@@ -1,0 +1,25 @@
+/*------------ PRE CONFIG --------------*/
+:root {
+    --verde-gotec: #67b599;
+    --azul-gotec: #233d76;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    margin: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+    margin: 0;
+    scroll-behavior: smooth;
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
