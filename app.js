@@ -17,6 +17,7 @@ const pathProductCart = path.resolve("views", "productCart.html")
 const pathProductDetail = path.resolve("views", "productDetail.html") 
 const pathRegister = path.resolve("views", "register.html") 
 const pathDarckmodeController = path.resolve("js", "dark-mode-controller.js") 
+const pathSubmenuController = path.resolve("js", "sub-menu-controller.js") 
 
 
 //----Peticiones CRUD----
@@ -27,6 +28,7 @@ app.get("/product-cart", (req,res) => res.sendFile(pathProductCart))
 app.get("/product-detail", (req,res) => res.sendFile(pathProductDetail))
 app.get("/register", (req,res) => res.sendFile(pathRegister))
 app.get("/darkmode-controller", (req,res) => res.sendFile(pathDarckmodeController))
+app.get("/submenu-controller", (req,res) => res.sendFile(pathSubmenuController))
 
 
 app.listen(PORT, () =>{
