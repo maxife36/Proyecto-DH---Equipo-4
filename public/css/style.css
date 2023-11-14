@@ -3,14 +3,16 @@
     --verde-gotec: #67b599;
     --verde-oscuro-gotec: #579981;
     --azul-gotec: #233d76;
+    --azul-intermedio-gotec: #1f3566;
+    --azul-oscuro-gotec:#182033;
     --blanco-gotec: #fff;
     --negro-gotec: #000;
     --gris-claro-gotec: #ebebeb;
     --gris-intermedio-gotec: #c0c0c0;
     --gris-oscuro-gotec: #666;
     --amarillo-gotec: #fbfd92;
-    --azul-oscuro-gotec:#182033;
     --violeta-gotec: #290147;
+    --violeta-oscuro-gotec: #1b0030;
 }
 
 html {
@@ -76,14 +78,14 @@ html {
     width: inherit;
     height: 3vh;
     background-color: var(--azul-gotec);
-    color: #f8f8f8;
+    color: var(--blanco-gotec);
     font-size: 12px;
 }
 
 .tracking-icon{
     font-size: 12px;
     position: absolute;
-    color: #f8f8f8;
+    color: var(--blanco-gotec);
     height: inherit;
     right: 0;
     margin-right: 10px;
@@ -99,7 +101,7 @@ html {
 .header-main-container{
     width: inherit;
     height: 15vh;
-    background: linear-gradient(-30deg,var(--azul-gotec) 20%,#67b599 50%,var(--azul-gotec) 80%);
+    background: linear-gradient(-10deg,var(--azul-gotec) 20%,#67b599 50%,var(--azul-gotec) 80%);
 }
 
 /* --LOGO-- */
@@ -235,7 +237,7 @@ html {
     width: 30px;
     height: 40px;
     font-size: 22px;
-    color: var(--gris-claro-gotec);
+    color: var(--blanco-gotec);
 }
 
 /* --USER PROFILE ICON-- */
@@ -250,9 +252,9 @@ html {
 .user-icon{
     width: inherit;
     height: inherit;
-    border: 1px solid var(--azul-intermedio-gotec);
+    border: 1px solid var(--gris-intermedio-gotec);
     border-radius: 50%;
-    background-color: var(--gris-intermedio-gotec);
+    background-color: var(--blanco-gotec);
     color: var(--gris-oscuro-gotec);
     font-size: 30px;
 }
@@ -287,7 +289,7 @@ html {
     width: 20%;
     height: inherit;
     list-style: none;
-    color: #f8f8f8;
+    color: var(--blanco-gotec);
     letter-spacing: 1px;
     font-size: 16px;
 }
@@ -335,9 +337,9 @@ html {
 /* -----------------------MAIN SECTION----------------------- */
 
 .main-section{
-    width: 100vw;
     min-height: 77vh;
-    background-color: #f8f8f8;
+    background-color: #e0e0e0;
+
 }
 
 /* -----------------------FOOTER----------------------- */
@@ -358,7 +360,7 @@ html {
     width: inherit;
     height: 3vh;
     font-size: 10px;
-    color: var(--azul-oscuro-gotec);
+    color: var(--blanco-gotec);
 }
 
 /*---------- FOOTER LOGO CONTAINER------ */
@@ -388,7 +390,7 @@ html {
     width: 100%;
     height: 50%;
     font-size: 25px;
-    color: var(--gris-claro-gotec);
+    color: var(--blanco-gotec);
     justify-content: space-evenly;
     padding-top: 30px;
 }
@@ -412,7 +414,7 @@ html {
 
 .footer-info-list a{
 
-    color: var(--gris-claro-gotec);
+    color: var(--blanco-gotec);
 }
 
 .footer-brands-container{
@@ -426,8 +428,8 @@ html {
     width: 90%;
     height: 60%;
     overflow: hidden;
-    border-top: 1px solid var(--azul-oscuro-gotec);
-    border-bottom: 1px solid var(--azul-oscuro-gotec);
+    border-top: 1px solid var(--blanco-gotec);
+    border-bottom: 1px solid var(--blanco-gotec);
 }
 
 .previous-icon,
@@ -435,7 +437,7 @@ html {
     height: 90%;
     width: 40px;
     font-size: 25px;
-    color: var(--gris-claro-gotec);
+    color: var(--blanco-gotec);
 }
 
 .brands-img-container{
