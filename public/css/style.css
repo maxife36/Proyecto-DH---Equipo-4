@@ -66,6 +66,7 @@ html {
 
 .header-main{
     width: 100vw;
+    background-color: var(--azul-gotec);
 }
 
 /* ----INFORMATION---- */
@@ -74,16 +75,15 @@ html {
     position: relative;
     width: inherit;
     height: 3vh;
-    background-color: var(--verde-gotec);
-    color: var(--gris-claro-gotec);
+    background-color: var(--azul-gotec);
+    color: #f8f8f8;
     font-size: 12px;
 }
 
 .tracking-icon{
     font-size: 12px;
     position: absolute;
-    color: var(--blanco-gotec);
-    color: var(--gris-claro-gotec);
+    color: #f8f8f8;
     height: inherit;
     right: 0;
     margin-right: 10px;
@@ -91,7 +91,6 @@ html {
 
 .fa-location-crosshairs{
     margin-left: 5px;
-
 }
 
 
@@ -100,7 +99,7 @@ html {
 .header-main-container{
     width: inherit;
     height: 15vh;
-    background: linear-gradient(-25deg,#233d76 5%,#67b599 50%,#233d76 95%);
+    background: linear-gradient(-30deg,var(--azul-gotec) 20%,#67b599 50%,var(--azul-gotec) 80%);
 }
 
 /* --LOGO-- */
@@ -279,17 +278,18 @@ html {
     position: relative;
     width: inherit;
     height: 5vh;
-    background-color: #bbe9d8;
+    background-color: var(--azul-gotec);
     justify-content: space-between;
-
+    border-bottom: 1px solid var(--azul-gotec);
 }
 
 .menu-container{
     width: 20%;
     height: inherit;
     list-style: none;
-    color: var(--gris-oscuro-gotec);
-    font-weight: bold;
+    color: #f8f8f8;
+    letter-spacing: 1px;
+    font-size: 16px;
 }
 
 .menu-title{
@@ -304,9 +304,10 @@ html {
     list-style: none;
     top: 100%;
     left: 0;
-    background-color: #233d7680;
+    background: linear-gradient(var(--azul-gotec)20%,#233d76cc);
     width: 100%;
     padding-bottom: 15px;
+    z-index: 3;
 }
 
 
@@ -327,13 +328,16 @@ html {
     border-bottom: 1px solid var(--gris-intermedio-gotec);
 }
 
+.sub-menu-container a:hover{
+    color: var(--gris-intermedio-gotec);
+}
+
 /* -----------------------MAIN SECTION----------------------- */
 
 .main-section{
     width: 100vw;
     min-height: 77vh;
-    /* min-height: 54vh; */
-    background-color: var(--gris-intermedio-gotec);
+    background-color: #f8f8f8;
 }
 
 /* -----------------------FOOTER----------------------- */
