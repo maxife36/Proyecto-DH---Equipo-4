@@ -19,6 +19,7 @@ const pathRegister = path.resolve("views", "register.html")
 const pathDkmGeneralController = path.resolve("js", "dkm-general-controller.js") 
 const pathDkmProductDetailController = path.resolve("js", "dkm-product-detail-controller.js") 
 const pathSubmenuController = path.resolve("js", "sub-menu-controller.js") 
+const pathFormsController = path.resolve("js", "register-form-controller.js") 
 
 
 //----Peticiones CRUD----
@@ -31,6 +32,7 @@ app.get("/register", (req,res) => res.sendFile(pathRegister))
 app.get("/darkmode-controller", (req,res) => res.sendFile(pathDkmGeneralController))
 app.get("/darkmode-ptodcut-detail-controller", (req,res) => res.sendFile(pathDkmProductDetailController))
 app.get("/submenu-controller", (req,res) => res.sendFile(pathSubmenuController))
+app.get("/forms-controller", (req,res) => res.sendFile(pathFormsController))
 
 
 app.listen(PORT, () =>{
