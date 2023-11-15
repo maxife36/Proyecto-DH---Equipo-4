@@ -2,6 +2,8 @@
 
 const darkModeInput = document.querySelector("#dark-mode-input")
 
+const htmlElement = document.documentElement
+
 //---header info
 const mainHeader = document.querySelector(".header-main")
 const infoContainer = document.querySelector(".header-info-container")
@@ -24,6 +26,8 @@ const footerCarousel = document.querySelector(".carousel-brand-container")
 
 // ----------------Colores Predefinidos
 
+const verdeGotec = getComputedStyle(htmlElement).getPropertyValue("--verde-gotec");
+
 //---header info
 const infoContainerBckColor = window.getComputedStyle(infoContainer).backgroundColor
 const mainHeaderBckColor = window.getComputedStyle(mainHeader).backgroundColor
@@ -45,6 +49,8 @@ const footerCarouselBorderBottom = window.getComputedStyle(footerCopyright).bord
 
 darkModeInput.addEventListener("change",()=>{
     if (darkModeInput.checked) {
+        htmlElement.style.setProperty("--verde-gotec", "#1f3566")
+
         //---header info
         infoContainer.style.backgroundColor = "#1b0030"
         mainHeader.style.backgroundColor = "#1b0030";
@@ -63,6 +69,8 @@ darkModeInput.addEventListener("change",()=>{
         footerCarousel.style.borderTop = "1px solid #ebebeb"
         footerCarousel.style.borderBottom = "1px solid #ebebeb"
     }else{
+        htmlElement.style.setProperty("--verde-gotec", verdeGotec)
+
         //---header info
         infoContainer.style.backgroundColor = infoContainerBckColor
         mainHeader.style.backgroundColor = mainHeaderBckColor;

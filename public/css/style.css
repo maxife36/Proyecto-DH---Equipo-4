@@ -65,6 +65,59 @@ html {
     align-items: center;
 }
 
+/* -----------------------ENTRY OPTIONS----------------------- */
+
+.entry-options{
+    display: none;
+    position: absolute;
+    width: 90vw;
+    height: 90vh;
+    top: 5vh;
+    left: 5vw;
+    background-color: #182033fd;
+    z-index: 5;
+    border-radius: 20px;
+    box-shadow: #182033fa 0px 0px 5vw 3vw ;
+}
+
+.entry-options a{
+    width: 100%;
+}
+.entry-logo{
+    height: 20% !important;
+}
+
+#btn-exit-entry{
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background-color: transparent;
+    color: var(--blanco-gotec);
+    font-size: 20px;
+}
+
+#btn-register,
+#btn-login{
+    all: unset;
+    cursor: pointer;
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    color: var(--blanco-gotec);
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 2.5rem;
+    padding: 10px 0;
+    font-style: italic;
+    line-height: 5rem;
+    border-top: 2px solid var(--blanco-gotec);
+    border-bottom: 2px solid var(--blanco-gotec);
+}
+
+
 /* -----------------------HEADER----------------------- */
 
 .header-main{
@@ -108,6 +161,7 @@ html {
 /* --LOGO-- */
 
 .main-logo-container{
+    cursor: pointer;
     width: 40%;
     height: 60%;
 }
@@ -233,7 +287,8 @@ html {
 /* --HEART CART ICON-- */
 
 .heart-icon,
-.cart-icon{
+.cart-icon,
+.login-icon{
     cursor: pointer;
     width: 30px;
     height: 40px;
@@ -244,6 +299,7 @@ html {
 /* --USER PROFILE ICON-- */
 
 .user-icon-container{
+    display: none;
     cursor: pointer;
     position: relative;
     width: 50px;

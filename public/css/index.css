@@ -9,6 +9,10 @@ main{
     justify-content: space-evenly;
 }
 
+.cards a{
+    all: unset;
+}
+
 .tarjeta-articulo{
     background-color: whitesmoke;
     width: 90%;
