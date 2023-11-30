@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/productCart.css">
+</head>
+
+<body>
+
+    <%- include('./partials/header.ejs') %>
+
+    <main class="main-section">
+        <h3 class="tu-carrito">TU CARRITO</h3>
+        <div class="cart-container">
+            <table>
+                <tr class="container">
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td><img src="img/mouse.png" alt="mouse" width="50vw"> Mouse Philips USB</td>
+                    <td>$4500</td>
+                    <td>
+                        <button class="icon-button">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <span class="cantidad">1</span>
+                        <button class="icon-button">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </td>
+                    <td class="subtotal">$4500</td>
+                    <td><button class="eliminar">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button></td>
+                </tr>
+                <tr>
+                    <td><img src="img/notebook.jpg" alt="notebook" width="50vw"> Notebook Lenovo</td>
+                    <td>$350000</td>
+                    <td>
+                        <button class="icon-button">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <span class="cantidad">1</span>
+                        <button class="icon-button">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </td>
+                    <td class="subtotal">$350000</td>
+                    <td><button class="eliminar">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button></td>
+                </tr>
+            </table>
+            <div class="article-container">
+                <div class="descuento">
+                    <div class="line"></div>
+                    <p class="cupon-descuento">APLICAR CUPÓN DE DESCUENTO</p>
+                    <div class="coupon">
+                        <input type="text" placeholder="Código de descuento">
+                        <button>Aplicar</button>
+                    </div>
+                    <div class="line"></div>
+                    <div class>
+                        <p class="subtotal">Subtotal $354500</p>
+                        <div class="line"></div>
+                        <p class="total">Total $354500</p>
+                        <div class="button-container">
+                            <button class="pago">Proceder al pago</button>
+                            <button class="elegir">Elegir más productos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-item"><i class="fa-solid fa-truck"></i> ENVÍO GRATIS</div>
+                    <div class="footer-item"><i class="fa-regular fa-credit-card"></i> PAGÁ EN 3 CUOTAS SIN INTERÉS</div>
+                    <div class="footer-item"><i class="fa-solid fa-rotate"></i> ¿QUERÉS CAMBIARLO?</div>
+                </div>
+            </div>
+            
+    </main>
+
+
+    <%- include('./partials/footer.ejs') %>
+
+    <!-- Scripts JS -->
+    <script src="/darkmode-controller"></script>
+    <script src="/submenu-controller"></script>
+</body>
+
+</html>
