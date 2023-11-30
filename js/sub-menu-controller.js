@@ -46,5 +46,12 @@ exitBtn.addEventListener("click", ()=> entryOptions.style.display = "none")
 
 loginIcon.addEventListener("click", ()=>  entryOptions.style.display = "flex")
 
+/* ------------------------ */
+
+const cartIcon = document.querySelector(".cart-icon")
+
+cartIcon.addEventListener("click", ()=>{
+    window.location.href = "/product-cart"
+})
 
 
