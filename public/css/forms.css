@@ -20,7 +20,7 @@
     display: none;
     width: 65vw;
     min-height: 95vh;
-    background: linear-gradient(90deg, #8b8b8b,#f8f8f8);
+    background-color: #f8f8f8;
 }
 
 .main-section{
@@ -29,6 +29,7 @@
 
 #logo-beside{
     width: 80%;
+    filter:drop-shadow(black 0px 1px 2px);
 }
 
 /* -----Profile Img configuration----- */

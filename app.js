@@ -40,6 +40,8 @@ const productCartRoutes = require('./routes/product-cart.routes.js');
 const productDetailRoutes = require('./routes/producto-detail.routes.js')
 //register 
 
+const productEditRoutes = require("./routes/product-edit.routes.js")
+
 const registerRoutes = require('./routes/register.routes.js')
 //darkMode
 
@@ -58,6 +60,7 @@ app.use('/',loginRoutes);
 app.use('/',productCartRoutes);
 app.use('/',productDetailRoutes);
 app.use('/',registerRoutes);
+app.use('/',productEditRoutes);
 app.use(darkModeRoutes)
 app.use(subMenuRoutes)
 app.use(formRegisterRoutes);

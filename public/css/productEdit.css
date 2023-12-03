@@ -1,0 +1,158 @@
+form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 12px;
+}
+main{
+    max-width: 1000px;
+}
+
+main input {
+    all:unset;
+    font-size: 28px;
+    font-weight: bold;
+    color: #233d76;
+}
+main button {
+    all:unset;
+    background-color: rgb(24, 33, 52);
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 2%;
+    border-radius: 15px;
+}
+main button:hover{
+    box-shadow: 1px 0px 8px 0px rgba(24,33,52,0.75)
+}
+
+.title h1{
+    font-size: 3em;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.product-name {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1%;
+    align-items: baseline;
+    
+}
+
+.product-name h2 {
+    width: 23%;
+    text-align: left;
+
+}
+.product-name input{
+
+    width: 50%;
+    margin: none;
+    border: none;
+    border-bottom: 1px solid #579981;
+    
+}
+.product-name button{
+
+    margin-left: 10%;
+}
+
+.description-img{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.product-description{
+    width: 50%;
+    padding: 1%;
+}
+.product-description h2{
+    margin-bottom: 15px;
+}
+.product-description textarea{
+    all:unset;
+    width: 100%;
+    border: 1px solid #579981;
+    border-radius: 10px;
+
+  }
+.product-img{
+    width: 50%;
+    padding: 1%;
+}
+.product-img h2{
+    margin-bottom: 15px;
+}
+.product-img input{
+    font-size: 16px;
+}
+.product-price{
+    width: 50%;
+    display:flex;
+    padding: 1%;
+    align-items: baseline;
+}
+.product-price h2{
+    width: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    
+ }
+.product-price input{
+    justify-content: center;
+    width: 25%;
+    border-bottom: 1px solid #579981;
+}
+.product-amount{
+    width: 50%;
+    display: flex;
+    padding: 1%;
+    align-items: baseline;
+}
+
+.product-amount h2{
+    width: 21%;
+}
+.product-amount input{
+    width: 25%;
+    border-bottom: 1px solid #579981;
+}
+
+.product-characteristics{
+    width: 100%;
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+.product-characteristics h2{
+    width: 100%;
+}
+.product-characteristics article{
+    width: 33%;
+}
+.product-characteristics li{
+    all: unset;
+}
+
+.li-characteristics{
+    font-size: 16px;
+    width: 50%;
+    border-bottom: 1px solid #579981;
+}
+.send-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+@media (width <= 900px) {
+    .product-name input{
+        width: 30%;
+}
+}
