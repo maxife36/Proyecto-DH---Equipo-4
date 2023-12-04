@@ -10,9 +10,6 @@ app.use(express.static(pathPublic))
 app.set('view engine' , 'ejs')
 app.set('views' , path.join(__dirname, 'views'))
 
-app.set('view engine' , 'ejs')
-app.set('views' , path.join(__dirname, 'views'))
-
 const port = process.env.PORT || 3001
 
 //---Paths---
@@ -64,9 +61,9 @@ app.use('/',productCartRoutes);
 app.use('/',productDetailRoutes);
 app.use('/',registerRoutes);
 app.use('/',productEditRoutes);
-app.use(darkModeRoutes)
-app.use(subMenuRoutes)
-app.use(formRegisterRoutes);
+app.use('/',darkModeRoutes)
+app.use('/',subMenuRoutes)
+app.use('/',formRegisterRoutes);
 
 
 

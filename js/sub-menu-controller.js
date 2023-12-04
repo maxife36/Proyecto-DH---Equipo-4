@@ -38,7 +38,7 @@ document.addEventListener("click", (event)=>{
 
 const entryOptions = document.querySelector(".entry-options")
 const exitBtn = document.querySelector("#btn-exit-entry")
-const loginIcon = document.querySelector(".login-icon")
+const loginIcon = document.querySelector(".login-icon") 
 
 let btnState = false
 
@@ -48,7 +48,8 @@ loginIcon.addEventListener("click", ()=>  entryOptions.style.display = "flex")
 
 /* ------------------------ */
 
-const cartIcon = document.querySelector(".cart-icon")
+const cartIcon = document.querySelector(".cart-icon") 
+
 
 cartIcon.addEventListener("click", ()=>{
     window.location.href = "/product-cart"
