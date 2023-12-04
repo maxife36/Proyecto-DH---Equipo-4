@@ -4,7 +4,6 @@
   "description": "Gotec es una empresa destinada a la venta de hardware en general con la más alta calidad del mercado. En esta ocasión se presenta el proyecto de ecommerce destinado a facilitar el comercio online.\r La misma contara con las distintas categorías del rubro, en donde cada producto tendrá la información de stock en tiempo real, descripción, imágenes de referencia y sus precios. Brindaremos un sector de opiniones con calificación que servirá de referencia a los compradores. \r Contará además con un sistema de gestión de cuentas, carrito de compra, seguimiento de envíos y pasarela de pagos. \r Para mejorar la experiencia del usuario se decidió agregar una sección de contacto en la cual se brinda un formulario de consulta, redes sociales, ubicación, etc.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },

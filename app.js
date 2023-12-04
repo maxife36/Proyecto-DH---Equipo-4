@@ -7,7 +7,7 @@ const pathPublic = path.resolve("public")
 
 app.use(express.static(pathPublic))
 
-const PORT = 3001
+const port = process.env.PORT || 3001
 
 //---Paths---
 
@@ -35,7 +35,7 @@ app.get("/submenu-controller", (req,res) => res.sendFile(pathSubmenuController))
 app.get("/forms-controller", (req,res) => res.sendFile(pathFormsController))
 
 
-app.listen(PORT, () =>{
+app.listen(port, () =>{
     console.log(`Se conecto Correctamnete a 
-    http://localhost:${PORT}`);
+    http://localhost:${port}`);
 })
