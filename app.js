@@ -11,7 +11,7 @@ app.set('view engine' , 'ejs')
 app.set('views' , path.join(__dirname, 'views'))
 
 const port = process.env.PORT || 3001
-
+ 
 //---Paths---
 //const pathLogin = path.resolve("views", "login.ejs") 
 //const pathProductCart = path.resolve("views", "productCart.ejs") 
