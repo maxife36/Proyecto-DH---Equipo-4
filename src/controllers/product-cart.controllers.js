@@ -1,6 +1,6 @@
 const path = require('path');
 
-const pathProductCart = path.resolve("views", "productCart.ejs") 
+const pathProductCart = path.resolve("src", "views", "productCart.ejs") 
 
 const controllers = {
     productCart: (req,res) => res.render(pathProductCart)

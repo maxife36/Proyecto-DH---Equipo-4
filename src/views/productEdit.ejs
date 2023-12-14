@@ -26,6 +26,8 @@
     <%- include('./partials/header.ejs') %>
     
 <main>
+    <div class="edit-container"> 
+    
     <section class="title">
         <h1>Edición / Carga de productos</h1>
     </section>
@@ -33,8 +35,8 @@
     <!-- Formulario Producto -->
     <form action="register-product" method="post">
         <section class = "product-name">
-            <h2>Nombre del producto</h2>
-            <input type="text">
+            <h2>Nombre del producto:</h2>
+            <input type="text" placeholder="Ingrese el nombre">
             <button>Previsualizar</button>
         </section>
            <div class="description-img">
@@ -105,7 +107,7 @@
             <button  type="submit">Crear producto</button>
         </section>
     </form>
-
+</div>
 
 </main>
 

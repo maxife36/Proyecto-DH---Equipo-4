@@ -1,6 +1,6 @@
 const path = require('path');
 
-const pathFormsController = path.resolve("js", "register-form-controller.js") 
+const pathFormsController = path.resolve("src", "js", "register-form-controller.js") 
 
 const controllers = {
     form: (req,res) => res.sendFile(pathFormsController)

@@ -1,6 +1,6 @@
 const path = require('path');
 
-const pathLogin = path.resolve("views", "login.ejs") 
+const pathLogin = path.resolve("src", "views", "login.ejs") 
 
 
 const controllers = {
