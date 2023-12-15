@@ -21,59 +21,59 @@
     </section>
 
     <!-- Formulario Producto -->
-    <form action="register-product" method="post">
+    <form action="/products/edit" method="post">
         <section class = "product-name">
             <h2>Nombre del producto:</h2>
-            <input type="text" placeholder="Ingrese el nombre">
+            <input type="text" name="name" placeholder="Ingrese el nombre">
             <button>Previsualizar</button>
         </section>
            <div class="description-img">
              <section class="product-description">
                 <h2>Descripción</h2>
-                <textarea name="description" id="" cols="30" rows="10"></textarea>
+                <textarea name="shortDescription" id="" cols="30" rows="10"></textarea>
             </section>
             <section class="product-img">
                 <h2>Imágenes del producto</h2>
-                <input type="file" multiple id="add-img" name="productImg" accept=".jpg, .jpeg, .png" >
+                <input type="file" multiple id="add-img" name="image" accept=".jpg, .jpeg, .png" >
                
             </section>
             </div>
         <section class="product-price">
             <h2>Precio</h2>
-            <input type="text">
+            <input type="text" name="price">
         </section>
         <section class="product-amount">
             <h2>Cantidad</h2>
-            <input type="text">
+            <input type="text" name="stock">
         </section>
         <section class="product-characteristics">
             <h2>Cracteristicas</h2>
             <article>
                 <label>Tipo de caracteristica</label>
-                <select>
+                <select name="features">
                     <option value="opcion1">Opción 1</option>
                     <option value="opcion2">Opción 2</option>
                     <option value="opcion3">Opción 3</option>
                 </select>
                 <ul>
-                    <li><input type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
+                    <li><input name="featureItem0" type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
+                    <li><input name="featureItem0" type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
+                    <li><input name="featureItem0" type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
+                    <li><input name="featureItem0" type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
                 </ul>
             </article>
             <article>
                 <label>Tipo de caracteristica</label>
-                <select>
+                <select name="features">
                     <option value="opcion1">Opción 1</option>
                     <option value="opcion2">Opción 2</option>
                     <option value="opcion3">Opción 3</option>
                 </select>
                 <ul>
-                    <li><input type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
+                    <li><input name="featureItem1" type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
+                    <li><input name="featureItem1" type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
+                    <li><input name="featureItem1" type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
+                    <li><input name="featureItem1" type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
                 </ul>
             </article>
             <article>
