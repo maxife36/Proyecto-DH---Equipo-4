@@ -7,21 +7,8 @@
 </head>
 
 <body>
-    <section class="entry-options flx-r-w">
-        <button id="btn-exit-entry">
-            <i class="fa-solid fa-x"></i>
-        </button>
-        
-        <a href="/register" class="flx-r-w">
-            <button id="btn-register">Registrate Ahora</button>
-        </a>
-        <a class="main-logo-container entry-logo flx-r-w" href="/">
-            <img src="/img/logo-horizontal-blanco.png" alt="">
-        </a>
-        <a href="/login" class="flx-r-w">
-            <button id="btn-login">¿Ya tenés Cuenta?</button>
-        </a>
-    </section>
+
+    <%- include('./partials/userOptions.ejs') %>
 
     <%- include('./partials/header.ejs') %>
 
@@ -32,7 +19,7 @@
                     <div class="imagen-producto">
                         <img src="/img/Products-Image/<%= product.image %>" alt=<%= product.alt %>>
                     </div>
-                    <a href="/product-detail">
+                    <a href="/products/detail">
                         <div class="info-producto">
                             <p class="titulo-producto">
                                 <%= product.name %>
@@ -53,7 +40,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -74,7 +61,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -95,7 +82,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -116,7 +103,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -137,7 +124,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -158,7 +145,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -179,7 +166,7 @@
                 <div class="imagen-producto">
                     <img src="/img/Imagenes-Index/gabinete.png" alt="Foto gabinete">
                 </div>
-                <a href="/product-detail">
+                <a href="/products/detail">
                     <div class="info-producto">
                         <p class="titulo-producto">
                             Titulo producto
@@ -210,8 +197,8 @@
    
 
     <!-- Scripts JS -->
-    <script src="/darkmode-controller"></script>
-    <script src="/submenu-controller"></script>
+    <script src="/DOM-Controllers/darkmode"></script>
+    <script src="/DOM-Controllers/subMenues"></script>
 </body>
 
 </html>

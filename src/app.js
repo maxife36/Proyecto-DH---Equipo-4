@@ -1,58 +1,42 @@
+/* ---Modulos Nativos y de Terceros--- */
 const express = require("express")
 const path = require("path")
+const methodOverride = require("method-override")
+
+/* ---Modulos Internos--- */
+
+const internalRoutes = require("./routes/internalRoutes.js")
+const mainRoutes = require("./routes/mainRoutes.js")
+const productsRoutes = require("./routes/productsRoutes.js")
+const usersRoutes = require("./routes/usersRoutes.js")
+const { log } = require("console")
+
+
+/* ---Variables de Configuracion--- */
+
+const port = process.env.PORT || 3000
 
 const app = express()
 
 const pathPublic = path.resolve("public")
+const pathViews = path.resolve("src" ,"views")
 
-app.use(express.static(pathPublic))
+/* ---Pre Configuraciones de Express y Middlewares--- */
 
 app.set('view engine' , 'ejs')
-app.set('views' , path.join(__dirname, 'views'))
+app.set('views' , pathViews)
 
-const port = process.env.PORT || 3001
+app.use(express.static(pathPublic))
+app.use(express.urlencoded({extended : false}))
+app.use(express.json())
+app.use(methodOverride("_method"))
 
+/* ---Rutas Principales de Express--- */
 
-//  routes 
-
-// index
-
-const indexRoutes = require('./routes/index.routes.js');
-//login 
-
-const loginRoutes = require('./routes/login.routes.js');
-//product-cart
-
-const productCartRoutes = require('./routes/product-cart.routes.js');
-//product-detail
-
-const productDetailRoutes = require('./routes/producto-detail.routes.js')
-//register 
-
-const productEditRoutes = require("./routes/product-edit.routes.js")
-
-const registerRoutes = require('./routes/register.routes.js')
-//darkMode
-
-const darkModeRoutes = require('./routes/darkmode.routes.js')
-//subMenu
-
-const subMenuRoutes = require('./routes/submenu.routes.js')
-
-//form 
-
-const formRegisterRoutes = require('./routes/form.routes.js')
-
-//  Mostrar rutas
-app.use('/',indexRoutes)
-app.use('/',loginRoutes);
-app.use('/',productCartRoutes);
-app.use('/',productDetailRoutes);
-app.use('/',registerRoutes);
-app.use('/',productEditRoutes);
-app.use('/',darkModeRoutes)
-app.use('/',subMenuRoutes)
-app.use('/',formRegisterRoutes);
+app.use("/DOM-Controllers", internalRoutes)
+app.use("/", mainRoutes)
+app.use("/products", productsRoutes)
+app.use("/users", usersRoutes)
 
 
 

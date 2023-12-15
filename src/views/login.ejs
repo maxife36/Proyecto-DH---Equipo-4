@@ -5,22 +5,11 @@
     <link rel="stylesheet" href="/css/forms.css">
 </head>
 <body class="flx-r-w">
-    <section class="entry-options flx-r-w">
-        <button id="btn-exit-entry">
-            <i class="fa-solid fa-x"></i>
-        </button>
-        
-        <a href="/register" class="flx-r-w">
-            <button id="btn-register">Registrate Ahora</button>
-        </a>
-        <a class="main-logo-container entry-logo flx-r-w" href="/">
-            <img src="/img/logo-horizontal-blanco.png" alt="">
-        </a>
-        <a href="/login" class="flx-r-w">
-            <button id="btn-login">¿Ya tenés Cuenta?</button>
-        </a>
-    </section>
+
+    <%- include('./partials/userOptions.ejs') %>
+
     <%- include('./partials/header.ejs') %>
+    
     <main class="main-section flx-r-w">
         <article class="beside flx-r-w">
             <img src="/img/logo-horizontal.png" alt="logo image" id="logo-beside">
@@ -68,8 +57,8 @@
     <%- include('./partials/footer.ejs') %>
 
     <!-- Scripts JS -->
-    <script src="/darkmode-controller"></script>
-    <script src="/submenu-controller"></script>
+    <script src="/DOM-Controllers/darkmode"></script>
+    <script src="/DOM-Controllers/subMenues"></script>
 </body>
 </html>
 

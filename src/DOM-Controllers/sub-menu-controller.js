@@ -52,7 +52,7 @@ const cartIcon = document.querySelector(".cart-icon")
 
 
 cartIcon.addEventListener("click", ()=>{
-    window.location.href = "/product-cart"
+    window.location.href = "/users/cart"
 })
 
 
