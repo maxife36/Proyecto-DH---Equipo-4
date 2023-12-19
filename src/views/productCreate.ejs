@@ -17,20 +17,20 @@
     <div class="edit-container"> 
     
     <section class="title">
-        <h1>Edición de productos</h1>
+        <h1>Carga de productos</h1>
     </section>
 
     <!-- Formulario Producto -->
-    <form action="/products/edit/<%= product.id %>?_method=PUT" method="post">
+    <form action="/products/edit" method="post">
         <section class = "product-name">
             <h2>Nombre del producto:</h2>
-            <input value=<%= product.name %> type="text" name="name" placeholder="Ingrese el nombre">
+            <input type="text" name="name" placeholder="Ingrese el nombre">
             <button>Previsualizar</button>
         </section>
            <div class="description-img">
              <section class="product-description">
                 <h2>Descripción</h2>
-                <textarea value=<%= product.shortDescription %>name="shortDescription" id="" cols="30" rows="10"></textarea>
+                <textarea name="shortDescription" id="" cols="30" rows="10"></textarea>
             </section>
             <section class="product-img">
                 <h2>Imágenes del producto</h2>
@@ -40,11 +40,11 @@
             </div>
         <section class="product-price">
             <h2>Precio</h2>
-            <input value=<%= product.price %> type="text" name="price">
+            <input type="text" name="price">
         </section>
         <section class="product-amount">
             <h2>Cantidad</h2>
-            <input value=<%= product.stock %> type="text" name="stock">
+            <input type="text" name="stock">
         </section>
         <section class="product-characteristics">
             <h2>Cracteristicas</h2>
@@ -94,9 +94,6 @@
         <section class="send-button">
             <button  type="submit">Crear producto</button>
         </section>
-    </form>
-    <form method="post" action="/products/delete/<%= product.id %>?_method=DELETE">
-        <button>Eliminar</button>
     </form>
 </div>
 

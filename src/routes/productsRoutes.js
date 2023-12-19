@@ -4,9 +4,11 @@ const router = express.Router();
 const controllers = require('../API-Controllers/productsControllers.js')
 
 router.get("/detail", controllers.productoDetail)
-router.get("/edit", controllers.productEdit)
-router.post("/edit", controllers.productStore)
-
+router.get("/create", controllers.createPage)
+router.post("/create", controllers.productCreate)
+router.get("/edit/:id", controllers.editPage)
+router.put("/edit/:id", controllers.productEdit)
+router.delete("/delete/:id", controllers.productDelete)
 
 
 module.exports = router;
