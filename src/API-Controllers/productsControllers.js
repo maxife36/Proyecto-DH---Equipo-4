@@ -2,31 +2,22 @@
 
 const fs = require("fs")
 const path = require("path")
-
+const productsModels = require("../models/productsModels")
 
 const controllers = {
     productoDetail: (req,res) => res.render("productDetail.ejs"),
     editPage :  (req, res) => {
         const productId = req.params.id
-        const pathProductDb = path.join(__dirname, "..", "temporary-DB", "products-DB.json")
-        const productsDbJSON = fs.readFileSync(pathProductDb, "utf-8")
-        const productsDb = JSON.parse(productsDbJSON)
-        let productsToEdit = null
+        let productsToEdit = productsModels.findByPk(productId)
 
-        for(let i = 0; i < productsDb.length; i++){
-            if(productId == productsDb[i].id){
-                productsToEdit = productsDb[i]
-            }
-        }
         res.render("productEdit.ejs", {product: productsToEdit})
     },
+
     createPage :  (req, res) => res.render("productCreate.ejs"),
     productCart: (req,res) => res.render("productCart.ejs"),
     productCreate: (req,res) => {
         const body = req.body
-        const pathProductDb = path.join(__dirname, "..", "temporary-DB", "products-DB.json")
-        const productsDbJSON = fs.readFileSync(pathProductDb, "utf-8")
-        const productsDb = JSON.parse(productsDbJSON)
+        const productsDb = productsModels.findAll()
         const feature = {}
 
         for(let i = 0; i < body.features.length; i++){
@@ -46,22 +37,15 @@ const controllers = {
             stock: body.stock,          
         }
         newProduct.feature = feature
-
-        productsDb.push(newProduct)
-
-        const newProductDbJSON = JSON.stringify(productsDb, null, " ") 
-        fs.writeFileSync(pathProductDb, newProductDbJSON)
         
+        productsModels.create(newProduct)
 
         res.redirect("/products/edit")
     },
+
     productEdit: (req, res) => {
         const productId = req.params.id
         const body = req.body
-        const pathProductDb = path.join(__dirname, "..", "temporary-DB", "products-DB.json")
-        const productsDbJSON = fs.readFileSync(pathProductDb, "utf-8")
-        const productsDbOriginal = JSON.parse(productsDbJSON)
-        const productsDb = productsDbOriginal.filter(el => el.id != productId)
         const feature = {}
 
         for(let i = 0; i < body.features.length; i++){
@@ -82,24 +66,16 @@ const controllers = {
         }
         newProduct.feature = feature
 
-        productsDb.push(newProduct)
-
-        const newProductDbJSON = JSON.stringify(productsDb, null, " ") 
-        fs.writeFileSync(pathProductDb, newProductDbJSON)
-        
+        productsModels.update(newProduct)
 
         res.redirect(`/products/edit/${productId}`)
 
     },
+
     productDelete: (req,res) => {
         const productId = req.params.id
-        const pathProductDb = path.join(__dirname, "..", "temporary-DB", "products-DB.json")
-        const productsDbJSON = fs.readFileSync(pathProductDb, "utf-8")
-        const productsDbOriginal = JSON.parse(productsDbJSON)
-        const productsDb = productsDbOriginal.filter(el => el.id != productId)
 
-        const deletedProductDbJSON = JSON.stringify(productsDb, null, " ") 
-        fs.writeFileSync(pathProductDb, deletedProductDbJSON)
+        productsModels.destroy(productId)
 
         res.redirect("/")
     }
