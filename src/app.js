@@ -9,7 +9,6 @@ const internalRoutes = require("./routes/internalRoutes.js")
 const mainRoutes = require("./routes/mainRoutes.js")
 const productsRoutes = require("./routes/productsRoutes.js")
 const usersRoutes = require("./routes/usersRoutes.js")
-const { log } = require("console")
 
 
 /* ---Variables de Configuracion--- */
