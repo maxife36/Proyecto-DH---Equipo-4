@@ -99,6 +99,30 @@ th, td {
     margin-right: 100px;
 
 }
+table {
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+    flex: 1;
+    overflow-x: auto;
+}
+
+th, td {
+    padding: 10px 20px; 
+    text-align: center;
+    border-bottom: 1px solid var(--gris-intermedio-gotec);
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+    table {
+        overflow: auto; 
+    }
+
+    th, td {
+        padding: 10px; 
+    }
+}
 
 .cupon-descuento {
     font-size: 10px;

@@ -1,149 +1,128 @@
 [
-    {
-        "id": 0,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    },
-    {
-        "id": 1,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    },
-    {
-        "id": 2,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    },
-    {
-        "id": 3,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    },
-    {
-        "id": 4,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    },
-    {
-        "id": 5,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    },
-    {
-        "id": 6,
-        "name": "Teclado Hyperx Alloy FPS",
-        "brand": "Hyperx",
-        "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
-        "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
-        "image": "/gabinete.png",
-        "alt": "Imagen de teclado",
-        "mainCategory": "Periféricos",
-        "features": {
-            "language": "eng",
-            "connectivity": "wired",
-            "color": "black",
-            "lighting": "rgb",
-            "size": "full-size"
-        },
-        "price": 95000,
-        "stock": 15,
-        "score": 75,
-        "discount": 10
-    }
+ {
+  "id": 1,
+  "name": "Teclado Hyperx Alloy FPS",
+  "brand": "Hyperx",
+  "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
+  "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
+  "image": "/gabinete.png",
+  "alt": "Imagen de teclado",
+  "mainCategory": "Periféricos",
+  "features": {
+   "language": "eng",
+   "connectivity": "wired",
+   "color": "black",
+   "lighting": "rgb",
+   "size": "full-size"
+  },
+  "price": 95000,
+  "stock": 15,
+  "score": 75,
+  "discount": 10
+ },
+ {
+  "id": 2,
+  "name": "Teclado Hyperx Alloy FPS",
+  "brand": "Hyperx",
+  "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
+  "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
+  "image": "/gabinete.png",
+  "alt": "Imagen de teclado",
+  "mainCategory": "Periféricos",
+  "features": {
+   "language": "eng",
+   "connectivity": "wired",
+   "color": "black",
+   "lighting": "rgb",
+   "size": "full-size"
+  },
+  "price": 95000,
+  "stock": 15,
+  "score": 75,
+  "discount": 10
+ },
+ {
+  "id": 3,
+  "name": "Teclado Hyperx Alloy FPS",
+  "brand": "Hyperx",
+  "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
+  "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
+  "image": "/gabinete.png",
+  "alt": "Imagen de teclado",
+  "mainCategory": "Periféricos",
+  "features": {
+   "language": "eng",
+   "connectivity": "wired",
+   "color": "black",
+   "lighting": "rgb",
+   "size": "full-size"
+  },
+  "price": 95000,
+  "stock": 15,
+  "score": 75,
+  "discount": 10
+ },
+ {
+  "id": 4,
+  "name": "Teclado Hyperx Alloy FPS",
+  "brand": "Hyperx",
+  "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
+  "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
+  "image": "/gabinete.png",
+  "alt": "Imagen de teclado",
+  "mainCategory": "Periféricos",
+  "features": {
+   "language": "eng",
+   "connectivity": "wired",
+   "color": "black",
+   "lighting": "rgb",
+   "size": "full-size"
+  },
+  "price": 95000,
+  "stock": 15,
+  "score": 75,
+  "discount": 10
+ },
+ {
+  "id": 5,
+  "name": "Teclado Hyperx Alloy FPS",
+  "brand": "Hyperx",
+  "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
+  "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
+  "image": "/gabinete.png",
+  "alt": "Imagen de teclado",
+  "mainCategory": "Periféricos",
+  "features": {
+   "language": "eng",
+   "connectivity": "wired",
+   "color": "black",
+   "lighting": "rgb",
+   "size": "full-size"
+  },
+  "price": 95000,
+  "stock": 15,
+  "score": 75,
+  "discount": 10
+ },
+ {
+  "id": 6,
+  "name": "Teclado Hyperx Alloy FPS",
+  "brand": "Hyperx",
+  "shortDescription": "Teclado gamer RGB idioma ENG switches BLUE",
+  "longDescription": "Sumérgete en el mundo de los videojuegos con el teclado gamer HyperX Alloy Core RGB. Diseñado especialmente para los amantes de los juegos, este teclado cuenta con un diseño QWERTY en español latinoamérica y una conexión USB 2.0 para garantizar una experiencia de juego fluida y sin interrupciones.",
+  "image": "/gabinete.png",
+  "alt": "Imagen de teclado",
+  "mainCategory": "Periféricos",
+  "features": {
+   "language": "eng",
+   "connectivity": "wired",
+   "color": "black",
+   "lighting": "rgb",
+   "size": "full-size"
+  },
+  "price": 95000,
+  "stock": 15,
+  "score": 75,
+  "discount": 10
+ }
 ]
