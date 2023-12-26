@@ -3,108 +3,135 @@
 
 <head>
     <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/productEdit.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/productEdit.css">
 </head>
 
 <body class="flx-r-w">
-    
+
     <%- include('./partials/userOptions.ejs') %>
 
-    <%- include('./partials/header.ejs') %>
-    
-<main>
-    <div class="edit-container"> 
-    
-    <section class="title">
-        <h1>Carga de productos</h1>
-    </section>
+        <%- include('./partials/header.ejs') %>
 
-    <!-- Formulario Producto -->
-    <form action="/products/edit" method="post">
-        <section class = "product-name">
-            <h2>Nombre del producto:</h2>
-            <input type="text" name="name" placeholder="Ingrese el nombre">
-            <button>Previsualizar</button>
-        </section>
-           <div class="description-img">
-             <section class="product-description">
-                <h2>Descripción</h2>
-                <textarea name="shortDescription" id="" cols="30" rows="10"></textarea>
-            </section>
-            <section class="product-img">
-                <h2>Imágenes del producto</h2>
-                <input type="file" multiple id="add-img" name="image" accept=".jpg, .jpeg, .png" >
-               
-            </section>
-            </div>
-        <section class="product-price">
-            <h2>Precio</h2>
-            <input type="text" name="price">
-        </section>
-        <section class="product-amount">
-            <h2>Cantidad</h2>
-            <input type="text" name="stock">
-        </section>
-        <section class="product-characteristics">
-            <h2>Cracteristicas</h2>
-            <article>
-                <label>Tipo de caracteristica</label>
-                <select name="features">
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                </select>
-                <ul>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
-                </ul>
-            </article>
-            <article>
-                <label>Tipo de caracteristica</label>
-                <select name="features">
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                </select>
-                <ul>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
-                </ul>
-            </article>
-            <article>
-                <label>Tipo de caracteristica</label>
-                <select>
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                </select>
-                <ul>
-                    <li><input type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
-                </ul>
-            </article>
-        </section>
-        <section class="send-button">
-            <button  type="submit">Crear producto</button>
-        </section>
-    </form>
-</div>
+            <main>
+                <div class="edit-container">
 
-</main>
+                    <section class="title">
+                        <h1>Carga de productos</h1>
+                        <button>Previsualizar</button>
+                    </section>
+
+                    <!-- Formulario Producto -->
+                    <form action="/products/create" method="post" enctype="multipart/form-data">
+                        <section class="product-name">
+                            <label for="name">Nombre del producto:</label>
+                            <input type="text" id="name" name="name" placeholder="Ingrese el nombre">
+                        </section>
+                        <section class="product-brand">
+                            <label for="brand">Marca:</label>
+                            <input type="text" id="brand" name="brand" placeholder="Ingrese una marca">
+                        </section>
+                        <div class="description-img">
+                            <section class="short-description">
+                                <label for="shortDescription">Descripción breve</label>
+                                <textarea name="shortDescription" id="shortDescription" cols="30" rows="10"></textarea>
+                            </section>
+                            <section class="long-description">
+                                <label for="longDescription">Descripción detallada</label>
+                                <textarea name="longDescription" id="longDescription" cols="30" rows="10"></textarea>
+                            </section>
+                            <section class="product-img">
+                                <label>Imágenes del producto</label>
+                                <input type="file" multiple id="add-img" name="image" accept=".jpg, .jpeg, .png">
+
+                            </section>
+                        </div>
+                        <div>
+                            <section class="product-category">
+                                <label for="product-category">Categoria</label>
+                                <input type="text" id="main-category" name="mainCategory">
+                            </section>
+                            <section class="product-price">
+                                <label for="price">Precio</label>
+                                <input type="text" id="price" name="price">
+                            </section>
+                            <section class="product-price">
+                                <label for="price">Precio</label>
+                                <input type="text" id="price" name="price">
+                            </section>
+                            <section class="product-amount">
+                                <label for="stock">Cantidad</label>
+                                <input type="text" id="stock" name="stock">
+                            </section>
+                        </div>
+                        <section class="product-characteristics">
+                            <h2>Caracteristicas</h2>
+                            <article>
+                                <label>Tipo de caracteristica</label>
+                                <select name="features">
+                                    <option value="opcion1">Opción 1</option>
+                                    <option value="opcion2">Opción 2</option>
+                                    <option value="opcion3">Opción 3</option>
+                                </select>
+                                <ul>
+                                    <li><input name="featureItem0" type="text" placeholder="Descripcion 1"
+                                            class="li-characteristics"></li>
+                                    <li><input name="featureItem0" type="text" placeholder="Descripcion 2"
+                                            class="li-characteristics"></li>
+                                    <li><input name="featureItem0" type="text" placeholder="Descripcion 3"
+                                            class="li-characteristics"></li>
+                                    <li><input name="featureItem0" type="text" placeholder="Descripcion 4"
+                                            class="li-characteristics"></li>
+                                </ul>
+                            </article>
+                            <article>
+                                <label>Tipo de caracteristica</label>
+                                <select name="features">
+                                    <option value="opcion1">Opción 1</option>
+                                    <option value="opcion2">Opción 2</option>
+                                    <option value="opcion3">Opción 3</option>
+                                </select>
+                                <ul>
+                                    <li><input name="featureItem1" type="text" placeholder="Descripcion 1"
+                                            class="li-characteristics"></li>
+                                    <li><input name="featureItem1" type="text" placeholder="Descripcion 2"
+                                            class="li-characteristics"></li>
+                                    <li><input name="featureItem1" type="text" placeholder="Descripcion 3"
+                                            class="li-characteristics"></li>
+                                    <li><input name="featureItem1" type="text" placeholder="Descripcion 4"
+                                            class="li-characteristics"></li>
+                                </ul>
+                            </article>
+                            <article>
+                                <label>Tipo de caracteristica</label>
+                                <select>
+                                    <option value="opcion1">Opción 1</option>
+                                    <option value="opcion2">Opción 2</option>
+                                    <option value="opcion3">Opción 3</option>
+                                </select>
+                                <ul>
+                                    <li><input type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
+                                    <li><input type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
+                                    <li><input type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
+                                    <li><input type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
+                                </ul>
+                            </article>
+                        </section>
+                        <section class="send-button">
+                            <button type="submit">Crear producto</button>
+                        </section>
+                    </form>
+                </div>
+
+            </main>
 
 
 
-    <!-- Scripts JS -->
-    <script src="/DOM-Controllers/darkmode"></script>
-    <script src="/DOM-Controllers/subMenues"></script> 
-    
-    <%- include('./partials/footer.ejs') %>
+            <!-- Scripts JS -->
+            <script src="/DOM-Controllers/darkmode"></script>
+            <script src="/DOM-Controllers/subMenues"></script>
+
+            <%- include('./partials/footer.ejs') %>
 </body>
+
 </html>

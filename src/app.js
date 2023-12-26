@@ -3,6 +3,7 @@ const express = require("express")
 const path = require("path")
 const methodOverride = require("method-override")
 
+
 /* ---Modulos Internos--- */
 
 const internalRoutes = require("./routes/internalRoutes.js")
@@ -19,15 +20,18 @@ const port = process.env.PORT || 3000
 const app = express()
 
 const pathPublic = path.resolve("public")
-const pathViews = path.resolve("src" ,"views")
+const pathViews = path.resolve("src", "views")
+
+
 
 /* ---Pre Configuraciones de Express y Middlewares--- */
 
-app.set('view engine' , 'ejs')
-app.set('views' , pathViews)
+
+app.set('view engine', 'ejs')
+app.set('views', pathViews)
 
 app.use(express.static(pathPublic))
-app.use(express.urlencoded({extended : false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(methodOverride("_method"))
 
@@ -40,7 +44,7 @@ app.use("/users", usersRoutes)
 
 
 
-app.listen(port, () =>{
+app.listen(port, () => {
     console.log(`Se conecto Correctamnete a 
     http://localhost:${port}`);
 })

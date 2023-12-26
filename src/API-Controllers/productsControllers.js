@@ -28,7 +28,7 @@ const controllers = {
         const productsDbJSON = fs.readFileSync(pathProductDb, "utf-8")
         const productsDb = JSON.parse(productsDbJSON)
         const feature = {}
-
+        
         for(let i = 0; i < body.features.length; i++){
             const featureKey = body.features[i]
             const featureValueOriginal = body[`featureItem${i}`]
@@ -43,7 +43,8 @@ const controllers = {
             name: body.name,
             shortDescription: body.shortDescription,
             price: body.price,
-            stock: body.stock,          
+            stock: body.stock,
+            image: req.file.filename         
         }
         newProduct.feature = feature
 
@@ -53,7 +54,7 @@ const controllers = {
         fs.writeFileSync(pathProductDb, newProductDbJSON)
         
 
-        res.redirect("/products/edit")
+        res.redirect("/")
     },
     productEdit: (req, res) => {
         const productId = req.params.id
@@ -78,7 +79,8 @@ const controllers = {
             name: body.name,
             shortDescription: body.shortDescription,
             price: body.price,
-            stock: body.stock,          
+            stock: body.stock,
+            image: req.file.filename          
         }
         newProduct.feature = feature
 

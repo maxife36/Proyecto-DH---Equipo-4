@@ -21,7 +21,7 @@
     </section>
 
     <!-- Formulario Producto -->
-    <form action="/products/edit/<%= product.id %>?_method=PUT" method="post">
+    <form action="/products/edit/<%= product.id %>?_method=PUT" method="post" enctype="multipart/form-data">
         <section class = "product-name">
             <h2>Nombre del producto:</h2>
             <input value=<%= product.name %> type="text" name="name" placeholder="Ingrese el nombre">
