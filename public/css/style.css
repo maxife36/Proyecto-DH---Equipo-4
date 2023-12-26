@@ -394,6 +394,7 @@ html {
 /* -----------------------MAIN SECTION----------------------- */
 
 .main-section{
+    position: relative;
     min-height: 77vh;
     background-color: #e0e0e0;
 

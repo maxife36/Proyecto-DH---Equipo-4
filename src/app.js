@@ -39,7 +39,7 @@ app.use("/users", usersRoutes)
 
 
 
-app.listen(port, () =>{
+app.listen(port,'0.0.0.0', () =>{
     console.log(`Se conecto Correctamnete a 
     http://localhost:${port}`);
 })
