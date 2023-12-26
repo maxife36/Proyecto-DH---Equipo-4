@@ -12,7 +12,6 @@ const productsRoutes = require("./routes/productsRoutes.js")
 const usersRoutes = require("./routes/usersRoutes.js")
 
 
-
 /* ---Variables de Configuracion--- */
 
 const port = process.env.PORT || 3000
