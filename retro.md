@@ -26,4 +26,18 @@
     -Utilizar whatsapp como herramieta para distribucion y control de trabajos.
 5. Dejar de hacer.
     -Dejar de retrasar la resolución de dudas o preguntas de aquellos miembros que no se conectan con frecuencia.
-    
+
+
+## SPRINT 4
+
+1. Comenzar a hacer.
+    -Reforzar reuniones semanales.
+2. Hacer más.
+    -Usar más el tablero de trabajo.
+3. Continuar haciendo.
+    -Utilizar herramientas de colaboración que han demostrado ser eficaces para el equipo.
+    -Seguir trabajando en equipo.
+4. Hacer menos.
+    -Depender en exceso de los miembros más activos
+5. Dejar de hacer.
+    -Postergar las consultas a los profesores sobre dudas que aparezcan.
