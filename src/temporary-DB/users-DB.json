@@ -4,7 +4,7 @@
         "firstName": "Maxi",
         "lastName": "Fenoglio",
         "email": "maxi@gmail.com",
-        "password": "123asd",
+        "password": "$2b$10$O6rhdbuK0rw4mjnMjbTOo.JxKIhvatbt0gIiHyTCunU8d083dO6Yy",
         "category": "admin",
         "image": "profile-image.jpg",
         "likes": [0, 1, 2],

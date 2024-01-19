@@ -4,7 +4,8 @@ const path = require("path")
 const methodOverride = require("method-override")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
-
+const bcrypt = require("bcrypt")
+console.log(bcrypt.hashSync("1234", 10));
 
 /* ---Modulos Internos--- */
 
@@ -36,7 +37,7 @@ app.use(express.static(pathPublic))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(methodOverride("_method"))
-app.use(session({secret:"gotec-DH"}))
+app.use(session({secret:"gotec-DH", resave: false, saveUninitialized: false}))
 app.use(cookieParser())
 app.use(cookieSearcher)
 
