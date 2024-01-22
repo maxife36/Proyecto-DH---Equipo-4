@@ -24,15 +24,16 @@ const usersModels = {
 
         return filteredUser
     },
-/* 
-    create: function (product) {
-        const productsDb = this.findAll()
-        productsDb.push(product)
 
-        const newProductDbJSON = JSON.stringify(productsDb, null, " ") 
-        fs.writeFileSync(pathProductDb, newProductDbJSON)
+    create: function (user) {
+        const usersDb = this.findAll()
+        usersDb.push(user)
+
+        const newUserDbJSON = JSON.stringify(usersDb, null, " ") 
+        fs.writeFileSync(pathUserDb, newUserDbJSON)
     },
 
+/* 
     update: function (product) {
         const productsDb = this.findAll()
         this.destroy(product.id)

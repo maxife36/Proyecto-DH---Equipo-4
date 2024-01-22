@@ -1,10 +1,13 @@
 const bcrypt = require('bcrypt')
+const usersModels = require("../models/usersModels");
+const { create } = require('domain');
 const controllers = {
     productCart: (req,res) => res.render("productCart.ejs"),
     showForm: (req, res) => {
         res.render('/register.ejs');
       },
     processRegister: (req, res) => {
+        console.log(req.file)
         const { fullName, userEmail, userBirthday, userAdress, userName, password, confirmPassword } = req.body;
         // const avatarPath = req.file.path;
         const newUser = {
@@ -12,29 +15,11 @@ const controllers = {
             email: userEmail,
             adress: userAdress,
             userName: userName,
-            password: bcrypt.hash(password, 10)
+            password: bcrypt.hashSync(password, 10),
+            image: req.file.filename
         }
-        bcrypt.hash(password, 10, (err, hash) => {
-            if (err) throw err;
-    
-            const newUser = {
-                username,
-                password: hash,
-                avatar: avatarPath
-            };
-            fs.readFile('usuarios.json', 'utf8', (err, data) => {
-                if (err) throw err;
-    
-                const usuarios = JSON.parse(data);
-                usuarios.push(newUser);
-    
-                fs.writeFile('usuarios.json', JSON.stringify(usuarios), (err) => {
-                    if (err) throw err;
-                    res.send('¡Registro exitoso!');
-                });
-            });
-        });
+        usersModels.create(newUser)
+        res.send(newUser)
     }
 }
-
 module.exports = controllers;
