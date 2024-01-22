@@ -30,7 +30,7 @@ Gotec se dirige a un público general entre 18 y 40 años que está interesado e
 + Coronel Arismendi, María Candela.
 + Pereyra, María del Pilar.
 + Fenoglio, Maximiliano Martin.
-+ Santillán, Francisco.
++ Santillán Suárez, Francisco.
 
 ## Tablero de Trabajo - Gotec
 
