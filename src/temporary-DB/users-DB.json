@@ -1,74 +1,155 @@
 [
-    {
-        "id": 0,
-        "firstName": "Maxi",
-        "lastName": "Fenoglio",
-        "email": "maxi@gmail.com",
-        "password": "123asd",
-        "category": "admin",
-        "image": "profile-image.jpg",
-        "likes": [0, 1, 2],
-        "billing": {
-            "dni": 55666777,
-            "cardNumber": 1111222233334444,
-            "type": "A"    
-        },
-        "adress": "Belgrano 123",
-        "birthDate": "dd/mm/aaaa",
-        "phone": 3854669977
-    },
-    {
-        "id": 1,
-        "firstName": "Maxi",
-        "lastName": "Fenoglio",
-        "email": "maxi@gmail.com",
-        "password": "123asd",
-        "category": "admin",
-        "image": "profile-image.jpg",
-        "likes": [0, 1, 2],
-        "billing": {
-            "dni": 55666777,
-            "cardNumber": 1111222233334444,
-            "type": "A"    
-        },
-        "adress": "Belgrano 123",
-        "birthDate": "dd/mm/aaaa",
-        "phone": 3854669977
-    },
-    {
-        "id": 2,
-        "firstName": "Maxi",
-        "lastName": "Fenoglio",
-        "email": "maxi@gmail.com",
-        "password": "123asd",
-        "category": "admin",
-        "image": "profile-image.jpg",
-        "likes": [0, 1, 2],
-        "billing": {
-            "dni": 55666777,
-            "cardNumber": 1111222233334444,
-            "type": "A"    
-        },
-        "adress": "Belgrano 123",
-        "birthDate": "dd/mm/aaaa",
-        "phone": 3854669977
-    },
-    {
-        "id": 3,
-        "firstName": "Maxi",
-        "lastName": "Fenoglio",
-        "email": "maxi@gmail.com",
-        "password": "123asd",
-        "category": "admin",
-        "image": "profile-image.jpg",
-        "likes": [0, 1, 2],
-        "billing": {
-            "dni": 55666777,
-            "cardNumber": 1111222233334444,
-            "type": "A"    
-        },
-        "adress": "Belgrano 123",
-        "birthDate": "dd/mm/aaaa",
-        "phone": 3854669977
-    }
+ {
+  "id": 0,
+  "firstName": "Maxi",
+  "lastName": "Fenoglio",
+  "email": "maxi@gmail.com",
+  "password": "$2b$10$O6rhdbuK0rw4mjnMjbTOo.JxKIhvatbt0gIiHyTCunU8d083dO6Yy",
+  "category": "admin",
+  "image": "profile-image.jpg",
+  "likes": [
+   0,
+   1,
+   2
+  ],
+  "billing": {
+   "dni": 55666777,
+   "cardNumber": 1111222233334444,
+   "type": "A"
+  },
+  "adress": "Belgrano 123",
+  "birthDate": "dd/mm/aaaa",
+  "phone": 3854669977
+ },
+ {
+  "id": 1,
+  "firstName": "Maxi",
+  "lastName": "Fenoglio",
+  "email": "maxi@gmail.com",
+  "password": "123asd",
+  "category": "admin",
+  "image": "profile-image.jpg",
+  "likes": [
+   0,
+   1,
+   2
+  ],
+  "billing": {
+   "dni": 55666777,
+   "cardNumber": 1111222233334444,
+   "type": "A"
+  },
+  "adress": "Belgrano 123",
+  "birthDate": "dd/mm/aaaa",
+  "phone": 3854669977
+ },
+ {
+  "id": 2,
+  "firstName": "Maxi",
+  "lastName": "Fenoglio",
+  "email": "maxi@gmail.com",
+  "password": "123asd",
+  "category": "admin",
+  "image": "profile-image.jpg",
+  "likes": [
+   0,
+   1,
+   2
+  ],
+  "billing": {
+   "dni": 55666777,
+   "cardNumber": 1111222233334444,
+   "type": "A"
+  },
+  "adress": "Belgrano 123",
+  "birthDate": "dd/mm/aaaa",
+  "phone": 3854669977
+ },
+ {
+  "id": 3,
+  "firstName": "Maxi",
+  "lastName": "Fenoglio",
+  "email": "maxi@gmail.com",
+  "password": "123asd",
+  "category": "admin",
+  "image": "profile-image.jpg",
+  "likes": [
+   0,
+   1,
+   2
+  ],
+  "billing": {
+   "dni": 55666777,
+   "cardNumber": 1111222233334444,
+   "type": "A"
+  },
+  "adress": "Belgrano 123",
+  "birthDate": "dd/mm/aaaa",
+  "phone": 3854669977
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {}
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": {},
+  "image": "1705959341472_img.jpg"
+ },
+ {
+  "fullName": "a",
+  "email": "a@hotmail.com",
+  "adress": "a",
+  "userName": "a",
+  "password": "$2b$10$xsZtT3oGzTZPJVxK0b73kePM22YtY1X8V0l8gneXIWLoOZLEnn43y",
+  "image": "1705959557102_img.jpg"
+ }
 ]

@@ -5,6 +5,14 @@ A pesar de esto, se logro avanzar en la resolucion del SPRINT 3 con detalles a m
 
 Lo objetivos para la proxima semana:
  -Establecer fecha y hora de las reuniones semanales.
- -Finalizar reglas de etsilos de la pagina correspondiente a carga/edición de productos.
+ -Finalizar reglas de estilos de la pagina correspondiente a carga/edición de productos.
  -Reordenamiento de enrutado para un mejor ordenamiento de modulos
  
+## SPRINT 5
+
+En este sprint mejoramos el uso del tablero y la delegación de tareas. Trabajamos de manera más eficiente y nos ayudamos en los problemas que fueron surgiendo. Mejoramos la comunicación. 
+
+Lo objetivos para la proxima semana:
+ -Continuar con la organizacion de tareas mediante el tablero de trabajo.
+ -Realizar la division de tareas con celeridad y criterio.
+ -Mantener las reuniones semanales y si es posible aumentar la frecuencia de las mismas.

@@ -2,7 +2,10 @@
 const express = require("express")
 const path = require("path")
 const methodOverride = require("method-override")
-
+const session = require("express-session")
+const cookieParser = require("cookie-parser")
+const bcrypt = require("bcrypt")
+console.log(bcrypt.hashSync("1234", 10));
 
 /* ---Modulos Internos--- */
 
@@ -10,6 +13,7 @@ const internalRoutes = require("./routes/internalRoutes.js")
 const mainRoutes = require("./routes/mainRoutes.js")
 const productsRoutes = require("./routes/productsRoutes.js")
 const usersRoutes = require("./routes/usersRoutes.js")
+const cookieSearcher = require("./Middlewares/cookieSearcher.js")
 
 
 /* ---Variables de Configuracion--- */
@@ -33,6 +37,10 @@ app.use(express.static(pathPublic))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(methodOverride("_method"))
+app.use(session({secret:"gotec-DH", resave: false, saveUninitialized: false}))
+app.use(cookieParser())
+app.use(cookieSearcher)
+
 
 /* ---Rutas Principales de Express--- */
 
