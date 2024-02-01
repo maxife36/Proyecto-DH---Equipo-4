@@ -24,6 +24,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING(60),
         allowNull: false,
+        unique: true,        
         validate:{
           isEmail: true
         }
@@ -33,10 +34,11 @@ module.exports = {
         allowNull:false
       },
       address: Sequelize.STRING(100),
-      profile_img: Sequelize.STRING(100),
+      profileImg: Sequelize.STRING(100),
       username: {
         type: Sequelize.STRING(20),
         allowNull:false,
+        unique: true,        
         validate:{
           is: /^[a-zA-Z0-9._-]{6,20}$/
         }
@@ -45,8 +47,7 @@ module.exports = {
         type: Sequelize.STRING(30),
         allowNull:false,
         validate:{
-          min: 8,
-          max: 30
+          len: [8,30]
         }
       }
     });

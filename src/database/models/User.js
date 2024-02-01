@@ -1,5 +1,5 @@
 'use strict';
-const {Model} = require('sequelize');
+const {Model, Sequelize} = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.fn('UUID'),
+      defaultValue: Sequelize.fn('UUID'),
       primaryKey: true,
       allowNull: false,
     },
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     address: DataTypes.STRING(100),
-    profile_img: DataTypes.STRING(100),
+    profileImg: DataTypes.STRING(100),
     username: {
       type: DataTypes.STRING(20),
       allowNull: false,
@@ -52,16 +52,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(30),
       allowNull: false,
       validate: {
-        min: 8,
-        max: 30
+        len: {
+          min:8,
+          max:30
+        }
       }
     }
   }, {
     sequelize,
     modelName: "User",
-    tableName: "users",
-    timestamps: true
+    tableName: "users"
   });
-  
+
   return User;
 };
