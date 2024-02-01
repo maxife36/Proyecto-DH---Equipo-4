@@ -8,7 +8,6 @@ const controllers = {
         res.render('/register.ejs');
     },
     processRegister: (req, res) => {
-        console.log(req.file)
         const { fullName, userEmail, userBirthday, userAdress, userName, password, confirmPassword } = req.body;
         // const avatarPath = req.file.path;
         const newUser = {

@@ -39,7 +39,6 @@ router.post('/', validateRegister, controllers.showForm);
 
 router.post('/register-form', upload.single("profileImg"),
 controllers.processRegister
-// (req,res) => res.send("PEPE")
 );
 
 

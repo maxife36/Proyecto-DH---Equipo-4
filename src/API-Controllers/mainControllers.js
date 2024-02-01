@@ -31,11 +31,7 @@ const controllers = {
 
         res.redirect("/login")
     }
-    /*     prueba: (req,res) =>{
-            console.log("Estoy en prueba"); 
-            req.session.usuarioLogueado = req.params.nombre
-            res.redirect("/")
-        } */
+
 }
 
 

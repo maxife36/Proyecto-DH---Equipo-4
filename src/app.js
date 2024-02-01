@@ -5,7 +5,6 @@ const methodOverride = require("method-override")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
-console.log(bcrypt.hashSync("1234", 10));
 
 /* ---Modulos Internos--- */
 
@@ -20,6 +19,7 @@ const cookieSearcher = require("./Middlewares/cookieSearcher.js")
 
 const port = process.env.PORT || 3000
 
+//Instancia de express
 const app = express()
 
 const pathPublic = path.resolve("public")
@@ -34,9 +34,14 @@ app.set('view engine', 'ejs')
 app.set('views', pathViews)
 
 app.use(express.static(pathPublic))
-app.use(express.urlencoded({ extended: false }))
+
+//Permite leer formatos enviados por forms
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
+//Permite utilizacion de otros metodos en los forms del html
 app.use(methodOverride("_method"))
+
 app.use(session({secret:"gotec-DH", resave: false, saveUninitialized: false}))
 app.use(cookieParser())
 app.use(cookieSearcher)
@@ -48,7 +53,6 @@ app.use("/DOM-Controllers", internalRoutes)
 app.use("/", mainRoutes)
 app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
-
 
 
 app.listen(port, () => {
