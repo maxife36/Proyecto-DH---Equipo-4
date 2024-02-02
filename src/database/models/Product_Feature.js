@@ -1,17 +1,16 @@
 'use strict';
-
 const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Image extends Model {
+  class Product_Feature extends Model {
 
     static associate(models) {
       // define association here
     }
   }
 
-  Image.init({
-    imageId: {
+  Product_Feature.init({
+    productFeatureId: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.fn('UUID'),
       primaryKey: true,
@@ -19,21 +18,25 @@ module.exports = (sequelize, DataTypes) => {
     },
     productId: {
       type: DataTypes.UUID,
+      allowNull: false,
       references:{
           model: "Product", 
           key: "productId"
         }
     },
-    imageTitle: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    }
-  }, {
+    featureId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references:{
+          model: "Feature", 
+          key: "featureId"
+        }
+    }}, {
     sequelize,
-    modelName: "Image",
-    tableName: "images",
-    timestamps: false
+    modelName: "Product_Feature",
+    tableName: "products_features",
+    timestamps:false
   });
-  
-  return Image;
+
+  return Product_Feature;
 };

@@ -18,6 +18,8 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       }
+    },{
+      timestamp:false
     });
   },
   async down(queryInterface, Sequelize) {

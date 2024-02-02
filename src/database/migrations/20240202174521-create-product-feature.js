@@ -1,9 +1,10 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('images', {
-      imageId: {
+    await queryInterface.createTable('products_features', {
+      productFeatureId: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.fn('UUID'),
         primaryKey: true,
@@ -11,20 +12,29 @@ module.exports = {
       },
       productId: {
         type: Sequelize.UUID,
+        allowNull: false,
         references:{
             model: "Product", 
             key: "productId"
           }
       },
-      imageTitle: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+      featureId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references:{
+            model: "Feature", 
+            key: "featureId"
+          }
+      },
+      specification: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
       }
     },{
       timestamp:false
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('images');
+    await queryInterface.dropTable('products_features');
   }
 };
