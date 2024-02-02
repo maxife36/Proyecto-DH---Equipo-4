@@ -10,10 +10,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      cartId: {
-        type: Sequelize.UUID,
-        allowNull: false
-      },
       productId: {
         type: Sequelize.UUID,
         allowNull: false

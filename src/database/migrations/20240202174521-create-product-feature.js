@@ -10,22 +10,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      productId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references:{
-            model: "Product", 
-            key: "productId"
-          }
-      },
-      featureId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references:{
-            model: "Feature", 
-            key: "featureId"
-          }
-      },
       specification: {
         type: Sequelize.STRING(20),
         allowNull: false,

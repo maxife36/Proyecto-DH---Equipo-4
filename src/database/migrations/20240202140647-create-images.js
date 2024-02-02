@@ -9,13 +9,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      productId: {
-        type: Sequelize.UUID,
-        references:{
-            model: "Product", 
-            key: "productId"
-          }
-      },
       imageTitle: {
         type: Sequelize.STRING(50),
         allowNull: false

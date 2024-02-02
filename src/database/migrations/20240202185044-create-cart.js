@@ -9,14 +9,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      userId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "User",
-          key: "userId"
-        }
-      },
       amount: {
         type: Sequelize.INTEGER,
         defaultValue: 0,

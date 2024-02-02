@@ -10,22 +10,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      userId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "User",
-          key: "userId"
-        }
-      },
-      productId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Product",
-          key: "productId"
-        }
-      },
       commentBody: {
         type: Sequelize.STRING(300),
         allowNull: false

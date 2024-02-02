@@ -9,22 +9,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      cartId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Cart",
-          key: "cartId"
-        }
-      },
-      productId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Product",
-          key: "productId"
-        }
-      },
       quantity: {
         type: Sequelize.INTEGER,
         defaultValue: 0,

@@ -1,0 +1,8 @@
+
+[4mSequelize CLI [Node: 18.17.1, CLI: 6.6.2, ORM: 6.35.2][24m
+
+Loaded configuration file "src\database\config\config.js".
+Using environment "development".
+== 20240202201920-table-associations: migrating =======
+
+

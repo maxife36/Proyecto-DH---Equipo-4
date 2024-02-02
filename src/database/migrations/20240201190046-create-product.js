@@ -38,13 +38,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         unsigned: true,
         allowNull: false
-      },
-      categoryId: {
-        type: Sequelize.UUID,
-        references: {
-          model: "Category",
-          key: "categoryId"
-        }
       }
     });
   },

@@ -10,14 +10,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      userId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "User",
-          key: "userId"
-        }
-      },
       creditNumber: {
         type: Sequelize.STRING(16),
         allowNull: false
