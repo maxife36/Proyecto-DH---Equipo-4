@@ -2,26 +2,25 @@
 const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
-
+  class Cart_Product extends Model {
 
     static associate(models) {
       // define association here
     }
   }
-  Comment.init({
-    commentId: {
+  Cart_Product.init({
+    cartProductId: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.fn('UUID'),
       primaryKey: true,
       allowNull: false,
     },
-    userId: {
+    cartId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "User",
-        key: "userId"
+        model: "Cart",
+        key: "cartId"
       }
     },
     productId: {
@@ -32,19 +31,22 @@ module.exports = (sequelize, DataTypes) => {
         key: "productId"
       }
     },
-    commentBody: {
-      type: DataTypes.STRING(300),
+    quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      unsigned: true,
       allowNull: false
     },
-    score: {
+    total: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       unsigned: true,
       allowNull: false
     }
   }, {
     sequelize,
-    modelName: "Comment",
-    tableName: "comments"
+    modelName: 'Cart_Product',
+    tableName: "carts_products"
   });
-  return Comment;
+  return Cart_Product;
 };

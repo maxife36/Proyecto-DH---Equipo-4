@@ -25,23 +25,26 @@ module.exports = {
       longDescription: Sequelize.STRING(200),
       productPrice: {
         type: Sequelize.INTEGER,
+        unsigned: true,
         allowNull: false
       },
       discount: Sequelize.INTEGER,
       stock: {
         type: Sequelize.INTEGER,
+        unsigned: true,
         allowNull: false
       },
       score: {
         type: Sequelize.INTEGER,
+        unsigned: true,
         allowNull: false
       },
       categoryId: {
         type: Sequelize.UUID,
-        references:{
-            model: "Category", 
-            key: "categoryId"
-          }
+        references: {
+          model: "Category",
+          key: "categoryId"
+        }
       }
     });
   },

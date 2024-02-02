@@ -1,21 +1,20 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('comments', {
-      commentId: {
+    await queryInterface.createTable('carts_products', {
+      cartProductId: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.fn('UUID'),
         primaryKey: true,
         allowNull: false,
       },
-      userId: {
+      cartId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: "User",
-          key: "userId"
+          model: "Cart",
+          key: "cartId"
         }
       },
       productId: {
@@ -26,18 +25,21 @@ module.exports = {
           key: "productId"
         }
       },
-      commentBody: {
-        type: Sequelize.STRING(300),
+      quantity: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        unsigned: true,
         allowNull: false
       },
-      score: {
+      total: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
         unsigned: true,
         allowNull: false
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('comments');
+    await queryInterface.dropTable('carts_products');
   }
 };

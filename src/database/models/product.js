@@ -30,23 +30,26 @@ module.exports = (sequelize, DataTypes) => {
     longDescription: DataTypes.STRING(200),
     productPrice: {
       type: DataTypes.INTEGER,
+      unsigned: true,
       allowNull: false
     },
     discount: DataTypes.INTEGER,
     stock: {
       type: DataTypes.INTEGER,
+      unsigned: true,
       allowNull: false
     },
     score: {
       type: DataTypes.INTEGER,
+      unsigned: true,
       allowNull: false
     },
     categoryId: {
       type: DataTypes.UUID,
-      references:{
-          model: "Category", 
-          key: "categoryId"
-        }
+      references: {
+        model: "Category",
+        key: "categoryId"
+      }
     }
 
   }, {
