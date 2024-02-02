@@ -1,38 +1,35 @@
 'use strict';
-
 const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Image extends Model {
+  class Feature extends Model {
 
     static associate(models) {
       // define association here
     }
   }
 
-  Image.init({
-    imageId: {
+  Feature.init({
+    featureId: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.fn('UUID'),
       primaryKey: true,
       allowNull: false,
     },
-    productId: {
-      type: DataTypes.UUID,
-      references:{
-          model: "Product", 
-          key: "productId"
-        }
+    fetureName: {
+      type: DataTypes.STRING(50),
+      allowNull: false
     },
-    imageTitle: {
+    fetureIcon: {
       type: DataTypes.STRING(50),
       allowNull: false
     }
   }, {
     sequelize,
-    modelName: "Image",
-    tableName: "images"
+    modelName: "Feature",
+    tableName: "features",
+    timestamps: false
   });
   
-  return Image;
+  return Feature;
 };
