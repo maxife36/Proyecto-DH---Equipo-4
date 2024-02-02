@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Product.init({
-    id: {
+    productId: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.fn('UUID'),
       primaryKey: true,
@@ -51,7 +51,8 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     sequelize,
-    modelName: 'Product',
+    modelName: "Product",
+    tableName: "products"
   });
   return Product;
 };
