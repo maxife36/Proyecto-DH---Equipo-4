@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const { Model, Sequelize } = require('sequelize');
+const { Model, Sequelize } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Image.init({
     imageId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn('UUID'),
+      defaultValue: Sequelize.fn("UUID"),
       primaryKey: true,
       allowNull: false,
     },

@@ -1,11 +1,11 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt")
 const usersModels = require("../models/usersModels");
-const { create } = require('domain');
-const { Console } = require('console');
+const { create } = require("domain");
+const { Console } = require("console");
 const controllers = {
     productCart: (req, res) => res.render("productCart.ejs"),
     showForm: (req, res) => {
-        res.render('/register.ejs');
+        res.render("/register.ejs");
     },
     processRegister: (req, res) => {
         const { fullName, userEmail, userBirthday, userAdress, userName, password, confirmPassword } = req.body;

@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-/** @type {import('sequelize-cli').Migration} */
+/** @type {import("sequelize-cli").Migration} */
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('categories', {
+    await queryInterface.createTable("categories", {
       categoryId: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.fn('UUID'),
+        defaultValue: Sequelize.fn("UUID"),
         primaryKey: true
       },
       categoryTitle: {
@@ -19,6 +19,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('categories');
+    await queryInterface.dropTable("categories");
   }
 };

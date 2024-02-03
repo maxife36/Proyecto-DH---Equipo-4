@@ -30,8 +30,8 @@ const pathViews = path.resolve("src", "views")
 /* ---Pre Configuraciones de Express y Middlewares--- */
 
 
-app.set('view engine', 'ejs')
-app.set('views', pathViews)
+app.set("view engine", "ejs")
+app.set("views", pathViews)
 
 app.use(express.static(pathPublic))
 

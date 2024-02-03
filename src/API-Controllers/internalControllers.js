@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 const pathDkm = path.resolve("src", "DOM-Controllers", "dkm-general-controller.js") 
 const pathDkmProductDetail = path.resolve("src", "DOM-Controllers", "dkm-product-detail-controller.js") 
