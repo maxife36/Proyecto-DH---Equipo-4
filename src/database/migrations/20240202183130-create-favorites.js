@@ -1,11 +1,11 @@
-'use strict';
-/** @type {import('sequelize-cli').Migration} */
+"use strict";
+/** @type {import("sequelize-cli").Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('favorites', {
+    await queryInterface.createTable("favorites", {
       favoriteId: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.fn('UUID'),
+        defaultValue: Sequelize.fn("UUID"),
         primaryKey: true,
         allowNull: false,
       }
@@ -14,6 +14,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('favorites');
+    await queryInterface.dropTable("favorites");
   }
 };

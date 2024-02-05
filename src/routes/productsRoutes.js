@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const multer = require("multer")
 const path = require("path")
 
-const controllers = require('../API-Controllers/productsControllers.js')
+const controllers = require("../API-Controllers/productsControllers.js")
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb){

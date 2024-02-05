@@ -1,5 +1,5 @@
-'use strict';
-const { Model, Sequelize } = require('sequelize');
+"use strict";
+const { Model, Sequelize } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Cart.init({
     cartId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn('UUID'),
+      defaultValue: Sequelize.fn("UUID"),
       primaryKey: true,
       allowNull: false,
     },
