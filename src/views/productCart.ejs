@@ -4,6 +4,8 @@
 <head>
     <%- include("./partials/head.ejs") %>
     <link rel="stylesheet" href="/css/productCart.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
@@ -20,12 +22,19 @@
                     <th>Producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Subtotal</th>
+                    <!-- <th>Subtotal</th> -->
                     <th></th>
                 </tr>
                 <tr>
-                    <td><img src="/img/mouse.png" alt="mouse" width="50vw"> Mouse Philips USB</td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <img src="/img/mouse.png" alt="mouse" width="50vw" style="vertical-align: middle;">
+                        <span style="display: inline-block; vertical-align: middle;">Mouse Philips USB</span>
+                      </td>
                     <td>$4500</td>
+                    <!-- <div class="quantity-container"> <button onclick="restar()">-</button>
+                        <span id="quantity">0</span>
+                        <button onclick="sumar()">+</button>
+                    </div> -->
                     <td>
                         <button class="icon-button">
                             <i class="fa-solid fa-plus"></i>
@@ -35,13 +44,16 @@
                             <i class="fa-solid fa-minus"></i>
                         </button>
                     </td>
-                    <td class="subtotal">$4500</td>
+                    <!-- <td class="subtotal">$4500</td> -->
                     <td><button class="eliminar">
                             <i class="fa-regular fa-trash-can"></i>
                         </button></td>
                 </tr>
                 <tr>
-                    <td><img src="/img/notebook.jpg" alt="notebook" width="50vw"> Notebook Lenovo</td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <img src="/img/notebook.jpg" alt="notebook" width="50vw" style="vertical-align: middle;">
+                        <span style="display: inline-block; vertical-align: middle;">Notebook Lenovo</span>
+                        </td>
                     <td>$350000</td>
                     <td>
                         <button class="icon-button">
@@ -52,7 +64,7 @@
                             <i class="fa-solid fa-minus"></i>
                         </button>
                     </td>
-                    <td class="subtotal">$350000</td>
+                    <!-- <td class="subtotal">$350000</td> -->
                     <td><button class="eliminar">
                             <i class="fa-regular fa-trash-can"></i>
                         </button></td>
