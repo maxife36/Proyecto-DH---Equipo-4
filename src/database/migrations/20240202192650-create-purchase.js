@@ -10,23 +10,9 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      productId: {
-        type: Sequelize.UUID,
+      data: {
+        type: Sequelize.JSON,
         allowNull: false
-      },
-      productName: {
-        type: Sequelize.STRING(50),
-        allowNull: false
-      },
-      quantity: {
-        type: Sequelize.INTEGER,
-        unsigned: true,
-        allowNull: false
-      },
-      amount: {
-        type: Sequelize.INTEGER,
-        unsigned: true,
-        allowNull: true
       },
       createdAt: {
         allowNull: false,

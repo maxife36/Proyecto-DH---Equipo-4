@@ -4,7 +4,71 @@ const { Model, Sequelize } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
-      // define association here
+
+      // Product - User association
+      this.belongsToMany(models.User, {
+        as: "users",
+        through: "comments",
+        foreignKey: "productId",
+        otherKey: "userId"
+      })
+
+      // Product - Comment association
+      this.hasMany(models.Comment, {
+        as: "comments",
+        foreignKey: "productId"
+      })
+
+      // Product - User through -> "favorite" association
+      this.belongsToMany(models.User, {
+        as: "favoriteUsers",
+        through: "favorites",
+        foreignKey: "userId",
+        otherKey: "productId"
+      })
+
+      // Product - Cart association
+      this.belongsToMany(models.Cart, {
+        as: "carts",
+        through: "carts_products",
+        foreignKey: "productId",
+        otherKey: "cartId"
+      })
+
+      // Prdouct - "Cart_Product" association
+      this.hasMany(models.Cart_Product, {
+        as: "cartProducts",
+        foreignKey: "productId"
+      })
+
+      // Product - Category association
+      this.belongsToMany(models.Category, {
+        as: "categories",
+        through: "products_categories",
+        foreignKey: "productId",
+        otherKey: "categoryId"
+      })
+
+      // Prdouct - Images association
+      this.hasMany(models.Image, {
+        as: "iamges",
+        foreignKey: "productId"
+      })
+
+      // Product - Feature association 
+      this.belongsToMany(models.Feature, {
+        as: "features",
+        through: "products_features",
+        foreignKey: "productId",
+        otherKey: "featureId"
+      })
+
+      // Prdouct - "Product_Feature" association
+      this.hasMany(models.Product_Feature, {
+        as: "specifications",
+        foreignKey: "productId"
+      })
+
     }
   }
 

@@ -98,12 +98,12 @@ module.exports = {
         key: "userId"
       }
     });
-    await queryInterface.addColumn("purchases", "cartId", {
+    await queryInterface.addColumn("purchases", "userId", {
       type: Sequelize.UUID,
       allowNull: false,
       references: {
-        model: "carts",
-        key: "cartId"
+        model: "users",
+        key: "userId"
       }
     });
     await queryInterface.addColumn("products_categories", "productId", {
@@ -137,7 +137,7 @@ module.exports = {
     await queryInterface.removeColumn("carts_products", "cartId");
     await queryInterface.removeColumn("carts_products", "productId");
     await queryInterface.removeColumn("credits_cards", "userId");
-    await queryInterface.removeColumn("purchases", "cartId");
+    await queryInterface.removeColumn("purchases", "userId");
     await queryInterface.removeColumn("products_categories", "productId");
     await queryInterface.removeColumn("products_categories", "categoryId");
   }

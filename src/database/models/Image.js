@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
 
     static associate(models) {
-      // define association here
+      // Images - Prdouct association
+      this.belongsTo(models.Product, {
+        as: "product",
+        foreignKey: "productId"
+      })
     }
   }
 
@@ -19,10 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     productId: {
       type: DataTypes.UUID,
-      references:{
-          model: "Product", 
-          key: "productId"
-        }
+      references: {
+        model: "Product",
+        key: "productId"
+      }
     },
     imageTitle: {
       type: DataTypes.STRING(50),
@@ -34,6 +38,6 @@ module.exports = (sequelize, DataTypes) => {
     tableName: "images",
     timestamps: false
   });
-  
+
   return Image;
 };

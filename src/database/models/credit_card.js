@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
   class Credit_Card extends Model {
 
     static associate(models) {
-      // define association here
+
+      this.belongsTo(models.User,{
+        as: "user",
+        foreignKey: "userId"
+      })
     }
   }
 

@@ -5,7 +5,17 @@ module.exports = (sequelize, DataTypes) => {
   class Product_Feature extends Model {
 
     static associate(models) {
-      // define association here
+      // "Product_Feature" - Feature association
+      this.belongsTo(models.Feature, {
+        as: "feature",
+        foreignKey: "featureId"
+      })
+
+      // "Product_Feature" - Product association
+      this.belongsTo(models.Product, {
+        as: "product",
+        foreignKey: "productId"
+      })
     }
   }
 
@@ -19,23 +29,24 @@ module.exports = (sequelize, DataTypes) => {
     productId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-          model: "Product", 
-          key: "productId"
-        }
+      references: {
+        model: "Product",
+        key: "productId"
+      }
     },
     featureId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-          model: "Feature", 
-          key: "featureId"
-        }
-    }}, {
+      references: {
+        model: "Feature",
+        key: "featureId"
+      }
+    }
+  }, {
     sequelize,
     modelName: "Product_Feature",
     tableName: "products_features",
-    timestamps:false
+    timestamps: false
   });
 
   return Product_Feature;

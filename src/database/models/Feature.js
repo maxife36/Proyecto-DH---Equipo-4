@@ -5,7 +5,19 @@ module.exports = (sequelize, DataTypes) => {
   class Feature extends Model {
 
     static associate(models) {
-      // define association here
+         // Feature - Product association 
+         this.belongsToMany(models.Product, {
+          as: "products",
+          through: "products_features",
+          foreignKey: "featureId",
+          otherKey: "productId"
+        })
+  
+        // Feature - "Product_Feature" association
+        this.hasMany(models.Product_Feature, {
+          as: "specifications",
+          foreignKey: "featureId"
+        })
     }
   }
 

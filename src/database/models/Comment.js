@@ -6,7 +6,17 @@ module.exports = (sequelize, DataTypes) => {
 
 
     static associate(models) {
-      // define association here
+      // Comment - User association
+      this.belongsTo(models.User,{
+        as: "user",
+        foreignKey: "userId"
+      })
+
+      // Comment - Product association
+      this.belongsTo(models.Product,{
+        as: "product",
+        foreignKey: "productId"
+      })
     }
   }
   Comment.init({

@@ -5,7 +5,17 @@ module.exports = (sequelize, DataTypes) => {
   class Cart_Product extends Model {
 
     static associate(models) {
-      // define association here
+       // "Cart_Product" - Cart association
+       this.belongsTo(models.Cart, {
+        as: "cart",
+        foreignKey: "cartId"
+      })
+
+       // "Cart_Product" - Product association
+       this.belongsTo(models.Product, {
+        as: "product",
+        foreignKey: "productId"
+      })
     }
   }
   Cart_Product.init({

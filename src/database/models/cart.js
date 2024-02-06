@@ -5,11 +5,27 @@ module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
 
     static associate(models) {
-      // define association here
+
+      // Cart - User association
       this.belongsTo(models.User, {
-        as:"usuario",
+        as: "user",
         foreignKey: "userId"
       })
+
+      // Cart - Product association
+      this.belongsToMany(models.Product, {
+        as: "products",
+        through: "carts_products",
+        foreignKey: "cartId",
+        otherKey: "productId"
+      })
+
+      // Cart - "Cart_Product" association
+      this.hasMany(models.Cart_Product, {
+        as: "cartProducts",
+        foreignKey: "cartId"
+      })
+
     }
   }
 
@@ -28,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         key: "userId"
       }
     },
-    amount:{
+    amount: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       unsigned: true,

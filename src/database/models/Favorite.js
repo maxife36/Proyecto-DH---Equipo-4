@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
   class Favorite extends Model {
 
     static associate(models) {
-      // define association here
     }
   }
 
