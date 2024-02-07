@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       // Product - User association
       this.belongsToMany(models.User, {
         as: "users",
-        through: "comments",
+        through: {
+          model: models.Comment, 
+          uniqueKey: 'commentId', 
+        },
         foreignKey: "productId",
         otherKey: "userId"
       })
@@ -22,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       // Product - User through -> "favorite" association
       this.belongsToMany(models.User, {
         as: "favoriteUsers",
-        through: "favorites",
+        through: {
+          model: models.Favorite, 
+          uniqueKey: 'favoriteId', 
+        },
         foreignKey: "userId",
         otherKey: "productId"
       })

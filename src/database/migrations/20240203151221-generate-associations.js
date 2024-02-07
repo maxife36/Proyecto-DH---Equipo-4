@@ -8,7 +8,9 @@ module.exports = {
       references: {
         model: "categories", //debe ir el nombre de la Tabla, no del modelo
         key: "categoryId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("images", "productId", {
       type: Sequelize.UUID,
@@ -16,7 +18,9 @@ module.exports = {
       references: {
         model: "products",
         key: "productId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("products_features", "productId", {
       type: Sequelize.UUID,
@@ -24,7 +28,9 @@ module.exports = {
       references: {
         model: "products",
         key: "productId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("products_features", "featureId", {
       type: Sequelize.UUID,
@@ -32,7 +38,9 @@ module.exports = {
       references: {
         model: "features",
         key: "featureId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("favorites", "userId", {
       type: Sequelize.UUID,
@@ -40,7 +48,9 @@ module.exports = {
       references: {
         model: "users",
         key: "userId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("favorites", "productId", {
       type: Sequelize.UUID,
@@ -48,7 +58,9 @@ module.exports = {
       references: {
         model: "products",
         key: "productId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("comments", "userId", {
       type: Sequelize.UUID,
@@ -56,7 +68,9 @@ module.exports = {
       references: {
         model: "users",
         key: "userId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("comments", "productId", {
       type: Sequelize.UUID,
@@ -64,7 +78,9 @@ module.exports = {
       references: {
         model: "products",
         key: "productId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("carts", "userId", {
       type: Sequelize.UUID,
@@ -72,7 +88,9 @@ module.exports = {
       references: {
         model: "users",
         key: "userId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("carts_products", "cartId", {
       type: Sequelize.UUID,
@@ -80,7 +98,9 @@ module.exports = {
       references: {
         model: "carts",
         key: "cartId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("carts_products", "productId", {
       type: Sequelize.UUID,
@@ -88,7 +108,9 @@ module.exports = {
       references: {
         model: "products",
         key: "productId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("credits_cards", "userId", {
       type: Sequelize.UUID,
@@ -96,7 +118,9 @@ module.exports = {
       references: {
         model: "users",
         key: "userId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("purchases", "userId", {
       type: Sequelize.UUID,
@@ -104,7 +128,9 @@ module.exports = {
       references: {
         model: "users",
         key: "userId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("products_categories", "productId", {
       type: Sequelize.UUID,
@@ -112,7 +138,9 @@ module.exports = {
       references: {
         model: "products",
         key: "productId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
     await queryInterface.addColumn("products_categories", "categoryId", {
       type: Sequelize.UUID,
@@ -120,7 +148,9 @@ module.exports = {
       references: {
         model: "categories",
         key: "categoryId"
-      }
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
     });
   },
 
