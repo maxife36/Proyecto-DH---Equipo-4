@@ -1,11 +1,12 @@
-const db = require("../models")
+const { User } = require("../models")
 const msg = require("../dbMessages")
+const { v4: uuid } = require("uuid")
 
 
 module.exports = {
     getAllUsers: async () => {
         try {
-            const users = await db.User.findAll({
+            const users = await User.findAll({
                 include: ["cart"]
             })
 
@@ -18,7 +19,7 @@ module.exports = {
     },
     getUserByPk: async (userId) => {
         try {
-            const user = await db.User.findByPk(userId, {
+            const user = await User.findByPk(userId, {
                 include: ["cart"]
             })
 
@@ -31,7 +32,7 @@ module.exports = {
     },
     getUserByEmail: async (email) => {
         try {
-            const user = await db.User.findOne({
+            const user = await User.findOne({
                 where: { email },
                 include: ["cart"]
             })
@@ -45,7 +46,7 @@ module.exports = {
     },
     getUserByUsername: async (username) => {
         try {
-            const user = await db.User.findOne({
+            const user = await User.findOne({
                 where: { username },
                 include: ["cart"]
             })
@@ -59,7 +60,7 @@ module.exports = {
     },
     getUserPurchase: async (userId) => {
         try {
-            const user = await db.User.findByPk(userId, {
+            const user = await User.findByPk(userId, {
                 include: ["purchases"]
             })
 
@@ -75,7 +76,7 @@ module.exports = {
     },
     getUserCreditcards: async (userId) => {
         try {
-            const user = await db.User.findByPk(userId, {
+            const user = await User.findByPk(userId, {
                 include: ["creditCards"]
             })
 
@@ -91,14 +92,14 @@ module.exports = {
     },
     getUserCommentedProducts: async (userId) => {
         try {
-            const user = await db.User.findByPk(userId, {
+            const user = await User.findByPk(userId, {
                 include: [{
                     association: "productsReviews",
-                    attributes: ["productId" ,'productName', 'score'],
+                    attributes: ["productId", 'productName', 'score'],
                     include: [
                         {
                             association: "comments",
-                            attributes: ["commentId",'commentBody', 'score']  
+                            attributes: ["commentId", 'commentBody', 'score']
                         }
                     ]
                 }]
@@ -116,10 +117,10 @@ module.exports = {
     },
     getUserFavoritesProducts: async (userId) => {
         try {
-            const user = await db.User.findByPk(userId, {
+            const user = await User.findByPk(userId, {
                 include: [{
                     association: "favoriteProducts",
-                    attributes: ["productId" ,'productName']
+                    attributes: ["productId", 'productName']
                 }]
             })
 
@@ -133,6 +134,91 @@ module.exports = {
             throw new Error(err.message)
         }
     },
+    createUser: async (userData) => {
+        try {
+
+            //Verificacion de campos obligatorios
+
+            const requiredField = ["fullname", "email", "birthday", "username", "password"]
+
+            requiredField.forEach(el => {
+                let requiredFlag = false
+
+                userData.hasOwnProperty(el) ? null : requiredFlag = true
+
+                if (requiredFlag) throw new Error(msg.erroMsg.incompleteData)
+            })
+
+            //creacion de usuario
+
+            const newUser = {
+                userId: uuid(),
+                admin: userData.admin ? userData.admin : 0,
+                fullname: userData.fullname,
+                email: userData.email,
+                birthday: userData.birthday,
+                address: userData.address ? userData.address : null,
+                profileImg: userData.profileImg ? userData.profileImg : null,
+                username: userData.username,
+                password: userData.password
+            }
+
+            return await User.create(newUser)
+
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    },
+    updateUserData: async (userId, userData) => {
+        try {
+
+            //Verificacion de campos obligatorios
+
+            const requiredField = ["fullname", "email", "birthday", "username", "password"]
+
+            
+            requiredField.forEach(el => {
+                let requiredFlag = false
+
+                userData.hasOwnProperty(el) ? null : requiredFlag = true
+
+                if (requiredFlag) throw new Error(msg.erroMsg.incompleteData)
+            })
 
 
+            //creacion de usuario
+
+            const updateUser = {
+                admin: userData.admin ? userData.admin : 0,
+                fullname: userData.fullname,
+                email: userData.email,
+                birthday: userData.birthday,
+                address: userData.address ? userData.address : null,
+                username: userData.username,
+                password: userData.password
+            }
+
+            return await User.update(updateUser,{
+                where : { userId }
+            })
+
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    },
+    deleteUser: async (userId) => {
+        try {
+            const result = await User.destroy({
+                where: {
+                  userId: userId,
+                },
+              })
+
+            if (!result) throw new Error(msg.erroMsg.notExistId)
+
+            return result
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    }
 }
