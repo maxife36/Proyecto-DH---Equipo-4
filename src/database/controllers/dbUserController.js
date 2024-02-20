@@ -8,6 +8,7 @@ const queryUser = seqQuery.newModel("User")
 module.exports = class DbUserController {
     static async getAllUsers() {
         try {
+            //query config
             const query = queryUser.newQuery(["cart"])
 
             const users = await User.findAll(query.config)
@@ -26,6 +27,7 @@ module.exports = class DbUserController {
             //validacion de ID
             validator.idValidator(userId)
 
+            //query config
             const query = queryUser.newQuery(["cart"])
 
             const user = await User.findByPk(userId, query.config)

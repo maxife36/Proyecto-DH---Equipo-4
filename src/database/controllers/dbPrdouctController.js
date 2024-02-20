@@ -2,58 +2,27 @@ const { Product, Sequelize, Favorite } = require("../models")
 const msg = require("./dbMessage")
 const validator = require("../seqQueyConfig/assets/validators")
 
+const queryProduct = seqQuery.newModel("Product")
+
 
 module.exports = class DbProductController {
 
     static async getAllProducts() {
         try {
-          /*   let c = a.initConfig(associations)//{}
-            a.addFilter(c)
-            c = a.addFilter(c)
-            c = a.addFilter(c)
+            //query config
+            const query = queryProduct.newQuery(["images", "categories", "comments", "features", "favorites"])
+            query.addAssociation("user", ["comments"])
+            query.addAssociation("specifications", ["features"])
+            query.addAttribute(["commentBody", "score"], "comments")
 
-            
-            a.execute(c)
- */
+            //En la siguiente linea incluyo manualmente attributes debido a que no cree una funcion para aplicar atributos en asociaciones de asociaciones.. solo en primera linea
+            query.config.include[2].include[0].attributes = ["userId", "username", "email"]
 
-            const products = await Product.findAll({
-                include: [
-                    {
-                        association: "images"
-                    },
-                    {
-                        association: "categories"
-                    },
-                    {
-                        association: "comments",
-                        attributes: ["commentBody", "score"],
-                        include: [
-                            {
-                                association: "user",
-                                attributes: ["userId", "username", "email"]
-                            }
-                        ]
-                    },
-                    {
-                        association: "features",
-                        include: [
-                            {
-                                association: "specifications",
-                                attributes: ["specification"]
-                            }
-                        ]
-                    },
-                    {
-                        association: "favorites",
-                        attributes: [
-                            [
-                                Sequelize.literal('(SELECT COUNT(*) FROM favorites WHERE favorites.productId = Product.productId)'),
-                                'favoritesCount',
-                            ],
-                        ]
-                    }
-                ]
-            })
+            const literal = "(SELECT COUNT(*) FROM favorites WHERE favorites.productId = Product.productId)"
+            query.addLiteral(literal, "attributes", "favorites")
+
+            //Consulta a DB
+            const products = await Product.findAll(query.config)
 
             if (!products.length) throw new Error(msg.erroMsg.emptyTable + "Producto")
 
@@ -69,38 +38,15 @@ module.exports = class DbProductController {
             //validacion de ID
             validator.idValidator(productId)
 
-            const product = await Product.findByPk(productId, {
-                include: [
-                    {
-                        association: "images"
-                    },
-                    {
-                        association: "categories"
-                    },
-                    {
-                        association: "comments",
-                        attributes: ["commentBody", "score"],
-                        include: [
-                            {
-                                association: "user",
-                                attributes: ["userId", "username", "email"]
-                            }
-                        ]
-                    },
-                    {
-                        association: "features",
-                        include: [
-                            {
-                                association: "specifications",
-                                attributes: ["specification"]
-                            }
-                        ]
-                    },
-                    {
-                        association: "favorites",
-                    }
-                ]
-            })
+            //query config
+            const query = queryProduct.newQuery(["images", "categories", "comments", "features", "favorites"])
+            query.addAssociation("user", ["comments"])
+            query.addAssociation("specifications", ["features"])
+            query.addAttribute(["commentBody", "score"], "comments")
+            //En la siguiente linea incluyo manualmente attributes debido a que no cree una funcion para aplicar atributos en asociaciones de asociaciones.. solo en primera linea
+            query.config.include[2].include[0].attributes = ["userId", "username", "email"]
+
+            const product = await Product.findByPk(productId, query.config)
 
             if (!product) throw new Error(msg.erroMsg.notExistId + productId)
 
@@ -112,23 +58,9 @@ module.exports = class DbProductController {
 
     static async getProductSearch(keywords) {
         try {
-            //limpieza de parametros de busqueda
-            const arraySearched = validator.searcherValidatorAndCleaner(keywords)
-
-            console.log(arraySearched);
-
-            //configuracion de opciones de busqueda
-
-            const whereConfig = arraySearched.map(keyword => {
-
-                const whereOption = {
-                    productName: {
-                        [Sequelize.Op.like]: `%${keyword}%`
-                    }
-                }
-
-                return whereOption
-            })
+            //query config
+            const query = queryProduct.newQuery()
+            query.filterByString(keywords, "productName", null, "exact")
 
             //Busqueda en mi DB
             const searchResult = await Product.findAll({
@@ -220,7 +152,7 @@ module.exports = class DbProductController {
 
         //generar una funcion que me devuelva el objeto armado de las configuraciones de filtrado 
 
-       
+
 
         DbProductController.whereNumberConstructor(/* FALTAN PASAR PARAMETROS */)
 
