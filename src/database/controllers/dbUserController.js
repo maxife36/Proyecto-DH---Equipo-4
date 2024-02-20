@@ -1,68 +1,85 @@
-const { User } = require("../models")
-const msg = require("../dbMessages")
+const { User, seqQuery } = require("../models")
+const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
+const validator = require("../seqQueyConfig/assets/validators")
 
+const queryUser = seqQuery.newModel("User")
 
-module.exports = {
-    getAllUsers: async () => {
+module.exports = class DbUserController {
+    static async getAllUsers() {
         try {
-            const users = await User.findAll({
-                include: ["cart"]
-            })
+            const query = queryUser.newQuery(["cart"])
+
+            const users = await User.findAll(query.config)
 
             if (!users.length) throw new Error(msg.erroMsg.emptyTable + "Usuarios")
 
             return users
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserByPk: async (userId) => {
+    }
+
+    static async getUserById(userId) {
         try {
-            const user = await User.findByPk(userId, {
-                include: ["cart"]
-            })
+
+            //validacion de ID
+            validator.idValidator(userId)
+
+            const query = queryUser.newQuery(["cart"])
+
+            const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
 
             return user.dataValues
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserByEmail: async (email) => {
+    }
+
+    static async getUserByEmail(email) {
         try {
-            const user = await User.findOne({
-                where: { email },
-                include: ["cart"]
-            })
+            //query config
+            const query = queryUser.newQuery(["cart"])
+            query.addWhere(email, "email")
+
+            const user = await User.findOne(query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistField + `email = ${email}`)
 
             return user
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserByUsername: async (username) => {
+    }
+
+    static async getUserByUsername(username) {
         try {
-            const user = await User.findOne({
-                where: { username },
-                include: ["cart"]
-            })
+            //query config
+            const query = queryUser.newQuery(["cart"])
+            query.addWhere(username, "username")
+
+            const user = await User.findOne(query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistField + `Username = ${username}`)
 
             return user
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserPurchase: async (userId) => {
+    }
+
+    static async getUserPurchase(userId) {
         try {
-            const user = await User.findByPk(userId, {
-                include: ["purchases"]
-            })
+
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryUser.newQuery(["purchases"])
+
+            const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
 
@@ -71,14 +88,20 @@ module.exports = {
                 purchases: user.purchases
             }
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserCreditcards: async (userId) => {
+    }
+
+    static async getUserCreditcards(userId) {
         try {
-            const user = await User.findByPk(userId, {
-                include: ["creditCards"]
-            })
+
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryUser.newQuery(["creditCards"])
+
+            const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
 
@@ -87,23 +110,22 @@ module.exports = {
                 creditCards: user.creditCards
             }
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserCommentedProducts: async (userId) => {
+    }
+
+    static async getUserCommentedProducts(userId) {
         try {
-            const user = await User.findByPk(userId, {
-                include: [{
-                    association: "productsReviews",
-                    attributes: ["productId", 'productName', 'score'],
-                    include: [
-                        {
-                            association: "comments",
-                            attributes: ["commentId", 'commentBody', 'score']
-                        }
-                    ]
-                }]
-            })
+
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryUser.newQuery(["productsReviews"])
+            query.addAttribute(["productId", "productName", "score"], "productsReviews")
+            query.addAssociation("comments", ["productsReviews"])
+
+            const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
 
@@ -112,17 +134,21 @@ module.exports = {
                 products: user.productsReviews
             }
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    getUserFavoritesProducts: async (userId) => {
+    }
+
+    static async getUserFavoritesProducts(userId) {
         try {
-            const user = await User.findByPk(userId, {
-                include: [{
-                    association: "favoriteProducts",
-                    attributes: ["productId", 'productName']
-                }]
-            })
+
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryUser.newQuery(["favoriteProducts"])
+            query.addAttribute(["productId", "productName"], "favoriteProducts")
+
+            const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
 
@@ -131,10 +157,11 @@ module.exports = {
                 products: user.favoriteProducts
             }
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    createUser: async (userData) => {
+    }
+
+    static async createUser(userData) {
         try {
 
             //Verificacion de campos obligatorios
@@ -166,17 +193,18 @@ module.exports = {
             return await User.create(newUser)
 
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    updateUserData: async (userId, userData) => {
+    }
+
+    static async updateUserData(userId, userData) {
         try {
+            //validacion de ID
+            validator.idValidator(userId)
 
             //Verificacion de campos obligatorios
-
             const requiredField = ["fullname", "email", "birthday", "username", "password"]
 
-            
             requiredField.forEach(el => {
                 let requiredFlag = false
 
@@ -185,9 +213,7 @@ module.exports = {
                 if (requiredFlag) throw new Error(msg.erroMsg.incompleteData)
             })
 
-
             //creacion de usuario
-
             const updateUser = {
                 admin: userData.admin ? userData.admin : 0,
                 fullname: userData.fullname,
@@ -198,27 +224,34 @@ module.exports = {
                 password: userData.password
             }
 
-            return await User.update(updateUser,{
-                where : { userId }
-            })
+            //query config
+            const query = queryUser.newQuery()
+            query.addWhere(userId, "userId")
+
+            return await User.update(updateUser, query.config)
 
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
-    },
-    deleteUser: async (userId) => {
+    }
+
+    static async deleteUser(userId) {
         try {
-            const result = await User.destroy({
-                where: {
-                  userId: userId,
-                },
-              })
+
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryUser.newQuery()
+            query.addWhere(userId, "userId")
+
+            const result = await User.destroy(query.config)
 
             if (!result) throw new Error(msg.erroMsg.notExistId)
 
             return result
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
         }
     }
 }

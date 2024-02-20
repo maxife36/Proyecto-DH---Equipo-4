@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
 
-      // Product - User association
+      // Product - User through -> "comments" association
       this.belongsToMany(models.User, {
         as: "users",
         through: {
           model: models.Comment, 
-          uniqueKey: 'commentId', 
+          uniqueKey: "commentId", 
         },
         foreignKey: "productId",
         otherKey: "userId"
@@ -22,21 +22,30 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "productId"
       })
 
-      // Product - User through -> "favorite" association
+      // Product - User through -> "favorites" association
       this.belongsToMany(models.User, {
         as: "favoriteUsers",
         through: {
           model: models.Favorite, 
-          uniqueKey: 'favoriteId', 
+          uniqueKey: "favoriteId", 
         },
         foreignKey: "userId",
         otherKey: "productId"
       })
 
+      // Product - Favorite association
+      this.hasMany(models.Favorite, {
+        as: "favorites",
+        foreignKey: "productId"
+      })
+
       // Product - Cart association
       this.belongsToMany(models.Cart, {
         as: "carts",
-        through: "carts_products",
+        through: {
+          model: models.Cart_Product, 
+          uniqueKey: "cartProductId", 
+        },
         foreignKey: "productId",
         otherKey: "cartId"
       })
@@ -50,21 +59,27 @@ module.exports = (sequelize, DataTypes) => {
       // Product - Category association
       this.belongsToMany(models.Category, {
         as: "categories",
-        through: "products_categories",
+        through: {
+          model: models.Product_Category, 
+          uniqueKey: "productCategoryId", 
+        },
         foreignKey: "productId",
         otherKey: "categoryId"
       })
 
       // Prdouct - Images association
       this.hasMany(models.Image, {
-        as: "iamges",
+        as: "images",
         foreignKey: "productId"
       })
 
       // Product - Feature association 
       this.belongsToMany(models.Feature, {
         as: "features",
-        through: "products_features",
+        through: {
+          model: models.Product_Feature, 
+          uniqueKey: "productFeatureId", 
+        },
         foreignKey: "productId",
         otherKey: "featureId"
       })

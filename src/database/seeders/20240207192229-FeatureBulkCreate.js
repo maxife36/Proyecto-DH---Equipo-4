@@ -1,7 +1,7 @@
-'use strict';
-const { Feature } = require('../models');
+"use strict";
+const { Feature } = require("../models");
 
-/** @type {import('sequelize-cli').Migration} */
+/** @type {import("sequelize-cli").Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     const features = [
@@ -44,6 +44,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-        await queryInterface.bulkDelete('features', null, {});
+        await queryInterface.bulkDelete("features", null, {});
   }
 };

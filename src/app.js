@@ -14,8 +14,6 @@ const productsRoutes = require("./routes/productsRoutes.js")
 const usersRoutes = require("./routes/usersRoutes.js")
 const cookieSearcher = require("./Middlewares/cookieSearcher.js")
 
-//PRUEBA -- ELIMINAR DESPUES DE USO
-const pruebaRoutes = require("./routes/prueba.js")
 
 /* ---Variables de Configuracion--- */
 
@@ -56,8 +54,12 @@ app.use("/", mainRoutes)
 app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
 
-//PRUEBA -- ELIMINAR DESPUES DE USO
-app.use("/prueba", pruebaRoutes)
+/* const pruebasRoutes = require("./routes/pruebaDeRutas.js")
+app.use("/prueba", pruebasRoutes) */
+
+
+
+
 
 
 app.listen(port, () => {

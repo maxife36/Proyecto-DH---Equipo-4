@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "productsReviews",
         through: {
           model: models.Comment, 
-          uniqueKey: 'commentId', 
+          uniqueKey: "commentId", 
         },
         foreignKey: "userId",
         otherKey: "productId"
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "favoriteProducts",
         through: {
           model: models.Favorite, 
-          uniqueKey: 'favoriteId', 
+          uniqueKey: "favoriteId", 
         },
         foreignKey: "userId",
         otherKey: "productId"
@@ -79,6 +79,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING(60),
       allowNull: false,
+      unique: true, 
       validate: {
         isEmail: true
       }
@@ -92,6 +93,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING(20),
       allowNull: false,
+      unique: true, 
       validate: {
         is: /^[a-zA-Z0-9._-]{6,20}$/
       }

@@ -1,0 +1,8 @@
+{
+    "notebook.find.scope": {
+        "markupSource": true,
+        "markupPreview": true,
+        "codeSource": true,
+        "codeOutput": true
+    }
+}

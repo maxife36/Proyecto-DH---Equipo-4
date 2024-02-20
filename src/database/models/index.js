@@ -39,5 +39,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+//instancia de clase General de seqQueryConfig
+db.seqQuery = new require("../seqQueyConfig/index")(sequelize)
 
 module.exports = db;

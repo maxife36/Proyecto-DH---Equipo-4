@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
         model: "Feature",
         key: "featureId"
       }
+    },
+    specification: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
     }
   }, {
     sequelize,

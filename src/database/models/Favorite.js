@@ -5,6 +5,17 @@ module.exports = (sequelize, DataTypes) => {
   class Favorite extends Model {
 
     static associate(models) {
+      // Favorite - User association
+      this.belongsTo(models.User,{
+        as: "user",
+        foreignKey: "userId"
+      })
+
+      // Favorite - Product association
+      this.belongsTo(models.Product,{
+        as: "product",
+        foreignKey: "productId"
+      })
     }
   }
 
