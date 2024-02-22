@@ -14,6 +14,21 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: Sequelize.fn("UUID"),
       primaryKey: true,
       allowNull: false,
+    },
+    productId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Product",
+        key: "productId"
+      }
+    },
+    categoryId: {
+      type: DataTypes.UUID,
+      references: {
+        model: "Category",
+        key: "categoryId"
+      }
     }
   }, {
     sequelize,

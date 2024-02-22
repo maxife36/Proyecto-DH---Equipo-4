@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     productId: {
       type: DataTypes.UUID,
+      allowNull: false,
       references: {
         model: "Product",
         key: "productId"

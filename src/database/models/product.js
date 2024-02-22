@@ -128,13 +128,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       unsigned: true,
       allowNull: false
-    },
-    categoryId: {
-      type: DataTypes.UUID,
-      references: {
-        model: "Category",
-        key: "categoryId"
-      }
     }
 
   }, {

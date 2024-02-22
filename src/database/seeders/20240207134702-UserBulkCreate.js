@@ -1,6 +1,7 @@
 "use strict";
 const { User } = require("../models");
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt")
 
 /** @type {import("sequelize-cli").Migration} */
 module.exports = {
@@ -226,6 +227,8 @@ module.exports = {
         password: "noahPass789",
       }
     ]
+
+    usersArray.forEach(user => user.password = bcrypt.hashSync(user.password, 10))
 
     await User.bulkCreate(usersArray);
   },

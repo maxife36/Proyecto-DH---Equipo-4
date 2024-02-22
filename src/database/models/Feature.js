@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false,
     },
-    fetureName: {
+    featureName: {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    fetureIcon: {
+    featureIcon: {
       type: DataTypes.STRING(50),
       allowNull: false
     }

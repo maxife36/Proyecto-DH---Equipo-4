@@ -34,7 +34,7 @@ module.exports = class DbUserController {
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
 
-            return user.dataValues
+            return user
         } catch (err) {
             console.log(err.message)
         }
@@ -165,31 +165,28 @@ module.exports = class DbUserController {
 
     static async createUser(userData) {
         try {
+            const { admin, fullname, email, birthday, address, profileImg, username, password } = userData
 
             //Verificacion de campos obligatorios
 
-            const requiredField = ["fullname", "email", "birthday", "username", "password"]
+            const requiredFields = ["fullname", "email", "birthday", "username", "password"]
 
-            requiredField.forEach(el => {
-                let requiredFlag = false
+            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
 
-                userData.hasOwnProperty(el) ? null : requiredFlag = true
-
-                if (requiredFlag) throw new Error(msg.erroMsg.incompleteData)
-            })
-
+            if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
+    
             //creacion de usuario
 
             const newUser = {
                 userId: uuid(),
-                admin: userData.admin ? userData.admin : 0,
-                fullname: userData.fullname,
-                email: userData.email,
-                birthday: userData.birthday,
-                address: userData.address ? userData.address : null,
-                profileImg: userData.profileImg ? userData.profileImg : null,
-                username: userData.username,
-                password: userData.password
+                admin: admin ? admin : 0,
+                fullname,
+                email,
+                birthday,
+                address: address ? address : null,
+                profileImg: profileImg ? profileImg : null,
+                username,
+                password
             }
 
             return await User.create(newUser)
@@ -201,29 +198,28 @@ module.exports = class DbUserController {
 
     static async updateUserData(userId, userData) {
         try {
+            const { admin, fullname, email, birthday, address, profileImg, username, password } = userData
+            
             //validacion de ID
             validator.idValidator(userId)
 
             //Verificacion de campos obligatorios
-            const requiredField = ["fullname", "email", "birthday", "username", "password"]
+            const requiredFields = ["fullname", "email", "birthday", "username", "password"]
 
-            requiredField.forEach(el => {
-                let requiredFlag = false
+            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
 
-                userData.hasOwnProperty(el) ? null : requiredFlag = true
-
-                if (requiredFlag) throw new Error(msg.erroMsg.incompleteData)
-            })
-
+            if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
+    
             //creacion de usuario
             const updateUser = {
-                admin: userData.admin ? userData.admin : 0,
-                fullname: userData.fullname,
-                email: userData.email,
-                birthday: userData.birthday,
-                address: userData.address ? userData.address : null,
-                username: userData.username,
-                password: userData.password
+                admin: admin ? admin : 0,
+                fullname,
+                email,
+                birthday,
+                address: address ? address : null,
+                profileImg: profileImg ? profileImg : null,
+                username,
+                password
             }
 
             //query config

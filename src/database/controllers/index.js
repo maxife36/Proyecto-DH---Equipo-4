@@ -11,6 +11,7 @@ fs
     return (
       file.indexOf(".") !== 0 &&
       file !== basename &&
+      file !== "dbMessage.js" &&
       file.slice(-3) === ".js" 
     );
   })
