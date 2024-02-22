@@ -28,7 +28,6 @@ Gotec se dirige a un público general entre 18 y 40 años que está interesado e
  
 + Delfino, Franco Giovanni.
 + Coronel Arismendi, María Candela.
-+ Pereyra, María del Pilar.
 + Fenoglio, Maximiliano Martin.
 + Santillán Suárez, Francisco.
 
