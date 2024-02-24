@@ -3,15 +3,6 @@
 /** @type {import("sequelize-cli").Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("products", "categoryId", {
-      type: Sequelize.UUID,
-      references: {
-        model: "categories", //debe ir el nombre de la Tabla, no del modelo
-        key: "categoryId"
-      },
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE"
-    });
     await queryInterface.addColumn("images", "productId", {
       type: Sequelize.UUID,
       allowNull: false,

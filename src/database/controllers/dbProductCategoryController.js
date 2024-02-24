@@ -1,11 +1,11 @@
-const { Product_Category , seqQuery } = require("../models")
+const { Product_Category, seqQuery } = require("../models")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
 const validator = require("../seqQueyConfig/assets/validators")
 
 const queryProductCategory = seqQuery.newModel("Product_Category")
 
-module.exports = class DbProductCategoryController {
+module.exports = class DbProductCategory {
     static async getAllProductCategory() {
         try {
             const productCategories = await Product_Category.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbProductCategoryController {
             return productCategories
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,17 +32,18 @@ module.exports = class DbProductCategoryController {
             return productCategory
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
-    static async createProductCategory(data) {
+    static async createProductCategory(data, transaction) {
         try {
             const { productId, categoryId } = data
 
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "categoryId"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -52,10 +54,41 @@ module.exports = class DbProductCategoryController {
                 categoryId
             }
 
-            return await Product_Category.create(newProductCategory)
+            return await Product_Category.create(newProductCategory, {transaction})
 
         } catch (err) {
             console.log(err.message)
+            throw err
+        }
+    }
+
+    static async bulkCreateProductCategory(ProductCategoryData, transaction) {
+        try {
+            const newProductCategory = []
+
+            for (const data of ProductCategoryData) {
+                const { productId, categoryId } = data
+
+                //Verificacion de campos obligatorios
+                const requiredFields = ["productId", "categoryId"]
+
+                const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
+
+                if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
+
+                //creacion de caracteristica
+                newProductCategory.push({
+                    productCategoryId: uuid(),
+                    productId,
+                    categoryId
+                })
+            }
+
+            return await Product_Category.bulkCreate(newProductCategory, { transaction })
+
+        } catch (err) {
+            console.log(err.message)
+            throw err
         }
     }
 
@@ -69,7 +102,7 @@ module.exports = class DbProductCategoryController {
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "categoryId"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -88,26 +121,28 @@ module.exports = class DbProductCategoryController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
-    static async deleteProductCategory(productCategoryId) {
+    static async deleteProductCategory(deleteId, deleteParam, transaction) {
         try {
 
             //validacion de ID
-            validator.idValidator(productCategoryId)
+            validator.idValidator(deleteId)
 
             //query config
             const query = queryProductCategory.newQuery()
-            query.addWhere(productCategoryId, "productCategoryId")
+            query.addWhere(deleteId, `${deleteParam}`)
 
-            const result = await Product_Category.destroy(query.config)
+            const result = await Product_Category.destroy(query.config, { transaction })
 
             if (!result) throw new Error(msg.erroMsg.notExistId)
 
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

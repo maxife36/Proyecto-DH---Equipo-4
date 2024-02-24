@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryPurchase = seqQuery.newModel("Purchase")
 
-module.exports = class DbPurchaseController {
+module.exports = class DbPurchase {
     static async getAllPurchases() {
         try {
             const purchase = await Purchase.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbPurchaseController {
             return purchase
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbPurchaseController {
             return purchase
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -41,7 +43,7 @@ module.exports = class DbPurchaseController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "data"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !purchaseData.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -56,6 +58,7 @@ module.exports = class DbPurchaseController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -69,7 +72,7 @@ module.exports = class DbPurchaseController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "data"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !purchaseData.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -88,6 +91,7 @@ module.exports = class DbPurchaseController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -108,6 +112,7 @@ module.exports = class DbPurchaseController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

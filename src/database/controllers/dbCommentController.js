@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryComment = seqQuery.newModel("Comment")
 
-module.exports = class DbCommentController {
+module.exports = class DbComment {
     static async getAllComments() {
         try {
             const comments = await Comment.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbCommentController {
             return comments
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbCommentController {
             return comment
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -41,7 +43,7 @@ module.exports = class DbCommentController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "productId", "commentBody", "score"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -58,6 +60,7 @@ module.exports = class DbCommentController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -71,7 +74,7 @@ module.exports = class DbCommentController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "productId", "commentBody", "score"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -92,6 +95,7 @@ module.exports = class DbCommentController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -112,6 +116,7 @@ module.exports = class DbCommentController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

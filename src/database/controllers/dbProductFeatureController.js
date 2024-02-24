@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryPrdouctFeature = seqQuery.newModel("Product_Feature")
 
-module.exports = class DbPrdouctFeatureController {
+module.exports = class DbPrdouctFeature {
     static async getAllPrdouctFeatures() {
         try {
             const specification = await Product_Feature.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbPrdouctFeatureController {
             return specification
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -30,17 +31,18 @@ module.exports = class DbPrdouctFeatureController {
             return specification
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
-    static async createPrdouctFeature(data) {
+    static async createPrdouctFeature(data, transaction) {
         try {
             const { productId, featureId, specification } = data
 
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "featureId", "specification"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -52,10 +54,42 @@ module.exports = class DbPrdouctFeatureController {
                 specification
             }
 
-            return await Product_Feature.create(newProductFeature)
+            return await Product_Feature.create(newProductFeature, { transaction })
 
         } catch (err) {
             console.log(err.message)
+            throw err
+        }
+    }
+
+    static async bulkCreatePrdouctFeature(PrdouctFeatureData, transaction) {
+        try {
+            const newPrdouctFeature = []
+
+            for (const data of PrdouctFeatureData) {
+                const { productId, featureId, specification } = data
+
+                //Verificacion de campos obligatorios
+                const requiredFields = ["productId", "featureId", "specification"]
+
+                const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
+
+                if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
+
+                //creacion de caracteristica
+                newPrdouctFeature.push({
+                    productFeatureId: uuid(),
+                    productId,
+                    featureId,
+                    specification
+                })
+            }
+
+            return await Product_Feature.bulkCreate(newPrdouctFeature, { transaction })
+
+        } catch (err) {
+            console.log(err.message)
+            throw err
         }
     }
 
@@ -65,16 +99,16 @@ module.exports = class DbPrdouctFeatureController {
 
             //validacion de ID
             validator.idValidator(productFeatureId)
-            
+
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "featureId", "specification"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
             //caracteristica modificada
-            const updateProductFeature =  {
+            const updateProductFeature = {
                 productId,
                 featureId,
                 specification
@@ -88,25 +122,27 @@ module.exports = class DbPrdouctFeatureController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
-    static async deletePrdouctFeature(productFeatureId) {
+    static async deletePrdouctFeature(deleteId, deleteParam, transaction) {
         try {
             //validacion de ID
-            validator.idValidator(productFeatureId)
+            validator.idValidator(deleteId)
 
             //query config
             const query = queryPrdouctFeature.newQuery()
-            query.addWhere(productFeatureId, "productFeatureId")
+            query.addWhere(deleteId, `${deleteParam}`)
 
-            const result = await Product_Feature.destroy(query.config)
+            const result = await Product_Feature.destroy(query.config, { transaction })
 
             if (!result) throw new Error(msg.erroMsg.notExistId)
 
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

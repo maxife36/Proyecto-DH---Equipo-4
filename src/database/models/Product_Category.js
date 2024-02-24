@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
   class Product_Category extends Model {
 
     static associate(models) {
-      // define association here
+      // "Product_Category" - Product association
+      this.belongsTo(models.Product, {
+        as: "product",
+        foreignKey: "productId"
+      })
     }
   }
   Product_Category.init({
@@ -34,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: "Product_Category",
     tableName: "products_categories",
-    timestamps:false
+    timestamps: false
   });
   return Product_Category;
 };

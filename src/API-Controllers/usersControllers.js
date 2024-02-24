@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt")
 const usersModels = require("../models/usersModels");
 const { create } = require("domain");
 const { Console } = require("console");
+
 const controllers = {
     productCart: (req, res) => res.render("productCart.ejs"),
     showForm: (req, res) => {

@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryCreditCard = seqQuery.newModel("Credit_Card")
 
-module.exports = class DbCreditCardController {
+module.exports = class DbCreditCard {
     static async getAllCreditCards() {
         try {
             const creditCards = await Credit_Card.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbCreditCardController {
             return creditCards
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbCreditCardController {
             return creditCard
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -41,7 +43,7 @@ module.exports = class DbCreditCardController {
             //Verificacion de campos obligatorios
             const requiredFields = [ "userId", "creditNumber", "creditName", "expirationDate"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -58,6 +60,7 @@ module.exports = class DbCreditCardController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -71,7 +74,7 @@ module.exports = class DbCreditCardController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "creditNumber", "creditName", "expirationDate"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -92,6 +95,7 @@ module.exports = class DbCreditCardController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -112,6 +116,7 @@ module.exports = class DbCreditCardController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.User, {
         as: "users",
         through: {
-          model: models.Comment, 
-          uniqueKey: "commentId", 
+          model: models.Comment,
+          uniqueKey: "commentId",
         },
         foreignKey: "productId",
         otherKey: "userId"
@@ -26,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.User, {
         as: "favoriteUsers",
         through: {
-          model: models.Favorite, 
-          uniqueKey: "favoriteId", 
+          model: models.Favorite,
+          uniqueKey: "favoriteId",
         },
         foreignKey: "userId",
         otherKey: "productId"
@@ -43,8 +43,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Cart, {
         as: "carts",
         through: {
-          model: models.Cart_Product, 
-          uniqueKey: "cartProductId", 
+          model: models.Cart_Product,
+          uniqueKey: "cartProductId",
         },
         foreignKey: "productId",
         otherKey: "cartId"
@@ -60,11 +60,17 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Category, {
         as: "categories",
         through: {
-          model: models.Product_Category, 
-          uniqueKey: "productCategoryId", 
+          model: models.Product_Category,
+          uniqueKey: "productCategoryId",
         },
         foreignKey: "productId",
         otherKey: "categoryId"
+      })
+
+      // Prdouct - "Product_Category" association
+      this.hasMany(models.Product_Category, {
+        as: "productsCategories",
+        foreignKey: "productId"
       })
 
       // Prdouct - Images association
@@ -77,8 +83,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Feature, {
         as: "features",
         through: {
-          model: models.Product_Feature, 
-          uniqueKey: "productFeatureId", 
+          model: models.Product_Feature,
+          uniqueKey: "productFeatureId",
         },
         foreignKey: "productId",
         otherKey: "featureId"

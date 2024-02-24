@@ -18,45 +18,41 @@ class Validators {
         if (!(seqInstance instanceof Sequelize)) throw new Error(msg.erroMsg.typeError + "Instance of Sequelize")
     }
 
-    static includeAssociationVerify(include, association){
+    static includeAssociationVerify(include, association) {
         /* 
         include = [{ association:"value" }, { ... } , ...]
         association  = ["STRING"]
         */
-       let foundedFlag = null
+        let foundedFlag = null
 
 
         for (const assocObj of include) {
-            if(assocObj.association === association){
-                foundedFlag = assocObj 
+            if (assocObj.association === association) {
+                foundedFlag = assocObj
                 break
             }
         }
 
-        if (!foundedFlag) return false 
+        if (!foundedFlag) return false
 
         return foundedFlag
     }
 
-    static attributeTypeVerify(seqModels, model, columnName, dataType){
+    static attributeTypeVerify(seqModels, model, columnName, dataType) {
 
         //dataType -> es el tipo de datos que yo necesito que sea mi columna, y verifico que coincida con el dataType que acepta realemente la columna
 
         if (columnName.constructor.name === "Literal") return
-                   
+
         const modelObj = seqModels[model]
 
         if (!modelObj) throw new Error(msg.erroMsg.notExistModel + `Modelo = ${model}`)
 
-     
-            
-            const attributesObj = modelObj.attributes[columnName]
-    
-            if (!attributesObj) throw new Error(msg.erroMsg.notExistAttribute + `En Modelo = ${model} no existe Column = ${columnName}`)
-    
-            if(attributesObj.dataType !== dataType.toUpperCase()) throw new Error(msg.erroMsg.notValidDatatypeAttribute + dataType.toUpperCase())
-        
+        const attributesObj = modelObj.attributes[columnName]
 
+        if (!attributesObj) throw new Error(msg.erroMsg.notExistAttribute + `En Modelo = ${model} no existe Column = ${columnName}`)
+
+        if (attributesObj.dataType !== dataType.toUpperCase()) throw new Error(msg.erroMsg.notValidDatatypeAttribute + dataType.toUpperCase())
     }
 
     static seqValidator(seqModels, searchParams) {
@@ -109,9 +105,9 @@ class Validators {
             if (searchAttributes.length) {
 
                 for (const searchedAttribute of searchAttributes) {
-                    const attributeName = Array.isArray(searchedAttribute)? searchedAttribute[0] : searchedAttribute
+                    const attributeName = Array.isArray(searchedAttribute) ? searchedAttribute[0] : searchedAttribute
 
-                    if(attributeName.constructor.name === "Literal") continue 
+                    if (attributeName.constructor.name === "Literal") continue
 
                     const attributeVerifyFlag = modelSearched.attributes[attributeName]
 
@@ -163,14 +159,14 @@ class Validators {
         if (!(array[2] === "DESC" || array[2] === "ASC")) throw new Error(msg.erroMsg.wrongFormat + "El tercer elemento puede ser 'ASC' o  'DESC'")
     }
 
-    static numbersDateParamsValidator(day, month, year){
+    static numbersDateParamsValidator(day, month, year) {
         const dayRegex = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/;
         const monthRegex = /^(0?[0-9]|1[0-1])$/;
         const yearRegex = /^(19[7-9][0-9]|20[0-9][0-9])$/;
 
-        if(day !== null && !dayRegex.test(day)) throw new Error(msg.erroMsg.notValidDateParam("day", "[1 - 31]"))
-        if(month !== null && !monthRegex.test(month)) throw new Error(msg.erroMsg.notValidDateParam("month", "[0 - 11]"))
-        if(year !== null && !yearRegex.test(year)) throw new Error(msg.erroMsg.notValidDateParam("year", "[1970 - 2099]"))
+        if (day !== null && !dayRegex.test(day)) throw new Error(msg.erroMsg.notValidDateParam("day", "[1 - 31]"))
+        if (month !== null && !monthRegex.test(month)) throw new Error(msg.erroMsg.notValidDateParam("month", "[0 - 11]"))
+        if (year !== null && !yearRegex.test(year)) throw new Error(msg.erroMsg.notValidDateParam("year", "[1970 - 2099]"))
     }
 
     static groupCommonValidator(queryInstance, columnsName, association, columnType = null) {
@@ -210,10 +206,10 @@ class Validators {
             result.attributes = {}
 
             for (const columnName of columnsName) {
-                const attributeName = Array.isArray(columnName)? columnName[0] : columnName
+                const attributeName = Array.isArray(columnName) ? columnName[0] : columnName
 
-                if(attributeName.constructor.name === "Literal") continue 
-                
+                if (attributeName.constructor.name === "Literal") continue
+
                 result.attributes[attributeName] = { fieldName: attributeName }
             }
 
@@ -223,9 +219,9 @@ class Validators {
                 const modelAttributes = queryInstance.seqModels[result.model].attributes
 
                 for (const columnName of columnsName) {
-                    const attributeName = Array.isArray(columnName)? columnName[0] : columnName
+                    const attributeName = Array.isArray(columnName) ? columnName[0] : columnName
 
-                    if(attributeName.constructor.name === "Literal") continue 
+                    if (attributeName.constructor.name === "Literal") continue
 
                     result.attributes[attributeName].dataType = modelAttributes[attributeName].dataType
                 }

@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryCart = seqQuery.newModel("Cart")
 
-module.exports = class DbCartController {
+module.exports = class DbCart {
     static async getAllCarts() {
         try {
             const carts = await Cart.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbCartController {
             return carts
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbCartController {
             return cart
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -41,7 +43,7 @@ module.exports = class DbCartController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -56,6 +58,7 @@ module.exports = class DbCartController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -69,7 +72,7 @@ module.exports = class DbCartController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -88,6 +91,7 @@ module.exports = class DbCartController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -108,6 +112,7 @@ module.exports = class DbCartController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

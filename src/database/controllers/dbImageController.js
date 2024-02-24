@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryImage = seqQuery.newModel("Image")
 
-module.exports = class DbImageController {
+module.exports = class DbImage {
     static async getAllImages() {
         try {
             const images = await Image.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbImageController {
             return images
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,17 +32,18 @@ module.exports = class DbImageController {
             return image
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
-    static async createImage(data) {
+    static async createImage(data, transaction) {
         try {
             const { productId, imageTitle} = data
 
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "imageTitle"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -52,10 +54,41 @@ module.exports = class DbImageController {
                 imageTitle
             }
 
-            return await Image.create(newImage)
+            return await Image.create(newImage, {transaction})
 
         } catch (err) {
             console.log(err.message)
+            throw err
+        }
+    }
+
+    static async bulkCreateImage(ImageData, transaction) {
+        try {
+            const newImage = []
+
+            for (const data of ImageData) {
+                const { productId, imageTitle} = data
+    
+                //Verificacion de campos obligatorios
+                const requiredFields = ["productId", "imageTitle"]
+    
+                const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
+    
+                if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
+    
+                //creacion de caracteristica
+                newImage.push({
+                    imageId: uuid(),
+                    productId,
+                    imageTitle
+                })
+            }
+
+            return await Image.bulkCreate(newImage, {transaction})
+
+        } catch (err) {
+            console.log(err.message)
+            throw err
         }
     }
 
@@ -69,7 +102,7 @@ module.exports = class DbImageController {
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "imageTitle"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -88,26 +121,28 @@ module.exports = class DbImageController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
-    static async deleteImage(imageId) {
+    static async deleteImage(deleteId, deleteParam, transaction) {
         try {
 
             //validacion de ID
-            validator.idValidator(imageId)
+            validator.idValidator(deleteId)
 
             //query config
             const query = queryImage.newQuery()
-            query.addWhere(imageId, "imageId")
+            query.addWhere(deleteId, `${deleteParam}`)
 
-            const result = await Image.destroy(query.config)
+            const result = await Image.destroy(query.config, { transaction })
 
             if (!result) throw new Error(msg.erroMsg.notExistId)
 
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryCategory = seqQuery.newModel("Category")
 
-module.exports = class DbCategoryController {
+module.exports = class DbCategory {
     static async getAllCategories() {
         try {
             const categories = await Category.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbCategoryController {
             return categories
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbCategoryController {
             return category
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -46,6 +48,7 @@ module.exports = class DbCategoryController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -65,6 +68,7 @@ module.exports = class DbCategoryController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -85,6 +89,7 @@ module.exports = class DbCategoryController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

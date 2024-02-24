@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryUser = seqQuery.newModel("User")
 
-module.exports = class DbUserController {
+module.exports = class DbUser {
     static async getAllUsers() {
         try {
             //query config
@@ -18,6 +18,7 @@ module.exports = class DbUserController {
             return users
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -37,6 +38,7 @@ module.exports = class DbUserController {
             return user
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -53,6 +55,7 @@ module.exports = class DbUserController {
             return user
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -69,6 +72,7 @@ module.exports = class DbUserController {
             return user
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -91,6 +95,7 @@ module.exports = class DbUserController {
             }
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -113,6 +118,7 @@ module.exports = class DbUserController {
             }
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -137,6 +143,7 @@ module.exports = class DbUserController {
             }
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -160,6 +167,7 @@ module.exports = class DbUserController {
             }
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -193,6 +201,7 @@ module.exports = class DbUserController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -230,6 +239,7 @@ module.exports = class DbUserController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -250,6 +260,7 @@ module.exports = class DbUserController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

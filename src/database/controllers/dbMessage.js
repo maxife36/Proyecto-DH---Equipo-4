@@ -7,6 +7,7 @@ module.exports = {
         notExistId: "No se encontraron registros con el ID ",
         notExistField: "No se encontraron registros con el campo ",
         incompleteData: "El registro no cumple con los requisitos obligatorios.",
+        wrongFormat: "No es un formato valido: "
               
     },
     warningMsg:{

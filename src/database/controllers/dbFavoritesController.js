@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryFavorite = seqQuery.newModel("Favorite")
 
-module.exports = class DbFavoriteController {
+module.exports = class DbFavorite {
     static async getAllFavorites() {
         try {
             const favorites = await Favorite.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbFavoriteController {
             return favorites
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbFavoriteController {
             return favorite
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -41,7 +43,7 @@ module.exports = class DbFavoriteController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "productId"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -56,6 +58,7 @@ module.exports = class DbFavoriteController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -69,7 +72,7 @@ module.exports = class DbFavoriteController {
             //Verificacion de campos obligatorios
             const requiredFields = ["userId", "productId"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -88,6 +91,7 @@ module.exports = class DbFavoriteController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -108,6 +112,7 @@ module.exports = class DbFavoriteController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }

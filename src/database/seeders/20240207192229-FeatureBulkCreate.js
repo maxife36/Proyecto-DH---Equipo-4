@@ -6,36 +6,36 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const features = [
       {
-        fetureName: "Almacenamiento",
-        fetureIcon: "/almacenamiento.png"
+        featureName: "Almacenamiento",
+        featureIcon: "/almacenamiento.png"
       },
       {
-        fetureName: "Conectividad",
-        fetureIcon: "/conectividad.png"
+        featureName: "Conectividad",
+        featureIcon: "/conectividad.png"
       },
       {
-        fetureName: "Memoria RAM",
-        fetureIcon: "/memoriaRAM.png"
+        featureName: "Memoria RAM",
+        featureIcon: "/memoriaRAM.png"
       },
       {
-        fetureName: "Otras Caracteristicas",
-        fetureIcon: "/otrasCaracteristicas.png"
+        featureName: "Otras Caracteristicas",
+        featureIcon: "/otrasCaracteristicas.png"
       },
       {
-        fetureName: "Pantalla",
-        fetureIcon: "/pantalla.png"
+        featureName: "Pantalla",
+        featureIcon: "/pantalla.png"
       },
       {
-        fetureName: "Procesador",
-        fetureIcon: "/procesador.png"
+        featureName: "Procesador",
+        featureIcon: "/procesador.png"
       },
       {
-        fetureName: "Puertos",
-        fetureIcon: "/puertos.png"
+        featureName: "Puertos",
+        featureIcon: "/puertos.png"
       },
       {
-        fetureName: "Sistema Operativo",
-        fetureIcon: "/sistemaOperativo.png"
+        featureName: "Sistema Operativo",
+        featureIcon: "/sistemaOperativo.png"
       },
     ]
 

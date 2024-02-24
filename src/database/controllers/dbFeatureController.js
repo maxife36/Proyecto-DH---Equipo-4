@@ -5,7 +5,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 
 const queryFeature = seqQuery.newModel("Feature")
 
-module.exports = class DbFeatureController {
+module.exports = class DbFeature {
     static async getAllFeatures() {
         try {
             const features = await Feature.findAll()
@@ -15,6 +15,7 @@ module.exports = class DbFeatureController {
             return features
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -31,6 +32,7 @@ module.exports = class DbFeatureController {
             return feature
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -41,7 +43,7 @@ module.exports = class DbFeatureController {
             //Verificacion de campos obligatorios
             const requiredFields = ["featureName", "featureIcon"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -56,6 +58,7 @@ module.exports = class DbFeatureController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -69,7 +72,7 @@ module.exports = class DbFeatureController {
             //Verificacion de campos obligatorios
             const requiredFields = ["featureName", "featureIcon"]
 
-            const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
+            const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
@@ -88,6 +91,7 @@ module.exports = class DbFeatureController {
 
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 
@@ -108,6 +112,7 @@ module.exports = class DbFeatureController {
             return result
         } catch (err) {
             console.log(err.message)
+            throw err
         }
     }
 }
