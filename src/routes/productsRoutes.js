@@ -1,4 +1,4 @@
-const express = require("express");
+/* const express = require("express");
 const router = express.Router();
 const multer = require("multer")
 const path = require("path")
@@ -27,4 +27,4 @@ router.put("/edit/:id", upload.single("image"), controllers.productEdit)
 router.delete("/delete/:id", controllers.productDelete)
 
 
-module.exports = router;
+module.exports = router; */

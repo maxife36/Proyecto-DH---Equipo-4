@@ -189,10 +189,10 @@ class QueryConfig {
             const model = resultValidator.model
             const columnType = resultValidator.attributes[columnName].dataType
 
-            let searchValueType = searchValue.constructor.name.toUpperCase() 
+            let searchValueType = searchValue.constructor.name.toUpperCase()
 
-            if(searchValueType === "NUMBER") searchValueType = "INTEGER" 
-            if(uuidValidate(searchValue)) searchValueType = "UUID" 
+            if (searchValueType === "NUMBER") searchValueType = "INTEGER"
+            if (uuidValidate(searchValue)) searchValueType = "UUID"
 
             if (columnType !== searchValueType) throw new Error(msg.erroMsg.notValidDatatypeValue + columnType)
 
@@ -251,17 +251,17 @@ class QueryConfig {
                     if (existAssocInclude) {
                         include = existAssocInclude.include ? existAssocInclude.include : existAssocInclude.include = []
                     } else {
-                        include.push({ 
+                        include.push({
                             association: assoc,
                             include: []
                         })
-                        
+
                         include = include[include.length - 1].include
                     }
-                    
+
                     //actualizacion de variable model para siguiente iteracion  
                     model = this.seqModels[model].associations[assoc].model
-                    
+
                     //Cuando llega al final de la ruta de asociaciones, pushea la asociacion solicitada
                     if ((index + 1) === includesRoute.length) include.push({ association })
                 });
@@ -293,13 +293,11 @@ class QueryConfig {
         }
     }
 
-    addLimitOffset(limit, offset, association = null, separate = false) {
+    addLimitOffset(limit, offset = 0, association = null, separate = false) {
         try {
 
             validator.paramTypeofValidator(limit, "number")
             validator.paramTypeofValidator(offset, "number")
-
-            console.log("-------------");
 
             const resultValidator = validator.groupCommonValidator(this, null, association)
 
@@ -309,8 +307,10 @@ class QueryConfig {
                 resultValidator.assocObj.offset = offset
             }
 
-            this.config.limit = limit
-            this.config.offset = offset
+            if (!resultValidator.assocObj) {
+                this.config.limit = limit
+                this.config.offset = offset
+            }
 
         } catch (err) {
             throw new Error(err.message)
@@ -394,7 +394,7 @@ class QueryConfig {
 
     }
 
-    
+
     /*     PROXIMOS METODOS
     orderBy(){}
     groupBy(){}

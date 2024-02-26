@@ -1,11 +1,17 @@
-module.exports = (req,res,next) => {
-    if(req.cookies.rememberme && !req.session.loggedUser){
+const { DbUser } = require("../database/controllers");
 
-        //copiar codigo de verificacion del proceso del login
+module.exports = async (req, res, next) => {
+    if (req.cookies.rememberme && !req.session.loggedUser) {
+        const userId = req.cookies.rememberme
         
-        req.session.loggedUser = req.cookies.rememberme
-        next()
-    }else{
+        const userFinded = await DbUser.getUserById(userId)
+
+        if (userFinded) {           
+            req.session.loggedUser = userId
+            next()
+        }
+
+    } else {
         next()
     }
 }

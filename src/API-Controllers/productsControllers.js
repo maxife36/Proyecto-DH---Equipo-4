@@ -1,8 +1,7 @@
-
+/* 
 
 const fs = require("fs")
 const path = require("path")
-const productsModels = require("../models/productsModels")
 
 const controllers = {
     productoDetail: (req,res) => res.render("productDetail.ejs"),
@@ -84,4 +83,4 @@ const controllers = {
 }
 
 
-module.exports = controllers;
+module.exports = controllers; */

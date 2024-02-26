@@ -51,15 +51,11 @@ app.use(cookieSearcher)
 
 app.use("/DOM-Controllers", internalRoutes)
 app.use("/", mainRoutes)
-app.use("/products", productsRoutes)
+// app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
 
 /* const pruebasRoutes = require("./routes/pruebaDeRutas.js")
 app.use("/prueba", pruebasRoutes) */
-
-
-
-
 
 
 app.listen(port, () => {

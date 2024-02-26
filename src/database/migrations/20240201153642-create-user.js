@@ -13,9 +13,9 @@ module.exports = {
         type: Sequelize.TINYINT,
         defaultValue: 0,
         allowNull: false,
-        validate: {
+      /*   validate: {
           isIn: [[0, 1]], // Restricción para permitir solo 0 o 1
-        }
+        } */
       },
       fullname:{
         type: Sequelize.STRING(100),
@@ -25,9 +25,9 @@ module.exports = {
         type: Sequelize.STRING(60),
         allowNull: false,
         unique: true,        
-        validate:{
+   /*      validate:{
           isEmail: true
-        }
+        } */
       },
       birthday:{
         type: Sequelize.DATE,
@@ -39,16 +39,16 @@ module.exports = {
         type: Sequelize.STRING(20),
         allowNull:false,
         unique: true,        
-        validate:{
+     /*    validate:{
           is: /^[a-zA-Z0-9._-]{6,20}$/
-        }
+        } */
       },
       password : {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(100),
         allowNull:false,
-        validate:{
-          len: [8,30]
-        }
+  /*       validate:{
+          len: [8,100]
+        } */
       },
       createdAt: {
         allowNull: false,

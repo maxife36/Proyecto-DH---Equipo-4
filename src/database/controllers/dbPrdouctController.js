@@ -94,11 +94,27 @@ module.exports = class DbProduct {
         }
     }
 
-    static async getProductByCategory(category) {
+    static async getProductByCategory(categoryId) {
         try {
             //query config
             const query = queryProduct.newQuery(["productsCategories"])
-            query.addWhere(category, "categoryId", "productsCategories")
+            query.addWhere(categoryId, "categoryId", "productsCategories")
+
+            //Busqueda en mi DB
+            const searchResult = await Product.findAll(query.config)
+
+            return searchResult
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
+    static async getProductPagination(limit, offset) {
+        try {
+            //query config
+            const query = queryProduct.newQuery()
+            query.addLimitOffset(limit, offset)
 
             //Busqueda en mi DB
             const searchResult = await Product.findAll(query.config)
