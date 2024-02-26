@@ -56,7 +56,7 @@
 5. Dejar de hacer.
     -Postergar las consultas a los profesores sobre dudas que aparezcan.
 
-    ## SPRINT 5
+## SPRINT 5
 
 1. Comenzar a hacer.
     -Aumentar la frecuencia de las reuniones  entre los miembros del equipo para compartir conocimientos y mejorar la calidad del código.
@@ -69,3 +69,17 @@
     -Depender en exceso de los miembros más activos
 5. Dejar de hacer.
     -Postergar las consultas a los profesores sobre dudas que aparezcan.
+
+## SPRINT 6
+
+1. Comenzar a hacer.
+    -Reuniones semanales via zoom para llevar un mejor control del proyecto.
+2. Hacer más.
+    -Usar más el tablero de trabajo.
+3. Continuar haciendo.
+    -Continuar el trabajo en equipo.
+4. Hacer menos.
+    -Depender en exceso de los miembros más activos
+5. Dejar de hacer.
+    -Postergar las consultas a los profesores sobre dudas que aparezcan.
+    -Postergar el tablero de trabajo.

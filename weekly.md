@@ -16,3 +16,12 @@ Lo objetivos para la proxima semana:
  -Continuar con la organizacion de tareas mediante el tablero de trabajo.
  -Realizar la division de tareas con celeridad y criterio.
  -Mantener las reuniones semanales y si es posible aumentar la frecuencia de las mismas.
+
+ ## SPRINT 6
+
+Estas semanas se dificulto coincidir por motivos personales de miembros del equipo y tal vez la distribucion de tareas no fue la optima, pero aún así pudimos resolver y llevar adelante el proyecto.
+
+Lo objetivos para la proxima semana:
+ -Continuar con la organizacion de tareas mediante el tablero de trabajo.
+ -Realizar una mejor division de tareas.
+ -Aumentar las reuniones semanales para el avance del proyecto.
