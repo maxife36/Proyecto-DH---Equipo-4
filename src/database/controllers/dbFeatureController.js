@@ -36,9 +36,26 @@ module.exports = class DbFeature {
         }
     }
 
+    static async getFeatureByName(featureName) {
+        try {
+            //query config
+            const query = queryFeature.newQuery()
+            query.addWhere(featureName, "featureName")
+
+            const feature = await Feature.findOne(query.config)
+
+            if (!feature) throw new Error(msg.erroMsg.notExistId + featureName)
+
+            return feature
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
     static async createFeature(data) {
         try {
-            const { featureName, featureIcon} = data
+            const { featureName, featureIcon } = data
 
             //Verificacion de campos obligatorios
             const requiredFields = ["featureName", "featureIcon"]
@@ -64,7 +81,7 @@ module.exports = class DbFeature {
 
     static async updateFeatureData(featureId, data) {
         try {
-            const { featureName, featureIcon} = data
+            const { featureName, featureIcon } = data
 
             //validacion de ID
             validator.idValidator(featureId)

@@ -152,7 +152,7 @@ module.exports = class DbProduct {
              */
 
             //Verificacion de campos obligatorios
-            const requiredFields = ["productName", "productBrand", "shortDescription", "productPrice", "stock", "score", "imageTitles", "categories"]
+            const requiredFields = ["productName", "productBrand", "shortDescription", "productPrice", "stock", "imageTitles", "categories"]
 
             const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
@@ -188,8 +188,7 @@ module.exports = class DbProduct {
                 longDescription: data.longDescription ? data.longDescription : null,
                 productPrice: data.productPrice,
                 discount: data.discount ? data.discount : null,
-                stock: data.stock,
-                score: data.score
+                stock: data.stock
             }
 
             await Product.create(newProduct, { transaction: productCreate })

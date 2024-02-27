@@ -36,6 +36,23 @@ module.exports = class DbCategory {
         }
     }
 
+    static async getCategoryByTitle(categoryTitle) {
+        try {
+            //query config
+            const query = queryCategory.newQuery()
+            query.addWhere(categoryTitle, "categoryTitle")
+
+            const category = await Category.findOne(query.config)
+
+            if (!category) throw new Error(msg.erroMsg.notExistId + categoryTitle)
+
+            return category
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
     static async createCategory(categoryTitle) {
         try {
             //creacion de categoria

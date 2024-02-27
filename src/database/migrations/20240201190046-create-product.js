@@ -36,8 +36,7 @@ module.exports = {
       },
       score: {
         type: Sequelize.INTEGER,
-        unsigned: true,
-        allowNull: false
+        unsigned: true
       },
       createdAt: {
         allowNull: false,

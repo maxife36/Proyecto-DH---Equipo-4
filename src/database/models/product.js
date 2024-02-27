@@ -133,7 +133,6 @@ module.exports = (sequelize, DataTypes) => {
     score: {
       type: DataTypes.INTEGER,
       unsigned: true,
-      allowNull: false
     }
 
   }, {

@@ -25,11 +25,11 @@
                     <form action="/products/create" method="post" enctype="multipart/form-data">
                         <section class="product-name">
                             <label for="name">Nombre del producto:</label>
-                            <input type="text" id="name" name="name" placeholder="Ingrese el nombre">
+                            <input type="text" id="name" name="productName" placeholder="Ingrese el nombre">
                         </section>
                         <section class="product-brand">
                             <label for="brand">Marca:</label>
-                            <input type="text" id="brand" name="brand" placeholder="Ingrese una marca">
+                            <input type="text" id="brand" name="productBrand" placeholder="Ingrese una marca">
                         </section>
                         <div class="description-img">
                             <section class="short-description">
@@ -49,15 +49,15 @@
                         <div class="div-info">
                             <section class="product-info">
                                 <label for="product-category">Categoria: </label>
-                                <input type="text" id="main-category" name="mainCategory">
+                                <input type="text" id="main-category" name="categories">
                             </section>
                             <section class="product-info product-price">
                                 <label for="price">Precio: </label>
-                                <input type="text" id="price" name="price">
+                                <input type="text" id="price" name="productPrice">
                             </section>
                             <section class="product-info">
                                 <label for="product-discount">Descuento: </label>
-                                <input type="text" id="product-discount" name="product-discount">
+                                <input type="text" id="product-discount" name="discount">
                             </section>
                             <section class="product-info">
                                 <label for="stock">Cantidad: </label>
@@ -74,10 +74,10 @@
                             <div class="features-container">
                                 <article class="features-card">
                                     <div class="card-titles">
-                                        <select name="features">
+                                        <select name="featureName0">
                                             <option value="default">Selecciona una característica</option>
-                                            <option value="opcion1">Opción 1</option>
-                                            <option value="opcion2">Opción 2</option>
+                                            <option value="Memoria RAM">Memoria RAM</option>
+                                            <option value="Procesador">Procesador</option>
                                             <option value="opcion3">Opción 3</option>
                                         </select>
                                     </div>                    
@@ -86,6 +86,22 @@
                                         <li><input name="featureItem0" type="text" class="li-characteristics"></li>
                                         <li><input name="featureItem0" type="text" class="li-characteristics"></li>
                                         <li><input name="featureItem0" type="text" class="li-characteristics"></li>
+                                    </ul>
+                                </article>
+                                <article class="features-card">
+                                    <div class="card-titles">
+                                        <select name="featureName1">
+                                            <option value="default">Selecciona una característica</option>
+                                            <option value="Memoria RAM">Memoria RAM</option>
+                                            <option value="Procesador">Procesador</option>
+                                            <option value="opcion3">Opción 3</option>
+                                        </select>
+                                    </div>                    
+                                    <ul class="feautured-items">
+                                        <li><input name="featureItem1" type="text" class="li-characteristics" placeholder="12"></li>
+                                        <li><input name="featureItem1" type="text" class="li-characteristics"></li>
+                                        <li><input name="featureItem1" type="text" class="li-characteristics"></li>
+                                        <li><input name="featureItem1" type="text" class="li-characteristics"></li>
                                     </ul>
                                 </article>
                             </div>

@@ -193,7 +193,7 @@ module.exports = class DbUser {
                 username,
                 password
             }
-            console.log("ANTES DE CREATE ", newUser);
+            
             return await User.create(newUser)
 
         } catch (err) {
@@ -236,7 +236,6 @@ module.exports = class DbUser {
 
         } catch (err) {
             console.log(err.message)
-            throw err
         }
     }
 

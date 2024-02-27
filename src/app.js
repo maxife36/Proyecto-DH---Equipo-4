@@ -12,7 +12,10 @@ const internalRoutes = require("./routes/internalRoutes.js")
 const mainRoutes = require("./routes/mainRoutes.js")
 const productsRoutes = require("./routes/productsRoutes.js")
 const usersRoutes = require("./routes/usersRoutes.js")
+const adminRoutes = require("./routes/adminRoutes.js")
 const cookieSearcher = require("./Middlewares/cookieSearcher.js")
+const adminMiddleware = require("./Middlewares/adminMiddleware.js")
+
 
 
 /* ---Variables de Configuracion--- */
@@ -51,8 +54,9 @@ app.use(cookieSearcher)
 
 app.use("/DOM-Controllers", internalRoutes)
 app.use("/", mainRoutes)
-// app.use("/products", productsRoutes)
+app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
+app.use("/admin", adminMiddleware, adminRoutes)
 
 /* const pruebasRoutes = require("./routes/pruebaDeRutas.js")
 app.use("/prueba", pruebasRoutes) */
