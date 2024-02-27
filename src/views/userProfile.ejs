@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<head>
+   <%- include("./partials/head.ejs")  %>
+   
+   <link rel="stylesheet" href="/css/forms.css">
+   <link rel="stylesheet" href="/css/usersProfile.css">
+</head>
+<body>
+    <%- include("./partials/userOptions.ejs")  %>
+    <%- include("./partials/header.ejs")  %>
+   <main>
+    <nav>
+        <ul>
+            <li>
+                <a href="">Mis compras</a>
+            </li>
+            <li>
+                <a href="">Mis datos</a>
+            </li>
+            <li>
+                <a href="">Favoritos</a>
+            </li>
+            <li>
+                <a href="/users/processLogout">Cerrar sesión</a>
+            </li>
+        </ul>
+    </nav>
+    <section class="form-section">
+             <div class="header-info">
+                <h3 class="personal-info-tittle">Información Personal</h3>
+                <button class="form-button" >Editar</button>
+                <button class="form-button">Guardar Cambios</button>
+                <button class="form-button">Cancelar</button>
+            </div>
+             <form class="register-form flx-c-w" action="/users/register-form" method="post" enctype="multipart/form-data">
+               
+                <div class="input-container flx-c-w" id="full-name-container">
+                    <input class="input-config" type="text" name="fullName" id="full-Name" required value="<%= userInfo.fullname %>">
+                    <label class="label-config full-name-label" for="full-Name">Nombre y Apellido *</label>
+                </div>
+                <div class="input-container flx-c-w" id="user-email-container">
+                    <input class="input-config" type="email" name="userEmail" id="user-Email" required value="<%= userInfo.email %>">
+                    <label class="label-config user-email-label" for="user-Email">Email *</label>
+                </div>
+                <div class="input-container flx-c-w" id="user-birthday-container">
+                    <input class="input-config" type="date" name="userBirthday" id="user-Birthday" required value="<%= userInfo.birthday %>">
+                    <label class="label-config user-birthday-label" for="user-Birthday">Fecha de Nacimiento *</label>
+                </div>
+                
+                <!-- <div class="input-container flx-c-w" id="user-provincia-container">
+                    <input class="input-config" type="text" name="userProvincia" id="user-Provincia" value="<%= userInfo.province %>">
+                    <label class="label-config user-adress-label" for="user-Provincia">Provincia</label>
+                </div>
+                <div class="input-container flx-c-w" id="user-localidad-container">
+                    <input class="input-config" type="text" name="userLocalidad" id="user-Localidad" value="<%= userInfo.city %>">
+                    <label class="label-config user-adress-label" for="user-Localidad">Localidad</label>
+                </div>
+                <div class="input-container flx-c-w" id="user-cp-container">
+                    <input class="input-config" type="number" name="userCp" id="user-Cp" value="<%= userInfo.cp %>">
+                    <label class="label-config user-adress-label" for="user-Cp">Código Postal</label>
+                </div> -->
+                <div class="input-container flx-c-w" id="user-adress-container">
+                    <input class="input-config" type="text" name="userAdress" id="user-Adress" value="<%= userInfo.address %>">
+                    <label class="label-config user-adress-label" for="user-Adress">Domicilio</label>
+                </div>
+               <!--  <div class="input-container flx-c-w" id="user-number-container">
+                    <input class="input-config" type="number" name="userNumber" id="user-Number" value="<%= userInfo.number %>">
+                    <label class="label-config user-adress-label" for="user-Number">Número</label>
+                </div> -->
+
+
+                <h3 class="profile-tittle">Perfil de Usuario</h3>
+                <div class="input-container flx-c-w" id="user-name-conatiner">
+                    <input class="input-config" type="text" name="userName" id="user-Name" required value="<%= userInfo.username %>">
+                    <label class="label-config user-name-label" for="user-Name">Nombre de Usuario *</label>
+                  </div>
+                  <div class="input-container flx-c-w" id="user-password-conatiner">
+                    <input class="input-config" type="password" name="password" id="user-password" required value="<%= userInfo.password %>">
+                    <label class="label-config user-password-label" for="user-password">Contraseña *</label>
+                  </div>
+                  <div class="input-container flx-c-w" id="user-confirm-pass-conatiner">
+                    <input class="input-config" type="password" name="confirmPassword" id="user-confirm-pass" required value="<%= userInfo.password %>">
+                    <label class="label-config user-confirm-pass-label" for="user-confirm-pass">Confirmar Contraseña *</label>
+                  </div>
+
+            </form>
+    </section>  
+   </main>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    <%- include("./partials/footer.ejs")  %>
+
+    <!-- Scripts JS -->
+    <script src="/DOM-Controllers/darkmode"></script>
+    <script src="/DOM-Controllers/subMenues"></script>
+</body>
+</html>

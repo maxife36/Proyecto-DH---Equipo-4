@@ -12,6 +12,7 @@ router.get("/login", guestMiddleware, controllers.login); //Muestra el Form
 router.get("/register", guestMiddleware, controllers.register); //Muestra el Form
 router.get("/editUser", authMiddleware, controllers.editUser); //Muestra el Form
 router.get("/cart", authMiddleware, controllers.productCart); //Muestra el Form
+router.get("/profile", authMiddleware, controllers.userProfile)
 
 router.get("/deleteUser", authMiddleware, controllers.deleteUser);
 router.get("/processLogout", authMiddleware, controllers.processLogout);

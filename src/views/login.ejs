@@ -23,11 +23,17 @@
             </div>
   
             <h3 class="personal-info-tittle">Log In</h3>
-  
+            <% if (locals.errors) { %>
+              <% errors.forEach(error => { %>
+                <span>"<%= error.msg %>"</span>
+              <% }) %>
+            <% } %>
+
             <div class="input-container flx-c-w" id="user-name-conatiner">
               <input class="input-config" type="text" name="userName" id="user-Name" required>
               <label class="label-config user-name-label" for="user-Name">Nombre de Usuario</label>
             </div>
+           
             <div class="input-container flx-c-w" id="user-password-conatiner">
               <input class="input-config" type="password" name="password" id="user-password" required>
               <label class="label-config user-password-label" for="user-password">Contraseña</label>

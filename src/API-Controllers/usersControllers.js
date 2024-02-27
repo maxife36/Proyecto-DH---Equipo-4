@@ -8,6 +8,16 @@ const controllers = {
     productCart: (req, res) => res.render("productCart.ejs"),
     login: (req, res) => res.render("login.ejs"),
     register: (req, res) => res.render("register.ejs"),
+    userProfile: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserById(userId)
+
+        console.log(currentUser);
+
+        res.render("userProfile.ejs", {userInfo:currentUser})
+        },
+        
     editUser: async (req, res) => {
         try {
             const userId = req.session.loggedUser
@@ -30,7 +40,7 @@ const controllers = {
 
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
-
+                    res.cookie("isLogged", true, { maxAge: (60 * 1000 * 60 * 24 * 7) })
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
                     }
@@ -38,10 +48,10 @@ const controllers = {
                 }
             }
 
-            res.redirect("/users/login", {errors : {msg: "Credenciales no validas"}})
+            res.render("login", {errors : [{msg: "Credenciales no validas"}]}, )
         } catch (err) {
             throw new Error(err.message)
-        }
+        } 
     },
     processRegister: async (req, res) => {
         try {
@@ -85,7 +95,7 @@ const controllers = {
                 const user = await DbUser.createUser(newUser)
 
                 req.session.loggedUser = user.userId
-
+                res.cookie("isLogged", true, { maxAge: (60 * 1000 * 60 * 24 * 7) })
                 return res.redirect("/")
             }
 
@@ -169,7 +179,7 @@ const controllers = {
 
             res.clearCookie("rememberme")
 
-            res.redirect("/users/login")
+            res.redirect("/")
         } catch (err) {
             throw new Error(err.message)
         }
