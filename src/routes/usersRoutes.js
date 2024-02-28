@@ -13,14 +13,14 @@ router.get("/register", guestMiddleware, controllers.register); //Muestra el For
 router.get("/editUser", authMiddleware, controllers.editUser); //Muestra el Form
 router.get("/cart", authMiddleware, controllers.productCart); //Muestra el Form
 router.get("/profile", authMiddleware, controllers.userProfile)
-
-router.get("/deleteUser", authMiddleware, controllers.deleteUser);
 router.get("/processLogout", authMiddleware, controllers.processLogout);
-
 
 router.post("/processLogin", guestMiddleware, controllers.processLogin);
 router.post("/processRegister", guestMiddleware, userProfileUpload.single("profileImg"), validateRegister, controllers.processRegister);
-router.post("/updateData", authMiddleware, userProfileUpload.single("profileImg"), validateRegister, controllers.processEditUser);
+
+router.put("/updateData", authMiddleware, userProfileUpload.single("profileImg"), validateRegister, controllers.processEditUser);
+
+router.delete("/deleteUser", authMiddleware, controllers.deleteUser);
 
 /* 
 Falta PROBAR controlador para:

@@ -33,6 +33,18 @@ const validateRegister = [
             return true;
         })
 ]
+//"productName", "productBrand", "shortDescription", "productPrice", "stock", "imageTitles", "categories"
+const validateProductCreate = [
+    body("productName").notEmpty().withMessage("Debes completar el Nombre del Producto"),
+    body("productBrand").notEmpty().withMessage("Debes completar la Marca del Producto"),
+    body("shortDescription").notEmpty().withMessage("Debes proveer una descripción breve del Producto."),
+    body("productPrice").notEmpty().withMessage("Debes completar el Precio del Producto")
+        .isInt({ gt: 0 }).withMessage('Debe ser un número entero mayor que 0'),
+    body("stock").notEmpty().withMessage("Debes completarel stock del Producto. Debe ser mayor a 0 (cero).")
+        .isInt({ gt: 0 }).withMessage('Debe ser un número entero mayor que 0'),
+    body("categories").notEmpty().withMessage("Debes otorgarle una Categoria al Producto")
+        .not().equals("default").withMessage("Debes otorgarle una Categoria al Producto")
+]
 
 //Configuraciones de Multer
 
@@ -68,13 +80,13 @@ const storageUserRegister = multer.diskStorage({
 //----Multer storage para Products Images
 
 let storageProductImages = multer.diskStorage({
-    destination: function (req, file, cb){
+    destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../../public/img/Products-Image"))
     },
-    filename: function (req, file, cb){
+    filename: function (req, file, cb) {
         const imageName = Date.now() + "_img" + path.extname(file.originalname)
-        cb(null, imageName) 
-        
+        cb(null, imageName)
+
     }
 })
 
@@ -83,6 +95,7 @@ const productImageUpload = multer({ storage: storageProductImages, fileFilter })
 
 module.exports = {
     validateRegister,
+    validateProductCreate,
     userProfileUpload,
     productImageUpload
 }
