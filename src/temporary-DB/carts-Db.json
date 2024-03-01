@@ -1,0 +1,25 @@
+[
+    {
+        "userId": 0,
+        "cartId": 0, 
+        "cartProducts":[
+            {
+                "productId": 0,
+                "productQuantity": 1
+            },
+            {
+                "productId": 1,
+                "productQuantity": 1
+            },
+            {
+                "productId": 2,
+                "productQuantity": 1
+            },
+            {
+                "productId": 3,
+                "productQuantity": 1
+            }
+        ],
+        "cartTotal": 1000
+    }
+]
