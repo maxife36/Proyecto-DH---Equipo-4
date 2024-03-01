@@ -16,8 +16,7 @@ const controllers = {
         console.log(currentUser);
 
         res.render("userProfile.ejs", {userInfo:currentUser})
-        },
-        
+    },        
     editUser: async (req, res) => {
         try {
             const userId = req.session.loggedUser
@@ -48,7 +47,7 @@ const controllers = {
                 }
             }
 
-            res.render("login", {errors : [{msg: "Credenciales no validas"}]}, )
+            res.render("login", {errors : [{msg: "El usuario o contraseña son incorrectos"}]}, )
         } catch (err) {
             throw new Error(err.message)
         } 

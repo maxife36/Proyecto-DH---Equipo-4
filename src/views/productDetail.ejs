@@ -28,9 +28,9 @@
             <article class="product-info-container flx-r-w">
 
                 <div class="product-title-section flx-r-w">
-                    <p class="product-title">Zapatilla X</p>
+                    <p class="product-title"><%= product.productName %></p>
                     <p class="product-description">
-                        <span class="description-title">Descripción:</span> <span class="description-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cumque esse vero dignissimos maxime, adipisci dolore sit?</span>
+                        <span class="description-title">Descripción:</span> <span class="description-content"><%= product.shortDescription %></span>
                     </p>
                 </div>
 
@@ -40,7 +40,7 @@
                         <input type="number" class="quantity-input" value="1" oninput="return false;">
                         <i class="plus-icon fa-solid fa-plus flx-r-w"></i>
                     </div>
-                    <p class="rest-quantity">Quedan 3 unidades</p>
+                    <p class="rest-quantity">Quedan <%= product.stock %> unidades</p>
                     <div class="quality-container flx-r-w">
                         <img src="/img/star-svgrepo-com.svg" alt="">
                         <img src="/img/star-svgrepo-com.svg" alt="">
@@ -51,8 +51,8 @@
                 </div>
 
                 <div class="product-price-section flx-r-w">
-                    <p class="product-price">25.000</p>
-                    <p class="product-payment-details">Mismo Precio en 6 cuotas</p>
+                    <p class="product-price"><%= product.productPrice %></p>
+                    <p class="product-payment-details"><%= product.discount%>% de Descuento!</p>
                 </div>
 
                 <div class="product-btns-section flx-r-w">
@@ -130,9 +130,7 @@
             <h3>Detalles</h3>
             <label for="display-btn"></label>
             <input type="checkbox" class="display-btn" id="display-btn">
-            <p class="item-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam quibusdam suscipit expedita consequatur cupiditate earum iure soluta at, corporis aliquam unde voluptas ratione pariatur eum tenetur! Dolorem quo nihil reprehenderit?
-            Adipisci dolorum, cupiditate sapiente placeat possimus voluptatibus aliquid voluptate unde inventore, voluptatum sunt modi? Id sapiente corrupti earum ab est. Nulla unde ullam tenetur totam id odit pariatur molestias facere.
-
+            <p class="item-detail"><%= product.longDescription %>
             </p>
         </section>
 

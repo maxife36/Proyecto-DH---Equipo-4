@@ -18,8 +18,9 @@
                 <article class="tarjeta-articulo">
                     <div class="imagen-producto">
                         <img src="/img/Products-Image/<%= product.image %>" alt=<%= product.alt %>>
-                    </div>
-                    <a href="/products/detail">
+                    </div>                              
+                    
+                    <a href="/products/detail/:<%= product.productId %>">
                         <div class="info-producto">
                             <p class="titulo-producto">
                                 <%= product.name %>
@@ -34,7 +35,8 @@
                     </a>
                     <i class="cart-icon fa-solid fa-cart-shopping flx-r-w"></i>
                     <i class="heart-icon fa-solid fa-heart flx-r-w"></i>
-                </article>           
+                </article> 
+     
             <% }) %>
             <!-- <article class="tarjeta-articulo">
                 <div class="imagen-producto">
