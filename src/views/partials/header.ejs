@@ -42,61 +42,23 @@
 
     <nav class="header-nav flx-r-w">
         <ul class="menu-container flx-c-w">
-            <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">Menu 1</li>
+            <li class="menu-title flx-r-nw" onclick="subMenuController(this)" status = "false">CATEGORIAS <i class="fa-solid fa-chevron-down"></i></li>
             <ul class="sub-menu-container flx-c-w">
-                <li>
-                    <a href="">Sub-menu1</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu2</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu3</a>
-                </li>
+                <% globalData.allCategories.forEach(category => { %>
+                    <li>
+                        <a href=""><%= category.categoryTitle %></a>
+                    </li>
+                <% }) %>
             </ul>
         </ul>
-        <ul class="menu-container flx-c-w">
-            <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">Menu 1</li>
-            <ul class="sub-menu-container flx-c-w">
-                <li>
-                    <a href="">Sub-menu4</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu5</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu6</a>
+        <% globalData.showCategories.forEach(category => { %>
+            <ul class="menu-container flx-c-w">
+                <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">
+                    <a href=""><%= category.categoryTitle %></a>
                 </li>
             </ul>
-        </ul>
-        <ul class="menu-container flx-c-w">
-            <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">Menu 1</li>
-            <ul class="sub-menu-container flx-c-w">
-                <li>
-                    <a href="">Sub-menu7</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu8</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu9</a>
-                </li>
-            </ul>
-        </ul>
-        <ul class="menu-container flx-c-w">
-            <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">Menu 1</li>
-            <ul class="sub-menu-container flx-c-w">
-                <li>
-                    <a href="">Sub-menu10</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu11</a>
-                </li>
-                <li>
-                    <a href="">Sub-menu12</a>
-                </li>
-            </ul>
-        </ul>
+        <% }) %>
+     
     </nav>
     
 </header>

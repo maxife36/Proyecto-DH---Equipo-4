@@ -1,6 +1,6 @@
 require('dotenv').config()
 // Step 1: Import the parts of the module you want to use
-const { MercadoPagoConfig, Preference } = require('mercadopago');
+const { MercadoPagoConfig, Preference, Payment} = require('mercadopago');
 
 const { v4: uuid } = require("uuid")
 
@@ -16,6 +16,7 @@ const client = new MercadoPagoConfig({
 
 // Step 3: Initialize the API object
 const preference = new Preference(client);
+const payment = new Payment(client);
 
 module.exports = {
     createOrder: async (req, res) => {
@@ -55,23 +56,33 @@ module.exports = {
 
             // console.log(result);
 
-            res.send(result)
+            // res.send(result)
 
-            // res.redirect(result.init_point)
+            res.redirect(result.init_point)
         } catch (err) {
             console.log(err.message);
             res.send(err.message)
         }
     },
 
-    recieveWebhook: (req, res) => {
+    recieveWebhook: async (req, res) => {
         try {
-            
+
             const result = req.query
-            console.log("------------------------------------------------------------");
-            console.log(result);
-    
-    
+
+            /* 
+            COMPLETAR CUANDO SUBAMOS A UN SERVIDOR
+            al ejecutarse muchas veces debido a los distintos cambios de estado durante el proceso de pago de MP, pueden llegar diferentes estructuras en req.query, por lo que hay q verificar bajo que estructura llega cuando esta aprobado.
+
+            en teoria llega { data.id: "numero ID",  type: "payment" }
+
+            cuando type = payment  -> Realizar una busqueda con payment.get,
+            verificar los datos que devuelve y almacenarlo en tabla purchase
+
+            const paymentData = await payment.get({id: '<PAYMENT_ID>'})
+
+            */
+
             res.send("webhook")
         } catch (error) {
             console.log(error);

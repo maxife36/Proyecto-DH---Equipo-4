@@ -27,7 +27,7 @@
     z-index: 1;
     overflow: hidden;
     justify-content: flex-start;
-    transition: all .1s linear;
+    transition: all .2s linear;
 }
 
 .sideCart-background {

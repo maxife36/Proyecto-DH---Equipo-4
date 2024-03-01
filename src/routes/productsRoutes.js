@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const controllers = require("../API-Controllers/productsControllers.js")
+const { productsControllers: controllers , configMulterAndValidator} = require("../API-Controllers")
+const { productImageUpload, validateProductCreate} = configMulterAndValidator
 
-const adminMiddleware = require("../Middlewares/adminMiddleware.js")
-
-const { productImageUpload, validateProductCreate} = require("../API-Controllers/configMulter&Validator.js")
-
+const { adminMiddleware } = require("../Middlewares")
 
 router.get("/detail/:productId", controllers.productDetail); //Muestra el Form
 router.get("/create", adminMiddleware, controllers.showCreateForm); //Muestra el Form

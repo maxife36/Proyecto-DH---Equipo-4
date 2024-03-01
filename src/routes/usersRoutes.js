@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const controllers = require("../API-Controllers/usersControllers.js");
+const { usersControllers: controllers , configMulterAndValidator} = require("../API-Controllers")
+const {validateRegister, userProfileUpload} = configMulterAndValidator
 
-const guestMiddleware = require("../Middlewares/guestMiddleware.js")
-const authMiddleware = require("../Middlewares/authMiddleware.js")
-
-const {validateRegister, userProfileUpload} = require("../API-Controllers/configMulter&Validator.js")
+const { guestMiddleware, authMiddleware } = require("../Middlewares")
 
 router.get("/login", guestMiddleware, controllers.login); //Muestra el Form
 router.get("/register", guestMiddleware, controllers.register); //Muestra el Form

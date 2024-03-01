@@ -17,12 +17,16 @@
             <% products.forEach(product => { %>
                 <article class="tarjeta-articulo">
                     <div class="imagen-producto">
-                        <img src="/img/Products-Image/<%= product.image %>" alt=<%= product.alt %>>
+                        <% if (product.image && product.image.length) { %>
+                            <img src="/img/Products-Image<%= product.image %>" alt=<%= product.alt %>>
+                            <% }else{ %>
+                            <img src="/img/Products-Image/default_img.jpg" alt=<%= product.alt %>>
+                        <% } %>
                     </div>
-                    <a href="/products/detail">
+                    <a href="/products/detail/<%= product.productId %>" >
                         <div class="info-producto">
                             <p class="titulo-producto">
-                                <%= product.name %>
+                                <%= product.productName %>
                             </p>
                             <p class="descripcion-producto">
                                 <%= product.shortDescription %>

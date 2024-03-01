@@ -9,15 +9,8 @@ const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
 
 /* ---Modulos Internos--- */
-
-const internalRoutes = require("./routes/internalRoutes.js")
-const mainRoutes = require("./routes/mainRoutes.js")
-const productsRoutes = require("./routes/productsRoutes.js")
-const usersRoutes = require("./routes/usersRoutes.js")
-const adminRoutes = require("./routes/adminRoutes.js")
-const mercadopagoRoutes = require("./routes/paymentRoutes.js")
-const cookieSearcher = require("./Middlewares/cookieSearcher.js")
-const adminMiddleware = require("./Middlewares/adminMiddleware.js")
+const {cookieSearcher, adminMiddleware , globalDataMiddleware} = require("./Middlewares")
+const {internalRoutes, mainRoutes , productsRoutes, usersRoutes, adminRoutes, mpPaymentRoutes} = require("./routes")
 
 /* ---Variables de Configuracion--- */
 
@@ -43,11 +36,10 @@ app.use(express.urlencoded({ extended: false }))
 
 //Permite utilizacion de otros metodos en los forms del html
 app.use(methodOverride("_method"))
-
 app.use(session({secret:"gotec-DH", resave: false, saveUninitialized: false}))
 app.use(cookieParser())
 app.use(cookieSearcher)
-
+app.use(globalDataMiddleware)
 
 /* ---Rutas Principales de Express--- */
 
@@ -56,10 +48,7 @@ app.use("/", mainRoutes)
 app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
 app.use("/admin", adminMiddleware, adminRoutes)
-app.use("/mercadopago", mercadopagoRoutes)
-
-/* const pruebasRoutes = require("./routes/pruebaDeRutas.js")
-app.use("/prueba", pruebasRoutes) */
+app.use("/mercadopago", mpPaymentRoutes)
 
 
 app.listen(PORT, () => {
