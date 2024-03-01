@@ -7,6 +7,7 @@ const router = express.Router()
 const controllers = require("../API-Controllers/mainControllers.js")
 
 router.get("/",  controllers.index)
+router.get("/pago",  (req,res) => res.render("../../pruebas/mp.ejs"))
 // router.get("/login",guestMiddleware, controllers.login);
 // router.get("/register",guestMiddleware, controllers.register);
 

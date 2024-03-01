@@ -115,7 +115,7 @@ module.exports = class DbProduct {
             //query config
             const query = queryProduct.newQuery()
             query.addLimitOffset(limit, offset)
-
+  
             //Busqueda en mi DB
             const searchResult = await Product.findAll(query.config)
 

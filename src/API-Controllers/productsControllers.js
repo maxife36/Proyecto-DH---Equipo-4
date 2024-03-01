@@ -35,6 +35,40 @@ const controllers = {
             throw new Error(err.message)
         }
     },
+    filterProduct: async (req, res) => {
+        try {
+            //[gte ,lte, order]
+
+            const gte = req.query.gte
+            const lte = req.query.lte
+            const order = req.query.order 
+
+            const products= await DbProduct.getProductByPrice(gte, lte, order)
+
+            res.render("/", { products }) //Cambiar a pagina de productos
+
+        } catch (err) {
+            throw new Error(err.message)
+            // console.log(err.message);
+            // res.status(400).render("errorPage")
+        }
+    },
+    searchProduct: async (req, res) => {
+        try {
+            //keywords = string de busqueda
+
+            const keywords = req.query.keyword
+
+            const products= await DbProduct.getSearchProduct(keywords)
+
+            res.render("/", { products }) //Cambiar a pagina de productos
+
+        } catch (err) {
+            throw new Error(err.message)
+            // console.log(err.message);
+            // res.status(400).render("errorPage")
+        }
+    },
     processCreate: async (req, res) => {
         try {
             /* OBJETO QUE SE DEBE ENVIAR AL CONTROLADOR DE LA DB

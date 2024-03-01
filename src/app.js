@@ -1,4 +1,6 @@
 /* ---Modulos Nativos y de Terceros--- */
+require('dotenv').config()
+
 const express = require("express")
 const path = require("path")
 const methodOverride = require("method-override")
@@ -13,22 +15,19 @@ const mainRoutes = require("./routes/mainRoutes.js")
 const productsRoutes = require("./routes/productsRoutes.js")
 const usersRoutes = require("./routes/usersRoutes.js")
 const adminRoutes = require("./routes/adminRoutes.js")
+const mercadopagoRoutes = require("./routes/paymentRoutes.js")
 const cookieSearcher = require("./Middlewares/cookieSearcher.js")
 const adminMiddleware = require("./Middlewares/adminMiddleware.js")
 
-
-
 /* ---Variables de Configuracion--- */
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 
 //Instancia de express
 const app = express()
 
 const pathPublic = path.resolve("public")
 const pathViews = path.resolve("src", "views")
-
-
 
 /* ---Pre Configuraciones de Express y Middlewares--- */
 
@@ -57,12 +56,13 @@ app.use("/", mainRoutes)
 app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
 app.use("/admin", adminMiddleware, adminRoutes)
+app.use("/mercadopago", mercadopagoRoutes)
 
 /* const pruebasRoutes = require("./routes/pruebaDeRutas.js")
 app.use("/prueba", pruebasRoutes) */
 
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Se conecto Correctamnete a 
-    http://localhost:${port}`);
+    http://localhost:${PORT}`);
 })
