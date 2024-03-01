@@ -8,6 +8,8 @@ module.exports = async (req, res, next) => {
 
         if (userFinded) {           
             req.session.loggedUser = userId
+            res.cookie("isLogged", true, { expires: 0 })
+
             next()
         }
 

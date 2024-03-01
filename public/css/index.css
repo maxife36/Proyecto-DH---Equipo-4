@@ -40,6 +40,7 @@
     display: block;
     width: 80%;
     max-width: 380px;
+    height: auto;
     margin-bottom: 3%;
     margin: auto;
 }

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const controllers = require("../API-Controllers/adminControllers");
 
-const {validateRegister, userProfileUpload} = require("../API-Controllers/configMulter&Validator.js")
+const { adminControllers: controllers , configMulterAndValidator} = require("../API-Controllers")
+const {validateRegister, userProfileUpload} = configMulterAndValidator
 
 router.get("/editUser", controllers.editUser); //Muestra el Form
 router.get("/deleteUser", controllers.deleteUser);

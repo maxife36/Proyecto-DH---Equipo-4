@@ -5,6 +5,15 @@ const { DbUser } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
+    allUser: async (req,res) => {
+        try {
+            const usersInfo = await DbUser.getAllUsers()
+
+            res.render("/", { usersInfo })  //Cambiar Ruta al dashboard para manipulacion de usuarios como ADMIN
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    },
     editUser: async (req, res) => {
         try {
             const userId = req.session.loggedUser

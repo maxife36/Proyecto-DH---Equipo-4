@@ -39,7 +39,8 @@ const controllers = {
 
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
-                    res.cookie("isLogged", true, { maxAge: (60 * 1000 * 60 * 24 * 7) })
+                    res.cookie("isLogged", true, { expires: 0 }) //permitira identificar desde el front si un usaurio esta logueado o no
+
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
                     }
@@ -94,7 +95,8 @@ const controllers = {
                 const user = await DbUser.createUser(newUser)
 
                 req.session.loggedUser = user.userId
-                res.cookie("isLogged", true, { maxAge: (60 * 1000 * 60 * 24 * 7) })
+                res.cookie("isLogged", true, { expires: 0 }) //permitira identificar desde el front si un usaurio esta logueado o no
+
                 return res.redirect("/")
             }
 
@@ -176,6 +178,7 @@ const controllers = {
         try {
             req.session.loggedUser = undefined
 
+            res.clearCookie("isLogged")
             res.clearCookie("rememberme")
 
             res.redirect("/")
@@ -193,7 +196,7 @@ const controllers = {
 
             if (currentUser.profileImg) {
                 const profileImgPath = path.join(__dirname, `../../public/img/usersimg${currentUser.profileImg}`)
-                console.log(profileImgPath);
+                
                 fs.unlink(profileImgPath, (err) => {
                     if (err) {
                         console.error("Error al eliminar la Foto de Perfil:", err);
@@ -203,6 +206,7 @@ const controllers = {
             }
 
             req.session.loggedUser = undefined
+            res.clearCookie("isLogged")
 
             res.clearCookie("rememberme")
 

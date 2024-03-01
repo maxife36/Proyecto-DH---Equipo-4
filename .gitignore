@@ -1,5 +1,5 @@
 node_modules
 .env
-pruebasDeControladores.js
-pruebaDeRutas.js
-pruebaAPIControles.js
+ngrokInfo.txt
+MP-credenciales-prueba
+/pruebas

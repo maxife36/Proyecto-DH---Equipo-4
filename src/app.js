@@ -1,4 +1,6 @@
 /* ---Modulos Nativos y de Terceros--- */
+require('dotenv').config()
+
 const express = require("express")
 const path = require("path")
 const methodOverride = require("method-override")
@@ -7,28 +9,18 @@ const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
 
 /* ---Modulos Internos--- */
-
-const internalRoutes = require("./routes/internalRoutes.js")
-const mainRoutes = require("./routes/mainRoutes.js")
-const productsRoutes = require("./routes/productsRoutes.js")
-const usersRoutes = require("./routes/usersRoutes.js")
-const adminRoutes = require("./routes/adminRoutes.js")
-const cookieSearcher = require("./Middlewares/cookieSearcher.js")
-const adminMiddleware = require("./Middlewares/adminMiddleware.js")
-
-
+const {cookieSearcher, adminMiddleware , globalDataMiddleware} = require("./Middlewares")
+const {internalRoutes, mainRoutes , productsRoutes, usersRoutes, adminRoutes, mpPaymentRoutes} = require("./routes")
 
 /* ---Variables de Configuracion--- */
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 
 //Instancia de express
 const app = express()
 
 const pathPublic = path.resolve("public")
 const pathViews = path.resolve("src", "views")
-
-
 
 /* ---Pre Configuraciones de Express y Middlewares--- */
 
@@ -44,11 +36,10 @@ app.use(express.urlencoded({ extended: false }))
 
 //Permite utilizacion de otros metodos en los forms del html
 app.use(methodOverride("_method"))
-
 app.use(session({secret:"gotec-DH", resave: false, saveUninitialized: false}))
 app.use(cookieParser())
 app.use(cookieSearcher)
-
+app.use(globalDataMiddleware)
 
 /* ---Rutas Principales de Express--- */
 
@@ -57,12 +48,10 @@ app.use("/", mainRoutes)
 app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
 app.use("/admin", adminMiddleware, adminRoutes)
-
-/* const pruebasRoutes = require("./routes/pruebaDeRutas.js")
-app.use("/prueba", pruebasRoutes) */
+app.use("/mercadopago", mpPaymentRoutes)
 
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Se conecto Correctamnete a 
-    http://localhost:${port}`);
+    http://localhost:${PORT}`);
 })

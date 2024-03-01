@@ -1,6 +1,10 @@
 const { Image , seqQuery } = require("../models")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
+const path = require("path");
+const fs = require("fs")
+
+
 const validator = require("../seqQueyConfig/assets/validators")
 
 const queryImage = seqQuery.newModel("Image")
@@ -125,15 +129,26 @@ module.exports = class DbImage {
         }
     }
 
-    static async deleteImage(deleteId, deleteParam, transaction) {
+    static async deleteImage(imageId, transaction) {
         try {
 
             //validacion de ID
-            validator.idValidator(deleteId)
+            validator.idValidator(imageId)
+
+            const image = await DbImage.getImageById(imageId)
+
+            const profileImgPath = path.resolve(`public/img/Products-Image${image.imageTitle}`)
+
+                    fs.unlink(profileImgPath, (err) => {
+                        if (err) {
+                            console.error("Error al eliminar la Foto de Perfil:", err);
+                        }
+                        console.log("Foto de Perfil eliminado");
+                    })
 
             //query config
             const query = queryImage.newQuery()
-            query.addWhere(deleteId, `${deleteParam}`)
+            query.addWhere(imageId, "imageId")
 
             const result = await Image.destroy(query.config, { transaction })
 

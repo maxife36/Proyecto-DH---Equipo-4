@@ -115,7 +115,7 @@ module.exports = class DbProduct {
             //query config
             const query = queryProduct.newQuery()
             query.addLimitOffset(limit, offset)
-
+  
             //Busqueda en mi DB
             const searchResult = await Product.findAll(query.config)
 
@@ -140,7 +140,6 @@ module.exports = class DbProduct {
                  productPrice ["NUMBER"],
                  discount ["NUMBER"],
                  stock ["NUMBER"],
-                 score ["NUMBER"],
                  features: [{
                      featureId: ["UUID"],
                      specifications: -> Array de strings con epsecifaciones por cada featureId
@@ -271,7 +270,6 @@ module.exports = class DbProduct {
                  productPrice ["NUMBER"],
                  discount ["NUMBER"],
                  stock ["NUMBER"],
-                 score ["NUMBER"],
                  features: [{
                      featureId: ["UUID"],
                      specifications: -> Array de strings con epsecifaciones por cada featureId
