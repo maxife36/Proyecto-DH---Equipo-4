@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   Feature.init({
     featureId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn("UUID"),
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },

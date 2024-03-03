@@ -39,7 +39,7 @@ const controllers = {
 
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
-                    res.cookie("isLogged", true, { expires: 0 }) //permitira identificar desde el front si un usaurio esta logueado o no
+                    res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
@@ -95,7 +95,7 @@ const controllers = {
                 const user = await DbUser.createUser(newUser)
 
                 req.session.loggedUser = user.userId
-                res.cookie("isLogged", true, { expires: 0 }) //permitira identificar desde el front si un usaurio esta logueado o no
+                res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
                 return res.redirect("/")
             }

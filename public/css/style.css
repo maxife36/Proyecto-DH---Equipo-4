@@ -37,6 +37,11 @@ html {
     display: none;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .flx-r-w{
     display: flex;
     flex-flow: row wrap;

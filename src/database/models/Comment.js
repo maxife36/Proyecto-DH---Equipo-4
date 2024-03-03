@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Comment.init({
     commentId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn("UUID"),
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },

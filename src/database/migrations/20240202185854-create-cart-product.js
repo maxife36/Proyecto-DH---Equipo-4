@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.createTable("carts_products", {
       cartProductId: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.fn("UUID"),
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
