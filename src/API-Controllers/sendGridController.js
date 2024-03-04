@@ -11,6 +11,8 @@ module.exports = {
         try {
             const { userEmail, userName, userId } = userData
 
+            const verificationHref = `${process.env.HOST}/mail-service/verifiedController/${userId}`
+
             const msg = {
                 to: userEmail,  // mail que se desea verificar userEmail
                 from: {
@@ -20,8 +22,8 @@ module.exports = {
                 subject: "Welcome to Gotec!. Please, confirm your email.",
                 templateId: process.env.SENDGRID_TEMP_WELCOME,   //Manipular el template y agregar href para verificacion
                 dynamicTemplateData: {
-                    userName,
-                    userId
+                    verificationHref,
+                    userName
                 }
             };
 
