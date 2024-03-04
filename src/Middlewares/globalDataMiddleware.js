@@ -17,8 +17,7 @@ async function verificacion() {
         showCategories.forEach(category => {
             if (!categoriesTitles.includes(category)) throw new Error(`La categoria ${category}, no se encuentra en la DB`)
         })
-
-        // return allCategories.filter(categoryObj => showCategories.includes(categoryObj.categoryTitle))      
+     
         showCategories = allCategories.filter(categoryObj => showCategories.includes(categoryObj.categoryTitle))
 
     } catch (err) {
@@ -30,13 +29,12 @@ async function verificacion() {
 
 module.exports = async (req, res, next) => {
     try {
-        
+        // carga unica de las variables showCategories y allCategories
         if (!firstChargeFlag) {
             await verificacion()
             firstChargeFlag = true
         }
-        // const showCategories = await verificacion()
-    
+            
         res.locals.globalData = {
             whatsappContactNumber,
             whatsappDefaultText: encodeURIComponent(whatsappDefaultText),
@@ -47,6 +45,5 @@ module.exports = async (req, res, next) => {
         next();
     } catch (err) {
         console.log(err.message)
-        throw err.message
     }
 }

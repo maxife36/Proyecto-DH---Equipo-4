@@ -50,6 +50,11 @@ module.exports = {
           len: [8,100]
         } */
       },
+      isVerified : {
+        type: Sequelize.TINYINT,
+        defaultValue: 0,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
