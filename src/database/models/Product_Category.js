@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Product_Category.init({
     productCategoryId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn("UUID"),
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },

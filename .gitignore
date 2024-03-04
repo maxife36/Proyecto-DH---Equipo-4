@@ -1,5 +1,6 @@
 node_modules
 .env
 ngrokInfo.txt
-MP-credenciales-prueba
+MP-credenciales-prueba.txt
+sendGrid-extraInfo.txt
 /pruebas

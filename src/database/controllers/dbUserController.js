@@ -179,7 +179,7 @@ module.exports = class DbUser {
             const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
-    
+
             //creacion de usuario
 
             const newUser = {
@@ -193,7 +193,7 @@ module.exports = class DbUser {
                 username,
                 password
             }
-            
+
             return await User.create(newUser)
 
         } catch (err) {
@@ -204,18 +204,18 @@ module.exports = class DbUser {
 
     static async updateUserData(userId, userData) {
         try {
-            const { admin, fullname, email, birthday, address, profileImg, username, password } = userData
-            
+            const { admin, fullname, email, birthday, address, profileImg, username } = userData
+
             //validacion de ID
             validator.idValidator(userId)
 
             //Verificacion de campos obligatorios
-            const requiredFields = ["fullname", "email", "birthday", "username", "password"]
+            const requiredFields = ["fullname", "email", "birthday", "username"]
 
             const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
-    
+
             //creacion de usuario
             const updateUser = {
                 admin: admin ? admin : 0,
@@ -224,8 +224,27 @@ module.exports = class DbUser {
                 birthday,
                 address: address ? address : null,
                 profileImg: profileImg ? profileImg : null,
-                username,
-                password
+                username
+            }
+
+            //query config
+            const query = queryUser.newQuery()
+            query.addWhere(userId, "userId")
+
+            return await User.update(updateUser, query.config)
+
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+    static async verifyUser(userId) {
+        try {
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //creacion de usuario
+            const updateUser = {
+                isVerified: 1
             }
 
             //query config

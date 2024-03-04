@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Category.init({
     categoryId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn("UUID"),
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true
     },
     categoryTitle: {

@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt")
 const fs = require("fs")
 const { validationResult } = require("express-validator");
+const { sendMail } = require("../API-Controllers/sendGridController");
 const { DbUser } = require("../database/controllers");
 const path = require("path");
 
@@ -15,8 +16,8 @@ const controllers = {
 
         console.log(currentUser);
 
-        res.render("userProfile.ejs", {userInfo:currentUser})
-    },        
+        res.render("userProfile.ejs", { userInfo: currentUser })
+    },
     editUser: async (req, res) => {
         try {
             const userId = req.session.loggedUser
@@ -32,26 +33,34 @@ const controllers = {
         try {
             const { remembermeBtn, userName, password } = req.body
 
+            const errors = []
+
             const userFinded = await DbUser.getUserByUsername(userName)
 
-            if (userFinded) {
+            if (userFinded && !userFinded.isVerified) errors.push({ msg: "Es necesario Validar tu mail" })
+            if (!userFinded) errors.push({ msg: "Las credenciales no son validas" })
+
+
+            if (!errors.length) {
                 const validPassword = bcrypt.compareSync(password, userFinded.password)
 
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
-                    res.cookie("isLogged", true, { expires: 0 }) //permitira identificar desde el front si un usaurio esta logueado o no
+                    res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
                     }
                     return res.redirect("/")
+                }else{
+                    errors.push({ msg: "Las credenciales no son validas" })
                 }
             }
 
-            res.render("login", {errors : [{msg: "El usuario o contraseña son incorrectos"}]}, )
+            res.render("login", { errors })
         } catch (err) {
             throw new Error(err.message)
-        } 
+        }
     },
     processRegister: async (req, res) => {
         try {
@@ -94,10 +103,16 @@ const controllers = {
 
                 const user = await DbUser.createUser(newUser)
 
-                req.session.loggedUser = user.userId
-                res.cookie("isLogged", true, { expires: 0 }) //permitira identificar desde el front si un usaurio esta logueado o no
+                const { fullname, email, userId } = user
 
-                return res.redirect("/")
+                //Envio asincronico de mail de verificación
+                sendMail({
+                    userId,
+                    userEmail: email,
+                    userName: fullname
+                })
+
+                return res.redirect("/users/login")
             }
 
             if (profileImage) fs.unlink(profileImage.path, (err) => {
@@ -196,7 +211,7 @@ const controllers = {
 
             if (currentUser.profileImg) {
                 const profileImgPath = path.join(__dirname, `../../public/img/usersimg${currentUser.profileImg}`)
-                
+
                 fs.unlink(profileImgPath, (err) => {
                     if (err) {
                         console.error("Error al eliminar la Foto de Perfil:", err);

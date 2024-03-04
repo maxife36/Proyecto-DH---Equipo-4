@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Favorite.init({
     favoriteId: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn("UUID"),
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },

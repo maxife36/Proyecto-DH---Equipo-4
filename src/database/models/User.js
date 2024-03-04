@@ -101,7 +101,12 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING(100),
       allowNull: false,
-    }
+    },
+    isVerified : {
+      type: DataTypes.TINYINT,
+      defaultValue: 0,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: "User",
