@@ -1,10 +1,11 @@
-const cartIcon = document.querySelector(".cart-icon")
+/*cartIcon ya viene declarado de header-controller*/
 const sideCartContainer = document.querySelector(".sideCart-container")
 const sideCartBackground = document.querySelector(".sideCart-background")
 const backgroundOpacity = document.querySelector(".background-opacity")
 const scProductContainer = document.querySelector(".sc-product-container")
 const scShippingContainer = document.querySelector(".sc-shipping-container")
 const scTotalContainer = document.querySelector(".sc-total-container")
+
 
 let sideCartFlag = false
 

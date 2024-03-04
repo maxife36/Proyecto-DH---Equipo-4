@@ -295,6 +295,11 @@ html {
     font-size: 22px;
     color: var(--blanco-gotec);
 }
+/* Modificar ID Cart Item */
+#heart-icon,
+.cart-icon{
+    display: none;
+}
 
 /* --USER PROFILE ICON-- */
 

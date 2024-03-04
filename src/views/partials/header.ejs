@@ -1,5 +1,5 @@
 <header class="header-main flx-c-w">
-
+    
     <section class="header-info-container flx-r-w">
         <p>Información Importante</p>
         <a class="tracking-icon flx-r-w" href="">
@@ -7,9 +7,9 @@
             <i class="fa-solid fa-location-crosshairs flx-r-w"></i>
         </a>
     </section>
-
+    
     <section class="header-main-container flx-r-w">
-
+        
         <a class="main-logo-container flx-r-w" href="/">
             <img src="/img/logo-horizontal-blanco.png" alt="">
         </a>
@@ -23,7 +23,7 @@
                 <i class="sun-icon fa-solid fa-sun"></i>
                 <i class="moon-icon fa-solid fa-moon"></i>
             </div>
-            <i class="heart-icon fa-solid fa-heart flx-r-w"></i>
+            <i class="heart-icon fa-solid fa-heart flx-r-w" id="heartIcon"></i>
             <i class="cart-icon fa-solid fa-cart-shopping flx-r-w"></i>
             <i class="login-icon fa-solid fa-right-to-bracket flx-r-w"></i>
             <div class="user-icon-container">
@@ -31,7 +31,7 @@
                 <p class="user-notifications flx-r-w">00</p>
             </div>
         </div>
-
+        
         <div class="main-search-bar flx-r-w">
             <label class="search-label flx-r-w" for="search-btn">
                 <input type="text" name="" id="search-btn" placeholder="Busqueda de Productos">
@@ -39,7 +39,7 @@
             </label>
         </div>
     </section>
-
+    
     <nav class="header-nav flx-r-w">
         <ul class="menu-container flx-c-w">
             <li class="menu-title flx-r-nw" onclick="subMenuController(this)" status = "false">CATEGORIAS <i class="fa-solid fa-chevron-down"></i></li>
@@ -48,17 +48,17 @@
                     <li>
                         <a href=""><%= category.categoryTitle %></a>
                     </li>
+                    <% }) %>
+                </ul>
+            </ul>
+            <% globalData.showCategories.forEach(category => { %>
+                <ul class="menu-container flx-c-w">
+                    <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">
+                        <a href=""><%= category.categoryTitle %></a>
+                    </li>
+                </ul>
                 <% }) %>
-            </ul>
-        </ul>
-        <% globalData.showCategories.forEach(category => { %>
-            <ul class="menu-container flx-c-w">
-                <li class="menu-title flx-c-w" onclick="subMenuController(this)" status = "false">
-                    <a href=""><%= category.categoryTitle %></a>
-                </li>
-            </ul>
-        <% }) %>
-     
-    </nav>
-    <script src="/DOM-Controllers/header"></script>
-</header>
+                
+            </nav>
+        </header>
+        <script src="/DOM-Controllers/header"></script>
