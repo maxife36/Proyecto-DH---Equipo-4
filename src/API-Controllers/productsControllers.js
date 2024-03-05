@@ -29,7 +29,7 @@ const controllers = {
             const productId = req.params.productId
 
             const product = await DbProduct.getProductById(productId)
-            console.log(product);
+            
             res.render("productEdit", { product })
         } catch (err) {
             throw new Error(err.message)
@@ -293,7 +293,7 @@ const controllers = {
     deleteProduct: async (req, res) => {
         try {
             const productId = req.params.productId
-            console.log(productId);
+            
             const currentProduct = await DbProduct.getProductById(productId)
 
             await DbProduct.deleteProduct(productId)

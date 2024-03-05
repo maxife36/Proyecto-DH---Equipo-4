@@ -97,7 +97,7 @@ const controllers = {
 
             if (currentUser.profileImg) {
                 const profileImgPath = path.join(__dirname, `../../public/img/usersimg${currentUser.profileImg}`)
-                console.log(profileImgPath);
+                
                 fs.unlink(profileImgPath, (err) => {
                     if (err) {
                         console.error("Error al eliminar la Foto de Perfil:", err);

@@ -33,16 +33,3 @@ document.addEventListener("click", (event)=>{
           
     }
 })
-
-/* ------------------------ */
-
-const entryOptions = document.querySelector(".entry-options")
-const exitBtn = document.querySelector("#btn-exit-entry")
-const loginIcon = document.querySelector(".login-icon") 
-
-let btnState = false
-
-exitBtn.addEventListener("click", ()=> entryOptions.style.display = "none")
-
-loginIcon.addEventListener("click", ()=>  entryOptions.style.display = "flex")
-

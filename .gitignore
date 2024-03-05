@@ -1,6 +1,7 @@
 node_modules
-.env
+/pruebas
+
+*.env
 ngrokInfo.txt
 MP-credenciales-prueba.txt
 sendGrid-extraInfo.txt
-/pruebas

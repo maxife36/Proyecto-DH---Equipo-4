@@ -361,7 +361,8 @@ a {
     font-size: 16px;
 }
 
-.menu-title{
+.menu-title,
+.simple-menu-title{
     cursor: pointer;
     height: 100%;
 }

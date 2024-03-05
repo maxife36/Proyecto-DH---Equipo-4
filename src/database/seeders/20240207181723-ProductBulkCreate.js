@@ -1,5 +1,37 @@
 "use strict";
-const { Product } = require("../models");
+const { Product, Feature, Category } = require("../models");
+const features = {
+  Puertos: "2b0e3edb-e8a3-4c97-99ba-5e712704c80c",
+  MemoriaRAM: "87b7b09f-6e03-4298-8175-29a9aa64d3a9",
+  Procesador: "9a4b7840-7f3b-4506-9b96-5f7d0b3d8603",
+  Almacenamiento: "aff297d8-39ff-41b3-88d8-a21ed7dd80bb",
+  Conectividad: "b80f145b-02cd-4528-a250-2fd3e5bdd9cf",
+  Pantalla: "c3833298-e148-435f-9096-626fb653e16b",
+  SistemaOperativo: "f4469084-d578-4c45-8d1b-704095bc5a53",
+  Otras: "d1ca6323-74c8-417f-b96a-d84870061bec"
+
+}
+
+const categories = {
+  Monitores: "000cae4c-d326-4a52-a17e-38d555a76e23",
+  MemoriaRAM: "6c4a0f92-4ad6-48e7-984f-cacf4cb81fbb",
+  Periféricos: "7c3ab4f8-9140-4e96-ae28-575509b2ed72",
+  TarjetasGráficas: "82c83ea2-e1e5-4071-bc2b-2a69ac9f6c77",
+  Laptops: "872360b1-d055-4bbf-85fa-c0708d24cbbe",
+  AccesoriosGaming: "9a463b31-ec9c-40be-90a0-dcb9de257eee",
+  Procesadores: "ab10f1a5-0064-44be-9b69-2253fa0c736a",
+  PCdeEscritorio: "d25c132c-f91b-4f31-a31d-decb512257fd",
+  Ofertas: "da0b1b30-162b-4a27-b78d-94bed8560507",
+  Almacenamiento: "ee0b0551-3fc6-4148-a988-4e88f7d11a8c"
+}
+
+/* features: [{
+  featureId: ["UUID"],
+  specifications: -> Array de strings con epsecifaciones por cada featureId
+}, (puede venir vacio, no se generara realicones de feature)
+{},...{}]  -> Array de Objetos, c/obj tiene el feature con sus especificaciones,
+imageTitles: ["pathImg", ...] -> Array de strings con el nombre y extension de la imagen,
+categories: ["categoryId",...] -> Array de strings con categoryIds */
 
 /** @type {import("sequelize-cli").Migration} */
 module.exports = {
@@ -14,6 +46,22 @@ module.exports = {
         discount: 10,
         stock: 50,
         score: 92,
+        features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["512 gb", "SSD"]
+          },
+          {
+            featureId: features.Pantalla,
+            specifications: ["15''", "1080p"]
+          },
+          {
+            featureId: features.Conectividad,
+            specifications: ["HDMI", "USB 3.0", "USB 2.0"]
+          },
+        ],
+        imageTitles: ["/LaptopDell.png", "/IntelCore.png"],
+        categories: [categories.Laptops]
       },
       {
         productName: "Teclado mecánico Redragon K552",

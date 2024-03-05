@@ -54,10 +54,6 @@ module.exports = {
             // Step 6: Make the request
             const result = await preference.create({ body, requestOptions })
 
-            // console.log(result);
-
-            // res.send(result)
-
             res.redirect(result.init_point)
         } catch (err) {
             console.log(err.message);

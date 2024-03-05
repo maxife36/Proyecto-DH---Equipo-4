@@ -14,8 +14,6 @@ const controllers = {
 
         const currentUser = await DbUser.getUserById(userId)
 
-        console.log(currentUser);
-
         res.render("userProfile.ejs", { userInfo: currentUser })
     },
     editUser: async (req, res) => {
@@ -232,5 +230,4 @@ const controllers = {
     }
 }
 
-module.exports = controllers;
-
+module.exports = controllers

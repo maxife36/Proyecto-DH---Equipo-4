@@ -1,4 +1,6 @@
 /*cartIcon ya viene declarado de header-controller*/
+// const cartIcon = document.querySelector(".cart-icon")
+
 const sideCartContainer = document.querySelector(".sideCart-container")
 const sideCartBackground = document.querySelector(".sideCart-background")
 const backgroundOpacity = document.querySelector(".background-opacity")
@@ -10,6 +12,7 @@ const scTotalContainer = document.querySelector(".sc-total-container")
 let sideCartFlag = false
 
 
+console.log(cartIcon);
 cartIcon.addEventListener("click", () => {
     const viewportWidth = window.innerWidth
 
