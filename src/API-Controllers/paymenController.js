@@ -21,6 +21,7 @@ const payment = new Payment(client);
 module.exports = {
     createOrder: async (req, res) => {
         try {
+            //recuperar del req.body todos los cartProductId  que estan en el input hidden, con esos se busca en la DB para encontrar todos los productos con cantidades y subtotales
 
             // Step 4: Create the request object
             const body = {
@@ -43,6 +44,7 @@ module.exports = {
                     failure: `${HOST}/mercadopago/failure`
                 },
                 notification_url: `${NGROK_HOST || HOST}/mercadopago/webhook`
+                //La informacion de envio se coloca dentro de un objeto con clave shipments.. revisar propiedades en https://www.mercadopago.com.ar/developers/es/reference/preferences/_checkout_preferences/post
             }
 
 

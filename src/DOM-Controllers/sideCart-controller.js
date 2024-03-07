@@ -8,9 +8,7 @@ const scProductContainer = document.querySelector(".sc-product-container")
 const scShippingContainer = document.querySelector(".sc-shipping-container")
 const scTotalContainer = document.querySelector(".sc-total-container")
 
-
 let sideCartFlag = false
-
 
 console.log(cartIcon);
 cartIcon.addEventListener("click", () => {
@@ -36,81 +34,26 @@ cartIcon.addEventListener("click", () => {
 
 })
 
-/* ----ONCLICK FUNCTIONS---- */
+/* ---- LISTENERS FUNCTIONS---- */
 
 const deleteProduct = (event) => {
     const productCard = event.target.parentNode.parentNode
     const productCardContainer = productCard.parentNode
 
     productCardContainer.removeChild(productCard)
+
+    //FALTA HACER UN FECTH PARA ELIMINAR EL PRODUCTO DEL CARRITO DE LA DB
 }
 
-
-
 const plusQuantity = (event) => {
-    const inputQuantity = event.target.previousElementSibling
-
-    const productCard = inputQuantity.parentNode.parentNode
-
-    const productSubTotal = productCard.querySelector(".sc-product-subtotal")
-
-    const unityPrice = productSubTotal.textContent / inputQuantity.value
-
-    inputQuantity.value++
-
-
-    productSubTotal.textContent = unityPrice * inputQuantity.value
-
+    
 }
 
 const minusQuantity = (event) => {
-    const inputQuantity = event.target.nextElementSibling
-
-    if (inputQuantity.value > 1) {
-        const productCard = inputQuantity.parentNode.parentNode
-
-        const productSubTotal = productCard.querySelector(".sc-product-subtotal")
-
-        const unityPrice = productSubTotal.textContent / inputQuantity.value
-
-        inputQuantity.value--
-
-
-        productSubTotal.textContent = unityPrice * inputQuantity.value
-    }
+    
 }
 
 
-
-/* ----ONCHANGE FUNCTIONS---- */
-
-const updateProductPrice = (event) => {
-    const inputQuantity = event.target
-    const previousValue = inputQuantity.value
-
-    inputQuantity.addEventListener("change", () =>{
-        const newValue = inputQuantity.value
-
-        console.log(newValue);
-
-
-
-    })
+const updateTotal = (event) => {
     
-   /*  const productCard = inputQuantity.parentNode.parentNode
-    
-    const productSubTotal = productCard.querySelector(".sc-product-subtotal")
-
-    if (inputQuantity.value > 1) {
-        
-
-        const unityPrice = productSubTotal.textContent / inputQuantity.value
-        
-
-        productSubTotal.textContent = unityPrice * inputQuantity.value
-        
-    }else{
-        inputQuantity.value = 1
-    }
- */
 }

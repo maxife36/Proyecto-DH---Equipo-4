@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
 
-// const { cartProductController: controllers } = require("../API-Controllers")
+const { cartController: controllers } = require("../API-Controllers")
 
-// router.get("/darkmode", controllers.darkMode);
+router.put("/addQuantity", controllers.addQuantityProduct);
+router.put("/restQuantity", controllers.restQuantityProduct);
 
 
 module.exports = router

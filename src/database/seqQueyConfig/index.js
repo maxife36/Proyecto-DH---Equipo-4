@@ -5,7 +5,7 @@ class General {
 
     constructor(sequelize) {
         this.sequelize = sequelize,
-            this.seqModels = {}
+        this.seqModels = {}
         this.newModel = this.modelCreate.bind(this) //devuelve una instancia de ModelConfig
         this.SeqData = this.SeqData.bind(this)
 

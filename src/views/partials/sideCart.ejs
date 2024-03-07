@@ -7,113 +7,27 @@
                 <h2 class="sc-title-section">Productos</h2>
 
                 <div class="sc-product-display flx-c-nw">
-
-                    <article class="sc-product-card flx-r-nw">
-                        <input type="hidden" name="productId" value="Zapatilla">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" onchange="updateProductPrice(event)" min="1">
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
-                    <article class="sc-product-card flx-r-nw">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" >
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
-                    <article class="sc-product-card flx-r-nw">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" >
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
-                    <article class="sc-product-card flx-r-nw">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" >
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
-                    <article class="sc-product-card flx-r-nw">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" >
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
-                    <article class="sc-product-card flx-r-nw">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" >
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
-                    <article class="sc-product-card flx-r-nw">
-                        <div class="sc-img-container">
-                            <img src="/img/Products-Image/gabinete.png" alt="">
-                        </div>
-                        <div class="sc-quantity-container flx-r-w">
-                            <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                            <input type="number" class="quantity-input" value="1" >
-                            <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
-                        </div>
-                        <p class="sc-product-subtotal">5000</p>
-                        <button class="sc-delete-product" onclick="deleteProduct(event)">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </article>
-
+                    <% if (locals.cartProducts) { %>
+                        <% locals.cartProducts.forEach(cartProduct => { %>
+                         
+                            <article class="sc-product-card flx-r-nw">
+                                <input type="hidden" name="cartProductId" value="<%= cartProduct.cartProductId %>">
+                                <input type="hidden" name="productId" value="<%= cartProduct.productId %>">
+                                <div class="sc-img-container">
+                                    <img src="/img/Products-Image<%= cartProduct.product.images[0].imageTitle %>" alt="">
+                                </div>
+                                <div class="sc-quantity-container flx-r-w">
+                                    <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
+                                    <input type="number" class="quantity-input" value="<%= cartProduct.quantity %>" onchange="updateTotal(event)" min="1">
+                                    <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
+                                </div>
+                                <p class="sc-product-subtotal"><%= cartProduct.total %></p>
+                                <button class="sc-delete-product" onclick="deleteProduct(event)">
+                                    <i class="fa-solid fa-x"></i>
+                                </button>
+                            </article>
+                        <% }) %>
+                    <% } %>
                 </div>
     
             </section>

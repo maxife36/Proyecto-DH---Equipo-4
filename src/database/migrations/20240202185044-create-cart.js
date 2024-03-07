@@ -9,12 +9,6 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      amount: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-        unsigned: true,
-        allowNull: true
-      }
     }, {
       timestamps: false
     });

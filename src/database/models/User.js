@@ -1,11 +1,11 @@
 "use strict";
 const { Model, Sequelize } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
 
 const CartModel = require("./Cart")
 
-module.exports = (sequelize, DataTypes) => {
 
-  const Cart = CartModel(sequelize, Sequelize.DataTypes)
+module.exports = (sequelize, DataTypes) => {
   class User extends Model {
 
     static associate(models) {
@@ -26,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Product, {
         as: "productsReviews",
         through: {
-          model: models.Comment, 
-          uniqueKey: "commentId", 
+          model: models.Comment,
+          uniqueKey: "commentId",
         },
         foreignKey: "userId",
         otherKey: "productId"
@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Product, {
         as: "favoriteProducts",
         through: {
-          model: models.Favorite, 
-          uniqueKey: "favoriteId", 
+          model: models.Favorite,
+          uniqueKey: "favoriteId",
         },
         foreignKey: "userId",
         otherKey: "productId"
@@ -68,9 +68,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TINYINT,
       defaultValue: 0,
       allowNull: false,
-   /*    validate: {
-        isIn: [[0, 1]], // Restricción para permitir solo 0 o 1
-      } */
+      /*    validate: {
+           isIn: [[0, 1]], // Restricción para permitir solo 0 o 1
+         } */
     },
     fullname: {
       type: DataTypes.STRING(100),
@@ -79,10 +79,10 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING(60),
       allowNull: false,
-      unique: true, 
-    /*   validate: {
-        isEmail: true
-      } */
+      unique: true,
+      /*   validate: {
+          isEmail: true
+        } */
     },
     birthday: {
       type: DataTypes.DATE,
@@ -93,16 +93,16 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING(20),
       allowNull: false,
-      unique: true, 
-    /*   validate: {
-        is: /^[a-zA-Z0-9._-]{6,20}$/
-      } */
+      unique: true,
+      /*   validate: {
+          is: /^[a-zA-Z0-9._-]{6,20}$/
+        } */
     },
     password: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    isVerified : {
+    isVerified: {
       type: DataTypes.TINYINT,
       defaultValue: 0,
       allowNull: false,
@@ -116,12 +116,21 @@ module.exports = (sequelize, DataTypes) => {
 
   // HOOKS de User - Crea automaticamente un carrito por usuario
   User.afterCreate(async (user, options) => {
-    await Cart.create({ userId: user.userId })
+    await sequelize.query(`
+    INSERT INTO carts (userId) VALUES ('${user.userId}');
+    `, { type: sequelize.QueryTypes.INSERT });
   })
 
   User.afterBulkCreate(async (users, options) => {
     for (const user of users) {
-      await Cart.create({ userId: user.userId })
+      const cartId = uuidv4(); // Generar nuevo UUID para cartId
+      try {
+        const CartInstance = CartModel(sequelize, DataTypes)
+        await CartInstance.create({ userId: user.userId })
+
+      } catch (err) {
+        console.error('Error creating cart:', err);
+      }
     }
   })
 

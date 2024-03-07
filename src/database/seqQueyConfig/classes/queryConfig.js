@@ -12,7 +12,7 @@ class QueryConfig {
                 this[key] = modelConfig[key]
             }
         }
-
+        
         this.config = {
             include: []
         }

@@ -1,6 +1,6 @@
 "use strict";
 const { DbProduct } = require("../controllers");
-
+const updateSeedsVariables = require("../assets/updateSeedsVariables")
 /* features: [{
   featureId: ["UUID"],
   specifications: -> Array de strings con epsecifaciones por cada featureId
@@ -12,7 +12,7 @@ categories: ["categoryId",...] -> Array de strings con categoryIds */
 /** @type {import("sequelize-cli").Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const { features, categories } = await require("../assets/updateSeedsVariables")()
+    const { features, categories } = await updateSeedsVariables()
     
     const productos = [
       {

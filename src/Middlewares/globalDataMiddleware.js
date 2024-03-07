@@ -17,7 +17,7 @@ async function verificacion() {
         showCategories.forEach(category => {
             if (!categoriesTitles.includes(category)) throw new Error(`La categoria ${category}, no se encuentra en la DB`)
         })
-     
+
         showCategories = allCategories.filter(categoryObj => showCategories.includes(categoryObj.categoryTitle))
 
     } catch (err) {
@@ -34,14 +34,14 @@ module.exports = async (req, res, next) => {
             await verificacion()
             firstChargeFlag = true
         }
-            
+
         res.locals.globalData = {
             whatsappContactNumber,
             whatsappDefaultText: encodeURIComponent(whatsappDefaultText),
             showCategories,
             allCategories
         };
-    
+
         next();
     } catch (err) {
         console.log(err.message)

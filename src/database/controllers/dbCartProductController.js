@@ -1,4 +1,4 @@
-const { Cart_Product , seqQuery } = require("../models")
+const { Cart_Product, seqQuery } = require("../models")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
 const validator = require("../seqQueyConfig/assets/validators")
@@ -19,13 +19,32 @@ module.exports = class DbCartProduct {
         }
     }
 
+    static async getCartProductsByUserId(userId) {
+        try {
+            //query config
+            const query = queryCartProduct.newQuery(["cart", "product"])
+            query.addWhere(userId, "userId", "cart")
+            query.config.include[1].include = [{ association: "images" }]
+
+            const cartProducts = await Cart_Product.findAll(query.config)
+
+            return cartProducts
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
     static async getCartProductById(cartProductId) {
         try {
 
             //validacion de ID
-            validator.idValidator(cartProductId)
+            validator.idValidator(cartProductId)  
 
-            const cartProduct = await Cart_Product.findByPk(cartProductId)
+            //query config
+            const query = queryCartProduct.newQuery(["cart", "product"])
+           
+            const cartProduct = await Cart_Product.findByPk(cartProductId, query.config)
 
             if (!cartProduct) throw new Error(msg.erroMsg.notExistId + cartProductId)
 
@@ -38,10 +57,10 @@ module.exports = class DbCartProduct {
 
     static async createCartProduct(data) {
         try {
-            const { cartId, productId, quantity ,total } = data
+            const { cartId, productId, quantity } = data
 
             //Verificacion de campos obligatorios
-            const requiredFields = ["cartId", "productId", "quantity", "total"]
+            const requiredFields = ["cartId", "productId", "quantity"]
 
             const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
@@ -52,8 +71,7 @@ module.exports = class DbCartProduct {
                 cartProductId: uuid(),
                 cartId,
                 productId,
-                quantity,
-                total
+                quantity
             }
 
             return await Cart_Product.create(newCartProduct)
@@ -66,13 +84,13 @@ module.exports = class DbCartProduct {
 
     static async updateCartProductData(cartProductId, data) {
         try {
-            const { cartId, productId, quantity ,total  } = data
+            const { cartId, productId, quantity } = data
 
             //validacion de ID
             validator.idValidator(cartProductId)
 
             //Verificacion de campos obligatorios
-            const requiredFields = ["cartId", "productId", "quantity", "total"]
+            const requiredFields = ["cartId", "productId", "quantity"]
 
             const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
@@ -83,8 +101,7 @@ module.exports = class DbCartProduct {
             const updateCartProduct = {
                 cartId,
                 productId,
-                quantity,
-                total
+                quantity
             }
 
             //query config

@@ -1,9 +1,7 @@
-const { Cart , seqQuery } = require("../models")
+const { Cart, seqQuery } = require("../models")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
 const validator = require("../seqQueyConfig/assets/validators")
-
-const queryCart = seqQuery.newModel("Cart")
 
 module.exports = class DbCart {
     static async getAllCarts() {
@@ -21,7 +19,6 @@ module.exports = class DbCart {
 
     static async getCartById(cartId) {
         try {
-
             //validacion de ID
             validator.idValidator(cartId)
 
@@ -36,9 +33,29 @@ module.exports = class DbCart {
         }
     }
 
+    static async getCartByUserId(userId) {
+        try {
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryCart.newQuery()
+            query.addWhere(userId, "userId")
+
+            const cart = await Cart.findOne(query.config)
+
+            if (!cart) throw new Error(msg.erroMsg.notExistId + userId)
+
+            return cart
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
     static async createCart(data) {
         try {
-            const { userId, amount} = data
+            const { userId, amount } = data
 
             //Verificacion de campos obligatorios
             const requiredFields = ["userId"]
@@ -64,7 +81,7 @@ module.exports = class DbCart {
 
     static async updateCartData(cartId, data) {
         try {
-            const {userId, amount} = data
+            const { userId, amount } = data
 
             //validacion de ID
             validator.idValidator(cartId)

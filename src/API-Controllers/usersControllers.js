@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt")
 const fs = require("fs")
 const { validationResult } = require("express-validator");
-const { sendMail } = require("../API-Controllers/sendGridController");
-const { DbUser } = require("../database/controllers");
+const { sendGridController, cartController } = require("../API-Controllers");
+const { DbUser, DbCartProduct } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
@@ -44,13 +44,18 @@ const controllers = {
 
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
+                    req.session.loggedCart = userFinded.cart.cartId
+                    
                     res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
+                    await cartController.updateCartInfoToRender(userFinded.userId, res)
+                    
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
                     }
+
                     return res.redirect("/")
-                }else{
+                } else {
                     errors.push({ msg: "Las credenciales no son validas" })
                 }
             }
@@ -104,7 +109,7 @@ const controllers = {
                 const { fullname, email, userId } = user
 
                 //Envio asincronico de mail de verificación
-                sendMail({
+                sendGridController.sendMail({
                     userId,
                     userEmail: email,
                     userName: fullname

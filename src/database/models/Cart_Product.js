@@ -1,18 +1,21 @@
 "use strict";
 const { Model, Sequelize } = require("sequelize");
 
+const ProductModel = require("./Product")
+
+
 module.exports = (sequelize, DataTypes) => {
   class Cart_Product extends Model {
 
     static associate(models) {
-       // "Cart_Product" - Cart association
-       this.belongsTo(models.Cart, {
+      // "Cart_Product" - Cart association
+      this.belongsTo(models.Cart, {
         as: "cart",
         foreignKey: "cartId"
       })
 
-       // "Cart_Product" - Product association
-       this.belongsTo(models.Product, {
+      // "Cart_Product" - Product association
+      this.belongsTo(models.Product, {
         as: "product",
         foreignKey: "productId"
       })
@@ -48,11 +51,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     total: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+      type: DataTypes.VIRTUAL,
       unsigned: true,
-      allowNull: false
-    }
+      get: async function() {
+        const ProductInstance = ProductModel(sequelize, DataTypes)
+        const product =await  ProductInstance.findByPk(this.productId)
+        const productPrice = product.productPrice
+        return this.quantity * productPrice;
+      }
+    },
   }, {
     sequelize,
     modelName: "Cart_Product",
