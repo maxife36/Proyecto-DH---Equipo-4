@@ -45,7 +45,58 @@ const deleteProduct = (event) => {
     //FALTA HACER UN FECTH PARA ELIMINAR EL PRODUCTO DEL CARRITO DE LA DB
 }
 
+
 const plusQuantity = (event) => {
+    const inputQuantity = event.target.previousElementSibling
+
+    const productCard = inputQuantity.parentNode.parentNode
+
+    const productSubTotal = productCard.querySelector(".sc-product-subtotal")
+
+    const unityPrice = productSubTotal.textContent / inputQuantity.value
+
+    inputQuantity.value++
+
+
+    productSubTotal.textContent = unityPrice * inputQuantity.value
+
+}
+
+const minusQuantity = (event) => {
+    const inputQuantity = event.target.nextElementSibling
+
+    if (inputQuantity.value > 1) {
+        const productCard = inputQuantity.parentNode.parentNode
+
+        const productSubTotal = productCard.querySelector(".sc-product-subtotal")
+
+        const unityPrice = productSubTotal.textContent / inputQuantity.value
+
+        inputQuantity.value--
+
+
+        productSubTotal.textContent = unityPrice * inputQuantity.value
+    }
+}
+
+
+
+/* ----ONCHANGE FUNCTIONS---- */
+
+const updateProductPrice = (event) => {
+    const inputQuantity = event.target
+    const previousValue = inputQuantity.value
+
+    inputQuantity.addEventListener("change", () =>{
+        const newValue = inputQuantity.value
+
+        console.log(newValue);
+
+
+
+    })
+}
+/* const plusQuantity = (event) => {
     
 }
 
@@ -56,4 +107,4 @@ const minusQuantity = (event) => {
 
 const updateTotal = (event) => {
     
-}
+} */
