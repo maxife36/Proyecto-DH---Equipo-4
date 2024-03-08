@@ -34,14 +34,14 @@ module.exports = {
             specifications: ["15''", "1080p"]
           },
           {
-            featureId: features.Conectividad,
+            featureId: features.Puertos,
             specifications: ["HDMI", "USB 3.0", "USB 2.0"]
           },
         ],
         imageTitles: ["/LaptopDell.png", "/IntelCore.png"],
         categories: [categories.Laptops]
       },
-      /*  {
+      {
          productName: "Teclado mecánico Redragon K552",
          productBrand: "Redragon",
          shortDescription: "Teclado compacto con interruptores mecánicos",
@@ -50,9 +50,18 @@ module.exports = {
          discount: null,
          stock: 100,
          score: 88,
-         features: [],
-         imageTitles: [],
-         categories: []
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Cableado"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Mecánico"]
+          }
+         ],
+         imageTitles: ["/RedragonK552.png","/redragon-2.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Monitor Samsung Odyssey G7",
@@ -63,6 +72,18 @@ module.exports = {
          discount: 15,
          stock: 30,
          score: 95,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["32'","Curva","1000R"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDM", "USB"]
+          }
+         ],
+         imageTitles: ["/SamsungOdysseyG7.png", "/samsung.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "Disco duro externo WD My Passport",
@@ -73,6 +94,18 @@ module.exports = {
          discount: 5,
          stock: 80,
          score: 89,
+         features:[
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["5TB"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB SuperSpeed", "USB 2.0"]
+          }
+         ],
+         imageTitles: ["/WDMyPassport.png"],
+         categories: [categories.Almacenamiento]
        },
        {
          productName: "Memoria RAM Corsair Vengeance LPX",
@@ -83,6 +116,14 @@ module.exports = {
          discount: null,
          stock: 60,
          score: 94,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["8GB"]
+          },
+         ],
+         imageTitles: ["/CorsairLPX.png"],
+         categories: [categories.MemoriaRAM]
        },
        {
          productName: "MacBook Air M2",
@@ -93,6 +134,30 @@ module.exports = {
          discount: 8,
          stock: 40,
          score: 93,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["LED","13.6'","Tecnología True Tone"]
+          },
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["16GB", "SSD de 256 o 512 GB"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB-C de 30 W", "Puerto de carga MagSafe 3"]
+          },
+          {
+            featureId: features.Conectividad,
+            specifications: ["Wi-Fi 6 (802.11ax)","Bluetooth 5.3"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["macOS"]
+          }
+         ],
+         imageTitles: ["/MacBookAirM2.png", "/apple_carrucel.png"],
+         categories: [categories.Laptops]
        },
        {
          productName: "Mouse Logitech G Pro X Superlight",
@@ -103,6 +168,18 @@ module.exports = {
          discount: 12,
          stock: 75,
          score: 91,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrica"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          }
+         ],
+         imageTitles: ["/LogitechSuperlight.png","/logitech.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Tarjeta gráfica NVIDIA GeForce RTX 3080",
@@ -113,6 +190,14 @@ module.exports = {
          discount: null,
          stock: 25,
          score: 97,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["12GB" ,"GDDR6X"]
+          }
+         ],
+         imageTitles: ["/NVIDIAGeForce.png","/nvidia-2.png"],
+         categories: [categories.TarjetasGraficas]
        },
        {
          productName: "Monitor LG UltraGear 27GN950-B",
@@ -123,6 +208,18 @@ module.exports = {
          discount: 10,
          stock: 35,
          score: 96,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["27'"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI", "DisplayPort", "USB"]
+          }
+         ],
+         imageTitles: ["/LGUltraGear.png", "/lg-4.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "SSD Kingston A2000 NVMe PCIe",
@@ -133,6 +230,14 @@ module.exports = {
          discount: 5,
          stock: 50,
          score: 90,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["SSD", "500GB"]
+          }
+         ],
+         imageTitles: ["/KingstonA2000.png"],
+         categories: [categories.Procesadores, categories.Ofertas]
        },
        {
          productName: "Ryzen 9 5900X",
@@ -143,6 +248,14 @@ module.exports = {
          discount: 15,
          stock: 30,
          score: 94,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["DDR4"]
+          }
+         ],
+         imageTitles: ["/AMDRyzen.png", "/amd.png"],
+         categories: [categories.Procesadores, categories.Ofertas]
        },
        {
          productName: "Teclado Razer BlackWidow Elite",
@@ -153,6 +266,18 @@ module.exports = {
          discount: null,
          stock: 60,
          score: 89,
+         features: [
+          {
+            featureId: features.Puertos,
+            specifications: ["USB 2.0"]
+          },
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["Memoria híbrida integrada y almacenamiento en la nube"]
+          }
+         ],
+         imageTitles: ["/RazerBlackWidow.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Samsung 970 EVO Plus SSD",
@@ -163,6 +288,14 @@ module.exports = {
          discount: 8,
          stock: 40,
          score: 92,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["1 TB", "SSD"]
+          }
+         ],
+         imageTitles: ["/SamsungEVOPlus.png" , "/samsung.png"],
+         categories: [categories.Procesadores]
        },
        {
          productName: "Gigabyte RTX 3070 Gaming OC",
@@ -173,6 +306,18 @@ module.exports = {
          discount: 12,
          stock: 25,
          score: 96,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["GDDR6", "8 GB"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI 2.1", "DisplayPort 1.4a"]
+          }
+         ],
+         imageTitles: ["/GigabyteRTX.png", "/gigabyte.png"],
+         categories: [categories.TarjetasGraficas]
        },
        {
          productName: "HyperX Cloud II Gaming Headset",
@@ -183,6 +328,14 @@ module.exports = {
          discount: 10,
          stock: 50,
          score: 88,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Cableado"]
+          }
+         ],
+         imageTitles: ["/HyperXCloud.png","/hyperx.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Logitech MX Master 3",
@@ -193,6 +346,22 @@ module.exports = {
          discount: 10,
          stock: 45,
          score: 93,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB-A"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 10", "Windows 11", "macOS 10.15", "Linux", "Chrome OS", "iPadOS 14", "Android"]
+          }
+         ],
+         imageTitles: ["/LogitechMX.png", "logitech.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming, categories.Ofertas]
        },
        {
          productName: "Asus ROG Strix B550-F Gaming",
@@ -203,6 +372,14 @@ module.exports = {
          discount: null,
          stock: 30,
          score: 94,
+         features: [
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4", "128 GB"]
+          }
+         ],
+         imageTitles: ["/AsusROGStrix.png", "/asus.png"],
+         categories: [categories.Almacenamiento]
        },
        {
          productName: "Corsair Vengeance RGB Pro RAM",
@@ -213,6 +390,18 @@ module.exports = {
          discount: 15,
          stock: 25,
          score: 91,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["Kit de 16GB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Luces LED RGB"]
+          }
+         ],
+         imageTitles: ["/Vengeance.png", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         categories: [categories.MemoriaRAM]
        },
        {
          productName: "Sony WH-1000XM4 Auriculares",
@@ -223,6 +412,18 @@ module.exports = {
          discount: 8,
          stock: 20,
          score: 96,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico", "Bluetooth"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Luces LED", "Micrófono"]
+          }
+         ],
+         imageTitles: ["/SonyWH.png"],
+         categories: [categories.Perifericos]
        },
        {
          productName: "EVGA GeForce RTX 3060 Ti",
@@ -233,6 +434,18 @@ module.exports = {
          discount: 10,
          stock: 35,
          score: 88,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["8GB", "GDDR6", "256 bit"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI", "DisplayPort"]
+          }
+         ],
+         imageTitles: ["/TarjetaEVGA.png"],
+         categories: [categories.TarjetasGraficas, categories.Ofertas]
        },
        {
          productName: "Dell XPS 13 Laptop",
@@ -243,6 +456,30 @@ module.exports = {
          discount: 5,
          stock: 15,
          score: 95,
+         features: [
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["16 GB", "DDR4"]
+          },
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["SSD", "1 TB"]
+          },
+          {
+            featureId: features.Pantalla,
+            specifications: ["13'", "Táctil"]
+          },
+          {
+            featureId: features.Conectividad,
+            specifications: ["Wi-Fi", "Bluetooht"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 11 Pro"]
+          }
+         ],
+         imageTitles: ["DellXPS.png","/dell_logo_blanco_2.png"],
+         categories: [categories.Laptops]
        },
        {
          productName: "Seagate Barracuda 4TB HDD",
@@ -253,6 +490,14 @@ module.exports = {
          discount: 10,
          stock: 40,
          score: 89,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["HDD", "4TB"]
+          }
+         ],
+         imageTitles: ["/Discoduro.png"],
+         categories: [categories.Almacenamiento, categories.Ofertas]
        },
        {
          productName: "HP Omen 27 Gaming Monitor",
@@ -263,6 +508,18 @@ module.exports = {
          discount: null,
          stock: 20,
          score: 92,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["IPS", "24.5'", "Antirreflejo"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI 2.0", "DisplayPort 1.4", "USB-A 3.2 Gen 1"]
+          }
+         ],
+         imageTitles: ["/OMEN.png", "/hp-2.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "Crucial Ballistix RGB RAM",
@@ -273,6 +530,18 @@ module.exports = {
          discount: 15,
          stock: 30,
          score: 91,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["8 GB"]
+          },
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4", "UDIMM", "3200 MHz"]
+          }
+         ],
+         imageTitles: ["/MemoriaRAM.png"],
+         categories: [categories.MemoriaRAM]
        },
        {
          productName: "Logitech G Pro X Mechanical Keyboard",
@@ -283,6 +552,18 @@ module.exports = {
          discount: 8,
          stock: 25,
          score: 94,
+         features: [
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Iluminación RGB LIGHTSYNC"]
+          }
+         ],
+         imageTitles: ["/TecladoLogitech.png", "/logitech.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        }, {
          productName: "Samsung 970 EVO Plus SSD",
          productBrand: "Samsung",
@@ -292,6 +573,18 @@ module.exports = {
          discount: 12,
          stock: 25,
          score: 93,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["500 GB","SSD"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows"]
+          }
+         ],
+         imageTitles: ["/SamsungEVOPlus.png", "/samsung.png"],
+         categories: [categories.Procesadores]
        },
        {
          productName: "Razer DeathAdder Elite Gaming Mouse",
@@ -302,6 +595,14 @@ module.exports = {
          discount: null,
          stock: 35,
          score: 90,
+         features: [
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Compatible con Microsoft Windows"]
+          }
+         ],
+         imageTitles: ["/RazerDeathAdder.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Acer Predator XB271HU Gaming Monitor",
@@ -312,6 +613,14 @@ module.exports = {
          discount: 15,
          stock: 15,
          score: 96,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["27'","Full HD", "LED"]
+          }
+         ],
+         imageTitles: ["/Predator.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "NZXT Kraken X63 Liquid Cooler",
@@ -322,6 +631,14 @@ module.exports = {
          discount: 8,
          stock: 20,
          score: 94,
+         features: [
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Bomba MTTF >210.000 hs", "RGB Gen 2 direccionable"]
+          }
+         ],
+         imageTitles: ["/NZXTKraken.png"],
+         categories: [categories.AccesoriosGaming]
        },
        {
          productName: "AMD Ryzen 9 5900X CPU",
@@ -332,6 +649,14 @@ module.exports = {
          discount: 10,
          stock: 10,
          score: 97,
+         features: [
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4", "128 GB"]
+          }
+         ],
+         imageTitles: ["/AMDRyzen.png", "/amd.png"],
+         categories: [categories.Procesadores, categories.Ofertas]
        },
        {
          productName: "Corsair K95 RGB Platinum XT Mechanical Keyboard",
@@ -342,6 +667,18 @@ module.exports = {
          discount: 10,
          stock: 18,
          score: 96,
+         features: [
+          {
+            featureId: features.Puertos,
+            specifications: ["USB 3.1"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Retroiluminación RGB"]
+          }
+         ],
+         imageTitles: ["/CorsairK95.png", "logos-2020_png_corsairlogo2020_horiz_w.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Logitech G Pro Wireless Gaming Mouse",
@@ -352,6 +689,21 @@ module.exports = {
          discount: 8,
          stock: 22,
          score: 94,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Chrome OS", "macOS 10.11", "Windows 7"]
+          }
+         ],
+         imageTitles: ["/LogitechGProMouse.png" , "/logitech.png"]
        },
        {
          productName: "Samsung Odyssey G9 Curved Gaming Monitor",
@@ -362,6 +714,18 @@ module.exports = {
          discount: 15,
          stock: 12,
          score: 98,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["49'", "Curvo"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI", "USB"]
+          }
+         ],
+         imageTitles: ["/SamsungOdyssey.png", "/samsung.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "Crucial P5 Plus NVMe SSD",
@@ -372,6 +736,14 @@ module.exports = {
          discount: null,
          stock: 15,
          score: 97,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["SSD", "1 TB"]
+          }
+         ],
+         imageTitles: ["/CrucialP5Plus.png"],
+         categories: [categories.Almacenamiento]
        },
        {
          productName: "NVIDIA GeForce RTX 3080 Graphics Card",
@@ -382,6 +754,18 @@ module.exports = {
          discount: 10,
          stock: 8,
          score: 99,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["10 GB", "GDDR6X","PCI-Express 4.0"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDM 2.1", "DisplayPort 1.4a"]
+          }
+         ],
+         imageTitles: ["/NVIDIARTX3080.png", "/nvidia-2.png"],
+         categories: [categories.TarjetasGraficas, categories.Ofertas]
        },
        {
          productName: "ASUS ROG Strix Scar 17 Gaming Laptop",
@@ -392,6 +776,26 @@ module.exports = {
          discount: 5,
          stock: 10,
          score: 97,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["QHD de 240 Hz"]
+          },
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["32 GB", "4800 MHz"]
+          },
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["2 TB", "SSD PCle 4.0 NVMe M.2"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 11 Pro"]
+          }
+         ],
+         imageTitles: ["/ASUSROG.png", "/asus.png"],
+         categories: [categories.Laptops]
        },
        {
          productName: "SteelSeries Arctis Pro Wireless Headset",
@@ -402,6 +806,18 @@ module.exports = {
          discount: null,
          stock: 15,
          score: 95,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico", "Bluetooth"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Microfono"]
+          }
+         ],
+         imageTitles: ["SteelSeries.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "LG UltraGear 27GN950-B 4K Gaming Monitor",
@@ -412,6 +828,18 @@ module.exports = {
          discount: 12,
          stock: 20,
          score: 98,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["27'","IPS", "4K Resolution 3840 x 2160"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI", "DisplayPort", "USB"]
+          }
+         ],
+         imageTitles: ["/LGUltraGear.png", "/lg-4.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "Kingston HyperX Cloud II Gaming Headset",
@@ -422,6 +850,18 @@ module.exports = {
          discount: 15,
          stock: 25,
          score: 92,
+         features: [
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Microfono","Luz LED"]
+          }
+         ],
+         imageTitles: ["/KingstonHyperX.png", "/hyperx.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Dell XPS 13 Ultrabook",
@@ -432,6 +872,31 @@ module.exports = {
          discount: 8,
          stock: 18,
          score: 96,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["13.4'", "4K UHD", "Dolby Vision HDR"]
+          },
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["32 GB de RAM LPDDR4X a 3.733 MHz"]
+          },
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["SSD PCle 3.0", "1 TB"]
+          },
+          {
+            featureId: features.Conectividad,
+            specifications: ["Wi-Fi", "Bluetooth 5.0"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB-C"]
+          }
+         ],
+         imageTitles: ["/DellXPS.png", "/dell_logo_blanco_2.png"],
+         categories: [categories.Laptops]
+  
        },
        {
          productName: "AMD Ryzen 9 5950X Processor",
@@ -442,6 +907,14 @@ module.exports = {
          discount: 10,
          stock: 15,
          score: 98,
+         features: [
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4", "128 GB"]
+          }
+         ],
+         imageTitles: ["/AMDRyzen.png", "/amd.png"],
+         categories: [categories.Procesadores]
        },
        {
          productName: "Logitech MX Master 3 Wireless Mouse",
@@ -452,6 +925,22 @@ module.exports = {
          discount: 8,
          stock: 25,
          score: 94,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Android", "Chrome OS", "Linux", "Windows 10", "Windows 11", "iPadOS 14", "macOS 10.15"]
+          }
+         ],
+         imageTitles: ["/LogitechMX.png", "/logitech.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Samsung T5 Portable SSD 1TB",
@@ -462,6 +951,22 @@ module.exports = {
          discount: null,
          stock: 20,
          score: 96,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["SSD", "1 TB"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB 3.2 Gen 2"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 7", "MacOS 10 X 10.10", "Android Lollipop"]
+          }
+         ],
+         imageTitles: ["/SamsuntT5.png", "/samsung.png"],
+         categories: [categories.Almacenamiento, categories.Ofertas]
        },
        {
          productName: "Corsair Vengeance LPX 32GB RAM",
@@ -472,6 +977,18 @@ module.exports = {
          discount: 12,
          stock: 18,
          score: 95,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["32 GB"]
+          },
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4 DRAM", "UDIMM", "2666 MHz"]
+          }
+         ],
+         imageTitles: ["/CorsairLPX.png", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         categories: [categories.MemoriaRAM]
        },
        {
          productName: "NVIDIA Quadro RTX 5000 Graphics Card",
@@ -482,6 +999,14 @@ module.exports = {
          discount: 15,
          stock: 12,
          score: 97,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["16 GB", "1750 MHz"]
+          }
+         ],
+         imageTitles: ["/NVIDIAQuadro.png", "/nvidia-2.png"],
+         categories: [categories.TarjetasGraficas]
        },
        {
          productName: "Intel Core i7-11700K CPU",
@@ -492,6 +1017,14 @@ module.exports = {
          discount: 7,
          stock: 20,
          score: 96,
+         features: [
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4", "128 GB"]
+          }
+         ],
+         imageTitles: ["/IntelCore.png", "/intelnewlogoblanco.png"],
+         categories: [categories.Procesadores]
        },
        {
          productName: "Razer BlackWidow Elite Mechanical Keyboard",
@@ -502,6 +1035,18 @@ module.exports = {
          discount: 10,
          stock: 15,
          score: 93,
+         features: [
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Retroiluminación", "Reposamuñecas ergonómico"]
+          }
+         ],
+         imageTitles: ["/RazerBlackWidow.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Crucial MX500 1TB SATA SSD",
@@ -512,6 +1057,18 @@ module.exports = {
          discount: null,
          stock: 25,
          score: 98,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["1 TB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Velocidad de lectura hasta 510 MB/s"]
+          }
+         ],
+         imageTitles: ["/CrucialMX500.png"],
+         categories: [categories.Almacenamiento]
        },
        {
          productName: "Corsair K95 RGB Platinum XT Mechanical Keyboard",
@@ -522,6 +1079,18 @@ module.exports = {
          discount: 15,
          stock: 18,
          score: 97,
+         features: [
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Retroiluminación RGB"]
+          }
+         ],
+         imageTitles: ["/CorsairK95"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Logitech G Pro X Gaming Mouse",
@@ -532,6 +1101,18 @@ module.exports = {
          discount: 8,
          stock: 22,
          score: 95,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 7", "macOS 10.11", "Chrome OS"]
+          }
+         ],
+         imageTitles: ["/LogitechGProMouse.png", "/logitech.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "WD Black 4TB Desktop Hard Drive",
@@ -542,6 +1123,18 @@ module.exports = {
          discount: 5,
          stock: 15,
          score: 94,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["4 TB"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Interfaz SATA 6 GB/s"]
+          }
+         ],
+         imageTitles: ["/WDBlack.png"],
+         categories: [categories.Almacenamiento]
        },
        {
          productName: "Asus ROG Strix B550-F Gaming Motherboard",
@@ -552,6 +1145,15 @@ module.exports = {
          discount: 12,
          stock: 18,
          score: 96,
+         features: [
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4", "128 GB", "DIMM"]
+          }
+         ],
+         imageTitles: ["/AsusROGStrix.png", "/asus.png"],
+         categories: [categories.Procesadores]
+  
        },
        {
          productName: "HyperX Cloud II Gaming Headset",
@@ -562,6 +1164,18 @@ module.exports = {
          discount: 8,
          stock: 20,
          score: 92,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Tipo de conectores Mini Jack"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Cancelación de ruido", "Sensibilidad 98 dB SPL/mW a 1 kHz"]
+          }
+         ],
+         imageTitles: ["/HyperXCloud.png", "/hyperx.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "MSI GeForce RTX 3080 Gaming X Trio GPU",
@@ -572,6 +1186,18 @@ module.exports = {
          discount: 10,
          stock: 12,
          score: 98,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["10 GB", "GDDR6X"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI 2.1", "DisplayPort 1.4a"]
+          }
+         ],
+         imageTitles: ["/MSIGeForce.png"],
+         categories: [categories.TarjetasGraficas, categories.Ofertas]
        },
        {
          productName: "Seagate FireCuda 1TB NVMe SSD",
@@ -582,6 +1208,18 @@ module.exports = {
          discount: null,
          stock: 22,
          score: 95,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["1 TB", "SSD"]
+          },
+          {
+            featureId: features.OtrasCaracteristicas,
+            specifications: ["Tecnología 3D NAND"]
+          }
+         ],
+         imageTitles: ["/FireCuda.png"],
+         categories: [categories.Procesadores]
        },
        {
          productName: "Corsair Vengeance RGB Pro 32GB RAM",
@@ -592,6 +1230,18 @@ module.exports = {
          discount: 15,
          stock: 14,
          score: 93,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["32 GB"]
+          },
+          {
+            featureId: features.MemoriaRAM,
+            specifications: ["DDR4 DRAM", "DIMM", "2666 MHz"]
+          }
+         ],
+         imageTitles: ["/Vengeance", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         categories: [categories.MemoriaRAM]
        },
        {
          productName: "Acer Predator X34 Curved Gaming Monitor",
@@ -602,6 +1252,18 @@ module.exports = {
          discount: 8,
          stock: 10,
          score: 97,
+         features: [
+          {
+            featureId: features.Pantalla,
+            specifications: ["34'", "Resolución 3440 x 1440", "Curvatura 1900R", "IPS"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["HDMI 2.0", "DisplayPort 1.4", "USB tipo C", "USB 3.0"]
+          }
+         ],
+         imageTitles: ["/Predator.png"],
+         categories: [categories.Monitores]
        },
        {
          productName: "Logitech MX Master 3 Wireless Mouse",
@@ -612,6 +1274,22 @@ module.exports = {
          discount: 10,
          stock: 18,
          score: 95,
+         features: [
+          {
+            featureId: features.Conectividad,
+            specifications: ["Inalambrico"]
+          },
+          {
+            featureId: features.Puertos,
+            specifications: ["USB"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 10", "Windows 11", "macOS 10.15", "Linux", "Chrome OS", "iPadOS 14", "Android"]
+          }
+         ],
+         imageTitles: ["/LogitechMX.png", "/logitech.png"],
+         categories: [categories.Perifericos]
        },
        {
          productName: "Samsung 970 EVO Plus 500GB NVMe SSD",
@@ -622,6 +1300,18 @@ module.exports = {
          discount: null,
          stock: 20,
          score: 96,
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["500 GB", "SSD"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows"]
+          }
+         ],
+         imageTitles: ["/SamsungEVOPlus.png", "/samsung.png"],
+         categories: [categories.Procesadores]
        },
        {
          productName: "AMD Ryzen 9 5950X 16-Core CPU",
@@ -632,7 +1322,18 @@ module.exports = {
          discount: 12,
          stock: 15,
          score: 98,
-       } */
+         features: [
+          {
+            featureId: features.Almacenamiento,
+            specifications: ["DDR4"]
+          },
+          {
+            featureId: features.SistemaOperativo,
+            specifications: ["Windows 10"]
+          }
+         ],
+         imageTitles: ["/AMDRyzen.png", "/amd.png"]
+       }
     ]
 
     const productsPromises = []
