@@ -8,6 +8,8 @@ module.exports = async (req, res, next) => {
 
         if (userFinded) {           
             req.session.loggedUser = userId
+            req.session.loggedCart = userFinded.cart.cartId
+            
             res.cookie("isLogged", true)
 
             next()

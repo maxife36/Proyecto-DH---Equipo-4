@@ -116,9 +116,17 @@ module.exports = (sequelize, DataTypes) => {
 
   // HOOKS de User - Crea automaticamente un carrito por usuario
   User.afterCreate(async (user, options) => {
-    await sequelize.query(`
-    INSERT INTO carts (userId) VALUES ('${user.userId}');
-    `, { type: sequelize.QueryTypes.INSERT });
+    const cartId = uuidv4(); // Generar nuevo UUID para cartId
+    try {
+      const CartInstance = CartModel(sequelize, DataTypes)
+      await CartInstance.create({ 
+        cartId,
+        userId: user.userId 
+      })
+
+    } catch (err) {
+      console.error('Error creating cart:', err);
+    }
   })
 
   User.afterBulkCreate(async (users, options) => {
@@ -126,7 +134,10 @@ module.exports = (sequelize, DataTypes) => {
       const cartId = uuidv4(); // Generar nuevo UUID para cartId
       try {
         const CartInstance = CartModel(sequelize, DataTypes)
-        await CartInstance.create({ userId: user.userId })
+        await CartInstance.create({ 
+          cartId,
+          userId: user.userId 
+        })
 
       } catch (err) {
         console.error('Error creating cart:', err);

@@ -1,5 +1,5 @@
 <section class="background-opacity">
-    <form class="sticky-container" action="/mercadopago/create-Order" method="post">
+    <form class="sticky-container" id="cartForm" action="/mercadopago/create-Order" method="post">
 
         <article class="sideCart-container flx-c-nw">
     
@@ -11,19 +11,25 @@
                         <% locals.cartProducts.forEach(cartProduct => { %>
                          
                             <article class="sc-product-card flx-r-nw">
-                                <input type="hidden" name="cartProductId" value="<%= cartProduct.cartProductId %>">
-                                <input type="hidden" name="productId" value="<%= cartProduct.productId %>">
+                                <input type="hidden" name="cartProductId" id="cartProductId" value="<%= cartProduct.cartProductId %>">
+                                <input type="hidden" name="productId" id="productId" value="<%= cartProduct.productId %>">
                                 <div class="sc-img-container">
                                     <img src="/img/Products-Image<%= cartProduct.product.images[0].imageTitle %>" alt="">
                                 </div>
                                 <div class="sc-quantity-container flx-r-w">
-                                    <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="minusQuantity(event)"></i>
-                                    <input type="number" class="quantity-input" value="<%= cartProduct.quantity %>" onchange="updateTotal(event)" min="1">
-                                    <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="plusQuantity(event)"></i>
+                                    <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="changeQuantity(event, 0)"></i>
+                                    <input type="number" class="quantity-input" onfocus="enterAction(event)"  onchange="updateProduct(event)" min="1" value="<%= cartProduct.quantity %>">
+                                    <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="changeQuantity(event, 1)"></i>
+                                    <br>
+                                    <% if (!cartProduct.discount) { %>
+                                        <i class="discount-text">
+                                            %<%= cartProduct.discount %> OFF
+                                        </i>
+                                    <% } %>
                                 </div>
                                 <p class="sc-product-subtotal"><%= cartProduct.total %></p>
-                                <button class="sc-delete-product" onclick="deleteProduct(event)">
-                                    <i class="fa-solid fa-x"></i>
+                                <button type="button" class="sc-delete-product" onclick="deleteProduct(event)">
+                                <i class="fa-solid fa-x"></i>
                                 </button>
                             </article>
                         <% }) %>

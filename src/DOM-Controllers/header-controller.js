@@ -18,8 +18,9 @@ if (cookies) {
     cookie.forEach(cookie => {
         if(cookie.includes("isLogged")) isLoggedCookie.push(cookie)
     })
-    
-    valorCookie = Boolean(isLoggedCookie[0].split("isLogged=")[1])
+    if (isLoggedCookie.length) {
+        valorCookie = Boolean(isLoggedCookie[0].split("isLogged=")[1])
+    }
 }
 /*Controlador de elemento DOM para usuarios logeados  */
 

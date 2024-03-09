@@ -1,6 +1,7 @@
 require('dotenv').config()
 // Step 1: Import the parts of the module you want to use
-const { MercadoPagoConfig, Preference, Payment} = require('mercadopago');
+const { MercadoPagoConfig, Preference, Payment } = require('mercadopago');
+const { DbCartProduct, DbUser } = require("../database/controllers")
 
 const { v4: uuid } = require("uuid")
 
@@ -16,28 +17,47 @@ const client = new MercadoPagoConfig({
 
 // Step 3: Initialize the API object
 const preference = new Preference(client);
-const payment = new Payment(client);
 
 module.exports = {
     createOrder: async (req, res) => {
         try {
             //recuperar del req.body todos los cartProductId  que estan en el input hidden, con esos se busca en la DB para encontrar todos los productos con cantidades y subtotales
+            const { loggedUser: userId, loggedCart: cartId } = req.session
+            const cartCookiesProducts = req.cookies.cartProductsId
+
+            const {email, fullname} = await DbUser.getUserById(userId)
+
+            const cartProducts = await DbCartProduct.getCartProductsByUserId(userId)
+
+            //Confeccion de Carrito a pagar
+            const items = []
+            for (const cartProduct of cartProducts) {
+                const { quantity } = cartProduct
+                const {productId, productName, productPrice, discount} = cartProduct.product
+                const unitPrice = productPrice * ( 1 - (discount / 100))
+
+                const productFlag = cartCookiesProducts.includes(productId)
+                if(!productFlag) console.warn(`Advertencia de manipulacion de datos del Carrito de Compras en el producto ${product.productId}`)
+                
+                items.push({
+                    id: productId ,  
+                    title: productName , 
+                    quantity: quantity, 
+                    unit_price: unitPrice, 
+                    currency_id: "ARS",  //OPCIONAL
+                })
+            }
 
             // Step 4: Create the request object
             const body = {
-                items: [
-                    {
-                        id: uuid(),  //requerido  [productId]
-                        title: "Monitor 4k Samsung", //requerido [productName]
-                        quantity: 1, //requerido [quantity - Tabla Cart_Product]
-                        unit_price: 10000,  //requerido [productPrice]
-                        currency_id: "ARS",  //OPCIONAL
-                        category_id: "Monitor"  // OPCIONAL
-                    }
-                ],
+                items: items,
                 payer: {
-                    email: "test_user_1352177263@testuser.com"  // OPCIONAL [userEmail]
+                    name: fullname,
+                    email: email  // OPCIONAL [userEmail]
                 },
+                shipments: {
+                    "cost": 5000,
+                  },
                 back_urls: {
                     success: `${HOST}/mercadopago/success`,
                     pending: `${HOST}/mercadopago/pending`,

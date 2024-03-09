@@ -54,9 +54,16 @@ module.exports = (sequelize, DataTypes) => {
       unsigned: true,
       get: async function () {
         const CartProductInstance = CartProductModel(sequelize, DataTypes)
-        const totalAmount = await CartProductInstance.sum("total", {
-              where: { cartId: this.cartId }
-            })
+        const cartProducts = await CartProductInstance.findAll({
+          where: { cartId: this.cartId }
+        })
+
+        let totalAmount = 0
+        
+        for (const product of cartProducts) {
+          totalAmount += await product.total
+        }
+
         return totalAmount
       }
     },

@@ -9,6 +9,7 @@ module.exports = {
         const limit = req.query.limit
         const offset = req.query.offset
 // TERMIANR DE COMPLETAR 
+
         const products = await DbProduct.getProductPagination(limit, offset)
         res.render("index.ejs", { products })
     },

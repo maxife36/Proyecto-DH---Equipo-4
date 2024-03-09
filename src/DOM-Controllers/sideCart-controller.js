@@ -7,10 +7,10 @@ const backgroundOpacity = document.querySelector(".background-opacity")
 const scProductContainer = document.querySelector(".sc-product-container")
 const scShippingContainer = document.querySelector(".sc-shipping-container")
 const scTotalContainer = document.querySelector(".sc-total-container")
+const cartForm = document.querySelector("#cartForm")
 
 let sideCartFlag = false
 
-console.log(cartIcon);
 cartIcon.addEventListener("click", () => {
     const viewportWidth = window.innerWidth
 
@@ -36,75 +36,94 @@ cartIcon.addEventListener("click", () => {
 
 /* ---- LISTENERS FUNCTIONS---- */
 
-const deleteProduct = (event) => {
-    const productCard = event.target.parentNode.parentNode
-    const productCardContainer = productCard.parentNode
+cartForm.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Evitar que el formulario se envíe al presionar "Enter"
+    }
+})
 
-    productCardContainer.removeChild(productCard)
+const deleteProduct = async (event) => {
+    try {
 
-    //FALTA HACER UN FECTH PARA ELIMINAR EL PRODUCTO DEL CARRITO DE LA DB
-}
+        const productCard = event.target.parentNode.parentNode //es el article que contiene la card del producto
+        const productCardContainer = productCard.parentNode //es el div que contiene todas las cards del producto
+        const cartProductId = productCard.querySelector("#cartProductId").value
 
+        const apiURL = `/cart/deleteProduct/${cartProductId}`
 
-const plusQuantity = (event) => {
-    const inputQuantity = event.target.previousElementSibling
+        const resultJSON = await fetch(apiURL, {
+            method: 'DELETE'
+        })
+        const result = await resultJSON.json()
 
-    const productCard = inputQuantity.parentNode.parentNode
+        if (!result[0]) return console.log(result[1]);// si no se elimina de la base de dato, no permito que se elimine del container
 
-    const productSubTotal = productCard.querySelector(".sc-product-subtotal")
-
-    const unityPrice = productSubTotal.textContent / inputQuantity.value
-
-    inputQuantity.value++
-
-
-    productSubTotal.textContent = unityPrice * inputQuantity.value
-
-}
-
-const minusQuantity = (event) => {
-    const inputQuantity = event.target.nextElementSibling
-
-    if (inputQuantity.value > 1) {
-        const productCard = inputQuantity.parentNode.parentNode
-
-        const productSubTotal = productCard.querySelector(".sc-product-subtotal")
-
-        const unityPrice = productSubTotal.textContent / inputQuantity.value
-
-        inputQuantity.value--
-
-
-        productSubTotal.textContent = unityPrice * inputQuantity.value
+        productCardContainer.removeChild(productCard)
+    } catch (err) {
+        console.log("ERROR fn : deleteProduct ", err.message);
     }
 }
 
+const updateProduct = async (event, quantityParam) => {
+    const productCard = event.target.parentNode.parentNode
+    const inputQuantity = productCard.querySelector(".quantity-input")
+    const cartProductId = productCard.querySelector("#cartProductId").value
+    const productId = productCard.querySelector("#productId").value
+    const productSubTotal = productCard.querySelector(".sc-product-subtotal")
+    const quantity = quantityParam ? quantityParam : Number(inputQuantity.value)
 
+    if (!quantity || quantity <= 0) quantity = 1
 
-/* ----ONCHANGE FUNCTIONS---- */
+    const updateData = {
+        cartProductId,
+        productId,
+        currentQuantity: quantity,
+    };
 
-const updateProductPrice = (event) => {
+    const resultJSON = await fetch("/cart/updateQuantity", {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateData),
+    })
+
+    const result = await resultJSON.json()
+
+    if (!result[0]) return console.log(result[1]);// si no se modifica en la base de dato, no permito que se cambie sus datos en el front 
+
+    inputQuantity.value = result[1].quantity
+    productSubTotal.textContent = result[1].total
+}
+
+const changeQuantity = (event, action) => {
+    const productCard = event.target.parentNode.parentNode
+    const inputQuantity = productCard.querySelector(".quantity-input")
+    let quantity = Number(inputQuantity.value)
+
+    if (quantity && quantity >= 1) {
+        if (action) {
+            quantity++
+        } else {
+            quantity--
+        }
+
+        updateProduct(event, quantity)
+    }
+}
+
+const enterAction = (event) => {
     const inputQuantity = event.target
-    const previousValue = inputQuantity.value
+    inputQuantity.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            let quantity = Number(inputQuantity.value)
 
-    inputQuantity.addEventListener("change", () =>{
-        const newValue = inputQuantity.value
+            if (quantity && quantity >= 1) updateProduct(event, quantity)
 
-        console.log(newValue);
-
-
-
+        }
     })
 }
-/* const plusQuantity = (event) => {
-    
-}
-
-const minusQuantity = (event) => {
-    
-}
 
 
-const updateTotal = (event) => {
-    
-} */
+
+

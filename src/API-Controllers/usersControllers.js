@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt")
 const fs = require("fs")
 const { validationResult } = require("express-validator");
-const { sendGridController, cartController } = require("../API-Controllers");
+const { updateCartInfoToRender } = require("./cartController");
+const { sendMail } = require("./sendGridController");
 const { DbUser, DbCartProduct } = require("../database/controllers");
 const path = require("path");
 
@@ -48,7 +49,7 @@ const controllers = {
                     
                     res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
-                    await cartController.updateCartInfoToRender(userFinded.userId, res)
+                    await updateCartInfoToRender(userFinded.userId,req, res)
                     
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
@@ -109,7 +110,7 @@ const controllers = {
                 const { fullname, email, userId } = user
 
                 //Envio asincronico de mail de verificación
-                sendGridController.sendMail({
+                sendMail({
                     userId,
                     userEmail: email,
                     userName: fullname

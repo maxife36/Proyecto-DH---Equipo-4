@@ -34,6 +34,8 @@ module.exports = async (req, res, next) => {
             await verificacion()
             firstChargeFlag = true
         }
+        
+        res.locals.cartProducts = req.session.cartProducts
 
         res.locals.globalData = {
             whatsappContactNumber,
