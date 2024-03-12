@@ -113,7 +113,7 @@ module.exports = class DbProduct {
     static async getProductPagination(limit, offset) {
         try {
             //query config
-            const query = queryProduct.newQuery()
+            const query = queryProduct.newQuery(["images"])
             query.addLimitOffset(limit, offset)
   
             //Busqueda en mi DB

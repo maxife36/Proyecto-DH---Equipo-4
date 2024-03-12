@@ -302,7 +302,7 @@ a {
 }
 /* Modificar ID Cart Item */
 #heart-icon,
-.cart-icon{
+#cart-icon{
     display: none;
 }
 

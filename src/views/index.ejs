@@ -17,8 +17,8 @@
             <% products.forEach(product => { %>
                 <article class="tarjeta-articulo">
                     <div class="imagen-producto">
-                        <% if (product.image && product.image.length) { %>
-                            <img src="/img/Products-Image<%= product.image %>" alt=<%= product.alt %>>
+                        <% if (product.images && product.images.length) { %>
+                            <img src="/img/Products-Image<%= product.images[0]?.imageTitle %>" alt=<%= product.alt %>>
                             <% }else{ %>
                             <img src="/img/Products-Image/default_img.jpg" alt=<%= product.alt %>>
                         <% } %>
@@ -31,11 +31,11 @@
                             <p class="descripcion-producto">
                                 <%= product.shortDescription %>
                             </p>
-                            <p class="precio-producto">
-                                <%= product.price%>
-                            </p>
                         </div>
                     </a>
+                    <p class="precio-producto">
+                        <%= product.productPrice%>
+                    </p>
                     <i class="cart-icon fa-solid fa-cart-shopping flx-r-w"></i>
                     <i class="heart-icon fa-solid fa-heart flx-r-w"></i>
                 </article> 

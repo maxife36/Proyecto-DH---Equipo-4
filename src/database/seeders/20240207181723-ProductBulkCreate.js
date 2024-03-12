@@ -137,19 +137,19 @@ module.exports = {
          features: [
           {
             featureId: features.Pantalla,
-            specifications: ["LED","13.6'","Tecnología True Tone"]
+            specifications: ["LED","13.6'","True Tone"]
           },
           {
             featureId: features.Almacenamiento,
-            specifications: ["16GB", "SSD de 256 o 512 GB"]
+            specifications: ["16GB", "SSD de 256"]
           },
           {
             featureId: features.Puertos,
-            specifications: ["USB-C de 30 W", "Puerto de carga MagSafe 3"]
+            specifications: ["USB-C 30 W", "Puerto MagSafe 3"]
           },
           {
             featureId: features.Conectividad,
-            specifications: ["Wi-Fi 6 (802.11ax)","Bluetooth 5.3"]
+            specifications: ["Wi-Fi 6 ","Bluetooth 5.3"]
           },
           {
             featureId: features.SistemaOperativo,
@@ -273,7 +273,7 @@ module.exports = {
           },
           {
             featureId: features.Almacenamiento,
-            specifications: ["Memoria híbrida integrada y almacenamiento en la nube"]
+            specifications: ["Memoria híbrida"]
           }
          ],
          imageTitles: ["/RazerBlackWidow.png"],
@@ -357,10 +357,10 @@ module.exports = {
           },
           {
             featureId: features.SistemaOperativo,
-            specifications: ["Windows 10", "Windows 11", "macOS 10.15", "Linux", "Chrome OS", "iPadOS 14", "Android"]
+            specifications: ["Windows 10", "Windows 11", "macOS 10.15", "otros"]
           }
          ],
-         imageTitles: ["/LogitechMX.png", "logitech.png"],
+         imageTitles: ["/LogitechMX.png", "/logitech.png"],
          categories: [categories.Perifericos, categories.AccesoriosGaming, categories.Ofertas]
        },
        {
@@ -478,7 +478,7 @@ module.exports = {
             specifications: ["Windows 11 Pro"]
           }
          ],
-         imageTitles: ["DellXPS.png","/dell_logo_blanco_2.png"],
+         imageTitles: ["/DellXPS.png","/dell_logo_blanco_2.png"],
          categories: [categories.Laptops]
        },
        {
@@ -559,7 +559,7 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Iluminación RGB LIGHTSYNC"]
+            specifications: ["RGB LIGHTSYNC"]
           }
          ],
          imageTitles: ["/TecladoLogitech.png", "/logitech.png"],
@@ -598,7 +598,7 @@ module.exports = {
          features: [
           {
             featureId: features.SistemaOperativo,
-            specifications: ["Compatible con Microsoft Windows"]
+            specifications: ["Mic. Windows"]
           }
          ],
          imageTitles: ["/RazerDeathAdder.png"],
@@ -634,7 +634,7 @@ module.exports = {
          features: [
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Bomba MTTF >210.000 hs", "RGB Gen 2 direccionable"]
+            specifications: ["Bomba MTTF", "RGB Gen 2 direc."]
           }
          ],
          imageTitles: ["/NZXTKraken.png"],
@@ -674,10 +674,10 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Retroiluminación RGB"]
+            specifications: ["Retro. RGB"]
           }
          ],
-         imageTitles: ["/CorsairK95.png", "logos-2020_png_corsairlogo2020_horiz_w.png"],
+         imageTitles: ["/CorsairK95.png", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
          categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
@@ -703,7 +703,8 @@ module.exports = {
             specifications: ["Chrome OS", "macOS 10.11", "Windows 7"]
           }
          ],
-         imageTitles: ["/LogitechGProMouse.png" , "/logitech.png"]
+         imageTitles: ["/LogitechGProMouse.png" , "/logitech.png"],
+         categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
          productName: "Samsung Odyssey G9 Curved Gaming Monitor",
@@ -757,7 +758,7 @@ module.exports = {
          features: [
           {
             featureId: features.Almacenamiento,
-            specifications: ["10 GB", "GDDR6X","PCI-Express 4.0"]
+            specifications: ["10 GB", "GDDR6X","PCI-Exp. 4.0"]
           },
           {
             featureId: features.Puertos,
@@ -787,7 +788,7 @@ module.exports = {
           },
           {
             featureId: features.Almacenamiento,
-            specifications: ["2 TB", "SSD PCle 4.0 NVMe M.2"]
+            specifications: ["2 TB", "SSD PCle 4.0"]
           },
           {
             featureId: features.SistemaOperativo,
@@ -816,7 +817,7 @@ module.exports = {
             specifications: ["Microfono"]
           }
          ],
-         imageTitles: ["SteelSeries.png"],
+         imageTitles: ["/SteelSeries.png"],
          categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
@@ -831,7 +832,7 @@ module.exports = {
          features: [
           {
             featureId: features.Pantalla,
-            specifications: ["27'","IPS", "4K Resolution 3840 x 2160"]
+            specifications: ["27'","IPS", "4K", "3840 x 2160"]
           },
           {
             featureId: features.Puertos,
@@ -879,7 +880,7 @@ module.exports = {
           },
           {
             featureId: features.MemoriaRAM,
-            specifications: ["32 GB de RAM LPDDR4X a 3.733 MHz"]
+            specifications: ["32 GB LPDDR4X"]
           },
           {
             featureId: features.Almacenamiento,
@@ -936,7 +937,7 @@ module.exports = {
           },
           {
             featureId: features.SistemaOperativo,
-            specifications: ["Android", "Chrome OS", "Linux", "Windows 10", "Windows 11", "iPadOS 14", "macOS 10.15"]
+            specifications: ["Android", "Chrome OS", "Windows 10", "Otros"]
           }
          ],
          imageTitles: ["/LogitechMX.png", "/logitech.png"],
@@ -962,7 +963,7 @@ module.exports = {
           },
           {
             featureId: features.SistemaOperativo,
-            specifications: ["Windows 7", "MacOS 10 X 10.10", "Android Lollipop"]
+            specifications: ["Windows 7", "MacOS 10 X 10.1", "Android Lollipop"]
           }
          ],
          imageTitles: ["/SamsuntT5.png", "/samsung.png"],
@@ -1042,7 +1043,7 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Retroiluminación", "Reposamuñecas ergonómico"]
+            specifications: ["Retroiluminación", "Ergonómico"]
           }
          ],
          imageTitles: ["/RazerBlackWidow.png"],
@@ -1064,7 +1065,7 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Velocidad de lectura hasta 510 MB/s"]
+            specifications: ["Hasta 510 MB/s"]
           }
          ],
          imageTitles: ["/CrucialMX500.png"],
@@ -1086,7 +1087,7 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Retroiluminación RGB"]
+            specifications: ["Retro. RGB"]
           }
          ],
          imageTitles: ["/CorsairK95"],
@@ -1130,7 +1131,7 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Interfaz SATA 6 GB/s"]
+            specifications: ["SATA 6 GB/s"]
           }
          ],
          imageTitles: ["/WDBlack.png"],
@@ -1167,11 +1168,11 @@ module.exports = {
          features: [
           {
             featureId: features.Conectividad,
-            specifications: ["Tipo de conectores Mini Jack"]
+            specifications: ["Mini Jack"]
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Cancelación de ruido", "Sensibilidad 98 dB SPL/mW a 1 kHz"]
+            specifications: ["Cancelación pasiva", "98 dB SPL/mW"]
           }
          ],
          imageTitles: ["/HyperXCloud.png", "/hyperx.png"],
@@ -1215,7 +1216,7 @@ module.exports = {
           },
           {
             featureId: features.OtrasCaracteristicas,
-            specifications: ["Tecnología 3D NAND"]
+            specifications: ["Tec. 3D NAND"]
           }
          ],
          imageTitles: ["/FireCuda.png"],
@@ -1255,7 +1256,7 @@ module.exports = {
          features: [
           {
             featureId: features.Pantalla,
-            specifications: ["34'", "Resolución 3440 x 1440", "Curvatura 1900R", "IPS"]
+            specifications: ["34'", "3440 x 1440", "Curvatura 1900R", "IPS"]
           },
           {
             featureId: features.Puertos,
@@ -1285,7 +1286,7 @@ module.exports = {
           },
           {
             featureId: features.SistemaOperativo,
-            specifications: ["Windows 10", "Windows 11", "macOS 10.15", "Linux", "Chrome OS", "iPadOS 14", "Android"]
+            specifications: ["Windows 10", "Windows 11", "macOS 10.15", "Otors"]
           }
          ],
          imageTitles: ["/LogitechMX.png", "/logitech.png"],
@@ -1332,7 +1333,8 @@ module.exports = {
             specifications: ["Windows 10"]
           }
          ],
-         imageTitles: ["/AMDRyzen.png", "/amd.png"]
+         imageTitles: ["/AMDRyzen.png", "/amd.png"],
+         categories: [categories.Procesadores]
        }
     ]
 

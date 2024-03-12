@@ -1,7 +1,7 @@
 const loginIcon = document.querySelector(".login-icon")
 const userProfile = document.querySelector(".user-icon-container")
 const heartIcon = document.querySelector("#heartIcon")
-const cartIcon = document.querySelector(".cart-icon")
+const cartIcon = document.querySelector("#cart-icon")
 const entryOptions = document.querySelector(".entry-options")
 const exitBtn = document.querySelector("#btn-exit-entry")
 
