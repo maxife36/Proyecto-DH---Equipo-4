@@ -1,26 +1,27 @@
 /* -----Cart Side Menu Styles----- */
 
 .background-opacity {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 0;
-    height: 100%;
+    height: 100vh;
     background-color: #0007;
-    z-index: 4;
+    z-index: 3;
 
 }
 
 .sticky-container {
-    position: sticky;
+    position: fixed;
     width: auto;
     height: auto;
     top: 0;
+    z-index: 5;
 
 }
 
 .sideCart-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 0;
@@ -57,8 +58,19 @@
     transition: all .5s linear;
 }
 
+#cartExit{
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: var(--verde-gotec);
+    z-index: 6;
+}
+
 .sc-product-display {
     width: inherit;
+    min-height: 250px;
     max-height: 340px;
     overflow: scroll;
     justify-content: flex-start;
@@ -77,7 +89,7 @@
 
 .sc-product-card {
     width: 100%;
-    height: 80px;
+    height: 80px !important;
     background-color: var(--blanco-gotec);
     border-radius: 5px;
     box-shadow: var(--gris-intermedio-gotec) 0px 0px 10px;
@@ -87,11 +99,15 @@
 }
 
 .sc-img-container {
-    height: 85%;
+    width: 120px;
+    height: 80px;
+    overflow: hidden;
 }
 
 .sc-img-container img {
-    height: 100%;
+    width: 100%;
+    height: 80%;
+    object-fit: contain;
 }
 
 .sc-quantity-container {
@@ -144,8 +160,6 @@
     font-weight: 400;
     text-align: center;
 }
-
-
 
 .sc-product-subtotal::before,
 .sc-shipping-subtotal::before,
@@ -209,24 +223,18 @@
         background-color: var(--verde-gotec);
         color: var(--blanco-gotec);
         letter-spacing: .6px;
-
-    }
-
-    button,
-    input[type="number"] {
         width: 45%;
         height: 55%;
         margin-right: 15px;
         text-align: center;
-        border: 1px solid var(--gris-oscuro-gotec);
+        border: 1px solid var(--verde-gotec);
         border-radius: 20px;
     }
 
     input[type="radio"] {
         all: unset;
         cursor: pointer;
-
-        padding: 0 8px;
+        padding: 8px;
         border: 2px solid var(--verde-gotec);
         border-radius: 50%;
         background-color: var(--blanco-gotec);
@@ -247,7 +255,7 @@
     width: 50%;
     height: 45px;
     text-align: center;
-    border: 1px solid var(--gris-oscuro-gotec);
+    border: 1px solid var(--verde-gotec);
     border-radius: 20px;
     font-size: 1.05rem;
     font-weight: bold;
@@ -257,13 +265,13 @@
     .sc-product-display {
         max-height: 400px;
     }
-    
+
     .sc-product-container,
     .sc-shipping-container,
     .sc-total-container {
         padding: 20px;
     }
-    
+
     .sc-shipping-way-container {
         height: 60px;
     }

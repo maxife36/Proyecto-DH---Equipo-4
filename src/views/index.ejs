@@ -15,7 +15,9 @@
     <main class="main-section">
         <section class="cards">
             <% products.forEach(product => { %>
-                <article class="tarjeta-articulo">
+                <article class="tarjeta-articulo" onclick="toProductDetail(event)">
+                    <input type="hidden" name="productId" id="productId" value="<%= product.productId %>">
+
                     <div class="imagen-producto">
                         <% if (product.images && product.images.length) { %>
                             <img src="/img/Products-Image<%= product.images[0]?.imageTitle %>" alt=<%= product.alt %>>
@@ -23,20 +25,21 @@
                             <img src="/img/Products-Image/default_img.jpg" alt=<%= product.alt %>>
                         <% } %>
                     </div>
-                    <a href="/products/detail/<%= product.productId %>" >
-                        <div class="info-producto">
-                            <p class="titulo-producto">
-                                <%= product.productName %>
-                            </p>
-                            <p class="descripcion-producto">
-                                <%= product.shortDescription %>
-                            </p>
-                        </div>
-                    </a>
+                    
+                    <div class="info-producto">
+                        <p class="titulo-producto">
+                            <%= product.productName %>
+                        </p>
+                        <p class="descripcion-producto">
+                            <%= product.shortDescription %>
+                        </p>
+                    </div>
+                   
                     <p class="precio-producto">
                         <%= product.productPrice%>
                     </p>
-                    <i class="cart-icon fa-solid fa-cart-shopping flx-r-w"></i>
+
+                    <i class="cart-icon fa-solid fa-cart-shopping flx-r-w" onclick="addToCart(event)"></i>
                     <i class="heart-icon fa-solid fa-heart flx-r-w"></i>
                 </article> 
      
@@ -49,13 +52,12 @@
             <i class="next-icon-banner fa-solid fa-caret-right flx-r-w"></i>
         </section>
 
-        <%- include('./partials/sideCart.ejs') %>
-
-
+        
     </main>
+    <%- include('./partials/sideCart.ejs') %>
 
     <%- include("./partials/footer.ejs") %>
-   
+
 
     <!-- Scripts JS -->
     <script src="/DOM-Controllers/darkmode"></script>

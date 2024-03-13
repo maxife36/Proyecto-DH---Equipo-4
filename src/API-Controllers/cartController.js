@@ -1,66 +1,18 @@
-const { DbCartProduct, DbCart, DbProduct } = require("../database/controllers")
+const { DbCartProduct } = require("../database/controllers")
 
 
-const controllers = {  //Cart deve devolver la asociacion con Cart_Prodcut
-/*   addQuantityProduct: async (req, res) => { //CREO QUE QUEDO DEPRECADO
+const controllers = {
+  getCartProductsInfo: async (req, res) => {
     try {
-      const cartProductId = req.params.cartProductId // se lo extrae e un input hidden y se le hace un fech en el onclik de plus
-      const { currentQuantity } = req.body //recupero el valor que existe en el input de quantity por si lo modifico manualmente 
+      const { loggedUser: userId } = req.session
 
-      const { cartId, productId, quantity } = await DbCartProduct.getCartProductById(cartProductId)
-
-      const newQuantity = Number(currentQuantity) === Number(quantity) ? (Number(quantity) + 1) : (Number(currentQuantity) + 1)
-
-      const addedProduct = {
-        cartId,
-        productId,
-        quantity: newQuantity
-      }
-
-      const result = await DbCartProduct.updateCartProductData(cartProductId, addedProduct)
-
-      if (!result[0]) res.send([false, "No se agrego al carrito"])
-
-      const { total } = await DbCartProduct.getCartProductById(cartProductId)
-
-      addedProduct.total = await total
-
-      return res.send([true, addedProduct])
-
+      const allCartProducts = await DbCartProduct.getCartProductsByUserId(userId)
+    
+      res.send(allCartProducts)
     } catch (err) {
-      console.log(err.message);
+      console.log("ERROR fn : getCartProductInfo -> ", err.message);
     }
   },
-
-  restQuantityProduct: async (req, res) => {//CREO QUE QUEDO DEPRECADO
-    try {
-      const cartProductId = req.params.cartProductId // se lo extrae e un input hidden y se le hace un fech en el onclik de plus
-      const { currentQuantity } = req.body //recupero el valor que existe en el input de quantity por si lo modifico manualmente 
-
-      const { cartId, productId, quantity } = await DbCartProduct.getCartProductById(cartProductId)
-
-      const newQuantity = Number(currentQuantity) === Number(quantity) ? (Number(quantity) - 1) : (Number(currentQuantity) - 1)
-
-      const decrementedProduct = {
-        cartId,
-        productId,
-        quantity: newQuantity
-      }
-
-      const result = await DbCartProduct.updateCartProductData(cartProductId, decrementedProduct)
-
-      if (!result[0]) res.send([false, "No se agrego al carrito"])
-
-      const { total } = await DbCartProduct.getCartProductById(cartProductId)
-
-      addedProduct.total = await total
-
-      return res.send([true, addedProduct])
-    } catch (err) {
-      console.log(err.message);
-    }
-  }, */
-
   updateQuantity: async (req, res) => {
     try {
       const { loggedUser: userId, loggedCart: cartId } = req.session
@@ -93,7 +45,7 @@ const controllers = {  //Cart deve devolver la asociacion con Cart_Prodcut
       return res.send([true, newProduct])
     } catch (err) {
       console.log("ERROR fn : updateQuantity -> ", err.message);
-      
+
     }
   },
 
@@ -103,7 +55,7 @@ const controllers = {  //Cart deve devolver la asociacion con Cart_Prodcut
       const cartProductId = req.params.cartProductId // se lo extrae e un input hidden y se le hace un fech en el onclik de plus
 
       const deleteProduct = await DbCartProduct.deleteCartProduct(cartProductId)
-      
+
       if (!deleteProduct) return res.send([false, "No se elimino del carrito"]) //en el fornt observar si se elimino el producto.. si es asi elimina el article del producto
 
       await controllers.updateCartInfoToRender(userId, req, res) //actualiza info del carrito para consumo del front
@@ -136,8 +88,8 @@ const controllers = {  //Cart deve devolver la asociacion con Cart_Prodcut
       if (!addedProduct) return res.send([false, "No se agrego el producto al carrito"]) //en el fornt observar si se elimino el producto.. si es asi elimina el article del producto
 
       await controllers.updateCartInfoToRender(userId, req, res) //actualiza info del carrito para consumo del front
-      
-      return res.send([true, "El producto fue eliminado con exito"])
+
+      return res.send([true, "El producto fue agregado con exito"])
     } catch (err) {
       console.log("ERROR fn : addProductToCart -> ", err.message);
     }
@@ -151,11 +103,11 @@ const controllers = {  //Cart deve devolver la asociacion con Cart_Prodcut
       const cartProductsId = cartProducts.map(product => product.productId)
 
       res.cookie("cartProductsId", cartProductsId) //sirve para verificar los productos que ya existen en el carrito
-      
+
       const cartProductsData = []
 
       for (const cartProduct of cartProducts) {
-        const {cartProductId, cartId, productId, quantity, total, product, cart} = cartProduct
+        const { cartProductId, cartId, productId, quantity, total, product, cart } = cartProduct
 
         cartProductsData.push({
           cartProductId: cartProductId,
