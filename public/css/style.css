@@ -72,16 +72,18 @@ a {
 /* -----------------------ENTRY OPTIONS----------------------- */
 
 .entry-options{
-    display: none;
+    display: flex;
     position: absolute;
-    width: 90vw;
-    height: 90vh;
-    top: 5vh;
-    left: 5vw;
+    top: 30px;
+    right: 0px;
+    width: 100px;
+    /* height: 90vh; */
+    /* top: 5vh;
+    left: 5vw; */
     background-color: #182033fd;
     z-index: 5;
-    border-radius: 20px;
-    box-shadow: #182033fa 0px 0px 5vw 3vw ;
+    /* border-radius: 20px; */
+    /* box-shadow: #182033fa 0px 0px 5vw 3vw ; */
 }
 
 .entry-options a{
@@ -113,7 +115,8 @@ a {
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
+    font-size: 1.4rem;
     padding: 10px 0;
     font-style: italic;
     line-height: 5rem;
@@ -293,6 +296,7 @@ a {
 .heart-icon,
 .cart-icon,
 .login-icon{
+    position: relative;
     cursor: pointer;
     width: 30px;
     height: 40px;

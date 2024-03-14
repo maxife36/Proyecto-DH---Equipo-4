@@ -7,6 +7,8 @@ router.get("/allCartProducts", controllers.getCartProductsInfo);
 router.post("/addProduct/:productId", controllers.addProductToCart); //Requiere params productId y por body = {quantity}
 router.put("/updateQuantity", controllers.updateQuantity); // Requiere por body = { cartProductId, productId, currentQuantity }
 router.delete("/deleteProduct/:cartProductId", controllers.deleteProduct); //Requiere params cartProductId
+router.delete("/deleteProduct/:cartProductId", controllers.deleteProduct); //Requiere params cartProductId
+router.delete("/cleanCartProducts", controllers.cleanCartProducts);
 
 
 module.exports = router

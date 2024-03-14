@@ -8,6 +8,7 @@ const scProductContainer = document.querySelector(".sc-product-container")
 const scShippingContainer = document.querySelector(".sc-shipping-container")
 const scTotalContainer = document.querySelector(".sc-total-container")
 const scShippingDistance = document.querySelector("#shippingDistance")
+const scShippingCost = document.querySelector("#shippingCost")
 const scShippingTotal = document.querySelector(".sc-shipping-subtotal")
 const cartForm = document.querySelector("#cartForm")
 const pickupBtn = document.querySelector("#pickupBtn")
@@ -75,6 +76,7 @@ cartForm.addEventListener("keypress", (event) => {
     }
 })
 
+
 /* ---- ATTRIBUTES FUNCTIONS---- */
 
 const deleteProduct = async (event) => {
@@ -85,9 +87,9 @@ const deleteProduct = async (event) => {
 
         //Este if busca poder reutilizar la funcion con diferentes events
         if (target.classList.contains("sc-delete-product")) {
-            productCard = target.parentNode 
+            productCard = target.parentNode
         }
-        
+
         const productCardContainer = productCard.parentNode //es el div que contiene todas las cards del producto
         const cartProductId = productCard.querySelector("#cartProductId").value
 
@@ -112,12 +114,12 @@ const deleteProduct = async (event) => {
         if (allProductsCards.length) {
             for (const productCard of allProductsCards) {
                 const productId = productCard.querySelector("#productId").value
-        
+
                 if (scProductId === productId) {
                     const cartIcon = productCard.querySelector(".cart-icon")
                     cartIcon.style.color = "var(--azul-gotec)"
                 }
-            }    
+            }
         }
     } catch (err) {
         console.log("ERROR fn : deleteProduct ", err.message);
@@ -153,7 +155,7 @@ const updateProduct = async (event, quantityParam) => {
     if (!result[0]) return console.log(result[1]);// si no se modifica en la base de dato, no permito que se cambie sus datos en el front 
 
     inputQuantity.value = result[1].quantity
-    productSubTotal.textContent = result[1].total
+    productSubTotal.textContent = (result[1].total).toFixed(2)
 
     updateTotal()
 }
@@ -189,7 +191,7 @@ const enterAction = (event) => {
 
 /*  CONFIGURACION DEL MAPA LEAFET */
 
-const mapGenerator = (title) => {
+function mapGenerator(title) {
     modalMappBackground.style.width = "100vw"
     modalMappBackground.style.height = "100vh"
     modalMappBackground.innerHTML = `
@@ -228,7 +230,7 @@ const mapGenerator = (title) => {
 
 }
 
-const shippingCalculator = (distance) => {
+function shippingCalculator(distance) {
     if (distance <= 300) {
         // Parte lineal
         const pendiente = (5000 - 800) / 300;
@@ -313,6 +315,7 @@ pickupBtn.addEventListener("click", () => {
 
                 //Actualizacion de distancia de envio
                 scShippingDistance.value = 0
+                scShippingCost.value = 0
 
                 //Actualizacion del valor de envio
                 scShippingTotal.textContent = 0
@@ -373,9 +376,11 @@ postalCodeBtn.addEventListener("click", () => {
             // Calculo la distancia entre el marcador del usuario y el marcador por defecto
             shippingDistance = defaultMarker.getLatLng().distanceTo(userLatLng) / 1000; // Convierto a kilómetros
             scShippingDistance.value = shippingDistance
-
+            
+            
             //Calculo del precio de envio
             const shippingPrice = shippingCalculator(shippingDistance)
+            scShippingCost.value = shippingPrice
             //Actualizacion del valor de envio
             scShippingTotal.textContent = shippingPrice.toFixed(2)
 

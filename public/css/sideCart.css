@@ -161,6 +161,20 @@
     text-align: center;
 }
 
+.sc-product-subtotal,
+.sc-shipping-subtotal,
+.sc-total {
+    all: unset;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gris-oscuro-gotec);
+}
+/* .sc-shipping-subtotal{
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gris-oscuro-gotec);
+} */
+
 .sc-product-subtotal::before,
 .sc-shipping-subtotal::before,
 .sc-total::before {
@@ -171,18 +185,10 @@
     margin-right: 5px;
 }
 
-.sc-product-subtotal,
-.sc-shipping-subtotal,
-.sc-total {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--gris-oscuro-gotec);
-}
-
 .sc-delete-product {
     all: unset;
     cursor: pointer;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--verde-gotec);
 }
 

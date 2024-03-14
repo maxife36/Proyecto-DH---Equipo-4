@@ -136,4 +136,24 @@ module.exports = class DbCartProduct {
             throw err
         }
     }
+
+    static async cleanCartProductsByUserId(cartId) {
+        try {
+            //validacion de ID
+            validator.idValidator(cartId)
+
+            //query config
+            const query = queryCartProduct.newQuery()
+            query.addWhere(cartId, "cartId")
+
+            const result = await Cart_Product.destroy(query.config)
+
+            if (!result) throw new Error(msg.erroMsg.notExistId)
+
+            return result
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
 }

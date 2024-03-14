@@ -5,11 +5,10 @@ const { paymenController: controllers } = require("../API-Controllers")
 
 router.post("/create-order", controllers.createOrder )
 
-router.get("/success", (req, res) => {res.send("success")} )
-router.get("/failure", (req, res) => {res.send("failure")} )
-router.get("/pending", (req, res) => {res.send("pending")} )
+router.get("/success", controllers.successHandler )
+router.get("/failure", controllers.failureHandler )
+router.get("/pending", controllers.pendingHandler )
 
-router.post("/webhook", controllers.recieveWebhook )
-
+router.post("/webhook/:userId/:cartId", controllers.recieveWebhook )
 
 module.exports = router

@@ -51,7 +51,7 @@ module.exports = class DbPurchase {
             const newPurchase = {
                 purchaseId: uuid(),
                 userId, 
-                data
+                data: JSON.stringify(data)
             }
 
             return await Purchase.create(newPurchase)

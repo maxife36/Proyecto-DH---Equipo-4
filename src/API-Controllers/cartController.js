@@ -66,6 +66,22 @@ const controllers = {
     }
   },
 
+  cleanCartProducts: async (req, res) => {
+    try {
+      const { loggedUser: userId } = req.session
+      
+      const cleanResult = await DbCartProduct.cleanCartProductsByUserId(userId)
+      
+      if (!cleanResult) return res.send([false, "No se limpio el carrito"]) 
+      
+      await controllers.updateCartInfoToRender(userId, req, res) //actualiza info del carrito para consumo del front
+      
+      return res.send([true, "El producto fue eliminado con exito"])
+    } catch (err) {
+      console.log("ERROR fn : cleanCartProducts -> ", err.message)
+    }
+  },
+
   addProductToCart: async (req, res) => {
     try {
       const productId = req.params.productId

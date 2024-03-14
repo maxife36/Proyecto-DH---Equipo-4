@@ -1,13 +1,17 @@
 require('dotenv').config()
+
+//Creador de tunel hhtps 
+const ngrok = require('ngrok');
+
 // Step 1: Import the parts of the module you want to use
 const { MercadoPagoConfig, Preference, Payment } = require('mercadopago');
-const { DbCartProduct, DbUser } = require("../database/controllers")
+const { DbCartProduct, DbUser, DbPurchase, DbProduct } = require("../database/controllers")
+const { updateCartInfoToRender } = require("./cartController")
 
 const { v4: uuid } = require("uuid")
 
 const MP_ACCESS_KEY = process.env.MP_ACCESS_KEY
 const HOST = process.env.HOST
-const NGROK_HOST = process.env.NGROK_TUNNELS
 
 // Step 2: Initialize the client object
 const client = new MercadoPagoConfig({
@@ -17,6 +21,7 @@ const client = new MercadoPagoConfig({
 
 // Step 3: Initialize the API object
 const preference = new Preference(client);
+const payment = new Payment(client);
 
 module.exports = {
     createOrder: async (req, res) => {
@@ -24,8 +29,9 @@ module.exports = {
             //recuperar del req.body todos los cartProductId  que estan en el input hidden, con esos se busca en la DB para encontrar todos los productos con cantidades y subtotales
             const { loggedUser: userId, loggedCart: cartId } = req.session
             const cartCookiesProducts = req.cookies.cartProductsId
+            let { shippingCost } = req.body
 
-            const {email, fullname} = await DbUser.getUserById(userId)
+            const { email, fullname } = await DbUser.getUserById(userId)
 
             const cartProducts = await DbCartProduct.getCartProductsByUserId(userId)
 
@@ -33,20 +39,23 @@ module.exports = {
             const items = []
             for (const cartProduct of cartProducts) {
                 const { quantity } = cartProduct
-                const {productId, productName, productPrice, discount} = cartProduct.product
-                const unitPrice = productPrice * ( 1 - (discount / 100))
+                const { productId, productName, productPrice, discount } = cartProduct.product
+                const unitPrice = productPrice * (1 - (discount / 100))
 
                 const productFlag = cartCookiesProducts.includes(productId)
-                if(!productFlag) console.warn(`Advertencia de manipulacion de datos del Carrito de Compras en el producto ${product.productId}`)
-                
+                if (!productFlag) console.warn(`Advertencia de manipulacion de datos del Carrito de Compras en el producto ${product.productId}`)
+
                 items.push({
-                    id: productId ,  
-                    title: productName , 
-                    quantity: quantity, 
-                    unit_price: unitPrice, 
+                    id: productId,
+                    title: productName,
+                    quantity: quantity,
+                    unit_price: unitPrice,
                     currency_id: "ARS",  //OPCIONAL
                 })
             }
+
+            //Eliminar en produccion
+            const NGROK_HOST = await ngrok.connect({ addr: 4000, authtoken: process.env.NGROK_AUTHTOKEN })
 
             // Step 4: Create the request object
             const body = {
@@ -56,17 +65,15 @@ module.exports = {
                     email: email  // OPCIONAL [userEmail]
                 },
                 shipments: {
-                    "cost": 5000,
-                  },
+                    "cost": Number(shippingCost),
+                },
                 back_urls: {
                     success: `${HOST}/mercadopago/success`,
                     pending: `${HOST}/mercadopago/pending`,
                     failure: `${HOST}/mercadopago/failure`
                 },
-                notification_url: `${NGROK_HOST || HOST}/mercadopago/webhook`
-                //La informacion de envio se coloca dentro de un objeto con clave shipments.. revisar propiedades en https://www.mercadopago.com.ar/developers/es/reference/preferences/_checkout_preferences/post
+                notification_url: `${NGROK_HOST || HOST}/mercadopago/webhook/${userId}/${cartId}`
             }
-
 
             // Step 5: Create request options object - Optional
             const requestOptions = {
@@ -85,27 +92,67 @@ module.exports = {
 
     recieveWebhook: async (req, res) => {
         try {
+            const { userId, cartId } = req.params
+            const paymentResult = req.query
 
-            const result = req.query
+            if (paymentResult.type && paymentResult.type === "payment") {
+                const paymentInfo = await payment.get({ id: paymentResult["data.id"] })
 
-            /* 
-            COMPLETAR CUANDO SUBAMOS A UN SERVIDOR
-            al ejecutarse muchas veces debido a los distintos cambios de estado durante el proceso de pago de MP, pueden llegar diferentes estructuras en req.query, por lo que hay q verificar bajo que estructura llega cuando esta aprobado.
+                const savePurchase = await DbPurchase.createPurchase({
+                    userId,
+                    data: paymentInfo
+                })
 
-            en teoria llega { data.id: "numero ID",  type: "payment" }
+                const cleanCart = await DbCartProduct.cleanCartProductsByUserId(cartId)
 
-            cuando type = payment  -> Realizar una busqueda con payment.get,
-            verificar los datos que devuelve y almacenarlo en tabla purchase
+                if (!cleanCart || !savePurchase) {
+                    const errors = {}
 
-            const paymentData = await payment.get({id: '<PAYMENT_ID>'})
+                    if (!cleanCart) errors.cart = "No se limpio el carrito"
+                    if (!savePurchase) errors.purchase = "No se guardo el registro del payment"
 
-            */
+                    return res.status(500).send([false, errors])
+                }
 
-            res.send("webhook")
-        } catch (error) {
-            console.log(error);
+                res.status(200).send("Pago Exitoso")
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+        }
+    },
+
+    successHandler: async (req, res) => {
+        try {
+            const { loggedUser: userId} = req.session
+
+            await updateCartInfoToRender(userId, req, res)
+
+            res.redirect("/")
+
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+        }
+    },
+
+    pendingHandler: async (req, res) => {
+        try {
+            res.redirect("/")
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+        }
+    },
+
+    failureHandler: async (req, res) => {
+        try {
+            res.redirect("/")
+        } catch (err) {
+            console.log(err);
             res.status(500).send("Internal Server Error");
         }
     }
+
 }
 
