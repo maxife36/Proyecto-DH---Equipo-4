@@ -72,56 +72,32 @@ a {
 /* -----------------------ENTRY OPTIONS----------------------- */
 
 .entry-options{
-    display: flex;
+    display: none;
     position: absolute;
-    top: 30px;
+    justify-content: space-evenly;
+    top: 40px;
     right: 0px;
-    width: 100px;
-    /* height: 90vh; */
-    /* top: 5vh;
-    left: 5vw; */
-    background-color: #182033fd;
+    width: 180px;
+    height: 100px;
+    background-color: var(--azul-intermedio-gotec);
+    border-radius: 4px 0 4px 4px ;
     z-index: 5;
-    /* border-radius: 20px; */
-    /* box-shadow: #182033fa 0px 0px 5vw 3vw ; */
-}
-
-.entry-options a{
-    width: 100%;
-}
-.entry-logo{
-    height: 20% !important;
-}
-
-#btn-exit-entry{
-    all: unset;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    background-color: transparent;
-    color: var(--blanco-gotec);
-    font-size: 20px;
 }
 
 #btn-register,
 #btn-login{
     all: unset;
+    border-bottom: 1px solid var(--gris-claro-gotec);
+    font-family: "Inter", sans-serif;
     cursor: pointer;
+    padding-top: 3px;
     width: 80%;
-    max-width: 400px;
-    height: auto;
+    height: 30px;
     color: var(--blanco-gotec);
     text-align: center;
+    font-size: 18px;
     font-weight: bold;
-    letter-spacing: 2px;
-    /* font-size: 2.5rem; */
-    font-size: 1.4rem;
-    padding: 10px 0;
-    font-style: italic;
-    line-height: 5rem;
-    border-top: 2px solid var(--blanco-gotec);
-    border-bottom: 2px solid var(--blanco-gotec);
+    letter-spacing: 3px;
 }
 
 
@@ -303,6 +279,10 @@ a {
     font-size: 22px;
     color: var(--blanco-gotec);
 }
+.login-icon{
+    width: 50px;
+}
+
 /* Modificar ID Cart Item */
 #heart-icon,
 #cart-icon{
@@ -351,7 +331,8 @@ a {
     width: inherit;
     height: 5vh;
     background-color: var(--azul-gotec);
-    justify-content: space-between;
+    justify-content: flex-start;
+    padding-left: 20px;
     border-bottom: 1px solid var(--azul-gotec);
 }
 
@@ -362,6 +343,10 @@ a {
     color: var(--blanco-gotec);
     letter-spacing: 1px;
     font-size: 16px;
+}
+
+.individual-menues{
+    display: none;
 }
 
 .menu-title,
@@ -544,8 +529,16 @@ a {
         width: 90%;
     }
 
+    .header-nav{
+        justify-content: space-between;
+    }
+
     .menu-container{
         position: relative;
+    }
+
+    .individual-menues{
+        display: flex;
     }
 
     .sub-menu-container{

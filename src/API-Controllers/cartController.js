@@ -6,9 +6,12 @@ const controllers = {
     try {
       const { loggedUser: userId } = req.session
 
-      const allCartProducts = await DbCartProduct.getCartProductsByUserId(userId)
-    
-      res.send(allCartProducts)
+      if (userId) {
+        
+        const allCartProducts = await DbCartProduct.getCartProductsByUserId(userId)
+      
+        res.send(allCartProducts)
+      }
     } catch (err) {
       console.log("ERROR fn : getCartProductInfo -> ", err.message);
     }

@@ -9,8 +9,8 @@ const { adminMiddleware } = require("../Middlewares")
 router.get("/detail/:productId", controllers.productDetail); //Muestra el Form
 router.get("/create", adminMiddleware, controllers.showCreateForm); //Muestra el Form
 router.get("/edit/:productId", adminMiddleware, controllers.showEditForm) //Muestra el Form
+router.get("/productsDisplay", controllers.productDisplay) // Por query -> categoryId, keywords, gte, lte , order, limit, offset
 
-// router.get("/filteredByCategory", controllers.filterCategory) 
 router.get("/filteredByNumber", controllers.filterProduct) // /filteredBy?gte=number&lte=number&order=["DESC", "ASC"] opcional
 router.get("/search", controllers.searchProduct) // /search?keywords=texto%20buscado 
 

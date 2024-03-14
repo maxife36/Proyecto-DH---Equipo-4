@@ -32,17 +32,17 @@
       </div>
     </div>
 
-    <div class="main-search-bar flx-r-w">
+    <form action="/products/productsDisplay" class="main-search-bar flx-r-w" id="searchForm">
       <label class="search-label flx-r-w" for="search-btn">
         <input
           type="text"
-          name=""
+          name="keywords"
           id="search-btn"
           placeholder="Busqueda de Productos"
         />
-        <i class="search-icon fa-solid fa-magnifying-glass flx-r-w"></i>
+        <i class="search-icon fa-solid fa-magnifying-glass flx-r-w" id="searchBtn"></i>
       </label>
-    </div>
+    </form>
   </section>
 
   <nav class="header-nav flx-r-w">
@@ -57,19 +57,19 @@
       <ul class="sub-menu-container flx-c-w">
         <% globalData.allCategories.forEach(category => { %>
         <li>
-          <a href=""><%= category.categoryTitle %></a>
+          <a href="/products/productsDisplay?categoryId=<%= category.categoryId %>"><%= category.categoryTitle %></a>
         </li>
         <% }) %>
       </ul>
     </ul>
     <% globalData.showCategories.forEach(category => { %>
-    <ul class="menu-container flx-c-w">
+    <ul class="menu-container individual-menues flx-c-w">
       <li
         class="simple-menu-title flx-c-w"
         onclick="subMenuController(this)"
         status="false"
       >
-        <a href=""><%= category.categoryTitle %></a>
+        <a href="/products/productsDisplay?categoryId=<%= category.categoryId %>"><%= category.categoryTitle %></a>
       </li>
     </ul>
     <% }) %>

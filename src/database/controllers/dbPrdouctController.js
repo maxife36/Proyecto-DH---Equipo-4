@@ -409,5 +409,29 @@ module.exports = class DbProduct {
             throw err
         }
     }
+
+    static async customFilter(filterObj){
+        try {
+            const { categoryId, keywords, gte, lte , order, limit, offset} = filterObj
+
+            if(!Object.keys(filterObj).length) throw new Error("No se pasaron parametros validos")
+
+            //query config
+            const query = queryProduct.newQuery(["images", "productsCategories"])
+            
+            if(categoryId) query.addWhere(categoryId, "categoryId", "productsCategories")
+            if(keywords) query.filterByString(keywords, "productName")
+            if(gte || lte || order) query.filterByInteger([gte, lte , order], "productPrice")
+            if(limit || offset) query.addLimitOffset(limit, offset)
+            
+            //Consulta a DB
+            const products = await Product.findAll(query.config)
+
+            return products
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
 }
 
