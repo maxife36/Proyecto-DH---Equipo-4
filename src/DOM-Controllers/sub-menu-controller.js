@@ -1,5 +1,5 @@
 const allMenuTitles = document.querySelectorAll(".menu-title") 
-const headerNav = document.querySelector(".header-nav") 
+// const headerNav = document.querySelector(".header-nav") // Ya fue declarada anteriormente 
 
 const subMenuController = (menuTitle) =>{
     allMenuTitles.forEach(el =>{

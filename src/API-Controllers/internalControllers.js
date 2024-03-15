@@ -2,6 +2,7 @@ const path = require("path");
 
 const pathDkm = path.resolve("src", "DOM-Controllers", "dkm-general-controller.js") 
 const pathDkmProductDetail = path.resolve("src", "DOM-Controllers", "dkm-product-detail-controller.js") 
+const pathProductDisplayDkMode = path.resolve("src", "DOM-Controllers", "dkm-productDisplay.js") 
 const pathSubMenues = path.resolve("src", "DOM-Controllers", "sub-menu-controller.js") 
 const pathForms = path.resolve("src", "DOM-Controllers", "register-form-controller.js") 
 const pathHeader = path.resolve("src", "DOM-Controllers", "header-controller.js")
@@ -12,6 +13,7 @@ const pathProductDisplay = path.resolve("src", "DOM-Controllers", "productDispla
 const controllers = {
     darkMode: (req,res) => res.sendFile(pathDkm),
     ProductDetailDkMode: (req,res) => res.sendFile(pathDkmProductDetail),
+    ProductDisplayDkMode: (req,res) => res.sendFile(pathProductDisplayDkMode),
     subMenues:  (req,res) => res.sendFile(pathSubMenues),
     forms: (req,res) => res.sendFile(pathForms),
     header: (req,res) => res.sendFile(pathHeader),

@@ -14,6 +14,10 @@
         <button type="button" id="filterBtn" >Filtros</button>
 
         <section class="filterSection flx-c-nw">
+            <div class="flx-r-nw titleContainer">
+                <h2 class="filterTitle">Filtros</h2>
+                <i class="fa-solid fa-x" id="filterExit"></i>
+            </div> 
 
             <article class="filterArt orderByContainer">
                 <h4>Ordenar por:</h4>
@@ -49,6 +53,20 @@
         </section>
 
         <section class="cards cardConatiner" id="cardContainer">
+            <article class="paginationControllers flx-r-nw">
+                <p  class="flx-r-nw" id="previousPage" onclick="previousPage(event)">
+                    <i class="fa-solid fa-circle-chevron-left flx-r-nw"></i>
+                    Anterior
+                </p>
+                <div class="pagesNumbersContainer flx-r-nw">
+     
+                </div>
+                <p class="flx-r-nw" id="nextPage" onclick="nextPage(event)">
+                    Siguiente
+                    <i class="fa-solid fa-circle-chevron-right flx-r-nw"></i>
+                </p>
+            </article>
+
             <% products.forEach(product => { %>
                 <article class="tarjeta-articulo" onclick="toProductDetail(event)">
                     <input type="hidden" name="productId" id="productId" value="<%= product.productId %>">
@@ -77,7 +95,6 @@
                     <i class="cart-icon fa-solid fa-cart-shopping flx-r-w" onclick="addToCart(event)"></i>
                     <i class="heart-icon fa-solid fa-heart flx-r-w"></i>
                 </article> 
-     
             <% }) %>
 
         </section>
@@ -90,8 +107,11 @@
 
     <!-- Scripts JS -->
     <script src="/DOM-Controllers/darkmode"></script>
-    <script src="/DOM-Controllers/subMenues"></script>
     <script src="/DOM-Controllers/productDisplay"></script>
+    <script src="/DOM-Controllers/darkmode/productDisplay"></script>
+
+    
+
 </body>
 
 </html>

@@ -323,6 +323,11 @@ const controllers = {
             /* por query categoryId, keywords, gte, lte , order, limit, offset*/
             const filtersKeys = Object.keys(req.query) 
 
+            const {allData, isFirst} = req.query
+
+            if(Boolean(isFirst)) return res.status(200).render("productsDisplay", { products :[] })
+
+
             if (!filtersKeys.length) throw new Error("No se pasaron parametros validos")
 
             const filterObj = {}
@@ -330,6 +335,8 @@ const controllers = {
             filtersKeys.forEach(filterKey => filterObj[filterKey] = req.query[filterKey])
 
             const products = await DbProduct.customFilter(filterObj)
+
+            if(Boolean(allData)) return res.send(products)
 
             res.status(200).render("productsDisplay", { products })
         } catch (err) {

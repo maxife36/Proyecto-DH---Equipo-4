@@ -1,19 +1,21 @@
 .filterSection {
     position: sticky;
     top: 0;
-    width: 15%;
+    width: 0px;
     justify-content: flex-start;
     align-self: self-start;
-    min-width: 220px;
-    max-width: 250px;
     min-height: 100vh;
+    min-width: 0px;
     background-color: var(--blanco-gotec);
     overflow: hidden;
+    opacity: 0;
+    transition: width 0.15s linear, opacity 0.1s linear;
+
 }
 
 #filterBtn {
     all: unset;
-    display: none;
+    display: block;
     position: absolute;
     cursor: pointer;
     width: 80px;
@@ -31,13 +33,36 @@
     z-index: 3;
 }
 
+.titleContainer {
+    position: relative;
+    width: 100%;
+}
+
+.filterTitle {
+    width: 100%;
+    height: 2.5rem;
+    border-bottom: 1px solid var(--gris-intermedio-gotec);
+    color: var(--verde-oscuro-gotec);
+    letter-spacing: 2px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+
+#filterExit {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    font-size: 16px;
+
+}
+
 #resetBtn {
     all: unset;
     cursor: pointer;
     width: 50%;
     height: 30px;
     border-radius: 15px;
-    border: 1px solid var(--verde-oscuro-gotec);
     background-color: var(--verde-oscuro-gotec);
     font-size: 13px;
     text-align: center;
@@ -49,10 +74,11 @@
 }
 
 .cardConatiner {
-    width: 85%;
+    width: 90%;
     min-height: 100vh;
-
     align-items: flex-start;
+    
+    padding-bottom: 70px !important;
 }
 
 /*  Articles de filtros */
@@ -84,9 +110,10 @@
     color: var(--verde-oscuro-gotec);
 }
 
-.priceRange{
+.priceRange {
     justify-content: flex-start;
 }
+
 .rangeLabel {
     font-size: 15px;
     width: 40%;
@@ -104,13 +131,70 @@
     color: var(--verde-oscuro-gotec);
     text-align: center;
     margin-top: 10px;
-
 }
 
-#errorVerify{
+#errorVerify {
     display: none;
     margin-top: 8px;
     font-size: 11px;
     color: red;
     letter-spacing: 1px;
+}
+
+/* PAGINATIONS CONTROLLERS */
+
+.paginationControllers {
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+    height: 50px;
+    color: var(--verde-oscuro-gotec);
+    font-size: 16px
+}
+
+#previousPage,
+#nextPage {
+    width: 100px;
+    cursor: pointer;
+    justify-content: space-evenly;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+#nextPage {
+    width: 110px;
+    margin-left: 15px;
+}
+
+#previousPage {
+    margin-right: 15px;
+}
+
+.pageNumber{
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0px 8px;
+}
+
+
+
+/* MEDIAS QUERIES */
+
+@media (width >=660px) {
+    .filterSection {
+        width: 15%;
+        min-width: 220px;
+        max-width: 250px;
+        opacity: 1;
+
+    }
+
+    #filterBtn {
+        display: none;
+    }
+
+    #filterExit {
+        display: none;
+
+    }
 }

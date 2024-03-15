@@ -34,8 +34,7 @@
 
     <form action="/products/productsDisplay" class="main-search-bar flx-r-w" id="searchForm">
       <label class="search-label flx-r-w" for="search-btn">
-        <input type="hidden" name="limit" value="20">
-        <input type="hidden" name="offset" value="0">
+        <input type="hidden" name="isFirst" value="true">
         <input
           type="text"
           name="keywords"
@@ -59,7 +58,7 @@
       <ul class="sub-menu-container flx-c-w">
         <% globalData.allCategories.forEach(category => { %>
         <li>
-          <a href="/products/productsDisplay?categoryId=<%= category.categoryId %>&limit=20&offset=0"><%= category.categoryTitle %></a>
+          <a href="/products/productsDisplay?categoryId=<%= category.categoryId %>&categoryTitle=<%= category.categoryTitle %>&isFirst=true"><%= category.categoryTitle %></a>
         </li>
         <% }) %>
       </ul>
@@ -71,10 +70,12 @@
         onclick="subMenuController(this)"
         status="false"
       >
-        <a href="/products/productsDisplay?categoryId=<%= category.categoryId %>&limit=20&offset=0"><%= category.categoryTitle %></a>
+        <a href="/products/productsDisplay?categoryId=<%= category.categoryId %>&categoryTitle=<%= category.categoryTitle %>&isFirst=true"><%= category.categoryTitle %></a>
       </li>
     </ul>
     <% }) %>
   </nav>
 </header>
 <script src="/DOM-Controllers/header"></script>
+<script src="/DOM-Controllers/subMenues"></script>
+
