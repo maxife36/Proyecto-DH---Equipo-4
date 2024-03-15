@@ -10,8 +10,45 @@
     
     <%- include("./partials/header.ejs") %>
 
-    <main class="main-section">
-        <section class="cards">
+    <main class="main-section flx-r-nw" >
+        <button type="button" id="filterBtn" >Filtros</button>
+
+        <section class="filterSection flx-c-nw">
+
+            <article class="filterArt orderByContainer">
+                <h4>Ordenar por:</h4>
+                <select name="category" id="orderBySelect">
+                    <option value="default">Seleccionar</option>
+                    <option value="DESC">Mayor Precio</option>
+                    <option value="ASC">Menor Precio</option>
+                </select>
+            </article>
+
+            <article class="filterArt categoryFilterContainer">
+                <h4>Categorias:</h4>
+                <select name="category" id="categorySelect">
+                    <option value="default">Seleccionar</option>
+                    <% globalData.allCategories.forEach(category => { %>
+                        <option value="<%= category.categoryId %>"><%= category.categoryTitle %></option>
+                    <% }) %>
+                </select>
+            </article>
+
+            <article class="filterArt priceRange flx-r-w">
+                <h4>Rango de Precio:</h4>
+                <label class="rangeLabel flx-r-w" for="gtePrice">Mayor a $</label>
+                <input class="rangeInput" type="number" name="gte" id="gtePrice">
+                <label class="rangeLabel flx-r-w" for="gtePrice">Menor a $</label>
+                <input class="rangeInput" type="number" name="lte" id="ltePrice">
+            </article>
+
+            <p id="errorVerify"></p>
+
+            <button type="button" id="resetBtn">Restablecer</button>
+
+        </section>
+
+        <section class="cards cardConatiner" id="cardContainer">
             <% products.forEach(product => { %>
                 <article class="tarjeta-articulo" onclick="toProductDetail(event)">
                     <input type="hidden" name="productId" id="productId" value="<%= product.productId %>">
@@ -54,6 +91,7 @@
     <!-- Scripts JS -->
     <script src="/DOM-Controllers/darkmode"></script>
     <script src="/DOM-Controllers/subMenues"></script>
+    <script src="/DOM-Controllers/productDisplay"></script>
 </body>
 
 </html>

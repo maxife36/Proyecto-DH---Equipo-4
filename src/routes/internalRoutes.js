@@ -10,5 +10,6 @@ router.get("/forms", controllers.forms);
 router.get("/header", controllers.header)
 router.get("/sideCart", controllers.sideCart);
 router.get("/mainControllers", controllers.mainControllers);
+router.get("/productDisplay", controllers.productDisplay);
 
 module.exports = router

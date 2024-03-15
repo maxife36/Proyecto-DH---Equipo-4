@@ -142,8 +142,8 @@ class Validators {
         if (typeof array[0] !== "number" || array[0] < 0) throw new Error(msg.erroMsg.wrongFormat + "El primer elemento debe ser un número positivo")
 
         if (typeof array[1] !== "number" || array[1] < 0) throw new Error(msg.erroMsg.wrongFormat + "El segundo elemento debe ser un número positivo")
-
-        if (array[0] > array[1]) throw new Error(msg.erroMsg.notValidNumbersFilter)
+    
+        if (array[1] !== 0  && array[0] > array[1]) throw new Error(msg.erroMsg.notValidNumbersFilter)
 
         if (!(array[2] === "DESC" || array[2] === "ASC")) throw new Error(msg.erroMsg.wrongFormat + "El tercer elemento puede ser 'ASC' o  'DESC'")
     }

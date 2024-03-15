@@ -7,6 +7,7 @@ const validator = require("../seqQueyConfig/assets/validators")
 const DbImage = require("./dbImageController")
 const DbProductCategory = require("./dbProductCategoryController")
 const DbPrdouctFeature = require("./dbProductFeatureController")
+const { Op } = require("sequelize")
 
 const queryProduct = seqQuery.newModel("Product")
 module.exports = class DbProduct {
@@ -82,7 +83,7 @@ module.exports = class DbProduct {
         try {
             //query config
             const query = queryProduct.newQuery()
-            query.filterByInteger([gte, lte , order], "productPrice")
+            query.filterByInteger([gte, lte, order], "productPrice")
 
             //Busqueda en mi DB
             const searchResult = await Product.findAll(query.config)
@@ -115,7 +116,7 @@ module.exports = class DbProduct {
             //query config
             const query = queryProduct.newQuery(["images"])
             query.addLimitOffset(limit, offset)
-  
+
             //Busqueda en mi DB
             const searchResult = await Product.findAll(query.config)
 
@@ -410,20 +411,22 @@ module.exports = class DbProduct {
         }
     }
 
-    static async customFilter(filterObj){
+    static async customFilter(filterObj) {
         try {
-            const { categoryId, keywords, gte, lte , order, limit, offset} = filterObj
+            let { categoryId, keywords, gte, lte, order, limit, offset } = filterObj
 
-            if(!Object.keys(filterObj).length) throw new Error("No se pasaron parametros validos")
+            gte = gte? +gte : 0 
+            lte = lte? +lte : 0 
+
+            if (!Object.keys(filterObj).length) throw new Error("No se pasaron parametros validos")
 
             //query config
             const query = queryProduct.newQuery(["images", "productsCategories"])
-            
-            if(categoryId) query.addWhere(categoryId, "categoryId", "productsCategories")
-            if(keywords) query.filterByString(keywords, "productName")
-            if(gte || lte || order) query.filterByInteger([gte, lte , order], "productPrice")
-            if(limit || offset) query.addLimitOffset(limit, offset)
-            
+            if (categoryId) query.addWhere(categoryId, "categoryId", "productsCategories")
+            if (keywords) query.filterByString(keywords, "productName")
+            if (gte || lte || order) query.filterByInteger([gte, lte, order], "productPrice")
+            if (limit || offset) query.addLimitOffset(Number(limit), Number(offset))
+
             //Consulta a DB
             const products = await Product.findAll(query.config)
 

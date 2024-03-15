@@ -321,7 +321,6 @@ const controllers = {
     productDisplay:async(req, res) => {
         try {
             /* por query categoryId, keywords, gte, lte , order, limit, offset*/
-            console.log(req.body);
             const filtersKeys = Object.keys(req.query) 
 
             if (!filtersKeys.length) throw new Error("No se pasaron parametros validos")

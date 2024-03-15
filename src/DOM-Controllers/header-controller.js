@@ -6,6 +6,14 @@ const entryOptions = document.querySelector(".entry-options")
 const exitBtn = document.querySelector("#btn-exit-entry")
 const searchBtn = document.querySelector("#searchBtn")
 const searchForm = document.querySelector("#searchForm")
+const headerNav = document.querySelector(".header-nav")
+
+/*  Controlador que oculta el nav en urls especificas  */
+
+const url = window.location.href
+
+if (url.includes("productsDisplay")) headerNav.style.display = "none"
+
 
 /* Controlador del formulario de busqueda */
 

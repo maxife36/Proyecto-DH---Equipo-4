@@ -1,0 +1,116 @@
+.filterSection {
+    position: sticky;
+    top: 0;
+    width: 15%;
+    justify-content: flex-start;
+    align-self: self-start;
+    min-width: 220px;
+    max-width: 250px;
+    min-height: 100vh;
+    background-color: var(--blanco-gotec);
+    overflow: hidden;
+}
+
+#filterBtn {
+    all: unset;
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid var(--verde-oscuro-gotec);
+    background-color: var(--blanco-gotec);
+    top: 30px;
+    left: 30px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--verde-oscuro-gotec);
+    z-index: 3;
+}
+
+#resetBtn {
+    all: unset;
+    cursor: pointer;
+    width: 50%;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid var(--verde-oscuro-gotec);
+    background-color: var(--verde-oscuro-gotec);
+    font-size: 13px;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--blanco-gotec);
+    z-index: 3;
+    margin-top: 20px;
+}
+
+.cardConatiner {
+    width: 85%;
+    min-height: 100vh;
+
+    align-items: flex-start;
+}
+
+/*  Articles de filtros */
+
+.filterArt {
+    padding-left: 15px;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 16px;
+    color: var(--verde-oscuro-gotec);
+}
+
+.filterArt h4 {
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--verde-oscuro-gotec);
+}
+
+.filterArt select {
+    width: 90%;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 0.5px solid var(--verde-oscuro-gotec);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--verde-oscuro-gotec);
+}
+
+.priceRange{
+    justify-content: flex-start;
+}
+.rangeLabel {
+    font-size: 15px;
+    width: 40%;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.rangeInput {
+    width: 40%;
+    height: 30px;
+    border-radius: 3px;
+    border: 0.5px solid var(--verde-oscuro-gotec);
+    color: var(--verde-oscuro-gotec);
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+#errorVerify{
+    display: none;
+    margin-top: 8px;
+    font-size: 11px;
+    color: red;
+    letter-spacing: 1px;
+}

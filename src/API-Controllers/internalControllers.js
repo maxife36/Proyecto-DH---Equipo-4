@@ -7,6 +7,7 @@ const pathForms = path.resolve("src", "DOM-Controllers", "register-form-controll
 const pathHeader = path.resolve("src", "DOM-Controllers", "header-controller.js")
 const pathSideCart = path.resolve("src", "DOM-Controllers", "sideCart-controller.js") 
 const pathMainControllers = path.resolve("src", "DOM-Controllers", "mainControllers.js") 
+const pathProductDisplay = path.resolve("src", "DOM-Controllers", "productDisplay.js") 
 
 const controllers = {
     darkMode: (req,res) => res.sendFile(pathDkm),
@@ -16,6 +17,7 @@ const controllers = {
     header: (req,res) => res.sendFile(pathHeader),
     sideCart: (req,res) => res.sendFile(pathSideCart),
     mainControllers: (req,res) => res.sendFile(pathMainControllers),
+    productDisplay: (req,res) => res.sendFile(pathProductDisplay)
 }
 
 module.exports = controllers;
