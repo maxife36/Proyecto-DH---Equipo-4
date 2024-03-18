@@ -1,0 +1,48 @@
+<nav class="btnsNavConatiner flx-r-nw">
+    <button type="button" class="navBtn" onclick="editInfoBtn(event)">Editar</button>
+    <button type="button" class="navBtn" onclick="saveInfoBtn(event)">Guardar Cambios</button>
+    <button type="button" class="navBtn" onclick="cancelInfoBtn(event)">Cancelar</button>
+</nav>
+
+<form class="userDataConatiner flx-c-nw" action="/users/updateData?_method=PUT" method="POST" enctype="multipart/form-data" onsubmit="saveInfoBtn()">
+    
+    <section class="centerConatiner flx-c-nw">
+        <div class="profile-img-section flx-c-w">
+            <div class="profile-img-container">
+              <% if (userInfo.profileImg) { %>
+                <img src="/img/usersImg<%= userInfo.profileImg %>">
+                <% }else{ %>
+                <img src="/img/user-img.svg">
+            <% } %>
+            <input type="hidden" name="isProfileImage" value="<%= userInfo.profileImg %>" disabled>
+            </div>
+            <input type="file" id="add-img" name="profileImg" accept=".jpg, .jpeg, .png" disabled>
+            <label class="flx-c-w" for="add-img">
+              <i class="fa-solid fa-pencil"></i>
+            </label>
+        </div>
+        <div class="inputsConatiner flx-c-nw">
+            <div class="dataConatiner flx-r-nw">
+                <label for="userEmail" class="flx-r-nw">Email</label>
+                <input type="text" name="userEmail" id="userEmail" value="<%= userInfo.email %>" required disabled>
+            </div>
+            <div class="dataConatiner flx-r-nw">
+                <label for="fullName" class="flx-r-nw">Nombre Completo</label>
+                <input type="text" name="fullName" id="fullName" value="<%= userInfo.fullname %>" required disabled>
+            </div>
+            <div class="dataConatiner flx-r-nw">
+                <label for="userBirthday" class="flx-r-nw">Fecha de Nacimiento</label>
+                <input type="date" name="userBirthday" id="userBirthday" value="<%= userInfo.formatedBirthday %>" required disabled>
+            </div>
+            <div class="dataConatiner flx-r-nw">
+                <label for="userAdress" class="flx-r-nw">Domicilio</label>
+                <input type="text" name="userAdress" id="userAdress" value="<%= userInfo.address %>" disabled>
+            </div>
+        </div>
+        <button type="submit" style="display:none"></button>
+
+    </section>
+
+</form>
+
+<script src="/DOM-Controllers/userData"></script>

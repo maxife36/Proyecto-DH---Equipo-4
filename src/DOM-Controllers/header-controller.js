@@ -13,6 +13,7 @@ const headerNav = document.querySelector(".header-nav")
 const url = window.location.href
 
 if (url.includes("productsDisplay")) headerNav.style.display = "none"
+if (url.includes("users/profile")) headerNav.style.display = "none"
 
 
 /* Controlador del formulario de busqueda */
@@ -22,7 +23,7 @@ searchBtn.addEventListener("click", () => searchForm.submit())
 /* Obtencion del valor de la cookie isLogged */
 
 const cookies = document.cookie
-let valorCookie = null
+let isLogged = null
 
 if (cookies) {
     const cookie = document.cookie.split(";")
@@ -32,30 +33,29 @@ if (cookies) {
         if (cookie.includes("isLogged")) isLoggedCookie.push(cookie)
     })
     if (isLoggedCookie.length) {
-        valorCookie = Boolean(isLoggedCookie[0].split("isLogged=")[1])
+        isLogged = Boolean(isLoggedCookie[0].split("isLogged=")[1])
     }
 }
 /*Controlador de elemento DOM para usuarios logeados  */
 
-if (valorCookie) {
+if (isLogged) {
     loginIcon.style.display = "none"
     userProfile.style.display = "flex"
     heartIcon.style.display = "flex"
     cartIcon.style.display = "flex"
 }
 
-userProfile.addEventListener("click", function () {
-    window.location.href = "/users/profile"
-})
+function reLocation(){
+    window.location.href = "/users/profile-v2"
+}
+userProfile.addEventListener("click", reLocation)
 
 /* --------Controladores de Opciones de Usuario----- */
 
 let loginIconFlag = false
 
 loginIcon.addEventListener("click", () => {
-    console.log("1 -", loginIconFlag);
     loginIconFlag= loginIconFlag ? false : true
-    console.log("2 -", loginIconFlag);
 
     if (loginIconFlag) {
 
@@ -72,3 +72,20 @@ loginIcon.addEventListener("click", () => {
 
 
 })
+
+
+//provisorio  -> Luego colocar en un archivo Domjs favoriteController.js
+
+heartIcon.addEventListener("click", () =>{
+    window.location.href ="/users/profile"
+})
+
+const formatDate = function (dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+
+    // Formatea la fecha en formato YYYY-MM-DD para el input date
+    return `${year}-${month}-${day}`;
+}

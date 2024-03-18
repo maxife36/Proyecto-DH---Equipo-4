@@ -9,6 +9,9 @@ const pathHeader = path.resolve("src", "DOM-Controllers", "header-controller.js"
 const pathSideCart = path.resolve("src", "DOM-Controllers", "sideCart-controller.js") 
 const pathMainControllers = path.resolve("src", "DOM-Controllers", "mainControllers.js") 
 const pathProductDisplay = path.resolve("src", "DOM-Controllers", "productDisplay.js") 
+const pathUserProfile = path.resolve("src", "DOM-Controllers", "userProfile.js") 
+const pathUserData = path.resolve("src", "DOM-Controllers", "userData.js") 
+const pathSecurityData = path.resolve("src", "DOM-Controllers", "securityData.js") 
 
 const controllers = {
     darkMode: (req,res) => res.sendFile(pathDkm),
@@ -19,7 +22,10 @@ const controllers = {
     header: (req,res) => res.sendFile(pathHeader),
     sideCart: (req,res) => res.sendFile(pathSideCart),
     mainControllers: (req,res) => res.sendFile(pathMainControllers),
-    productDisplay: (req,res) => res.sendFile(pathProductDisplay)
+    productDisplay: (req,res) => res.sendFile(pathProductDisplay),
+    userProfile: (req,res) => res.sendFile(pathUserProfile),
+    userData: (req,res) => res.sendFile(pathUserData),
+    securityData: (req,res) => res.sendFile(pathSecurityData)
 }
 
 module.exports = controllers;

@@ -1,0 +1,144 @@
+:root {
+    --profile-img-size: 200px
+}
+
+.btnsNavConatiner {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: var(--blanco-gotec);
+    border-bottom: 1px solid var(--gris-intermedio-gotec);
+    justify-content: flex-end;
+}
+
+.navBtn {
+    all: unset;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+    height: 40%;
+    margin-right: 20px;
+    padding-left: 10px;
+    color: var(--verde-oscuro-gotec);
+    font-weight: 600;
+    border-left: 3.5px solid var(--gris-intermedio-gotec);
+    transition: all 0.1s linear;
+}
+
+.navBtn:hover{
+    color: var(--verde-gotec);
+    height: 60%;
+}
+
+.userDataConatiner{
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--gris-claro-gotec);
+    padding: 40px;
+    
+}
+
+.centerConatiner{
+    height: 100vh;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--gris-intermedio-gotec) 0px 0px 10px;
+    background-color: var(--blanco-gotec);
+}
+
+.inputsConatiner{
+    width: 100%;
+    padding: 0px 40px;
+}
+
+.dataConatiner{
+    width: 100%;
+    height: 80px;
+    color: var(--verde-oscuro-gotec);
+    font-size: 15px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--gris-intermedio-gotec);
+
+}
+
+.dataConatiner label{
+    height: 60%;
+    width: 40%;
+    min-width: 130px;
+    justify-content: flex-start;
+    padding-left: 20px;
+    font-weight: 600;
+}
+
+.dataConatiner input{
+    all: unset;
+    height: 40%;
+    flex-grow: 1;
+    padding-left: 12px;
+    color: var(--gris-intermedio-gotec);
+    border-left: 3.5px solid var(--gris-intermedio-gotec);
+    transition: all 0.1s linear;
+}
+
+.dataConatiner input:focus{
+    height: 60%;
+    background-color: #f5f5f5ec ;
+    color: var(--gris-oscuro-gotec);
+}
+
+
+
+/* -----Profile Img configuration----- */
+
+.profile-img-section {
+    position: relative;
+    width: var(--profile-img-size);
+    margin: 15px 0 3px 0;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+}
+
+.profile-img-container {
+    width: var(--profile-img-size);
+    height: var(--profile-img-size);
+    background-color: var(--gris-claro-gotec);
+    border-radius: 50%;
+    border: 1px solid var(--gris-intermedio-gotec);
+    overflow: hidden;
+    box-shadow: var(--verde-oscuro-gotec) 0px 0px 8px;
+    opacity: 0.8;
+}
+
+.profile-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#add-img {
+    display: none;
+}
+
+label[for="add-img"] {
+    position: absolute;
+    cursor: pointer;
+    right: -10%;
+    bottom: 15%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--blanco-gotec);
+    border-radius: 50%;
+    border: 1px solid var(--gris-oscuro-gotec);
+    color: var(--verde-oscuro-gotec);
+    box-shadow: var(--verde-oscuro-gotec) 1px 3px 3px;
+
+}
+
+label[for="add-img"] i {
+    font-size: 15px;
+}
+
+label[for="add-img"]:hover{
+    color: var(--verde-gotec);
+    box-shadow: var(--verde-gotec) 1px 3px 3px;
+}

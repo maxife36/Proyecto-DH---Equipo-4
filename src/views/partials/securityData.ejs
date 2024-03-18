@@ -1,0 +1,39 @@
+<nav class="btnsNavConatiner flx-r-nw">
+    <button type="button" class="navBtn" onclick="editSecurityBtn(event)">Editar</button>
+    <button type="button" class="navBtn" onclick="saveSecurityBtn(event)">Guardar Cambios</button>
+    <button type="button" class="navBtn" onclick="cancelSecurityBtn(event)">Cancelar</button>
+</nav>
+
+<form class="userDataConatiner flx-c-nw" id="securityDataForm" enctype="application/x-www-form-urlencoded" onsubmit="saveSecurityBtn()">
+    
+    <section class="centerConatiner flx-c-nw">
+        <div class="profile-img-section flx-c-w">
+            <div class="profile-img-container">
+              <% if (userInfo.profileImg) { %>
+                <img src="/img/usersImg<%= userInfo.profileImg %>">
+                <% }else{ %>
+                <img src="/img/user-img.svg">
+            <% } %>
+            </div>
+         
+        </div>
+    
+        <div class="inputsConatiner flx-c-nw">
+            <div class="dataConatiner flx-r-nw">
+                <label for="userName" class="flx-r-nw">Nombre de Usuario</label>
+                <input type="text" name="userName" id="userName" value="<%= userInfo.username %>" required disabled>
+            </div>
+            <div class="dataConatiner flx-r-nw">
+                <label for="password" class="flx-r-nw">Contraseña</label>
+                <input type="password" name="password" id="password" value="********" required disabled>
+            </div>
+            <div class="dataConatiner flx-r-nw">
+                <label for="confirmPassword" class="flx-r-nw">Confirmar Contraseña</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" value="********" required disabled>
+            </div>
+        </div>
+        <button type="submit" style="display:none"></button>
+
+    </section>
+
+</form>

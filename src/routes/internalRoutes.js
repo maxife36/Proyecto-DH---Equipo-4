@@ -12,5 +12,8 @@ router.get("/header", controllers.header)
 router.get("/sideCart", controllers.sideCart);
 router.get("/mainControllers", controllers.mainControllers);
 router.get("/productDisplay", controllers.productDisplay);
+router.get("/userProfile", controllers.userProfile);
+router.get("/userData", controllers.userData);
+router.get("/securityData", controllers.securityData);
 
 module.exports = router

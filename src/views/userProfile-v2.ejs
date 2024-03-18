@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head.ejs") %>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/userData.css" />
+  </head>
+
+  <body>
+    <%- include("./partials/header.ejs") %>
+
+    <main class="main-section flx-r-nw">
+
+      <section class="settingsSection flx-c-nw">
+        <div class="flx-r-nw titleSettingsContainer">
+          <h2 class="settingsTitle">Mi Perfil</h2>
+          <i class="fa-solid fa-x" id="settingsExit"></i>
+        </div>
+
+        <article class="settingsArt">
+          <div class="optionName flx-r-nw" id="usarData">
+            <h4>Mis Datos</h4>
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+          <ul class="settingList">
+            <li id="personalData">Datos Personales</li>
+            <li id="securityData">Seguridad</li>
+          </ul>
+        </article>
+
+        <article class="settingsArt">
+          <div class="optionName flx-r-nw">
+            <h4>Mis Compras</h4>
+            <i class="fa-solid fa-angle-right"></i>
+          </div>
+        </article>
+
+        <article class="settingsArt">
+          <div class="optionName flx-r-nw">
+            <h4>Favoritos</h4>
+            <i class="fa-solid fa-angle-right"></i>
+          </div>
+        </article>
+
+        <article class="settingsArt">
+          <div class="optionName flx-r-nw">
+            <h4>Dashboard</h4>
+            <i class="fa-solid fa-angle-right"></i>
+          </div>
+        </article>
+
+        <article class="settingsArt">
+          <div class="optionName flx-r-nw">
+            <a href="/users/processLogout">
+              <h4>Cerrar Sesión</h4>
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <section class="settingDisplayConatiner flx-c-nw" id="settingDisplayConatiner">
+          <%- include('./partials/userData.ejs') %> 
+
+      </section>
+    </main>
+    <%- include('./partials/sideCart.ejs') %> 
+    <%- include("./partials/footer.ejs") %>
+
+    <!-- Scripts JS -->
+    <script src="/DOM-Controllers/darkmode"></script>
+    <script src="/DOM-Controllers/userProfile"></script>
+  </body>
+</html>

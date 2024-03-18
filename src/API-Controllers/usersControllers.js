@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt")
 const fs = require("fs")
+const { v4: uuid } = require("uuid")
 const { validationResult } = require("express-validator");
 const { updateCartInfoToRender } = require("./cartController");
-const { sendMail } = require("./sendGridController");
+const { sendVerificationMail, sendSecurityUpdateMail } = require("./sendGridController");
 const { DbUser, DbCartProduct } = require("../database/controllers");
 const path = require("path");
 
@@ -14,8 +15,70 @@ const controllers = {
         const userId = req.session.loggedUser
 
         const currentUser = await DbUser.getUserById(userId)
-
         res.render("userProfile.ejs", { userInfo: currentUser })
+    },
+    userProfileV2: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserById(userId)
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            let month = (1 + date.getMonth()).toString().padStart(2, '0');
+            let day = (date.getDate() + 1).toString().padStart(2, '0');
+
+            // Formatea la fecha en formato YYYY-MM-DD para el input date
+            return `${year}-${month}-${day}`;
+        }
+
+        currentUser.formatedBirthday = formatDate(currentUser.birthday)
+
+        res.render("userProfile-v2.ejs", { userInfo: currentUser })
+    },
+    userData: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserById(userId)
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            let month = (1 + date.getMonth()).toString().padStart(2, '0');
+            let day = (date.getDate() + 1).toString().padStart(2, '0');
+
+            // Formatea la fecha en formato YYYY-MM-DD para el input date
+            return `${year}-${month}-${day}`;
+        }
+
+        currentUser.formatedBirthday = formatDate(currentUser.birthday)
+
+        res.render("./partials/userData.ejs", { userInfo: currentUser })
+    },
+    securityData: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserById(userId)
+
+        res.render("./partials/securityData.ejs", { userInfo: currentUser })
+    },
+    editSecurityData: async (req, res) => {
+        const currentUserId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserById(currentUserId)
+
+        const { fullname, email, userId } = currentUser
+
+        const validateToken = uuid()
+        req.session.updateUserToken = validateToken
+
+        //Envio asincronico de mail de verificación
+        sendSecurityUpdateMail({
+            userId,
+            userEmail: email,
+            userName: fullname,
+            validateToken
+        })
+
+        res.status(200).send(true) // en el controlador del btn de editar en el DOM, enviar un popup avisando que verifique su mail
     },
     editUser: async (req, res) => {
         try {
@@ -46,11 +109,11 @@ const controllers = {
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
                     req.session.loggedCart = userFinded.cart.cartId
-                    
+
                     res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
-                    await updateCartInfoToRender(userFinded.userId,req, res)
-                    
+                    await updateCartInfoToRender(userFinded.userId, req, res)
+
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
                     }
@@ -84,6 +147,7 @@ const controllers = {
                 path: "userEmail",
                 location: "body"
             })
+
             if (existUser[1]) errors.push({
                 type: "field",
                 value: userName,
@@ -110,7 +174,7 @@ const controllers = {
                 const { fullname, email, userId } = user
 
                 //Envio asincronico de mail de verificación
-                sendMail({
+                sendVerificationMail({
                     userId,
                     userEmail: email,
                     userName: fullname
@@ -136,35 +200,61 @@ const controllers = {
             const userId = req.session.loggedUser
             const profileImage = req.file
 
-            const { fullName, userEmail, userBirthday, userAdress, userName, password } = req.body
+            const { fullName, userBirthday, userAdress, userName, password, isProfileImage, validateToken } = req.body
 
             const errors = validationResult(req).errors;
 
             const currentUser = await DbUser.getUserById(userId)
+            const existUsername = null
+
+            if (validateToken && currentUser.username !== userName) {
+                existUsername = await DbUser.getUserByUsername(userName)
+            }
 
             if (!currentUser) errors.push({
                 type: "field",
                 value: userId,
                 msg: `No existe un usuario con el Id:  ${userId}`,
                 path: "userId",
-                location: "params"
+                location: "body"
+            })
+
+            if (existUsername) errors.push({
+                type: "field",
+                value: userName,
+                msg: `Ya existe el nombre de usuario:  ${userId}`,
+                path: "userName",
+                location: "body"
             })
 
             //Si no hay errores prosigo con la creacion
             if (!errors.length) {
 
-                const updatedUser = {
-                    fullname: fullName,
-                    email: userEmail,
-                    birthday: userBirthday,
-                    address: userAdress,
-                    profileImg: profileImage ? `/${profileImage.filename}` : null,
-                    username: userName,
-                    password: bcrypt.hashSync(password, 10)
+                let updatedUser = {
+                    fullname: fullName ? fullName : currentUser.fullname,
+                    email: currentUser.email,
+                    birthday: userBirthday ? userBirthday : currentUser.birthday,
+                    address: userAdress ? userAdress : currentUser.address,
+                    profileImg: profileImage ? `/${profileImage.filename}` : isProfileImage,
+                    username: currentUser.username,
+                    password: currentUser.password
+                }
+
+                if (validateToken && req.session.updateUserToken === validateToken) {
+
+                    updatedUser = {
+                        fullname: currentUser.fullname,
+                        email: currentUser.email,
+                        birthday: currentUser.birthday,
+                        address: currentUser.address,
+                        profileImg: currentUser.profileImg,
+                        username: userName ? userName : currentUser.username,
+                        password: password ? bcrypt.hashSync(password, 10) : currentUser.password
+                    }
                 }
 
                 //Si se paso una foto nueva se elimina la anetrior antes de crearse la nueva, Para no ocupar espacio en el servidor
-                if (currentUser.profileImg) {
+                if (!isProfileImage && profileImage) {
                     const profileImgPath = path.join(__dirname, `../../public/img/usersimg${currentUser.profileImg}`)
 
                     fs.unlink(profileImgPath, (err) => {
@@ -175,9 +265,34 @@ const controllers = {
                     })
                 }
 
-                updatedUser = await DbUser.updateUserData(userId, updatedUser)
+                updatedUserResult = await DbUser.updateUserData(userId, updatedUser)
 
-                return res.render("/", { userInfo: updatedUser }) //cambiar ruta al de edicion de perfil 
+                //Si se actualizo un elemento y se trata de cambio de username o contraseña, cierra la sesion
+                if (validateToken && req.session.updateUserToken === validateToken && updatedUserResult[0]) {
+                    req.session.loggedUser = undefined
+                    req.session.loggedCart = undefined
+
+                    res.clearCookie("isLogged")
+                    res.clearCookie("rememberme")
+                    res.clearCookie("cartProductsId")
+
+                    return res.status(200).send(true)
+                }
+
+                updatedUser = await DbUser.getUserById(userId)
+
+                function formatDate(date) {
+                    const year = date.getFullYear();
+                    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+                    let day = (date.getDate() + 1).toString().padStart(2, '0');
+
+                    // Formatea la fecha en formato YYYY-MM-DD para el input date
+                    return `${year}-${month}-${day}`;
+                }
+
+                updatedUser.formatedBirthday = formatDate(updatedUser.birthday)
+
+                return res.status(200).render("userProfile-v2.ejs", { userInfo: updatedUser })
             }
 
             if (profileImage) fs.unlink(profileImage.path, (err) => {
@@ -187,7 +302,7 @@ const controllers = {
                 console.log("Foto de Perfil eliminado");
             })
 
-            res.render("register", { errors }) //cambiar ruta al de edicion de perfil
+            res.status(500).send(errors) //cambiar ruta al de edicion de perfil
 
         } catch (err) {
             throw new Error(err.message)
@@ -196,9 +311,11 @@ const controllers = {
     processLogout: (req, res) => {
         try {
             req.session.loggedUser = undefined
+            req.session.loggedCart = undefined
 
             res.clearCookie("isLogged")
             res.clearCookie("rememberme")
+            res.clearCookie("cartProductsId")
 
             res.redirect("/")
         } catch (err) {

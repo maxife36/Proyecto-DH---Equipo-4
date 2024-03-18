@@ -1,0 +1,137 @@
+.settingsSection {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    justify-content: flex-start;
+    align-self: self-start;
+    min-height: 100vh;
+    background-color: var(--blanco-gotec);
+    overflow: hidden;
+    opacity: 1;
+    transition: width 0.15s linear, opacity 0.1s linear;
+
+}
+
+.titleSettingsContainer {
+    position: relative;
+    width: 100%;
+}
+
+.settingsTitle {
+    width: 100%;
+    height: 2.5rem;
+    border-bottom: 1px solid var(--gris-intermedio-gotec);
+    color: var(--verde-oscuro-gotec);
+    letter-spacing: 3px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+#settingsExit {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    font-size: 16px;
+    color: var(--verde-oscuro-gotec);
+}
+
+.settingDisplayConatiner {
+    display: none;
+    justify-content: flex-start;
+    position: relative;
+    min-height: 100vh;
+    border-left: 1px solid var(--gris-intermedio-gotec);
+}
+
+.settingsArt {
+    padding-left: 30px;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 16px;
+    color: var(--verde-oscuro-gotec);
+
+}
+
+.optionName{
+    cursor: pointer;
+    justify-content: space-between;
+    padding-right: 15px;
+    transition: all 0.1s linear;
+}
+
+.optionName:hover{
+    font-size: 18px;
+    padding-right: 8px;
+    color: var(--verde-gotec);
+
+}
+
+.optionName:hover h4{
+    color: var(--verde-gotec);
+}
+
+.settingsArt h4 {
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--verde-oscuro-gotec);
+}
+
+.settingsArt .fa-angle-right {
+    margin-right: 5px;
+    transition: all 0.1s linear;
+}
+
+.settingsArt .fa-angle-down {
+    margin-right: 2px;
+    transition: all 0.2s linear;
+}
+
+.settingList{
+    height: 0px;
+    list-style-type: none;
+    font-size:14px ;
+    margin-left: 20px;
+    transition: all 0.1s linear;
+
+}
+
+.settingList li{
+    display: flex;
+    pointer-events: none;
+    opacity: 0;
+    z-index: -1;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    height: 35px;
+    font-size:14.5px ;
+    letter-spacing: 1px;
+    transition: all 0.1s linear;
+}
+
+.settingList li:hover {
+    font-weight: bold;
+    color: var(--verde-gotec);
+
+}
+
+/* MEDIAS QUERIES */
+
+@media (width >=660px) {
+    .settingsSection {
+        width: 15%;
+        min-width: 220px;
+        max-width: 250px;
+        opacity: 1;
+
+    }
+    .settingDisplayConatiner {
+        display: flex;
+    }
+
+    #settingsExit {
+        display: none;
+
+    }
+}

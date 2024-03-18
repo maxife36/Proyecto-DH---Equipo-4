@@ -8,6 +8,9 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
 
+
+
+
 /* ---Modulos Internos--- */
 const {cookieSearcher, adminMiddleware , globalDataMiddleware} = require("./Middlewares")
 const {internalRoutes, mainRoutes , productsRoutes, usersRoutes, cartRoutes, adminRoutes, mpPaymentRoutes, sendGridRoutes} = require("./routes")
@@ -51,6 +54,8 @@ app.use("/cart", cartRoutes)
 app.use("/admin", adminMiddleware, adminRoutes)
 app.use("/mercadopago", mpPaymentRoutes)
 app.use("/mail-service", sendGridRoutes)
+
+
 
 
 app.listen(PORT, () => {

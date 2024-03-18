@@ -110,9 +110,7 @@
     color: var(--verde-oscuro-gotec);
 }
 
-.priceRange {
-    justify-content: flex-start;
-}
+
 
 .rangeLabel {
     font-size: 15px;

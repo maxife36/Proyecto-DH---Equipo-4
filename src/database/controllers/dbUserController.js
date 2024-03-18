@@ -204,13 +204,13 @@ module.exports = class DbUser {
 
     static async updateUserData(userId, userData) {
         try {
-            const { admin, fullname, email, birthday, address, profileImg, username } = userData
+            const { admin, fullname, email, birthday, address, profileImg, username, password } = userData
 
             //validacion de ID
             validator.idValidator(userId)
 
             //Verificacion de campos obligatorios
-            const requiredFields = ["fullname", "email", "birthday", "username"]
+            const requiredFields = ["fullname", "email", "birthday", "username", "password"]
 
             const missingFields = requiredFields.filter(field => !userData.hasOwnProperty(field));
 
@@ -224,7 +224,8 @@ module.exports = class DbUser {
                 birthday,
                 address: address ? address : null,
                 profileImg: profileImg ? profileImg : null,
-                username
+                username,
+                password
             }
 
             //query config
