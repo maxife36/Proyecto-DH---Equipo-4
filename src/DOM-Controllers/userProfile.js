@@ -82,6 +82,7 @@ settingsExitBtn.addEventListener("click", () => {
 /* --links controllers-- */
 const personalDataLink = document.querySelector("#personalData")
 const securityDataLink = document.querySelector("#securityData")
+const purchasesink = document.querySelector("#purchases")
 
 personalDataLink.addEventListener("click", async () => {
     try {
@@ -99,6 +100,7 @@ personalDataLink.addEventListener("click", async () => {
         console.log(error);
     }
 })
+
 securityDataLink.addEventListener("click", async () => {
     try {
 
@@ -113,6 +115,28 @@ securityDataLink.addEventListener("click", async () => {
             //inyecto script por separado para que lo lea correctamente
             const scriptElement = document.createElement('script');
             scriptElement.src = "/DOM-Controllers/securityData";
+            displayContainer.appendChild(scriptElement);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+purchasesink.addEventListener("click", async () => {
+    try {
+
+        //Peticion que devuelve un archivo HTML con la pagina cargada
+        const fetchURL = "/users/purchases"
+        const securityDataHTML = await fetch(fetchURL)
+
+        if (securityDataHTML) {
+            const productsDisplayTxt = await securityDataHTML.text()
+            displayContainer.innerHTML = productsDisplayTxt
+
+            //inyecto script por separado para que lo lea correctamente
+            const scriptElement = document.createElement('script');
+            scriptElement.src = "/DOM-Controllers/purchases";
             displayContainer.appendChild(scriptElement);
         }
 

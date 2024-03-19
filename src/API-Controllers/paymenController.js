@@ -94,7 +94,7 @@ module.exports = {
         try {
             const { userId, cartId } = req.params
             const paymentResult = req.query
-
+            
             if (paymentResult.type && paymentResult.type === "payment") {
                 const paymentInfo = await payment.get({ id: paymentResult["data.id"] })
 
@@ -147,6 +147,11 @@ module.exports = {
 
     failureHandler: async (req, res) => {
         try {
+            
+            console.log("PARAMS ",req.params)
+            console.log("BODY ",req.body)
+            console.log("QUERY ",req.query)
+            
             res.redirect("/")
         } catch (err) {
             console.log(err);

@@ -1,6 +1,6 @@
 const loginIcon = document.querySelector(".login-icon")
 const userProfile = document.querySelector(".user-icon-container")
-const heartIcon = document.querySelector("#heartIcon")
+const heartIcon = document.querySelector("#heart-icon")
 const cartIcon = document.querySelector("#cart-icon")
 const entryOptions = document.querySelector(".entry-options")
 const exitBtn = document.querySelector("#btn-exit-entry")
@@ -33,7 +33,7 @@ if (cookies) {
         if (cookie.includes("isLogged")) isLoggedCookie.push(cookie)
     })
     if (isLoggedCookie.length) {
-        isLogged = Boolean(isLoggedCookie[0].split("isLogged=")[1])
+        isLogged = isLoggedCookie[0].split("isLogged=")[1] === "true" ? true : false
     }
 }
 /*Controlador de elemento DOM para usuarios logeados  */
@@ -46,7 +46,7 @@ if (isLogged) {
 }
 
 function reLocation(){
-    window.location.href = "/users/profile-v2"
+    window.location.href = "/users/profile"
 }
 userProfile.addEventListener("click", reLocation)
 

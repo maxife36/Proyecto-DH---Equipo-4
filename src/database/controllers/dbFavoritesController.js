@@ -36,6 +36,21 @@ module.exports = class DbFavorite {
         }
     }
 
+    static async getFavoriteByUserId(userId) {
+        try {
+            //query config
+            const query = queryFavorite.newQuery()
+            query.addWhere(userId, "userId")
+
+            const favorites = await Favorite.findAll(query.config)
+
+            return favorites
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
     static async createFavorite(data) {
         try {
             const { userId, productId } = data

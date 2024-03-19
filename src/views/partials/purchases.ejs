@@ -1,0 +1,41 @@
+<article class="userDataConatiner flx-c-nw" >
+    
+    <section class="centerConatiner flx-c-nw" id="purchasesContainer">
+
+        
+        <div class="inputsConatiner purchasesContainer flx-c-nw">
+            <div class="dataConatiner flx-r-nw">
+              <h2>Historial de Compras</h2>
+            </div>
+            <% if (userInfo && userInfo.purchases) { %>
+                <% userInfo.purchases.forEach( purchase => { %>
+                    <div class="dataConatiner purchaseGeneralData flx-r-nw">
+                        <input type="hidden" id="purchaseId" value="<%= purchase.purchaseId %>">
+                        <input type="date" class="purchaseCreatedDate" value="<%= purchase.formatedCreatedDate %>" disabled>
+                        
+                        <p class="purchaseQuantity flx-r-nw">Compró <%= purchase.dataParse.additional_info.items.length %> Productos</p>
+
+                        <div class="purchaseTotalConatiner flx-r-nw">
+                            <p class="purchaseTotalTtile">Total: </p>
+                            
+                            <p class="purchaseTotal">$ <%= purchase.dataParse.transaction_details.total_paid_amount%></p>
+                        </div>
+
+                        <i class="purchaseDetailBtn flx-r-nw fa-solid fa-angle-down" onclick="displayPurchaseDetail(event)" data-display="false"></i>
+                    </div>
+                    <ul class="dataConatiner purchaseDetail flx-c-nw" >
+                        <%  purchase.dataParse.additional_info.items.forEach(item => { %>
+                         <li class="itemData flx-r-nw">
+                            <p class="itemTitle"><%= item.title %></p>
+                            <p class="itemQuantity flx-r-nw"> x <%= item.quantity %> u.</p>
+                            <p class="itemUnitPrice">$ <%= Number(item.unit_price).toFixed(2) %></p>
+                         </li>
+                        <% }) %>
+                    </ul>
+                <% }) %>
+            <% } %>
+    
+        </div>
+    </section>
+
+</article>

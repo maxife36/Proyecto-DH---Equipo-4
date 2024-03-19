@@ -29,7 +29,7 @@ module.exports = class DbUser {
             validator.idValidator(userId)
 
             //query config
-            const query = queryUser.newQuery(["cart"])
+            const query = queryUser.newQuery(["cart", "favoriteProducts"])
 
             const user = await User.findByPk(userId, query.config)
 
@@ -81,6 +81,7 @@ module.exports = class DbUser {
 
             //query config
             const query = queryUser.newQuery(["purchases"])
+            query.config.include[0].order = [['createdAt', 'ASC']]
 
             const user = await User.findByPk(userId, query.config)
 

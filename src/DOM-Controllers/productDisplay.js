@@ -60,6 +60,8 @@ let totalProductsNumber = 0
 let numberOfPages = 0
 
 /* Primera vez que se accede a la pagina */
+/* updateHeartIcon()
+updateCartIcon() */
 
 window.addEventListener("load", async function () {
     const currentURL = window.location.href
@@ -70,6 +72,7 @@ window.addEventListener("load", async function () {
             filterSelected[key] = value
         }
     });
+
 
     //Cargo la opcion del select ya que si la primera carga se hace a traves de una categoria, deberia figurar por cual fue
     if (filterSelected.categoryId) {
@@ -203,6 +206,10 @@ async function filtersearchExecutor() {
 
         cardConatiner.innerHTML = cardsSection.innerHTML
     }
+
+    //Actualizo lod iconos en caso de estar seleccionados como favoritos o en el carrito
+    updateHeartIcon()
+    updateCartIcon()
 }
 
 async function pagesInfoUpdate() {

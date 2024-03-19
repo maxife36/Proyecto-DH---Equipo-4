@@ -102,7 +102,7 @@ module.exports = {
 
         if (paramsUserId === userId && validateToken === updateUserToken) {
 
-            const mainHTML = await fetch(`${process.env.HOST}/users/profile-v2`, {
+            const mainHTML = await fetch(`${process.env.HOST}/users/profile`, {
                 method: 'GET',
                 headers: {
                   'Cookie': req.headers.cookie // Adjunta la cookie al encabezado de la solicitud para pasar el middleware auth

@@ -9,13 +9,16 @@ const { guestMiddleware, authMiddleware } = require("../Middlewares")
 router.get("/login", guestMiddleware, controllers.login); //Muestra el Form
 router.get("/register", guestMiddleware, controllers.register); //Muestra el Form
 router.get("/editUser", authMiddleware, controllers.editUser); //Muestra el Form
+
 router.get("/cart", authMiddleware, controllers.productCart); //Muestra el Form
+
 router.get("/profile", authMiddleware, controllers.userProfile)
-router.get("/profile-v2", authMiddleware, controllers.userProfileV2)
 router.get("/userData", authMiddleware, controllers.userData)
 router.get("/securityData", authMiddleware, controllers.securityData)
 router.get("/editSecurityData",authMiddleware, controllers.editSecurityData)
 router.get("/processLogout", authMiddleware, controllers.processLogout);
+
+router.get("/purchases", authMiddleware, controllers.purchases)
 
 router.post("/processLogin", guestMiddleware, controllers.processLogin);
 router.post("/processRegister", guestMiddleware, userProfileUpload.single("profileImg"), validateRegister, controllers.processRegister);

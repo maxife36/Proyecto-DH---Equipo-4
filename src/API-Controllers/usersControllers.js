@@ -3,53 +3,39 @@ const fs = require("fs")
 const { v4: uuid } = require("uuid")
 const { validationResult } = require("express-validator");
 const { updateCartInfoToRender } = require("./cartController");
+const { updateFavoriteCookieInfo } = require("./favoritesController");
 const { sendVerificationMail, sendSecurityUpdateMail } = require("./sendGridController");
 const { DbUser, DbCartProduct } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
+    formatDate: function (date) {
+        const year = date.getFullYear();
+        let month = (1 + date.getMonth()).toString().padStart(2, '0');
+        let day = (date.getDate() + 1).toString().padStart(2, '0');
+
+        // Formatea la fecha en formato YYYY-MM-DD para el input date
+        return `${year}-${month}-${day}`;
+    },
     productCart: (req, res) => res.render("productCart.ejs"),
     login: (req, res) => res.render("login.ejs"),
     register: (req, res) => res.render("register.ejs"),
+
     userProfile: async (req, res) => {
         const userId = req.session.loggedUser
 
         const currentUser = await DbUser.getUserById(userId)
+
+        currentUser.formatedBirthday = controllers.formatDate(currentUser.birthday)
+
         res.render("userProfile.ejs", { userInfo: currentUser })
-    },
-    userProfileV2: async (req, res) => {
-        const userId = req.session.loggedUser
-
-        const currentUser = await DbUser.getUserById(userId)
-
-        function formatDate(date) {
-            const year = date.getFullYear();
-            let month = (1 + date.getMonth()).toString().padStart(2, '0');
-            let day = (date.getDate() + 1).toString().padStart(2, '0');
-
-            // Formatea la fecha en formato YYYY-MM-DD para el input date
-            return `${year}-${month}-${day}`;
-        }
-
-        currentUser.formatedBirthday = formatDate(currentUser.birthday)
-
-        res.render("userProfile-v2.ejs", { userInfo: currentUser })
     },
     userData: async (req, res) => {
         const userId = req.session.loggedUser
 
         const currentUser = await DbUser.getUserById(userId)
 
-        function formatDate(date) {
-            const year = date.getFullYear();
-            let month = (1 + date.getMonth()).toString().padStart(2, '0');
-            let day = (date.getDate() + 1).toString().padStart(2, '0');
-
-            // Formatea la fecha en formato YYYY-MM-DD para el input date
-            return `${year}-${month}-${day}`;
-        }
-
-        currentUser.formatedBirthday = formatDate(currentUser.birthday)
+        currentUser.formatedBirthday = controllers.formatDate(currentUser.birthday)
 
         res.render("./partials/userData.ejs", { userInfo: currentUser })
     },
@@ -59,6 +45,30 @@ const controllers = {
         const currentUser = await DbUser.getUserById(userId)
 
         res.render("./partials/securityData.ejs", { userInfo: currentUser })
+    },
+    purchases: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserPurchase(userId)
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            let month = (1 + date.getMonth()).toString().padStart(2, '0');
+            let day = (date.getDate()).toString().padStart(2, '0');
+    
+            // Formatea la fecha en formato YYYY-MM-DD para el input date
+            return `${year}-${month}-${day}`;
+        }
+
+        if (currentUser) {
+            currentUser.purchases.forEach(purchase => {
+                purchase.dataParse = JSON.parse(purchase.data)
+                purchase.formatedCreatedDate = formatDate(purchase.createdAt)
+            });
+        }
+
+
+        res.render("./partials/purchases.ejs", { userInfo: currentUser })
     },
     editSecurityData: async (req, res) => {
         const currentUserId = req.session.loggedUser
@@ -113,6 +123,7 @@ const controllers = {
                     res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
 
                     await updateCartInfoToRender(userFinded.userId, req, res)
+                    await updateFavoriteCookieInfo(userFinded.userId, req, res)
 
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
@@ -281,18 +292,9 @@ const controllers = {
 
                 updatedUser = await DbUser.getUserById(userId)
 
-                function formatDate(date) {
-                    const year = date.getFullYear();
-                    let month = (1 + date.getMonth()).toString().padStart(2, '0');
-                    let day = (date.getDate() + 1).toString().padStart(2, '0');
+                updatedUser.formatedBirthday = controllers.formatDate(updatedUser.birthday)
 
-                    // Formatea la fecha en formato YYYY-MM-DD para el input date
-                    return `${year}-${month}-${day}`;
-                }
-
-                updatedUser.formatedBirthday = formatDate(updatedUser.birthday)
-
-                return res.status(200).render("userProfile-v2.ejs", { userInfo: updatedUser })
+                return res.status(200).render("userProfile.ejs", { userInfo: updatedUser })
             }
 
             if (profileImage) fs.unlink(profileImage.path, (err) => {
