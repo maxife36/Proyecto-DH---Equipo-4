@@ -119,4 +119,13 @@ async function inyectPartialEJS (url, script){
 
 
 //Remplazo la Url para simular la busqueda.. no recarga la pagina solo muestra una url distinta
-history.replaceState(null, null, fetchURL);
+// history.replaceState(null, null, fetchURL);
+
+const currentURL = window.location.href
+const querys = new URL(currentURL).searchParams
+
+querys.forEach((value, key) => {
+    if (key !== "isFirst") {
+        filterSelected[key] = value
+    }
+})
