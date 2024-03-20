@@ -1,4 +1,3 @@
-
 async function favoritesControlls(event) {
     try {
         console.log("FN: favoritesControlls(event)");
@@ -28,7 +27,7 @@ async function favoritesControlls(event) {
 
             //configuraciones HTML y CSS en caso de Exito
             if (newFavorite) {
-                
+
                 cardArticle.setAttribute("favoriteId", newFavorite.favoriteId)
                 heartIcon.style.color = "var(--verde-gotec)"
             }
@@ -64,3 +63,35 @@ async function favoritesControlls(event) {
     }
 }
 
+
+function goToProduct(event) {
+    const target = event.target
+
+    if (!target.classList.contains("deleteFavorite")) {
+        const productId = event.target.getAttribute("productId")
+
+        window.location.href = `/products/detail/${productId}`
+
+    }
+}
+
+async function deleteFavorite(event) {
+    const favoriteDataConatiner = event.target.parentNode
+    const favoriteId = favoriteDataConatiner.getAttribute("favoriteId")
+
+    const deleteFavoriteJSON = await fetch('/favorites/deleteFavorite', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ favoriteId })
+    })
+
+    const deleteFavorite = await deleteFavoriteJSON.json()
+
+    //Si se elimino correctamente el favorito, le retiro el atributo favoriteId y cambio el CSS
+    if (deleteFavorite) {
+        favoriteDataConatiner.remove()
+    }
+
+}

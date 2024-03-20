@@ -28,10 +28,21 @@ function navContainerSticky() {
 }
 
 ///Habilitar el form
+
+//Informacion Original de los inputs
+let originalFullname = null
+let originalBirthday = null
+let originalAdress = null
+
+
 function editInfoBtn(event) {
     const formUserInfo = document.querySelector(".userDataConatiner")
     const allFormInputs = formUserInfo.querySelectorAll("input")
     allFormInputs.forEach(input => {
+        if(input.id === "fullName") originalFullname = input.value
+        if(input.id === "userBirthday") originalBirthday = input.value
+        if(input.id === "userAdress") originalAdress = input.value
+
         if (input.id !== "userEmail") {
             input.removeAttribute("disabled")
             input.style.color = "var(--gris-oscuro-gotec)"
@@ -43,6 +54,10 @@ function cancelInfoBtn(event) {
     const formUserInfo = document.querySelector(".userDataConatiner")
     const allFormInputs = formUserInfo.querySelectorAll("input")
     allFormInputs.forEach(input => {
+        if(input.id === "fullName") input.value = originalFullname
+        if(input.id === "userBirthday") input.value = originalBirthday 
+        if(input.id === "userAdress") input.value = originalAdress 
+
         input.setAttribute("disabled", "disabled")
         input.style.color = "var(--gris-intermedio-gotec)"
     });

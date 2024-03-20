@@ -15,6 +15,14 @@ const url = window.location.href
 if (url.includes("productsDisplay")) headerNav.style.display = "none"
 if (url.includes("users/profile")) headerNav.style.display = "none"
 
+window.addEventListener("load", () => {
+    if (url.includes("users/profile")){ 
+        const backgroundOpacitySC = document.querySelector(".background-opacity")
+        const cartFormSC = document.querySelector("#cartForm")
+        backgroundOpacitySC.remove()
+        cartFormSC.remove()
+    }
+})
 
 /* Controlador del formulario de busqueda */
 
@@ -36,7 +44,7 @@ if (cookies) {
         isLogged = isLoggedCookie[0].split("isLogged=")[1] === "true" ? true : false
     }
 }
-/*Controlador de elemento DOM para usuarios logeados  */
+/*Controlador de elemento DOM para usuarios logueados  */
 
 if (isLogged) {
     loginIcon.style.display = "none"
@@ -73,19 +81,8 @@ loginIcon.addEventListener("click", () => {
 
 })
 
-
 //provisorio  -> Luego colocar en un archivo Domjs favoriteController.js
 
 heartIcon.addEventListener("click", () =>{
-    window.location.href ="/users/profile"
+    window.location.href ="/users/profile?section=favorites"
 })
-
-const formatDate = function (dateString) {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    let month = (1 + date.getMonth()).toString().padStart(2, '0');
-    let day = date.getDate().toString().padStart(2, '0');
-
-    // Formatea la fecha en formato YYYY-MM-DD para el input date
-    return `${year}-${month}-${day}`;
-}

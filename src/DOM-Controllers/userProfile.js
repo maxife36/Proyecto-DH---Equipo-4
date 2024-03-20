@@ -4,8 +4,8 @@ const displayContainer = document.querySelector(".settingDisplayConatiner")
 const settingsDisplayBTn = document.querySelector(".user-icon-container")
 const settingsExitBtn = document.querySelector("#settingsExit")
 
-const usarData = document.querySelector("#usarData")
-const usarDataAngle = usarData.querySelector("i")
+const userData = document.querySelector("#userData")
+const userDataAngle = userData.querySelector("i")
 const settingsArt3Childe = document.querySelector(".settingsArt:nth-child(3)")
 const settingList = document.querySelector(".settingList")
 const settingListLi = settingList.querySelectorAll("li")
@@ -18,12 +18,12 @@ displayContainer.style.width = `${windowsWidth - settingsSectionWidth}px`
 
 let userDataFlag = false
 
-usarData.addEventListener("click", () => {
+userData.addEventListener("click", () => {
     userDataFlag = userDataFlag ? false : true
 
     if (userDataFlag) {
         settingList.style.height = "70px"
-        usarDataAngle.style.transform = "rotate(180deg) translateY(5px)"
+        userDataAngle.style.transform = "rotate(180deg) translateY(5px)"
         settingListLi.forEach(li => {
             li.style.pointerEvents = "auto"
             li.style.opacity = 1
@@ -31,13 +31,12 @@ usarData.addEventListener("click", () => {
         settingsArt3Childe.style.marginTop = "10px"
     } else {
         settingList.style.height = "0px"
-        usarDataAngle.style.transform = "rotate(0deg) translateY(0px)"
+        userDataAngle.style.transform = "rotate(0deg) translateY(0px)"
         settingListLi.forEach(li => {
             li.style.opacity = 0
             li.style.pointerEvents = "none"
         })
         settingsArt3Childe.style.marginTop = "20px"
-
     }
 })
 
@@ -82,65 +81,42 @@ settingsExitBtn.addEventListener("click", () => {
 /* --links controllers-- */
 const personalDataLink = document.querySelector("#personalData")
 const securityDataLink = document.querySelector("#securityData")
-const purchasesink = document.querySelector("#purchases")
+const purchasesLink = document.querySelector("#purchases")
+const favoritesLink = document.querySelector("#favorites") 
+const cartDisplayLink = document.querySelector("#cartDisplay")
+const dashboardLink = document.querySelector("#dashboard") //FALTA
 
-personalDataLink.addEventListener("click", async () => {
+
+personalDataLink.addEventListener("click", () => inyectPartialEJS ("userData"))
+securityDataLink.addEventListener("click", () => inyectPartialEJS ("securityData", "securityData"))
+purchasesLink.addEventListener("click", () => inyectPartialEJS ("purchases", "purchases"))
+favoritesLink.addEventListener("click", () => inyectPartialEJS ("favorites"))
+cartDisplayLink.addEventListener("click", () => inyectPartialEJS ("profileCart", "profileCart"))
+
+async function inyectPartialEJS (url, script){
     try {
 
         //Peticion que devuelve un archivo HTML con la pagina cargada
-        const fetchURL = "/users/userData"
-        const personalDataHTML = await fetch(fetchURL)
+        const fetchURL = `/users/${url}`
+        const DataHTML = await fetch(fetchURL)
 
-        if (personalDataHTML) {
-            const productsDisplayTxt = await personalDataHTML.text()
-            displayContainer.innerHTML = productsDisplayTxt
+        if (DataHTML) {
+            const DisplayTxt = await DataHTML.text()
+            displayContainer.innerHTML = DisplayTxt
+
+            if (script) {
+                //inyecto script por separado para que lo lea correctamente
+                const scriptElement = document.createElement('script');
+                scriptElement.src = `/DOM-Controllers/${script}`;
+                displayContainer.appendChild(scriptElement);
+            }
         }
 
     } catch (error) {
         console.log(error);
     }
-})
+}
 
-securityDataLink.addEventListener("click", async () => {
-    try {
 
-        //Peticion que devuelve un archivo HTML con la pagina cargada
-        const fetchURL = "/users/securityData"
-        const securityDataHTML = await fetch(fetchURL)
-
-        if (securityDataHTML) {
-            const productsDisplayTxt = await securityDataHTML.text()
-            displayContainer.innerHTML = productsDisplayTxt
-
-            //inyecto script por separado para que lo lea correctamente
-            const scriptElement = document.createElement('script');
-            scriptElement.src = "/DOM-Controllers/securityData";
-            displayContainer.appendChild(scriptElement);
-        }
-
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-purchasesink.addEventListener("click", async () => {
-    try {
-
-        //Peticion que devuelve un archivo HTML con la pagina cargada
-        const fetchURL = "/users/purchases"
-        const securityDataHTML = await fetch(fetchURL)
-
-        if (securityDataHTML) {
-            const productsDisplayTxt = await securityDataHTML.text()
-            displayContainer.innerHTML = productsDisplayTxt
-
-            //inyecto script por separado para que lo lea correctamente
-            const scriptElement = document.createElement('script');
-            scriptElement.src = "/DOM-Controllers/purchases";
-            displayContainer.appendChild(scriptElement);
-        }
-
-    } catch (error) {
-        console.log(error);
-    }
-})
+//Remplazo la Url para simular la busqueda.. no recarga la pagina solo muestra una url distinta
+history.replaceState(null, null, fetchURL);

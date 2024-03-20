@@ -1,0 +1,55 @@
+<article class="profileCartConatiner flx-c-nw" >
+    
+    <section class="centerProfileCartConatiner flx-c-nw">
+        
+        <div class="titleProfileCartSection flx-r-nw">
+          <h2>Carrito de Compras</h2>
+        </div>
+
+        <div class="profileCartProducts flx-r-w">
+
+            <% if (locals.cartProducts) { %>
+
+                <% locals.cartProducts.forEach(cartProduct => {  %>
+
+                    <article class="profileCartDataConatiner flx-r-nw">
+
+                        <input type="hidden" name="cartProductId" id="cartProductId" value="<%= cartProduct.cartProductId %>">
+                        <input type="hidden" name="productId" id="productId" value="<%= cartProduct.productId %>">
+
+                        <div class="leftProfileCartBorder"></div>
+
+                        <div class="profileCart-img-container flx-r-nw">
+                            <img src="/img/Products-Image<%= cartProduct.product.images[0].imageTitle %>" alt="">
+                        </div>
+
+                        <div class="profileCart-quantity-container flx-r-w">
+                            <i class="profileCart-minus-icon fa-solid fa-minus flx-r-w" onclick="profileCartChangeQuantity(event, 0)"></i>
+
+                            <input type="number" class="profileCart-quantity-input" onfocus="profileCartEnterAction(event)"  onchange="profileCartUpdateProduct(event)" min="1" value="<%= cartProduct.quantity %>">
+
+                            <i class="profileCart-plus-icon fa-solid fa-plus flx-r-w" onclick="profileCartChangeQuantity(event, 1)"></i>
+                        </div>
+
+                        <% if (cartProduct.discount) { %>
+                            <i class="profileCart-discount-text flx-r-nw">
+                                %<%= cartProduct.discount %> OFF
+                            </i>
+                        <% } else{ %>
+                            <i class="profileCart-discount-text"></i>
+                        <% } %>
+
+                        <p class="profileCart-product-subtotal"><%= cartProduct.total.toFixed(2) %></p>
+
+                        <i class="fa-solid fa-x flx-r-nw profileCart-delete-product" onclick="profileCartDeleteProduct(event)"></i>
+
+                    </article>
+
+                <% }) %>
+
+            <% } %>
+    
+        </div>
+    </section>
+
+</article>

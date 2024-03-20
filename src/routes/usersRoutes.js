@@ -16,6 +16,8 @@ router.get("/profile", authMiddleware, controllers.userProfile)
 router.get("/userData", authMiddleware, controllers.userData)
 router.get("/securityData", authMiddleware, controllers.securityData)
 router.get("/editSecurityData",authMiddleware, controllers.editSecurityData)
+router.get("/favorites",authMiddleware, controllers.favoritesData)
+router.get("/profileCart",authMiddleware, controllers.profileCart)
 router.get("/processLogout", authMiddleware, controllers.processLogout);
 
 router.get("/purchases", authMiddleware, controllers.purchases)

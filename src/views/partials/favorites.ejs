@@ -1,0 +1,47 @@
+<article class="favoriteConatiner flx-c-nw" >
+    
+    <section class="centerFavoriteConatiner flx-c-nw">
+        
+        <div class="titleSection flx-r-nw">
+          <h2>Productos Favoritos</h2>
+        </div>
+
+        <div class="favoriteProducts flx-r-w">
+
+            <% if (userInfo) { %>
+
+                <% userInfo.forEach( productItem => { %>
+
+                    <div class="favoriteDataConatiner flx-r-nw" productId="<%= productItem.product.productId %>" favoriteId="<%= productItem.favoriteId %>" onclick="goToProduct(event)">
+                        
+
+                        <div class="leftFavoriteBorder"></div>
+
+                        <div class="favorite-img-container flx-r-nw">
+                            <img src="/img/Products-Image<%= productItem.product.images[0].imageTitle %>" alt="">
+                        </div>
+
+                        <p class="favoriteProductName"><%= productItem.product.productName %></p>
+
+                        <% if (productItem.product.discount) { %>
+                            <i class="favorite-discount-text">
+                                %<%= productItem.product.discount %> OFF
+                            </i>
+                        <% } else {%>
+                            <i class="favorite-discount-text"></i>
+                        <% } %>
+
+                        <p class="favorite-product-price"><%= productItem.product.productPrice.toFixed(2) %></p>
+
+                        <i class="fa-solid fa-x flx-r-nw deleteFavorite" onclick="deleteFavorite(event)"></i>
+                        
+                    </div>
+
+                <% }) %>
+
+            <% } %>
+    
+        </div>
+    </section>
+
+</article>

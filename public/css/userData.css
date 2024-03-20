@@ -82,7 +82,7 @@
 
 .dataConatiner input:focus{
     height: 60%;
-    background-color: #f5f5f5ec ;
+    background-color: #f0f0f0 ;
     color: var(--gris-oscuro-gotec);
 }
 

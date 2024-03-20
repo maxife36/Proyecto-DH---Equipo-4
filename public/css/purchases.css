@@ -1,22 +1,24 @@
 #purchasesContainer {
+    position: relative !important;
     justify-content: flex-start;
-    overflow-x: hidden;
-    overflow-y: scroll;
+
+    padding-top: 90px;
+    padding-bottom: 20px;
 }
 
-
-.paddingTop {
+#purchaseTitle{
+    position: absolute !important;
     top: 0;
 }
 
-.paddingBottom {
-    bottom: 0;
+.purchasesContainer{
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .purchaseGeneralData {
     justify-content: flex-start;
     color: var(--azul-intermedio-gotec) !important;
-
 }
 
 .purchaseCreatedDate {

@@ -1,0 +1,130 @@
+.favoriteConatiner{
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--gris-claro-gotec);
+    padding: 40px;
+}
+
+.centerFavoriteConatiner{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    padding-top: 90px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: var(--gris-intermedio-gotec) 0px 0px 10px;
+    background-color: var(--blanco-gotec);
+    justify-content: flex-start;
+}
+
+.titleSection,
+.favoriteDataConatiner{
+    width: 100%;
+    height: 80px;
+    color: var(--verde-oscuro-gotec);
+    font-size: 15px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--gris-intermedio-gotec);
+}
+
+.titleSection{
+    position: absolute;
+    top: 0;
+}
+
+.favoriteDataConatiner {
+    justify-content: flex-start;
+    color: var(--azul-intermedio-gotec) !important;
+    cursor: pointer;
+    transition: all 0.15s linear;
+
+}
+
+.favoriteDataConatiner:hover {
+    background-color: #f0f0f0 ;
+
+}
+.favoriteDataConatiner:hover .leftFavoriteBorder {
+    height: 70%;
+    border-left: 4px solid var(--verde-oscuro-gotec);
+
+}
+
+.favoriteProducts{
+    width: 93%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* --- CSS para cada producto --- */
+
+.leftFavoriteBorder{
+    width: 20px;
+    height: 50%;
+    border-left: 3.5px solid var(--gris-intermedio-gotec);
+    pointer-events: none;
+    transition: all 0.15s linear;
+}
+
+.favorite-img-container {
+    width: 120px;
+    height: 80px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.favorite-img-container img {
+    width: 100%;
+    height: 80%;
+    object-fit: contain;
+    pointer-events: none;
+
+}
+
+.favoriteProductName{
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 20px;
+    pointer-events: none;
+
+}
+
+.favorite-discount-text {
+    flex-grow: 1;
+    color: var(--verde-oscuro-gotec);
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    pointer-events: none;
+
+}
+
+.favorite-product-price{
+    all: unset;
+    width: 120px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gris-oscuro-gotec);
+    pointer-events: none;
+}
+
+.favorite-product-price::before{
+    content: "$";
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--gris-oscuro-gotec);
+    margin-right: 5px;
+    pointer-events: none;
+
+}
+
+.deleteFavorite{
+    width: 40px;
+    font-size: 1.4rem;
+    color: var(--verde-gotec);
+    padding-right: 5px;
+    justify-content: flex-end;
+}

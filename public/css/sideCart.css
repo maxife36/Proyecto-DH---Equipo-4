@@ -169,11 +169,6 @@
     font-weight: bold;
     color: var(--gris-oscuro-gotec);
 }
-/* .sc-shipping-subtotal{
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: var(--gris-oscuro-gotec);
-} */
 
 .sc-product-subtotal::before,
 .sc-shipping-subtotal::before,

@@ -5,7 +5,7 @@ const { validationResult } = require("express-validator");
 const { updateCartInfoToRender } = require("./cartController");
 const { updateFavoriteCookieInfo } = require("./favoritesController");
 const { sendVerificationMail, sendSecurityUpdateMail } = require("./sendGridController");
-const { DbUser, DbCartProduct } = require("../database/controllers");
+const { DbUser, DbCartProduct, DbFavorite } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
@@ -33,9 +33,13 @@ const controllers = {
     userData: async (req, res) => {
         const userId = req.session.loggedUser
 
+        const {onlyData} = req.query
+
         const currentUser = await DbUser.getUserById(userId)
 
         currentUser.formatedBirthday = controllers.formatDate(currentUser.birthday)
+
+        if(onlyData === "true") return res.send(currentUser)
 
         res.render("./partials/userData.ejs", { userInfo: currentUser })
     },
@@ -70,6 +74,14 @@ const controllers = {
 
         res.render("./partials/purchases.ejs", { userInfo: currentUser })
     },
+    favoritesData: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbFavorite.getFavoriteByUserId(userId)
+
+        res.render("./partials/favorites.ejs", { userInfo: currentUser })
+    },
+    profileCart: async (req, res) =>  res.render("./partials/profileCart.ejs"),
     editSecurityData: async (req, res) => {
         const currentUserId = req.session.loggedUser
 

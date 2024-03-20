@@ -1,6 +1,12 @@
+require('dotenv').config()
+
 const { DbProduct } = require("../database/controllers")
 
 module.exports = {
+    hostName: (req, res) => {
+        const HOST = process.env.HOST
+        res.send(HOST)
+    },
     index: async (req, res) => {
         const products = await DbProduct.getProductPagination(15, 0)
         res.render("index.ejs", { products })

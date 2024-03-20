@@ -14,6 +14,7 @@ const pathUserProfile = path.resolve("src", "DOM-Controllers", "userProfile.js")
 const pathUserData = path.resolve("src", "DOM-Controllers", "userData.js") 
 const pathSecurityData = path.resolve("src", "DOM-Controllers", "securityData.js") 
 const pathPurchases = path.resolve("src", "DOM-Controllers", "purchases.js") 
+const pathProfileCart = path.resolve("src", "DOM-Controllers", "profileCart.js") 
 
 const controllers = {
     darkMode: (req,res) => res.sendFile(pathDkm),
@@ -29,7 +30,8 @@ const controllers = {
     userProfile: (req,res) => res.sendFile(pathUserProfile),
     userData: (req,res) => res.sendFile(pathUserData),
     securityData: (req,res) => res.sendFile(pathSecurityData),
-    purchases: (req,res) => res.sendFile(pathPurchases)
+    purchases: (req,res) => res.sendFile(pathPurchases),
+    profileCart: (req,res) => res.sendFile(pathProfileCart)
 }
 
 module.exports = controllers;

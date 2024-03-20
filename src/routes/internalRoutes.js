@@ -17,5 +17,6 @@ router.get("/userProfile", controllers.userProfile);
 router.get("/userData", controllers.userData);
 router.get("/securityData", controllers.securityData);
 router.get("/purchases", controllers.purchases);
+router.get("/profileCart", controllers.profileCart);
 
 module.exports = router

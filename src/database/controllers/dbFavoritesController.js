@@ -39,7 +39,8 @@ module.exports = class DbFavorite {
     static async getFavoriteByUserId(userId) {
         try {
             //query config
-            const query = queryFavorite.newQuery()
+            const query = queryFavorite.newQuery(["product"])
+            query.addAssociation("images", ["product"])
             query.addWhere(userId, "userId")
 
             const favorites = await Favorite.findAll(query.config)

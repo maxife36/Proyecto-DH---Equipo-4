@@ -2,11 +2,11 @@
     
     <section class="centerConatiner flx-c-nw" id="purchasesContainer">
 
+        <div class="dataConatiner flx-r-nw" id="purchaseTitle">
+          <h2>Historial de Compras</h2>
+        </div>
         
-        <div class="inputsConatiner purchasesContainer flx-c-nw">
-            <div class="dataConatiner flx-r-nw">
-              <h2>Historial de Compras</h2>
-            </div>
+        <div class="inputsConatiner purchasesContainer flx-r-w">
             <% if (userInfo && userInfo.purchases) { %>
                 <% userInfo.purchases.forEach( purchase => { %>
                     <div class="dataConatiner purchaseGeneralData flx-r-nw">
