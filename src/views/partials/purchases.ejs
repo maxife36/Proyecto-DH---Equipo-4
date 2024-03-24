@@ -7,8 +7,8 @@
         </div>
         
         <div class="inputsConatiner purchasesContainer flx-r-w">
-            <% if (userInfo && userInfo.purchases) { %>
-                <% userInfo.purchases.forEach( purchase => { %>
+            <% if (userInfo) { %>
+                <% userInfo.forEach( purchase => { %>
                     <div class="dataConatiner purchaseGeneralData flx-r-nw">
                         <input type="hidden" id="purchaseId" value="<%= purchase.purchaseId %>">
                         <input type="date" class="purchaseCreatedDate" value="<%= purchase.formatedCreatedDate %>" disabled>

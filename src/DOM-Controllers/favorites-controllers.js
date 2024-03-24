@@ -1,6 +1,5 @@
 async function favoritesControlls(event) {
     try {
-        console.log("FN: favoritesControlls(event)");
         if (!isLogged) return
 
         const cardArticle = getParentNode(event, "tarjeta-articulo")
@@ -62,7 +61,6 @@ async function favoritesControlls(event) {
         console.log(error.message);
     }
 }
-
 
 function goToProduct(event) {
     const target = event.target

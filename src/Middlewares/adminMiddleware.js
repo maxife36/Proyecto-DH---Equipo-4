@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
       
       //Si no es Admin te redirige al Home
       if (!user.admin) return res.redirect("/")
-
+      
       //Si el usuario es Admin continua la ejecucion
       next()
    } else {

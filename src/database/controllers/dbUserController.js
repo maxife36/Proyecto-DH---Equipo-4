@@ -82,7 +82,7 @@ module.exports = class DbUser {
             //query config
             const query = queryUser.newQuery(["purchases"])
             query.config.include[0].order = [['createdAt', 'ASC']]
-
+         
             const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)

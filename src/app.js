@@ -41,6 +41,9 @@ app.use(cookieParser())
 app.use(cookieSearcher)
 app.use(globalDataMiddleware)
 
+// const morgan = require("morgan")
+// app.use(morgan("dev"))
+
 /* ---Rutas Principales de Express--- */
 
 app.use("/DOM-Controllers", internalRoutes)
@@ -52,6 +55,9 @@ app.use("/favorites", favoritesRoutes)
 app.use("/admin", adminMiddleware, adminRoutes)
 app.use("/mercadopago", mpPaymentRoutes)
 app.use("/mail-service", sendGridRoutes)
+app.use("*", (req,res) => {
+    res.render("notFound")
+})
 
 
 app.listen(PORT, () => {

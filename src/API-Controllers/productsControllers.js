@@ -1,15 +1,37 @@
 const fs = require("fs")
 const { validationResult } = require("express-validator");
-const { DbProduct, DbFeature, DbCategory } = require("../database/controllers");
+const { DbProduct, DbFeature, DbCategory, DbUser, DbComment } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
     productDetail: async (req, res) => {
         try {
+            const userId = req.session.loggedUser
+
             const productId = req.params.productId
 
             const product = await DbProduct.getProductById(productId)
 
+            if (product) {
+                const userInfo = await DbUser.getUserById(userId)
+                if (userInfo) {
+                    product.currentUsername = userInfo.username
+                }
+
+                const numComments = product.comments.length
+
+                //Creo nueva propiedad con el score global
+                if (numComments) {
+                    let sumCommentsScore = 0
+
+                    product.comments.forEach(comment => {
+                        sumCommentsScore += comment.score
+                    });
+
+                    product.totalScore = sumCommentsScore / numComments
+                }
+            }
+            
             res.render("productDetail", { product })
 
         } catch (err) {
@@ -29,7 +51,7 @@ const controllers = {
             const productId = req.params.productId
 
             const product = await DbProduct.getProductById(productId)
-            
+
             res.render("productEdit", { product })
         } catch (err) {
             throw new Error(err.message)
@@ -41,9 +63,9 @@ const controllers = {
 
             const gte = req.query.gte
             const lte = req.query.lte
-            const order = req.query.order 
+            const order = req.query.order
 
-            const products= await DbProduct.getProductByPrice(gte, lte, order)
+            const products = await DbProduct.getProductByPrice(gte, lte, order)
 
             res.render("/", { products }) //Cambiar a pagina de productos
 
@@ -59,7 +81,7 @@ const controllers = {
 
             const keywords = req.query.keyword
 
-            const products= await DbProduct.getSearchProduct(keywords)
+            const products = await DbProduct.getSearchProduct(keywords)
 
             res.render("/", { products }) //Cambiar a pagina de productos
 
@@ -293,7 +315,7 @@ const controllers = {
     deleteProduct: async (req, res) => {
         try {
             const productId = req.params.productId
-            
+
             const currentProduct = await DbProduct.getProductById(productId)
 
             await DbProduct.deleteProduct(productId)
@@ -318,14 +340,14 @@ const controllers = {
             throw new Error(err.message)
         }
     },
-    productDisplay:async(req, res) => {
+    productDisplay: async (req, res) => {
         try {
             /* por query categoryId, keywords, gte, lte , order, limit, offset*/
-            const filtersKeys = Object.keys(req.query) 
+            const filtersKeys = Object.keys(req.query)
 
-            const {allData, isFirst} = req.query
+            const { allData, isFirst } = req.query
 
-            if(Boolean(isFirst)) return res.status(200).render("productsDisplay", { products :[] })
+            if (Boolean(isFirst)) return res.status(200).render("productsDisplay", { products: [] })
 
 
             if (!filtersKeys.length) throw new Error("No se pasaron parametros validos")
@@ -336,11 +358,47 @@ const controllers = {
 
             const products = await DbProduct.customFilter(filterObj)
 
-            if(Boolean(allData)) return res.send(products)
+            if (Boolean(allData)) return res.send(products)
 
             res.status(200).render("productsDisplay", { products })
         } catch (err) {
             throw new Error(err.message)
+        }
+    },
+    commentProduct: async (req, res) => {
+        try {
+            const productId = req.params.productId
+            const userId = req.session.loggedUser
+            const { commentBody, score } = req.body
+
+            data = { userId, productId, commentBody, score }
+
+            const newComment = await DbComment.createComment(data)
+
+            if (!newComment) return res.send([false, "No se agrego el comentario"]) 
+
+            return res.redirect(`/products/detail/${productId}`)
+        } catch (error) {
+            console.log(error.message);
+        }
+    },
+    deleteComment: async (req, res) => {
+        try {
+            const userId = req.session.loggedUser
+            const { commentId } = req.body
+
+            if (userId) {
+                const commentDeleted = await DbComment.deleteComment(commentId)
+                
+                if (!commentDeleted) return res.send([false, "No se elimino el comentario"]) 
+
+                console.log(commentDeleted);
+                return res.send(`${commentDeleted}`)
+            }
+
+            return res.send(false)
+        } catch (error) {
+            console.log(error.message);
         }
     }
 }

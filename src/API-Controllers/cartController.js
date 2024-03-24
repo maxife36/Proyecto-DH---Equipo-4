@@ -2,14 +2,33 @@ const { DbCartProduct } = require("../database/controllers")
 
 
 const controllers = {
+  getOneCartProductInfo: async (req, res) => {
+    try {
+      const { loggedUser: userId } = req.session
+
+      if (userId) {
+
+        const { cartProductId } = req.params
+
+        const cartProduct = await DbCartProduct.getCartProductById(cartProductId)
+
+        const total = await cartProduct.total * (1 - (cartProduct.product.discount / 100))
+
+        console.log(cartProduct);
+        res.send({ cartProduct, total })
+      }
+    } catch (err) {
+      console.log("ERROR fn : getCartProductInfo -> ", err.message);
+    }
+  },
   getCartProductsInfo: async (req, res) => {
     try {
       const { loggedUser: userId } = req.session
 
       if (userId) {
-        
+
         const allCartProducts = await DbCartProduct.getCartProductsByUserId(userId)
-      
+
         res.send(allCartProducts)
       }
     } catch (err) {
@@ -36,7 +55,11 @@ const controllers = {
       // Modificacion en DB del producto
       const result = await DbCartProduct.updateCartProductData(cartProductId, newProduct)
 
-      if (!result[0]) return res.send([false, "No se agrego al carrito"])
+      if (!result[0]) {
+        if (result[1]) return res.send([false, result[1]])
+
+        return res.send([false, "No se agrego al carrito"])
+      } 
 
       const { total, product } = await DbCartProduct.getCartProductById(cartProductId)
 
@@ -72,13 +95,13 @@ const controllers = {
   cleanCartProducts: async (req, res) => {
     try {
       const { loggedUser: userId } = req.session
-      
+
       const cleanResult = await DbCartProduct.cleanCartProductsByUserId(userId)
-      
-      if (!cleanResult) return res.send([false, "No se limpio el carrito"]) 
-      
+
+      if (!cleanResult) return res.send([false, "No se limpio el carrito"])
+
       await controllers.updateCartInfoToRender(userId, req, res) //actualiza info del carrito para consumo del front
-      
+
       return res.send([true, "El producto fue eliminado con exito"])
     } catch (err) {
       console.log("ERROR fn : cleanCartProducts -> ", err.message)
@@ -108,7 +131,7 @@ const controllers = {
 
       await controllers.updateCartInfoToRender(userId, req, res) //actualiza info del carrito para consumo del front
 
-      return res.send([true, "El producto fue agregado con exito"])
+      return res.send([true, "El producto fue agregado con exito", addedProduct])
     } catch (err) {
       console.log("ERROR fn : addProductToCart -> ", err.message);
     }

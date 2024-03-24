@@ -22,11 +22,11 @@ const radioHomeDelivery = document.querySelector("#homeDelivery")
 let sideCartFlag = false
 
 /* ---- LISTENERS FUNCTIONS---- */
-cartIcon.addEventListener("click", () => {
+function cartIconCSSChange (){
     const viewportWidth = window.innerWidth
-
+    
     sideCartFlag = sideCartFlag ? false : true
-
+    
     if (sideCartFlag) {
         sideCartContainer.style.width = viewportWidth >= 440 ? "440px" : "100vw"
         backgroundOpacity.style.width = "100vw"
@@ -42,8 +42,9 @@ cartIcon.addEventListener("click", () => {
         scShippingContainer.style.opacity = 0
         scTotalContainer.style.opacity = 0
     }
+}
 
-})
+cartIcon.addEventListener("click",cartIconCSSChange)
 
 backgroundOpacity.addEventListener("click", () => {
 
@@ -106,6 +107,12 @@ const deleteProduct = async (event) => {
 
         productCardContainer.removeChild(productCard)
 
+        const currentUrl =  window.location.href
+        if (currentUrl.includes("/products/detail/")) {
+            const cartIcon = document.querySelector("#cartIconProductDetail")
+            cartIcon.style.color = "var(--azul-gotec)" 
+        }
+
         updateTotal()
 
         // Cambio de cart Icon correspondiente
@@ -133,6 +140,8 @@ const updateProduct = async (event, quantityParam) => {
 
     const productCard = event.target.parentNode.parentNode
     const inputQuantity = productCard.querySelector(".quantity-input")
+    const stock = + productCard.querySelector("#productStock")?.value
+
     const cartProductId = productCard.querySelector("#cartProductId").value
     const productId = productCard.querySelector("#productId").value
     const productSubTotal = productCard.querySelector(".sc-product-subtotal")
@@ -156,10 +165,18 @@ const updateProduct = async (event, quantityParam) => {
 
     const result = await resultJSON.json()
 
+    if (!result[0] && result[1] === "No hay stock") {
+        inputQuantity.style.border = "1px solid Red"
+        inputQuantity.style.color = "Red"
+        return
+    }
+    
     if (!result[0]) return console.log(result[1]);// si no se modifica en la base de dato, no permito que se cambie sus datos en el front 
 
     inputQuantity.value = result[1].quantity
     productSubTotal.textContent = (result[1].total).toFixed(2)
+    inputQuantity.style.border = "1px solid var(--gris-intermedio-gotec)"
+    inputQuantity.style.color = "var(--verde-masOscuro-gotec)"
 
     updateTotal()
 }
@@ -169,12 +186,15 @@ const changeQuantity = (event, action) => {
 
     const productCard = event.target.parentNode.parentNode
     const inputQuantity = productCard.querySelector(".quantity-input")
+    // const stock = + productCard.querySelector("#productStock")?.value
+    
+
     let quantity = Number(inputQuantity.value)
 
     if (quantity && quantity >= 1) {
         if (action) {
             quantity++
-        } else {
+        } else if (!action) {
             quantity--
         }
 
@@ -244,6 +264,8 @@ async function addToCart(event) {
             <article class="sc-product-card flx-r-nw">
                 <input type="hidden" name="cartProductId" id="cartProductId" value="${cartProduct.cartProductId}">
                 <input type="hidden" name="productId" id="productId" value="${cartProduct.productId}">
+                <input type="hidden" name="productStock" id="productStock" value="${cartProduct.product.stock}">
+                
                 <div class="sc-img-container  flx-r-nw">
                     <img src="/img/Products-Image${cartProduct.product.images[0].imageTitle}" alt="">
                 </div>

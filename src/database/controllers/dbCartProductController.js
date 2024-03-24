@@ -1,4 +1,5 @@
 const { Cart_Product, seqQuery } = require("../models")
+const DbProduct = require("./dbPrdouctController")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
 const validator = require("../seqQueyConfig/assets/validators")
@@ -43,6 +44,7 @@ module.exports = class DbCartProduct {
 
             //query config
             const query = queryCartProduct.newQuery(["cart", "product"])
+            query.config.include[1].include = [{ association: "images" }]
            
             const cartProduct = await Cart_Product.findByPk(cartProductId, query.config)
 
@@ -96,7 +98,11 @@ module.exports = class DbCartProduct {
 
             if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
 
+            const productInfo = await DbProduct.getProductById(productId)
+            const currentStock = productInfo?.stock
 
+            if (quantity > currentStock) return [false, "No hay stock"]
+            
             //caracteristica modificada
             const updateCartProduct = {
                 cartId,

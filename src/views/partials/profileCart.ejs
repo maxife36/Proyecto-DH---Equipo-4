@@ -1,9 +1,13 @@
 <article class="profileCartConatiner flx-c-nw" >
     
-    <section class="centerProfileCartConatiner flx-c-nw">
+    <form class="centerProfileCartConatiner flx-c-nw" action="/mercadopago/create-Order" method="post">
+        <input type="hidden" name="shippingCost" id="profileCartshippingCost" value="0"></input>
         
         <div class="titleProfileCartSection flx-r-nw">
           <h2>Carrito de Compras</h2>
+          <p class="profileCart-total flx-r-nw"></p>
+          <button type="button" class="navBtn" onclick="" id="profileCartShippingBtn">Envío</button>
+          <button type="submit" class="navBtn" onclick="" id="profileCartPaymentBtn">Pagar</button>
         </div>
 
         <div class="profileCartProducts flx-r-w">
@@ -15,7 +19,7 @@
                     <article class="profileCartDataConatiner flx-r-nw">
 
                         <input type="hidden" name="cartProductId" id="cartProductId" value="<%= cartProduct.cartProductId %>">
-                        <input type="hidden" name="productId" id="productId" value="<%= cartProduct.productId %>">
+                        <input type="hidden" name="productId" id="productId" value="<%= cartProduct.productId %>" >
 
                         <div class="leftProfileCartBorder"></div>
 
@@ -50,6 +54,6 @@
             <% } %>
     
         </div>
-    </section>
+    </form>
 
 </article>

@@ -1,0 +1,51 @@
+<article class="profileCartConatiner flx-c-nw" >
+    
+    <section class="centerProfileCartConatiner flx-c-nw" action="/mercadopago/create-Order" method="post">
+         
+        <div class="titleSection flx-r-nw">
+            <h2>Todos los Productos</h2>
+        </div>
+  
+        <div class="profileCartProducts flx-r-w">
+
+            <% if (locals.allProducts) { %>
+
+                <% locals.allProducts.forEach(product => {  %>
+
+                    <article class="profileCartDataConatiner flx-r-nw">
+                        <input type="hidden" name="productId" id="productId" value="<%= product.productId %>" >
+
+                        <div class="leftProfileCartBorder"></div>
+
+                        <div class="profileCart-img-container flx-r-nw">
+                            <img src="/img/Products-Image<%= product.images[0].imageTitle %>" alt="">
+                        </div>
+
+                        <p class="favoriteProductName"><%= product.productName %></p>
+
+                        <div class="profileCart-quantity-container flx-r-w">
+                            <input type="number" class="profileCart-quantity-input"  value="<%= product.stock %>" disabled>
+                        </div>
+
+                        <% if (product.discount) { %>
+                            <i class="profileCart-discount-text flx-r-nw">
+                                %<%= product.discount %> OFF
+                            </i>
+                        <% } else{ %>
+                            <i class="profileCart-discount-text"></i>
+                        <% } %>
+
+                        <p class="profileCart-product-subtotal"><%= product.productPrice.toFixed(2) %></p>
+
+                        <i class="fa-solid fa-x flx-r-nw profileCart-delete-product" onclick="profileCartDeleteProduct(event)"></i>
+
+                    </article>
+
+                <% }) %>
+
+            <% } %>
+    
+        </div>
+    </section>
+
+</article>

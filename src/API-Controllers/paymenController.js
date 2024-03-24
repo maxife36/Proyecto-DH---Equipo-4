@@ -24,6 +24,72 @@ const preference = new Preference(client);
 const payment = new Payment(client);
 
 module.exports = {
+    createOneProductOrder: async (req, res) => {
+        try {
+            //recuperar del req.body todos los cartProductId  que estan en el input hidden, con esos se busca en la DB para encontrar todos los productos con cantidades y subtotales
+            const { loggedUser: userId  } = req.session
+            
+            
+            if (userId) {
+                let { productId: requireProductId, quantity, productDetailShippingCost} = req.body
+                console.log(req.body);
+
+                const { email, fullname } = await DbUser.getUserById(userId)
+    
+                const selectedProduct = await DbProduct.getProductById(requireProductId)
+
+                if(!selectedProduct) throw new Error("No se encontró el producto en la base de datos")
+
+                const { productId, productName, productPrice, discount } = selectedProduct
+                const unitPrice = productPrice * (1 - (discount / 100))
+                
+                //obtengo el precio en Number ya que viene en formato "$ 400"
+                productDetailShippingCost = parseFloat(productDetailShippingCost.replace(/\$|\s/g, ''))
+
+                //Eliminar en produccion
+                const NGROK_HOST = await ngrok.connect({ addr: 4000, authtoken: process.env.NGROK_AUTHTOKEN })
+    
+                // Step 4: Create the request object
+                const body = {
+                    items: [{
+                        id: productId,
+                        title: productName,
+                        quantity: +quantity,
+                        unit_price: +unitPrice,
+                        currency_id: "ARS",  //OPCIONAL
+                    }],
+                    payer: {
+                        name: fullname,
+                        email: email  // OPCIONAL [userEmail]
+                    },
+                    shipments: {
+                        "cost": Number(productDetailShippingCost),
+                    },
+                    back_urls: {
+                        success: `${HOST}/mercadopago/success`,
+                        pending: `${HOST}/mercadopago/pending`,
+                        failure: `${HOST}/mercadopago/failure`
+                    },
+                    notification_url: `${NGROK_HOST || HOST}/mercadopago/oneProductWebhook/${userId}`
+                }
+    
+                // Step 5: Create request options object - Optional
+                const requestOptions = {
+                    idempotencyKey: uuid(),
+                };
+    
+                // Step 6: Make the request
+                const result = await preference.create({ body, requestOptions })
+    
+                return res.redirect(result.init_point)
+            }
+            
+            return res.redirect("/users/login")
+        } catch (err) {
+            console.log(err.message);
+            res.send(err.message)
+        }
+    },
     createOrder: async (req, res) => {
         try {
             //recuperar del req.body todos los cartProductId  que estan en el input hidden, con esos se busca en la DB para encontrar todos los productos con cantidades y subtotales
@@ -72,7 +138,7 @@ module.exports = {
                     pending: `${HOST}/mercadopago/pending`,
                     failure: `${HOST}/mercadopago/failure`
                 },
-                notification_url: `${NGROK_HOST || HOST}/mercadopago/webhook/${userId}/${cartId}`
+                notification_url: `${NGROK_HOST || HOST}/mercadopago/cartWebhook/${userId}/${cartId}`
             }
 
             // Step 5: Create request options object - Optional
@@ -90,7 +156,27 @@ module.exports = {
         }
     },
 
-    recieveWebhook: async (req, res) => {
+    recieveOneProducttWebhook: async (req, res) => {
+        try {
+            const { userId, cartId } = req.params
+            const paymentResult = req.query
+            
+            if (paymentResult.type && paymentResult.type === "payment") {
+                const paymentInfo = await payment.get({ id: paymentResult["data.id"] })
+
+                const savePurchase = await DbPurchase.createPurchase({
+                    userId,
+                    data: paymentInfo
+                })
+
+                res.status(200).send("Pago Exitoso")
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+        }
+    },
+    recieveCartWebhook: async (req, res) => {
         try {
             const { userId, cartId } = req.params
             const paymentResult = req.query

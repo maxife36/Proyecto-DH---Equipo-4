@@ -30,6 +30,26 @@
 .titleProfileCartSection{
     position: absolute;
     top: 0;
+    padding: 0px 40px;
+    justify-content: flex-start;
+}
+
+.profileCart-total{
+    flex-grow: 1;
+    padding-right: 40px;
+    justify-content: flex-end;
+    font-size: 20px ;
+    font-weight: 600;
+    color: var(--gris-oscuro-gotec);
+
+}
+
+.profileCart-total::before {
+    content: "Total: $";
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--gris-oscuro-gotec);
+    margin-right: 5px;
 }
 
 .profileCartDataConatiner {
@@ -138,7 +158,7 @@
     width: 120px;
     font-size: 1.25rem;
     font-weight: bold;
-    color: var(--gris-oscuro-gotec);
+    color: var(--verde-gotec);
     pointer-events: none;
 }
 
@@ -146,7 +166,7 @@
     content: "$";
     font-size: 1.4rem;
     font-weight: bold;
-    color: var(--gris-oscuro-gotec);
+    color: var(--verde-gotec);
     margin-right: 5px;
 }
 

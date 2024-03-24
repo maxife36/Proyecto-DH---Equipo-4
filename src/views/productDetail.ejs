@@ -5,19 +5,34 @@
     <link rel="stylesheet" href="/css/productDetail.css" />
   </head>
   <body>
-    <%-
-    include("./partials/header.ejs") %>
+    <%- include("./partials/header.ejs") %>
 
     <main class="main-section flx-r-w">
-      <section class="info-item-container flx-r-w">
+      <form class="info-item-container flx-r-w" action="/mercadopago/create-one-product-order" method="post" id="buyProductForm">
+        <input
+          type="hidden"
+          name="productId"
+          id="productId"
+          value="<%= product.productId %>"
+        />
+
         <article class="product-img-container flx-r-w">
-          <img src="/img/Products-Image/gabinete.png" alt="" />
-          <i class="like-img-icon fa-regular fa-heart flx-r-w"></i>
+          <img
+            src="/img/Products-Image<%= product.images[0].imageTitle %>"
+            id="productImageConatiner"
+          />
+          <i class="heart-icon fa-solid fa-heart flx-r-w" id="heartIconProductDetail" onclick="favoritesProductDetailControlls(event)"></i>
+          <i class="cart-icon fa-solid fa-cart-shopping flx-r-w" id="cartIconProductDetail" isOnCart="" onclick="cartProductDetailControlls(event)"></i>
+
           <div class="controller-img-container flx-r-w">
-            <div id="img-1"></div>
-            <div id="img-2"></div>
-            <div id="img-3"></div>
-            <div id="img-4"></div>
+            <% for( let i = 0; i < product.images.length && i <= 5 ; i++ ) { %>
+            <div
+              id="<%= i %>"
+              class="imageSelector"
+              imgTitle="<%= product.images[i].imageTitle %>"
+              onclick="changeImage(event)"
+            ></div>
+            <% } %>
           </div>
         </article>
 
@@ -34,99 +49,87 @@
 
           <div class="product-quantity-quality-section flx-r-w">
             <div class="quantity-container flx-r-w">
-              <i class="minus-icon fa-solid fa-minus flx-r-w"></i>
+              <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="productDetailChangeQuantity(event, 0)"></i>
               <input
                 type="number"
+                id="mainQuantityInput"
                 class="quantity-input"
-                name = "quantity"
+                name="quantity"
                 value="1"
-                oninput="return false;"
+                oninput="return false"
+                onchange="productDetailQuantity(event)"
               />
-              <i class="plus-icon fa-solid fa-plus flx-r-w"></i>
+              <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="productDetailChangeQuantity(event, 1)"></i>
             </div>
             <p class="rest-quantity">Quedan <%= product.stock %> unidades</p>
-            <div class="quality-container flx-r-w">
-              <img src="/img/star-svgrepo-com.svg" alt="" />
-              <img src="/img/star-svgrepo-com.svg" alt="" />
-              <img src="/img/star-svgrepo-com.svg" alt="" />
-              <img src="/img/star-svgrepo-com.svg" alt="" />
-              <img src="/img/star-svgrepo-com.svg" alt="" />
+            <div
+              class="quality-container flx-r-w"
+              id="totalScore"
+              totalScore="<%= product.totalScore %>"
+            >
+              <img src="/img/star-svgrepo-com.svg" />
+              <img src="/img/star-svgrepo-com.svg" />
+              <img src="/img/star-svgrepo-com.svg" />
+              <img src="/img/star-svgrepo-com.svg" />
+              <img src="/img/star-svgrepo-com.svg" />
             </div>
           </div>
 
           <div class="product-price-section flx-r-w">
             <p class="product-price"><%= product.productPrice %></p>
-            <p class="product-payment-details">
-              <%= product.discount%>% de Descuento!
-            </p>
+            <p class="product-payment-details"><%= product.discount%>% OFF!</p>
           </div>
 
           <div class="product-btns-section flx-r-w">
-            <button class="btn-buy flx-r-w">Comprar Ahora</button>
-            <button class="btn-add-cart flx-r-w">Agregar al Carrito</button>
+            <input type="hidden" name="productDetailShippingDistance" id="productDetailShippingDistance">
+
+            <div class="productDetailShippingOptions flx-r-nw">
+              <div class="flx-c-nw">
+                  <div class="flx-r-nw"> 
+                      <input type="radio" id="productDetailStorePickup" value="storePickup" name="shippingWay">
+                      <label for="StorePickup">Retiro sin Cargo</label>
+                  </div>
+                  <input type="text" class="pickupPlace" id="productDetailShippingPlace"  name="pickupPlace" value="OCA SRL" disabled>
+              </div>
+              
+              <div class="flx-c-nw">
+                  <div class="flx-r-nw">
+                      <input type="radio" id="productDetailHomeDelivery" value="homeDelivery" name="shippingWay">
+                      <label for="homeDelivery">Envio a Domicilio</label>
+                  </div>
+                  <input type="text" class="pickupPlace" id="productDetailShippingCost" name="productDetailShippingCost" value="$ 0" disabled>
+              </div>
+          </div>
+
+      
+            <button type="submit" class="btn-buy flx-r-w" id="productDetailAddCart">
+              Continuar la Compra
+            </button>
           </div>
         </article>
-      </section>
+      </form>
 
       <section class="feature-item-container flx-r-w">
         <h3>Características</h3>
         <label for="display-btn"></label>
         <input type="checkbox" class="display-btn" id="display-btn" />
         <div class="all-feature-container flx-r-w">
+          <% product.features.forEach(feature => { %>
           <article class="item-feature flx-c-w">
             <div class="feature-title flx-r-w">
-              <i class="fa-solid fa-memory"></i>
-              <h4>Memoria RAM</h4>
+              <img
+                src="/img/FeatureImg<%= feature.featureIcon %>"
+                class="featureIcon"
+              />
+              <h4><%= feature.featureName %></h4>
             </div>
             <ul class="feature-list flx-c-w">
-              <li>Capacidad: 8 Gigas</li>
-              <li>Formato: SODIMM</li>
-              <li>Expandible: No</li>
+              <% feature.specifications.forEach(specification => { %>
+              <li><%= specification.specification %></li>
+              <% }) %>
             </ul>
           </article>
-          <article class="item-feature flx-c-w">
-            <div class="feature-title flx-r-w">
-              <i class="fa-solid fa-microchip"></i>
-              <h4>Procesador</h4>
-            </div>
-            <ul class="feature-list flx-c-w">
-              <li>Intel: Core i3</li>
-              <li>Modelo: 1115G4</li>
-              <li>Núcleos: 2</li>
-              <li>Frecuencia: 4.10Ghz</li>
-              <li>Caché: 6Mb Cache</li>
-            </ul>
-          </article>
-          <article class="item-feature flx-c-w">
-            <div class="feature-title flx-r-w">
-              <i class="fa-solid fa-display"></i>
-              <h4>Pantalla</h4>
-            </div>
-            <ul class="feature-list flx-c-w">
-              <li>Tamaño: 14.1"</li>
-              <li>Resolucion: 1920x1080</li>
-              <li>Tecnologia: FHD</li>
-            </ul>
-          </article>
-          <article class="item-feature flx-c-w">
-            <div class="feature-title flx-r-w">
-              <i class="fa-brands fa-windows"></i>
-              <h4>Sistema Operativo</h4>
-            </div>
-            <ul class="feature-list flx-c-w">
-              <li>Windows 11: Home</li>
-              <li>Versión: 64-bits</li>
-            </ul>
-          </article>
-          <article class="item-feature flx-c-w">
-            <div class="feature-title flx-r-w">
-              <i class="fa-solid fa-hard-drive"></i>
-              <h4>Almacenamiento</h4>
-            </div>
-            <ul class="feature-list flx-c-w">
-              <li>Disco Sólido: 256Gb</li>
-            </ul>
-          </article>
+          <% }) %>
         </div>
       </section>
 
@@ -142,86 +145,82 @@
         <label for="display-btn"></label>
         <input type="checkbox" class="display-btn" id="display-btn" />
         <div class="all-coments-container flx-r-w">
-          <article class="coment-container flx-c-w">
+          <form
+            action="/products/addComment/<%= product.productId %>"
+            method="POST"
+            class="coment-container flx-c-w"
+            id="addCommentForm"
+          >
             <div class="coment-user-info flx-r-w">
               <i class="user-coment-icon fa-solid fa-user flx-r-w"></i>
-              <h4>Nombre de Usuario</h4>
+              <h4 class="flx-r-nw" id="currentUsername">
+                <%= product.currentUsername %>
+              </h4>
+
+              <div class="quality-container flx-r-nw" id="newCommentScore">
+                <input type="hidden" name="score" id="userScore" />
+                <i
+                  class="fa-solid fa-star"
+                  id="star-1"
+                  onclick="setUserScore(event)"
+                ></i>
+                <i
+                  class="fa-solid fa-star"
+                  id="star-2"
+                  onclick="setUserScore(event)"
+                ></i>
+                <i
+                  class="fa-solid fa-star"
+                  id="star-3"
+                  onclick="setUserScore(event)"
+                ></i>
+                <i
+                  class="fa-solid fa-star"
+                  id="star-4"
+                  onclick="setUserScore(event)"
+                ></i>
+                <i
+                  class="fa-solid fa-star"
+                  id="star-5"
+                  onclick="setUserScore(event)"
+                ></i>
+              </div>
+            </div>
+
+            <textarea
+              class="coment-contain"
+              name="commentBody"
+              cols="1"
+              rows="6"
+              id="commentBody"
+              placeholder="Por favor ingresa tu comentario..."
+            ></textarea>
+            <button type="submit" id="sbmBtn">Comentar</button>
+            <p id="notEmptyComment"></p>
+          </form>
+
+          <% product.comments.forEach(comment => { %>
+          <article class="coment-container flx-c-w">
+            <div
+              class="coment-user-info flx-r-w"
+              commentId="<%= comment.commentId %>"
+            >
+              <i class="user-coment-icon fa-solid fa-user flx-r-w"></i>
+              <h4 class="flx-r-nw"><%= comment.user.username %></h4>
               <div class="user-score">
                 <div class="score-star">
                   <img src="/img//star-svgrepo-com.svg" alt="" />
                 </div>
-                <p class="flx-c-w">5</p>
+                <p class="flx-c-w"><%= comment.score %></p>
               </div>
             </div>
 
-            <p class="coment-contain">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              aspernatur unde placeat totam quos odio, quae autem provident.
-              Nihil, tempore? Possimus facilis, saepe quia ut cum incidunt omnis
-              ex rerum!
-            </p>
+            <p class="coment-contain"><%= comment.commentBody %></p>
           </article>
-          <article class="coment-container flx-c-w">
-            <div class="coment-user-info flx-r-w">
-              <i class="user-coment-icon fa-solid fa-user flx-r-w"></i>
-              <h4>Nombre de Usuario</h4>
-              <div class="user-score">
-                <div class="score-star">
-                  <img src="/img/star-svgrepo-com.svg" alt="" />
-                </div>
-                <p class="flx-c-w">5</p>
-              </div>
-            </div>
-
-            <p class="coment-contain">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              aspernatur unde placeat totam quos odio, quae autem provident.
-              Nihil, tempore? Possimus facilis, saepe quia ut cum incidunt omnis
-              ex rerum!
-            </p>
-          </article>
-          <article class="coment-container flx-c-w">
-            <div class="coment-user-info flx-r-w">
-              <i class="user-coment-icon fa-solid fa-user flx-r-w"></i>
-              <h4>Nombre de Usuario</h4>
-              <div class="user-score">
-                <div class="score-star">
-                  <img src="/img/star-svgrepo-com.svg" alt="" />
-                </div>
-                <p class="flx-c-w">5</p>
-              </div>
-            </div>
-
-            <p class="coment-contain">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              aspernatur unde placeat totam quos odio, quae autem provident.
-              Nihil, tempore? Possimus facilis, saepe quia ut cum incidunt omnis
-              ex rerum!
-            </p>
-          </article>
-          <article class="coment-container flx-c-w">
-            <div class="coment-user-info flx-r-w">
-              <i class="user-coment-icon fa-solid fa-user flx-r-w"></i>
-              <h4>Nombre de Usuario</h4>
-              <div class="user-score">
-                <div class="score-star">
-                  <img src="/img/star-svgrepo-com.svg" alt="" />
-                </div>
-                <p class="flx-c-w">5</p>
-              </div>
-            </div>
-
-            <p class="coment-contain">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              aspernatur unde placeat totam quos odio, quae autem provident.
-              Nihil, tempore? Possimus facilis, saepe quia ut cum incidunt omnis
-              ex rerum!
-            </p>
-          </article>
+          <% }) %>
         </div>
       </section>
       <%- include('./partials/sideCart.ejs') %>
-
     </main>
 
     <%- include("./partials/footer.ejs") %>
@@ -229,6 +228,6 @@
     <!-- Scripts JS -->
     <script src="/DOM-Controllers/darkmode"></script>
     <script src="/DOM-Controllers/darkmode/productDetail"></script>
-    
+    <script src="/DOM-Controllers/productDetail"></script>
   </body>
 </html>

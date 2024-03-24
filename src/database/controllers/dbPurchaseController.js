@@ -1,4 +1,4 @@
-const { Purchase , seqQuery } = require("../models")
+const { Purchase, seqQuery } = require("../models")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
 const validator = require("../seqQueyConfig/assets/validators")
@@ -9,6 +9,26 @@ module.exports = class DbPurchase {
     static async getAllPurchases() {
         try {
             const purchase = await Purchase.findAll()
+
+            if (!purchase.length) throw new Error(msg.erroMsg.emptyTable + "Purchasenes")
+
+            return purchase
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+    static async getPurchasesByUserId(userId) {
+        try {
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryPurchase.newQuery()
+            query.addWhere(userId, "userId")
+            query.filterByDateRange([0,0,"DESC"], "createdAt")
+
+            const purchase = await Purchase.findAll(query.config)
 
             if (!purchase.length) throw new Error(msg.erroMsg.emptyTable + "Purchasenes")
 
@@ -50,7 +70,7 @@ module.exports = class DbPurchase {
             //creacion de caracteristica
             const newPurchase = {
                 purchaseId: uuid(),
-                userId, 
+                userId,
                 data: JSON.stringify(data)
             }
 
@@ -79,7 +99,7 @@ module.exports = class DbPurchase {
 
             //caracteristica modificada
             const updatePurchase = {
-                userId, 
+                userId,
                 data
             }
 

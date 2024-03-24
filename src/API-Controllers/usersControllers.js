@@ -5,7 +5,7 @@ const { validationResult } = require("express-validator");
 const { updateCartInfoToRender } = require("./cartController");
 const { updateFavoriteCookieInfo } = require("./favoritesController");
 const { sendVerificationMail, sendSecurityUpdateMail } = require("./sendGridController");
-const { DbUser, DbCartProduct, DbFavorite } = require("../database/controllers");
+const { DbUser, DbCartProduct, DbFavorite, DbPurchase} = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
@@ -21,6 +21,15 @@ const controllers = {
     login: (req, res) => res.render("login.ejs"),
     register: (req, res) => res.render("register.ejs"),
 
+    userOnlyData: async (req, res) => {
+        const userId = req.session.loggedUser
+
+        const currentUser = await DbUser.getUserById(userId)
+
+        currentUser.formatedBirthday = controllers.formatDate(currentUser.birthday)
+
+        res.send(currentUser)
+    },
     userProfile: async (req, res) => {
         const userId = req.session.loggedUser
 
@@ -53,7 +62,7 @@ const controllers = {
     purchases: async (req, res) => {
         const userId = req.session.loggedUser
 
-        const currentUser = await DbUser.getUserPurchase(userId)
+        const currentUserPurchases = await DbPurchase.getPurchasesByUserId(userId)
 
         function formatDate(date) {
             const year = date.getFullYear();
@@ -64,15 +73,15 @@ const controllers = {
             return `${year}-${month}-${day}`;
         }
 
-        if (currentUser) {
-            currentUser.purchases.forEach(purchase => {
+        if (currentUserPurchases) {
+            currentUserPurchases.forEach(purchase => {
                 purchase.dataParse = JSON.parse(purchase.data)
                 purchase.formatedCreatedDate = formatDate(purchase.createdAt)
             });
         }
 
 
-        res.render("./partials/purchases.ejs", { userInfo: currentUser })
+        res.render("./partials/purchases.ejs", { userInfo: currentUserPurchases })
     },
     favoritesData: async (req, res) => {
         const userId = req.session.loggedUser

@@ -2,7 +2,7 @@
 
 const dkmInputProductDetail = document.querySelector("#dark-mode-input")
 
-const likeIcon = document.querySelector(".like-img-icon")
+const likeIcon = document.querySelector("#heartIconProductDetail")
 const restQuantity = document.querySelector(".rest-quantity")
 const userComentIcon= document.querySelectorAll(".user-coment-icon")
 const userScore = document.querySelectorAll(".user-score")

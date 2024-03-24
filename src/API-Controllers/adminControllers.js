@@ -1,10 +1,20 @@
 const bcrypt = require("bcrypt")
 const fs = require("fs")
 const { validationResult } = require("express-validator");
-const { DbUser } = require("../database/controllers");
+const { DbUser, DbProduct } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
+    allProducts: async (req, res) => {
+        try {
+            const allProducts = await DbProduct.getAllProducts()
+
+            res.render("./partials/allProducts", { allProducts })
+        } catch (err) {
+            console.log(err.message);
+            res.status(404).render("notFound")
+        }
+    },
     allUser: async (req,res) => {
         try {
             const usersInfo = await DbUser.getAllUsers()

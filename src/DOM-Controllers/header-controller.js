@@ -12,17 +12,9 @@ const headerNav = document.querySelector(".header-nav")
 
 const url = window.location.href
 
-if (url.includes("productsDisplay")) headerNav.style.display = "none"
+if (url.includes("productsDisplay"))headerNav.style.display = "none"
 if (url.includes("users/profile")) headerNav.style.display = "none"
 
-window.addEventListener("load", () => {
-    if (url.includes("users/profile")){ 
-        const backgroundOpacitySC = document.querySelector(".background-opacity")
-        const cartFormSC = document.querySelector("#cartForm")
-        backgroundOpacitySC.remove()
-        cartFormSC.remove()
-    }
-})
 
 /* Controlador del formulario de busqueda */
 
@@ -83,6 +75,7 @@ loginIcon.addEventListener("click", () => {
 
 //provisorio  -> Luego colocar en un archivo Domjs favoriteController.js
 
-heartIcon.addEventListener("click", () =>{
+function heartIconRelocation(){
     window.location.href ="/users/profile?section=favorites"
-})
+}
+heartIcon.addEventListener("click", heartIconRelocation)

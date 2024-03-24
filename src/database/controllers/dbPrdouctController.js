@@ -15,22 +15,13 @@ module.exports = class DbProduct {
     static async getAllProducts() {
         try {
             //query config
-            const query = queryProduct.newQuery(["images", "categories", "comments", "features", "favorites"])
-            query.addAssociation("user", ["comments"])
-            query.addAssociation("specifications", ["features"])
-            query.addAttribute(["commentBody", "score"], "comments")
-
-            //En la siguiente linea incluyo manualmente attributes debido a que no cree una funcion para aplicar atributos en asociaciones de asociaciones.. solo en primera linea
-            query.config.include[2].include[0].attributes = ["userId", "username", "email"]
-
-            const literal = "(SELECT COUNT(*) FROM favorites WHERE favorites.productId = Product.productId)"
-            query.addLiteral(literal, "attributes", "favorites")
-
+            const query = queryProduct.newQuery(["images"])
+            
             //Consulta a DB
             const products = await Product.findAll(query.config)
-
+            
             if (!products.length) throw new Error(msg.erroMsg.emptyTable + "Producto")
-
+            
             return products
         } catch (err) {
             console.log(err.message)
@@ -48,9 +39,10 @@ module.exports = class DbProduct {
             const query = queryProduct.newQuery(["images", "categories", "comments", "features", "favorites"])
             query.addAssociation("user", ["comments"])
             query.addAssociation("specifications", ["features"])
-            query.addAttribute(["commentBody", "score"], "comments")
+            query.addAttribute(["commentId","commentBody", "score"], "comments")
             //En la siguiente linea incluyo manualmente attributes debido a que no cree una funcion para aplicar atributos en asociaciones de asociaciones.. solo en primera linea
             query.config.include[2].include[0].attributes = ["userId", "username", "email"]
+            query.config.include[3].include[0].where = {productId}
 
             const product = await Product.findByPk(productId, query.config)
 

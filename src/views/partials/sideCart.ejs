@@ -15,6 +15,7 @@
                         <article class="sc-product-card flx-r-nw">
                             <input type="hidden" name="cartProductId" id="cartProductId" value="<%= cartProduct.cartProductId %>">
                             <input type="hidden" name="productId" id="productId" value="<%= cartProduct.productId %>">
+                            <input type="hidden" name="productStock" id="productStock" value="<%= cartProduct.product.stock %>">
                             <div class="sc-img-container flx-r-nw">
                                 <img src="/img/Products-Image<%= cartProduct.product.images[0].imageTitle %>" alt="">
                             </div>

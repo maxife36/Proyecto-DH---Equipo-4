@@ -12,6 +12,7 @@ router.get("/editUser", authMiddleware, controllers.editUser); //Muestra el Form
 
 router.get("/cart", authMiddleware, controllers.productCart); //Muestra el Form
 
+router.get("/userOnlyData", authMiddleware, controllers.userOnlyData)
 router.get("/profile", authMiddleware, controllers.userProfile)
 router.get("/userData", authMiddleware, controllers.userData)
 router.get("/securityData", authMiddleware, controllers.securityData)
