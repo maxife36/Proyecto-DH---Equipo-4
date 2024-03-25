@@ -3,111 +3,147 @@
 
 <head>
     <%- include("./partials/head.ejs") %>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/productEdit.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/productCreate.css" />
+
 </head>
 
 <body class="flx-r-w">
-    
+
     
 
-    <%- include("./partials/header.ejs") %>
-    
-<main>
-    <div class="edit-container"> 
-    
-    <section class="title">
-        <h1>Edición de productos</h1>
-    </section>
-
-    <!-- Formulario Producto -->
-    <form action="/products/edit/<%= product.id %>?_method=PUT" method="post" enctype="multipart/form-data">
-        <section class = "product-name">
-            <h2>Nombre del producto:</h2>
-            <input value=<%= product.name %> type="text" name="name" placeholder="Ingrese el nombre">
-            <button>Previsualizar</button>
-        </section>
-           <div class="description-img">
-             <section class="product-description">
-                <h2>Descripción</h2>
-                <textarea value=<%= product.shortDescription %>name="shortDescription" id="" cols="30" rows="10"></textarea>
-            </section>
-            <section class="product-img">
-                <h2>Imágenes del producto</h2>
-                <input type="file" multiple id="add-img" name="image" accept=".jpg, .jpeg, .png" >
-               
-            </section>
+<%- include("./partials/header.ejs") %>
+  <main class="main-section flx-r-w">
+    <form class="flx-r-w" action="/products/edit/<%= product.productId %>?_method=PUT" method="post" id="editProductForm" enctype="multipart/form-data">
+      
+      <section class="info-item-container flx-r-w" action="/mercadopago/create-one-product-order" method="post" id="buyProductForm">
+        <article class="titlePage flx-r-w">
+          <input type="hidden" name="productId" id="productId" value="<%= product.productId %>">
+          <h1 class="flx-r-w">Edición de Producto</h1>
+          <i class="fa-solid fa-question flx-r-w" onclick="helpBtn(event)"></i>
+        </article>
+        
+        <article class="product-info-container flx-r-w">
+            <div class="product-title-section flx-r-w">
+            <input type="text" class="product-title" name="productName" id="productName" placeholder="Nombre del producto *" value="<%= product.productName %>"/>
+            <div class="productMainInfo flx-r-w">
+              <label class="inputTitle" for="productShortDescription">Descripción: *</label>
+              <textarea type="text" class="inputGralStyle" name="shortDescription" id="shortDescription" placeholder="Ingresa una descripción resumida de tu producto..." ><%= product.shortDescription %></textarea>
             </div>
-        <section class="product-price">
-            <h2>Precio</h2>
-            <input value=<%= product.price %> type="text" name="price">
-        </section>
-        <section class="product-amount">
-            <h2>Cantidad</h2>
-            <input value=<%= product.stock %> type="text" name="stock">
-        </section>
-        <section class="product-characteristics">
-            <h2>Cracteristicas</h2>
-            <article>
-                <label>Tipo de caracteristica</label>
-                <select name="features">
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                </select>
-                <ul>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input name="featureItem0" type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
-                </ul>
-            </article>
-            <article>
-                <label>Tipo de caracteristica</label>
-                <select name="features">
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                </select>
-                <ul>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input name="featureItem1" type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
-                </ul>
-            </article>
-            <article>
-                <label>Tipo de caracteristica</label>
-                <select>
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                </select>
-                <ul>
-                    <li><input type="text" placeholder="Descripcion 1" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 2" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 3" class="li-characteristics"></li>
-                    <li><input type="text" placeholder="Descripcion 4" class="li-characteristics"></li>
-                </ul>
-            </article>
-        </section>
-        <section class="send-button">
-            <button  type="submit">Crear producto</button>
-        </section>
+            <div class="productMainInfo flx-r-w">
+              <label class="inputTitle" for="productBrand">Marca del Producto: *</label>
+              <input type="text" name="productBrand" class="inputGralStyle" id="productBrand" placeholder="Ingresa la marca del producto..." value="<%= product.productBrand %>">
+            </div>
+            <div class="productMainInfo flx-r-w">
+              <label class="inputTitle" for="productBrand">Categoria: *</label>
+              <select name="categories" class="inputGralStyle" id="productCategory">
+                <option value="default" selected>Seleccionar</option>
+                <% allCategories?.forEach(category => { %>
+                  <% if (product.categories[0].categoryTitle === category.categoryTitle) { %>
+
+                    <option value="<%= category.categoryId %>" selected><%= category.categoryTitle %></option>
+                    
+                  <% } %>
+
+                    <option value="<%= category.categoryId %>"><%= category.categoryTitle %></option>
+          
+                <% }) %>
+              </select>
+            </div>
+            <div class="productMainInfo flx-r-w">
+              <label class="inputTitle" for="productPrice">Precio del Producto: *</label>
+              <input type="number" name="productPrice" class="inputGralStyle" id="productPrice" placeholder="Ingresa el precio unitario..." value="<%= product.productPrice %>">
+            </div>
+            <div class="productMainInfo halfContainer flx-r-w">
+              <label class="inputTitle" for="stock">Stock: *</label>
+              <input type="number" name="stock" class="inputGralStyle" id="stock" placeholder="Stock Inicial..." value="<%= product.stock %>">
+            </div>
+            <div class="productMainInfo halfContainer flx-r-w">
+              <label class="inputTitle" for="discount">% Descuento:</label>
+              <input type="number" name="discount" class="inputGralStyle" id="discount" placeholder="Descuento del producto..." value="<%= product.discount %>">
+            </div>
+        </article>
+
+        <article class="product-img-container flx-r-w">
+          <img  src="/img/Products-Image<%= product.images[0].imageTitle %>"  id="productImageConatiner"/>
+          <div class="profile-img-section flx-c-w">
+            <input type="file" id="add-img" name="productImages" accept=".jpg, .jpeg, .png" multiple>
+            <label class="flx-c-w" for="add-img">
+              <i class="fa-solid fa-pencil"></i>
+              <span class="addImageLabel">Agregar Foto *</span>
+            </label>
+          </div>
+          
+          <div class="controller-img-container flx-r-w">
+            <% for( let i = 0; i < product.images.length && i <= 5 ; i++ ) { %>
+              <div
+                id="<%= i %>"
+                class="imageSelector"
+                imgTitle="<%= product.images[i].imageTitle %>"
+                onclick="changeImage(event)"
+              ></div>
+            <% } %>
+          </div>
+        </article>
+      </section>
+  
+      <section class="feature-item-container flx-r-w">
+        <h3>Características</h3>
+        <div class="addFeatureContainer flx-r-nw">
+            <button type="button" class="navBtn" onclick="addFeatureContainer(event)">+ Agregar</button>
+        </div>
+        <div class="all-feature-container flx-r-w">
+          <% product.features.forEach(prodFeature => { %>
+          <article class="item-feature flx-c-nw">
+            <i class="fa-solid fa-x featureDelete" onclick="deleteFeature(event)"></i>
+            <div class="feature-title flx-r-nw">
+              <img  src="/img/FeatureImg<%= prodFeature.featureIcon %>"  class="featureIcon"/>
+              <select class="inputGralStyle flx-r-nw" name="featureTitle" id="featureTitle" onchange="updateIconFeature(event)">
+                <option value="default" selected >Seleccionar</option>
+                <% allFeatures?.forEach(feature => { %>
+                  <% if (prodFeature.featureName === feature.featureName) { %>
+                    
+                    <option value="<%= feature.featureId %>" featureIcon="<%= feature.featureIcon %>" selected>
+                        <%= feature.featureName %>
+                    </option>
+                    
+                  <% } %>
+                    <option value="<%= feature.featureId %>" featureIcon="<%= feature.featureIcon %>" >
+                        <%= feature.featureName %>
+                    </option>
+                 
+                <% }) %>
+              </select>
+              <i class="plus-icon fa-solid fa-plus flx-r-w" onclick="addSpecification(event)"></i>
+            </div>
+            <ul class="feature-list flx-c-w">
+              <% prodFeature.specifications.forEach(specification => { %>
+                <li>
+                  <i class="minus-icon fa-solid fa-minus flx-r-w" onclick="deleteSpecification(event)"></i>
+                  <input type="text" class="specification" max="20" placeholder="Su especificación..." value="<%= specification.specification %>">
+                </li>   
+                <% }) %>
+            </ul>
+          </article>
+          <% }) %>
+        </div>
+      </section>
+  
+      <section class="details-item-container flx-r-w">
+        <h3>Detalles</h3>
+        <textarea class="item-detail" name="longDescription" id="longDescription" cols="1" rows="1" placeholder="Por favor haga una descripciòn detallada de su producto..." ><%= product.longDescription %></textarea>
+      </section>
+      
+      <section class="btn-section flx-r-w">
+        <button type="submit" id="submitForm">Guardar Cambios</button>
+      </section>
     </form>
-    <form method="post" action="/products/delete/<%= product.id %>?_method=DELETE">
-        <button>Eliminar</button>
-    </form>
-</div>
-
-</main>
-
-
-
-    <!-- Scripts JS -->
-    <script src="/DOM-Controllers/darkmode"></script>
-     
-    
-    <%- include("./partials/footer.ejs") %>
+  </main>
+  <%- include("./partials/footer.ejs") %>
+  <!-- Scripts JS -->
+  <script src="/DOM-Controllers/darkmode"></script>
+  <script src="/DOM-Controllers/productEdit"></script>
+            
 </body>
+
 </html>

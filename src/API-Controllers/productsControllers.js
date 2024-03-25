@@ -4,6 +4,24 @@ const { DbProduct, DbFeature, DbCategory, DbUser, DbComment } = require("../data
 const path = require("path");
 
 const controllers = {
+    allCategories: async (req, res) => {
+        try {
+            const allCategories = await DbCategory.getAllCategories()
+
+            res.send(allCategories)
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    }, 
+    allFeatures: async (req, res) => {
+        try {
+            const allFeatures = await DbFeature.getAllFeatures()
+
+            res.send(allFeatures)
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    },
     productDetail: async (req, res) => {
         try {
             const userId = req.session.loggedUser
@@ -39,9 +57,12 @@ const controllers = {
             res.status(404).render("notFound")
         }
     },
-    showCreateForm: (req, res) => {
+    showCreateForm: async (req, res) => {
         try {
-            res.render("productCreate")
+            const allCategories = await DbCategory.getAllCategories()
+            const allFeatures = await DbFeature.getAllFeatures()
+
+            res.render("productCreate", { allCategories, allFeatures})
         } catch (err) {
             throw new Error(err.message)
         }
@@ -50,9 +71,11 @@ const controllers = {
         try {
             const productId = req.params.productId
 
+            const allCategories = await DbCategory.getAllCategories()
+            const allFeatures = await DbFeature.getAllFeatures()
             const product = await DbProduct.getProductById(productId)
 
-            res.render("productEdit", { product })
+            res.render("productEdit", { product, allCategories, allFeatures })
         } catch (err) {
             throw new Error(err.message)
         }
@@ -95,7 +118,6 @@ const controllers = {
         try {
             /* OBJETO QUE SE DEBE ENVIAR AL CONTROLADOR DE LA DB
             {
-                productId,
                 productName,
                 productBrand,
                 shortDescription,
@@ -109,35 +131,25 @@ const controllers = {
                 categories // Array con ids de categorias
             } 
             */
-
-            const { productName, productBrand, shortDescription, longDescription, categories, productPrice, discount, stock } = req.body
-
-            const formData = req.body
-            const images = req.files
-
-            // Filtrado para obtener unicamente la info de features
-            const featureKeys = Object.keys(formData).filter(el => el.startsWith('featureName'))
-            const featureItemKeys = Object.keys(formData).filter(el => el.startsWith('featureItem'))
-
+      
+            const { customeData: customeDataJSON } = req.body
+            
+            const images = req.files         
+            
+            const customeData = customeDataJSON? JSON.parse(customeDataJSON) : {}
+                  
+            const { productName, productBrand, shortDescription, longDescription, categories, productPrice, discount, stock, features } = customeData
+            
             const errors = validationResult(req).errors;
-
+             
             if (!images.length) errors.push({
                 type: "field",
                 value: images,
                 msg: "Debe proporcionar al menos 1 foto del producto.",
                 path: "images",
                 location: "body"
-            })
-
-            if (featureKeys.length !== featureItemKeys.length) errors.push({
-                type: "field",
-                value: undefined,
-                msg: "Existen Caracteristicas sin especificaciones.",
-                path: "features",
-                location: "body"
-            })
-
-
+            })           
+            
             if (!errors.length) {
                 const data = {
                     productName,
@@ -146,58 +158,34 @@ const controllers = {
                     longDescription,
                     productPrice,
                     discount,
-                    stock
+                    stock,
+                    features
                 }
-
+                        
                 //Procesado de Categorias
-
-                const categoryInfo = await DbCategory.getCategoryByTitle(categories)
-
+                
+                const categoryInfo = await DbCategory.getCategoryById(categories[0])
+                
                 data.categories = [categoryInfo.categoryId]
-
+                
                 //Procesado de imagenes
-
+                
                 const imageTitles = []
-
+                
                 for (const imageInfo of images) {
                     imageTitles.push(`/${imageInfo.filename}`)
                 }
-
+                
                 data.imageTitles = imageTitles
-
-                //Procesado de Features
-
-
-                // Formacion del atributo features necesario
-                const features = []
-
-                for (const featureName of featureKeys) {
-                    if (featureName === "default") continue
-
-                    const feature = await DbFeature.getFeatureByName(formData[featureName])
-
-                    const featureId = feature.featureId
-
-                    const featureNumber = featureName.split('featureName')[1] // obtengo el numero del feature que estoy tratando
-
-                    let specifications = formData[`featureItem${featureNumber}`]
-
-                    specifications = specifications.filter(Boolean)
-
-                    if (!specifications.length) continue
-
-                    features.push({ featureId, specifications })
-                }
-
-                data.features = features
-
+                
                 //Creacion del Producto 
+                
                 const product = await DbProduct.createProduct(data)
-
-                return res.render("productDetail", { product })
-            }
-
-            res.render("productCreate", { errors })
+                
+                if(product) return res.send([true, product.productId])   
+        }
+        
+            res.send([false, errors])
         } catch (err) {
             throw new Error(err.message)
         }
@@ -221,14 +209,13 @@ const controllers = {
             */
             const productId = req.params.productId
 
-            const { productName, productBrand, shortDescription, longDescription, categories, productPrice, discount, stock } = req.body
-
-            const formData = req.body
-            const images = req.files
-
-            // Filtrado para obtener unicamente la info de features
-            const featureKeys = Object.keys(formData).filter(el => el.startsWith('featureName'))
-            const featureItemKeys = Object.keys(formData).filter(el => el.startsWith('featureItem'))
+            const { customeData: customeDataJSON } = req.body
+            
+            const images = req.files         
+            
+            const customeData = customeDataJSON? JSON.parse(customeDataJSON) : {}
+                  
+            const { productName, productBrand, shortDescription, longDescription, categories, productPrice, discount, stock, features } = customeData
 
             const errors = validationResult(req).errors;
 
@@ -237,14 +224,6 @@ const controllers = {
                 value: images,
                 msg: "Debe proporcionar al menos 1 foto del producto.",
                 path: "images",
-                location: "body"
-            })
-
-            if (featureKeys.length !== featureItemKeys.length) errors.push({
-                type: "field",
-                value: undefined,
-                msg: "Existen Caracteristicas sin especificaciones.",
-                path: "features",
                 location: "body"
             })
 
@@ -261,7 +240,7 @@ const controllers = {
 
                 //Procesado de Categorias
 
-                const categoryInfo = await DbCategory.getCategoryByTitle(categories)
+                const categoryInfo = await DbCategory.getCategoryById(categories[0])
 
                 data.categories = [categoryInfo.categoryId]
 
@@ -275,39 +254,13 @@ const controllers = {
 
                 data.imageTitles = imageTitles
 
-                //Procesado de Features
-
-
-                // Formacion del atributo features necesario
-                const features = []
-
-                for (const featureName of featureKeys) {
-                    if (featureName === "default") continue
-
-                    const feature = await DbFeature.getFeatureByName(formData[featureName])
-
-                    const featureId = feature.featureId
-
-                    const featureNumber = featureName.split('featureName')[1] // obtengo el numero del feature que estoy tratando
-
-                    let specifications = formData[`featureItem${featureNumber}`]
-
-                    specifications = specifications.filter(Boolean)
-
-                    if (!specifications.length) continue
-
-                    features.push({ featureId, specifications })
-                }
-
-                data.features = features
-
                 //Creacion del Producto 
                 const product = await DbProduct.updateProductData(productId, data)
 
-                return res.render("productDetail", { product })
+                if(product) return res.send([true, product.productId]) 
             }
 
-            res.render("productCreate", { errors })
+            res.send([false, errors])
         } catch (err) {
             throw new Error(err.message)
         }

@@ -14,6 +14,11 @@ const url = window.location.href
 
 if (url.includes("productsDisplay"))headerNav.style.display = "none"
 if (url.includes("users/profile")) headerNav.style.display = "none"
+if (url.includes("products/create")) {
+    searchForm.style.opacity = "0"
+    searchForm.style.pointerEvents = "none"
+    headerNav.style.display = "none"
+}
 
 
 /* Controlador del formulario de busqueda */

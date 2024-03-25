@@ -20,5 +20,7 @@ router.get("/purchases", controllers.purchases);
 router.get("/profileCart", controllers.profileCart);
 router.get("/allProducts", controllers.allProducts);
 router.get("/productDetail", controllers.productDetail);
+router.get("/productCreate", controllers.productCreate);
+router.get("/productEdit", controllers.productEdit);
 
 module.exports = router

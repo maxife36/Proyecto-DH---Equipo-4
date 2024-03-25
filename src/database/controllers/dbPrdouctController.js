@@ -183,7 +183,7 @@ module.exports = class DbProduct {
                 stock: data.stock
             }
 
-            await Product.create(newProduct, { transaction: productCreate })
+            const createdProduct = await Product.create(newProduct, { transaction: productCreate })
 
             //Transaction para el modelo Image
 
@@ -237,7 +237,7 @@ module.exports = class DbProduct {
             // Realizo el commit de la transaccion en caso de que todo haya salido sin errores
             await productCreate.commit()
 
-            return
+            return createdProduct
         } catch (err) {
             // Deshago la transaccion en caso de que haya errores
             await productCreate.rollback()
@@ -313,7 +313,7 @@ module.exports = class DbProduct {
             const queryProductTable = queryProduct.newQuery()
             queryProductTable.addWhere(productId, "productId")
 
-            await Product.update(updateProduct, queryProductTable.config, { transaction: productUpdate })
+            const updatedProduct = await Product.update(updateProduct, queryProductTable.config, { transaction: productUpdate })
 
             //Transaction para el modelo Image
 
@@ -372,7 +372,7 @@ module.exports = class DbProduct {
             // Realizo el commit de la transaccion en caso de que todo haya salido sin errores
             await productUpdate.commit()
 
-            return
+            return updatedProduct
         } catch (err) {
             // Deshago la transaccion en caso de que haya errores
             await productUpdate.rollback()
