@@ -9,7 +9,7 @@ module.exports = {
     const usersArray = [
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "John Doe",
         email: "john@example.com",
         birthday: new Date(1990, 5, 15),
@@ -42,7 +42,7 @@ module.exports = {
       },
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Bob Anderson",
         email: "bob@example.com",
         birthday: new Date(1985, 12, 5),
@@ -64,7 +64,7 @@ module.exports = {
       }, 
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Michael Brown",
         email: "michael@example.com",
         birthday: new Date(1987, 9, 18),
@@ -97,7 +97,7 @@ module.exports = {
       },
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Olivia Davis",
         email: "olivia@example.com",
         birthday: new Date(1991, 7, 12),
@@ -119,7 +119,7 @@ module.exports = {
       },
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Sophia Clark",
         email: "sophia@example.com",
         birthday: new Date(1988, 6, 22),
@@ -152,7 +152,7 @@ module.exports = {
       },
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Ethan Martinez",
         email: "ethan@example.com",
         birthday: new Date(1993, 8, 18),
@@ -173,7 +173,7 @@ module.exports = {
         password: "avaPass222",
       },{
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Lucas Brown",
         email: "lucas@example.com",
         birthday: new Date(1989, 4, 15),
@@ -206,7 +206,7 @@ module.exports = {
       },
       {
         userId: uuidv4(),
-        admin: 1,
+        admin: 0,
         fullname: "Mia Martinez",
         email: "mia@example.com",
         birthday: new Date(1991, 2, 18),

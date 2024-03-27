@@ -1,4 +1,4 @@
-const { Image , seqQuery } = require("../models")
+const { Image, seqQuery } = require("../models")
 const msg = require("./dbMessage")
 const { v4: uuid } = require("uuid")
 const path = require("path");
@@ -13,6 +13,23 @@ module.exports = class DbImage {
     static async getAllImages() {
         try {
             const images = await Image.findAll()
+
+            if (!images.length) throw new Error(msg.erroMsg.emptyTable + "Imagenes")
+
+            return images
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
+    static async getAllProductIdImages(productId) {
+        try {
+            //query config
+            const query = queryImage.newQuery()
+            query.addWhere(productId, "productId")
+
+            const images = await Image.findAll(query.config)
 
             if (!images.length) throw new Error(msg.erroMsg.emptyTable + "Imagenes")
 
@@ -42,7 +59,7 @@ module.exports = class DbImage {
 
     static async createImage(data, transaction) {
         try {
-            const { productId, imageTitle} = data
+            const { productId, imageTitle } = data
 
             //Verificacion de campos obligatorios
             const requiredFields = ["productId", "imageTitle"]
@@ -58,7 +75,7 @@ module.exports = class DbImage {
                 imageTitle
             }
 
-            return await Image.create(newImage, {transaction})
+            return await Image.create(newImage, { transaction })
 
         } catch (err) {
             console.log(err.message)
@@ -71,15 +88,15 @@ module.exports = class DbImage {
             const newImage = []
 
             for (const data of ImageData) {
-                const { productId, imageTitle} = data
-    
+                const { productId, imageTitle } = data
+
                 //Verificacion de campos obligatorios
                 const requiredFields = ["productId", "imageTitle"]
-    
+
                 const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
-    
+
                 if (missingFields.length) throw new Error(msg.erroMsg.incompleteData + ` Faltan propiedades requeridas: ${missingFields.join(", ")}`);
-    
+
                 //creacion de caracteristica
                 newImage.push({
                     imageId: uuid(),
@@ -88,7 +105,7 @@ module.exports = class DbImage {
                 })
             }
 
-            return await Image.bulkCreate(newImage, {transaction})
+            return await Image.bulkCreate(newImage, { transaction })
 
         } catch (err) {
             console.log(err.message)
@@ -98,7 +115,7 @@ module.exports = class DbImage {
 
     static async updateImageData(imageId, data) {
         try {
-            const { productId, imageTitle} = data
+            const { productId, imageTitle } = data
 
             //validacion de ID
             validator.idValidator(imageId)
@@ -139,16 +156,50 @@ module.exports = class DbImage {
 
             const profileImgPath = path.resolve(`public/img/Products-Image${image.imageTitle}`)
 
-                    fs.unlink(profileImgPath, (err) => {
-                        if (err) {
-                            console.error("Error al eliminar la Foto de Perfil:", err);
-                        }
-                        console.log("Foto de Perfil eliminado");
-                    })
+            fs.unlink(profileImgPath, (err) => {
+                if (err) {
+                    console.error("Error al eliminar la Foto de Perfil:", err);
+                }
+                console.log("Foto de Perfil eliminado");
+            })
 
             //query config
             const query = queryImage.newQuery()
             query.addWhere(imageId, "imageId")
+
+            const result = await Image.destroy(query.config, { transaction })
+
+            if (!result) throw new Error(msg.erroMsg.notExistId)
+
+            return result
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        }
+    }
+
+    static async deleteAllImageByProductId(productId, transaction) {
+        try {
+
+            //validacion de ID
+            validator.idValidator(productId)
+
+            const images = await DbImage.getAllProductIdImages(productId)
+
+            images.forEach(image => {
+                const profileImgPath = path.resolve(`public/img/Products-Image${image.imageTitle}`)
+    
+                fs.unlink(profileImgPath, (err) => {
+                    if (err) {
+                        console.error("Error al eliminar la Foto de Perfil:", err);
+                    }
+                    console.log("Foto de Perfil eliminado");
+                })
+            });
+
+            //query config
+            const query = queryImage.newQuery()
+            query.addWhere(productId, "productId")
 
             const result = await Image.destroy(query.config, { transaction })
 

@@ -62,8 +62,10 @@ window.addEventListener("DOMContentLoaded", async () => {
             }
 
             const allProductsDisplay = document.querySelector("#allProductsDisplay")
+            const allUsersDisplay = document.querySelector("#allUsersDisplay")
 
             allProductsDisplay.addEventListener("click",() => inyectPartialEJSDashboard("allProducts", "allProducts", "products"))
+            allUsersDisplay.addEventListener("click",() => inyectPartialEJSDashboard("allUsers", "allUsers", "users"))
 
         } else {
             // const articleDashboard = dashboardInput.parentNode

@@ -219,13 +219,13 @@ const controllers = {
 
             const errors = validationResult(req).errors;
 
-            if (!images.length) errors.push({
+           /*  if (!images.length) errors.push({
                 type: "field",
                 value: images,
                 msg: "Debe proporcionar al menos 1 foto del producto.",
                 path: "images",
                 location: "body"
-            })
+            }) */
 
             if (!errors.length) {
                 const data = {
@@ -235,6 +235,7 @@ const controllers = {
                     longDescription,
                     productPrice,
                     discount,
+                    features,
                     stock
                 }
 
@@ -255,9 +256,10 @@ const controllers = {
                 data.imageTitles = imageTitles
 
                 //Creacion del Producto 
+                
                 const product = await DbProduct.updateProductData(productId, data)
 
-                if(product) return res.send([true, product.productId]) 
+                if(product) return res.send([true, productId]) 
             }
 
             res.send([false, errors])
@@ -288,7 +290,7 @@ const controllers = {
                 }
             }
 
-            res.redirect("/") //Monificar y poner el dashboard
+            res.send(true)
         } catch (err) {
             throw new Error(err.message)
         }

@@ -82,7 +82,7 @@ module.exports = class DbUser {
             //query config
             const query = queryUser.newQuery(["purchases"])
             query.config.include[0].order = [['createdAt', 'ASC']]
-         
+
             const user = await User.findByPk(userId, query.config)
 
             if (!user) throw new Error(msg.erroMsg.notExistId + userId)
@@ -219,7 +219,6 @@ module.exports = class DbUser {
 
             //creacion de usuario
             const updateUser = {
-                admin: admin ? admin : 0,
                 fullname,
                 email,
                 birthday,
@@ -239,6 +238,23 @@ module.exports = class DbUser {
             console.log(err.message)
         }
     }
+
+    static async changePermission(userId, userData) {
+        try {
+            //validacion de ID
+            validator.idValidator(userId)
+
+            //query config
+            const query = queryUser.newQuery()
+            query.addWhere(userId, "userId")
+
+            return await User.update(userData, query.config)
+
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
     static async verifyUser(userId) {
         try {
             //validacion de ID

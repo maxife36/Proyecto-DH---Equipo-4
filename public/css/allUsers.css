@@ -1,0 +1,136 @@
+
+.profileCart-userImg-container {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    background-color: #233d7620;
+    border-radius: 50%;
+    border: 1px solid var(--verde-gotec);
+    overflow: hidden;
+}
+
+.profileCart-userImg-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+#userSearchProduct{
+    height: 100%;
+}
+
+.profileUserSearchLabel{
+    height: 55%;
+}
+.profileUserSearchInput{
+    border: 1px solid var(--gris-intermedio-gotec) !important;
+}
+
+.userInfoFullname,
+.userInfoEmail{
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 20px;
+    pointer-events: none;
+    flex-grow: 1;
+}
+.userInfoEmail{
+    display: none;
+}
+
+.admin-container{
+    position: relative;
+    min-width: 60px;
+    width: 60px;
+    height: 20px;
+}
+
+.userInfoAdmin{
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+.adminBtn {
+    width: 50%;
+    height: 90%;
+    padding: 3px;
+    background-color: var(--gris-claro-gotec);
+    border-radius: 8.75px;
+    box-shadow: var(--gris-oscuro-gotec) 0px 2px 10px inset;
+    justify-content: flex-start;
+    transition: all 0.3s linear;
+    margin-right: 5px;
+}
+
+.adminBtn div {
+    width: 50%;
+    height: 90%;
+    background-color: var(--blanco-gotec);
+    border-radius: 50%;
+    box-shadow: var(--gris-oscuro-gotec) 0px 2px 10px;
+}
+
+#adminInput{
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    width: 60%;
+    height: inherit;
+    opacity: 0;
+}
+
+#adminInput:checked~.adminBtn {
+    justify-content: flex-end;
+    background-color: var(--verde-gotec);
+
+}
+
+.profileDestroyUser {
+    width: 40px;
+    font-size: 1.4rem;
+    color: var(--verde-gotec);
+    padding-right: 5px;
+    justify-content: flex-end;
+}
+
+
+@media (width >= 900px){
+    .userInfoEmail{
+        display: flex;
+    }
+}
+
+/* -- USER DETAILS -- */
+
+#userDetailCenterConatiner{
+    justify-content: flex-start;
+}
+
+#returnToAllUsers{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 40px;
+}
+.profile-img-section{
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.profile-img-container{
+    width: 150px;
+    height: 150px;
+    opacity: 1;
+}
+
+.dataConatiner input{
+    color: var(--gris-oscuro-gotec);
+}

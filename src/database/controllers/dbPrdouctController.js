@@ -274,7 +274,7 @@ module.exports = class DbProduct {
              */
 
             //Verificacion de campos obligatorios
-            const requiredFields = ["productName", "productBrand", "shortDescription", "productPrice", "stock", "score", "imageTitles", "categories"]
+            const requiredFields = ["productName", "productBrand", "shortDescription", "productPrice", "stock", "imageTitles", "categories"]
 
             const missingFields = requiredFields.filter(field => !data.hasOwnProperty(field));
 
@@ -295,6 +295,8 @@ module.exports = class DbProduct {
                 })
             }
             //Transaction para el modelo Product
+
+
 
             const promisesCreate = []
 
@@ -317,42 +319,45 @@ module.exports = class DbProduct {
 
             //Transaction para el modelo Image
 
-            await DbImage.deleteImage(productId, "productId", productUpdate)
-
+            if (data.imageTitles.length > 0) {
+                await DbImage.deleteAllImageByProductId(productId, productUpdate)
+                
+            }
+            
             const bulkImages = []
-
+            
             for (const image of data.imageTitles) {
                 bulkImages.push({
                     productId,
                     imageTitle: image
                 })
             }
-
+            
             promisesCreate.push(DbImage.bulkCreateImage(bulkImages, productUpdate))
-
+            
             //Transaction para el modelo Product_Category 
-
+            
             await DbProductCategory.deleteProductCategory(productId, "productId", productUpdate)
-
+            
             const bulkCategories = []
-
+            
             for (const categoryId of data.categories) {
                 bulkCategories.push({
                     productId,
                     categoryId
                 })
             }
-
+            
             promisesCreate.push(DbProductCategory.bulkCreateProductCategory(bulkCategories, productUpdate))
-
+            
             //Transaction para el modelo Product_Feature
-
+            
             await DbPrdouctFeature.deletePrdouctFeature(productId, "productId", productUpdate)
-
+            
             if (data.features) {
-
+                
                 const bulkFeatures = []
-
+                
                 for (const objFeature of data.features) {
                     for (const specification of objFeature.specifications) {
                         bulkFeatures.push({
@@ -367,11 +372,12 @@ module.exports = class DbProduct {
             }
 
             //Resuelvo los bulkCreate Juntos
-            await Promise.all(promisesCreate)
 
+            const atat = await Promise.all(promisesCreate)
+            
             // Realizo el commit de la transaccion en caso de que todo haya salido sin errores
             await productUpdate.commit()
-
+            
             return updatedProduct
         } catch (err) {
             // Deshago la transaccion en caso de que haya errores

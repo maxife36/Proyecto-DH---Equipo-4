@@ -1,5 +1,7 @@
 const formUserInfo = document.querySelector(".userDataConatiner")
 const allFormInputs = formUserInfo.querySelectorAll("input")
+const imgInput = formUserInfo.querySelector("#add-img")
+const profileImg = formUserInfo.querySelector("#profileImg")
 
 const btnsNavConatiner = document.querySelector('.btnsNavConatiner');
 const btnsNavConatinerHeight = parseInt(window.getComputedStyle(btnsNavConatiner).height)
@@ -33,15 +35,21 @@ function navContainerSticky() {
 let originalFullname = null
 let originalBirthday = null
 let originalAdress = null
+let originalProfileImg = null
 
 
 function editInfoBtn(event) {
     const formUserInfo = document.querySelector(".userDataConatiner")
+    const profileImgConatiner = formUserInfo.querySelector(".profile-img-container")
     const allFormInputs = formUserInfo.querySelectorAll("input")
+
+    profileImgConatiner.style.opacity = 1
+    originalProfileImg = profileImg.src
+
     allFormInputs.forEach(input => {
-        if(input.id === "fullName") originalFullname = input.value
-        if(input.id === "userBirthday") originalBirthday = input.value
-        if(input.id === "userAdress") originalAdress = input.value
+        if (input.id === "fullName") originalFullname = input.value
+        if (input.id === "userBirthday") originalBirthday = input.value
+        if (input.id === "userAdress") originalAdress = input.value
 
         if (input.id !== "userEmail") {
             input.removeAttribute("disabled")
@@ -52,19 +60,21 @@ function editInfoBtn(event) {
 
 function cancelInfoBtn(event) {
     const formUserInfo = document.querySelector(".userDataConatiner")
+    const profileImgConatiner = formUserInfo.querySelector(".profile-img-container")
     const allFormInputs = formUserInfo.querySelectorAll("input")
+
+    profileImgConatiner.style.opacity = 0.8
+    profileImg.src = originalProfileImg
+
     allFormInputs.forEach(input => {
-        if(input.id === "fullName") input.value = originalFullname
-        if(input.id === "userBirthday") input.value = originalBirthday 
-        if(input.id === "userAdress") input.value = originalAdress 
+        if (input.id === "fullName") input.value = originalFullname
+        if (input.id === "userBirthday") input.value = originalBirthday
+        if (input.id === "userAdress") input.value = originalAdress
 
         input.setAttribute("disabled", "disabled")
         input.style.color = "var(--gris-intermedio-gotec)"
     });
 }
-
-//Permite controlar que no se envie el formulario en caso de estar deshabilitado
-// formUserInfo.addEventListener("submit", saveInfoBtn)
 
 function saveInfoBtn() {
     const formUserInfo = document.querySelector(".userDataConatiner")
@@ -75,4 +85,33 @@ function saveInfoBtn() {
     if (isDisabled === null) formUserInfo.submit()
 }
 
+function formatImgChecker(InputImg){
 
+    let checkFlag = false
+
+    const supportedFormats = ["jpg", "jpeg", "png"]
+
+    let typeImg = InputImg.files[0].type.slice(6)
+
+    supportedFormats.forEach(el => { el === typeImg ? checkFlag = true : "" })
+
+    return checkFlag
+}
+
+imgInput.addEventListener("change", () => {
+
+    if (imgInput.files.length > 0) {
+
+        if (formatImgChecker(imgInput)) {
+
+            const url = URL.createObjectURL(imgInput.files[0]);
+
+            profileImg.src = url
+
+        } else {
+            window.alert("Formato de imagen no soportado")
+        }
+    } else {
+        window.alert("No ingreso niguna imagen")
+    }
+})

@@ -39,6 +39,7 @@
 }
 
 .centerConatiner{
+    position: relative;
     height: 100vh;
     width: 100%;
     border-radius: 10px;
@@ -141,4 +142,23 @@ label[for="add-img"] i {
 label[for="add-img"]:hover{
     color: var(--verde-gotec);
     box-shadow: var(--verde-gotec) 1px 3px 3px;
+}
+
+
+/*  SECURITY DTATA   */
+
+#securityDataCentercontainer{
+    justify-content: flex-start;
+
+    .profile-img-section{
+        margin-top: 65.5px;
+    }
+
+    #deleteAccountBtn{
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        height: 40px;
+    }
+
 }

@@ -1,3 +1,86 @@
+const previousBrand = document.querySelector(".previous-icon")
+const nextBrand = document.querySelector(".next-icon")
+const brandsImgWraper = document.querySelector(".brandsImgWraper")
+const bannerContainer = document.querySelector(".carouselBannerContainer")
+const allBrandImg = brandsImgWraper.querySelectorAll("img")
+
+let brandsWraperRealWidth = 0
+let brandsWraperWindowWidth = parseFloat(window.getComputedStyle(brandsImgWraper).width)
+
+
+// obtengo los limites de carrusel de marcas
+
+allBrandImg.forEach(img => {
+    const computerStyle = window.getComputedStyle(img);
+    const imgWidth = parseFloat(computerStyle.width);
+    brandsWraperRealWidth += imgWidth
+})
+
+nextBrand.addEventListener("click", () => {
+    const brandsImgWraper = document.querySelector(".brandsImgWraper")
+    const computerStyle = window.getComputedStyle(brandsImgWraper);
+    const right = parseFloat(computerStyle.right)
+    
+    if ((brandsWraperRealWidth - right) >= brandsWraperWindowWidth) {
+        brandsImgWraper.style.right = `${right + brandsWraperWindowWidth}px` 
+    }else if ((brandsWraperRealWidth - right) > 0) {
+        brandsImgWraper.style.right = `$0px` 
+    }
+
+})
+previousBrand.addEventListener("click", () => {
+    const brandsImgWraper = document.querySelector(".brandsImgWraper")
+    const computerStyle = window.getComputedStyle(brandsImgWraper);
+    const right = parseFloat(computerStyle.right)
+    
+    if ((brandsWraperRealWidth - right) <= (brandsWraperRealWidth - brandsWraperWindowWidth )) {
+        brandsImgWraper.style.right = `${right - brandsWraperWindowWidth}px` 
+    }else if ((brandsWraperRealWidth - right) ) {
+        brandsImgWraper.style.right = `$0px` 
+    }
+
+})
+
+window.addEventListener("resize", () => {
+    const allBrandImg = brandsImgWraper.querySelectorAll("img")
+    const brandsImgWraper = document.querySelector(".brandsImgWraper")
+
+
+    brandsWraperWindowWidth = parseFloat(window.getComputedStyle(brandsImgWraper).width)
+
+    allBrandImg.forEach(img => {
+        const computerStyle = window.getComputedStyle(img);
+        const imgWidth = parseFloat(computerStyle.width);
+        brandsWraperRealWidth += imgWidth
+    })
+})
+/* ----------------- */
+let bannerNum = 1
+
+function bannerInterval(){
+    if (bannerNum > 3) bannerNum = 1
+
+    const bannerImages = bannerContainer.querySelectorAll(`div`)
+
+    bannerImages.forEach(banner =>{
+
+        if (banner.id != `banner${bannerNum}` ) {
+            banner.style.opacity = 0
+        }else{
+            banner.style.opacity = 1
+        }
+    })
+
+    bannerNum++
+}
+
+setInterval(bannerInterval, 5000)
+
+
+
+
+//-----------------
+
 function getParentNode(event, className) {
     let target = event.target
 
@@ -24,13 +107,13 @@ function toProductDetail(event) {
 }
 
 //Sirve para la primera carga pintar los iconos de los productos que estan en el carrito
-async function updateCartIcon(){
-    if (!isLogged)  return
+async function updateCartIcon() {
+    if (!isLogged) return
 
     const allCartProductsJSON = await fetch(`/cart/allCartProducts`)
-    
+
     const allCartProducts = await allCartProductsJSON.json()
-    
+
     const cartProductsIds = new Set()
 
     for (const cartProduct of allCartProducts) {
@@ -54,8 +137,8 @@ updateCartIcon()
 
 //Sirve para la primera carga pintar los iconos de los productos que estan en favoritos
 
-async function updateHeartIcon(){
-    if (!isLogged)  return
+async function updateHeartIcon() {
+    if (!isLogged) return
 
     const resultJSON = await fetch("/favorites/allFavorites")
     const result = await resultJSON.json()
@@ -65,7 +148,7 @@ async function updateHeartIcon(){
     for (const product of result) {
         favoriteProducts[product.productId] = product.favoriteId
     }
-    
+
     const allProductsCards = document.querySelectorAll(".tarjeta-articulo")
 
     for (const productCard of allProductsCards) {

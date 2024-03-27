@@ -140,12 +140,13 @@ const controllers = {
                 if (validPassword) {
                     req.session.loggedUser = userFinded.userId
                     req.session.loggedCart = userFinded.cart.cartId
-
+                    req.session.profileImg = userFinded.profileImg
+                    
                     res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
-
+                    
                     await updateCartInfoToRender(userFinded.userId, req, res)
                     await updateFavoriteCookieInfo(userFinded.userId, req, res)
-
+      
                     if (remembermeBtn) {
                         res.cookie("rememberme", userFinded.userId, { maxAge: (60 * 1000 * 60 * 24) })
                     }
@@ -351,7 +352,7 @@ const controllers = {
 
             const currentUser = await DbUser.getUserById(userId)
 
-            await DbUser.deleteUser(userId)
+            const deletedUser = await DbUser.deleteUser(userId)
 
             if (currentUser.profileImg) {
                 const profileImgPath = path.join(__dirname, `../../public/img/usersimg${currentUser.profileImg}`)
@@ -369,7 +370,8 @@ const controllers = {
 
             res.clearCookie("rememberme")
 
-            res.redirect("/users/login")
+            if (deletedUser) return res.send(true)
+            return res.send(false)
         } catch (err) {
             throw new Error(err.message)
         }

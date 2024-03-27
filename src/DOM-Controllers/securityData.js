@@ -25,9 +25,6 @@ async function cancelSecurityBtn(event) {
     });
 }
 
-//Permite controlar que no se envie el formulario en caso de estar deshabilitado
-// formSecurityInfo.addEventListener("submit", saveSecurityBtn)
-
 async function saveSecurityBtn() {
     const formSecurityInfo = document.querySelector("#securityDataForm")
 
@@ -59,4 +56,22 @@ async function saveSecurityBtn() {
     }
 }
 
+async function deleteCurrentAccount(event){
+    try {
+        const isSure = confirm("¿Esta seguro de ELiminar su cuenta?")
+
+        if (isSure) {
+            const resultJSON = await fetch("/users/deleteUser",{
+                method: "DELETE"
+            })
+            const result = await resultJSON.json()
+
+            if (result) {
+                window.location.href = "/users/login"
+            }
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+}
 

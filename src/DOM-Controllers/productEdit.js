@@ -362,12 +362,13 @@ editForm.addEventListener("submit", async (event) => {
     if (!noErrors) updateWarnings()
     if (noErrors) {
 
-        const resultJSON = await fetch("/products/create", {
-            method: "POST",
+        const resultJSON = await fetch(`/products/edit/${productId}`, {
+            method: "PUT",
             body: formData
         })
 
         const result = await resultJSON.json()
+
 
         if (result[0]) {
             window.location.href = `/products/detail/${result[1]}`

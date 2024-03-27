@@ -1,0 +1,14 @@
+.titleSection{
+    justify-content: space-evenly;
+}
+
+#searchProduct{
+    height: 100%;
+}
+
+.profileSearchLabel{
+    height: 55%;
+}
+.profileSearchInput{
+    border: 1px solid var(--gris-intermedio-gotec) !important;
+}

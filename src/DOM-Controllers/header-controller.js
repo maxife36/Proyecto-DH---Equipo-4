@@ -13,8 +13,11 @@ const headerNav = document.querySelector(".header-nav")
 const url = window.location.href
 
 if (url.includes("productsDisplay"))headerNav.style.display = "none"
-if (url.includes("users/profile")) headerNav.style.display = "none"
-if (url.includes("products/create")) {
+if (url.includes("users/profile")) {
+    searchForm.style.pointerEvents = "none"
+    headerNav.style.display = "none"
+}
+if (url.includes("products/create") || url.includes("products/edit")) {
     searchForm.style.opacity = "0"
     searchForm.style.pointerEvents = "none"
     headerNav.style.display = "none"
@@ -77,8 +80,6 @@ loginIcon.addEventListener("click", () => {
 
 
 })
-
-//provisorio  -> Luego colocar en un archivo Domjs favoriteController.js
 
 function heartIconRelocation(){
     window.location.href ="/users/profile?section=favorites"

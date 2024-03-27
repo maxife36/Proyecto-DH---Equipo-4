@@ -27,8 +27,12 @@
         <%- include("./userOptions.ejs") %>
       </i>
       <div class="user-icon-container">
-        <i class="user-icon fa-solid fa-user flx-r-w"></i>
-        <p class="user-notifications flx-r-w">00</p>
+        <% if (globalData.profileImg) { %>
+          <img src="/img/usersImg<%= globalData.profileImg %>" class="miniProfileImg">
+        <% } else {%>
+          <img src="/img/usersImg/defaultUser.svg" class="miniProfileImg">
+        <% } %>
+        <p class="user-notifications flx-r-w">-</p>
       </div>
     </div>
 

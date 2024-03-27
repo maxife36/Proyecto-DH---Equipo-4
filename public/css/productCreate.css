@@ -172,7 +172,9 @@ label[for="add-img"] i {
     color: var(--negro-gotec);
     /* padding-left: 10px; */
     border-radius: 5px;
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 15px 0 5px 0;
     letter-spacing: 1px;
 }

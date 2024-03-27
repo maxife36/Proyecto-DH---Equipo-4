@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="/css/allUsers.css">
+<article class="profileCartConatiner flx-c-nw" >
+    
+    <section class="centerProfileCartConatiner flx-c-nw" action="/mercadopago/create-Order" method="post">
+         
+        <div class="titleSection flx-r-nw">
+            <h2>Todos los Usuarios</h2>
+            <div class="main-search-bar flx-r-w" id="userSearchProduct">
+                <label class="search-label profileUserSearchLabel flx-r-w" for="search-btn">
+                  <input
+                    type="text"
+                    name="keywords"
+                    id="search-btn"
+                    class="profileUserSearchInput"
+                    placeholder="Busqueda de Productos"
+                  />
+                </label>
+            </div>
+        </div>
+  
+        <div class="profileCartProducts flx-r-w">
+
+            <% if (locals.allUsers) { %>
+
+                <% locals.allUsers.forEach(user => {  %>
+
+                    <article class="profileCartDataConatiner flx-r-nw"  onclick="dashboardUserDetail(event)">
+                        <input type="hidden" name="userId" id="userId" value="<%= user.userId %>" >
+
+                        <div class="leftProfileCartBorder"></div>
+
+                        <div class="profileCart-userImg-container flx-r-nw">
+                            <% if (user.profileImg) { %>
+                                <img src="/img/usersImg<%= user.profileImg %>" style="width: 70px; height: 70px;">
+                            <% }else{ %>
+                                <img src="/img/user-img.svg">
+                            <% } %>
+                        </div>
+
+                        <p class="userInfoFullname"><%= user.fullname %></p>
+
+                        <p class="userInfoEmail" ><%= user.email %></p>
+                        
+                        <div class="admin-container flx-r-w">
+                            <label class="userInfoAdmin" for="adminInput">Admin</label>
+                          <% if (user.admin) { %>
+                              <input type="checkbox" name="isAdmin" id="adminInput" checked onchange="adminController(event)"/>
+                          <% } else {%>
+                              <input type="checkbox" name="isAdmin" id="adminInput" onchange="adminController(event)"/>
+                          <% } %>
+                          <div class="adminBtn flx-r-nw">
+                            <div></div>
+                          </div>
+                        </div>
+
+                        <i class="fa-solid fa-trash flx-r-nw profileDestroyUser" onclick="destroyUser(event)"></i>
+                    </article>
+
+                <% }) %>
+
+            <% } %>
+    
+        </div>
+    </section>
+
+</article>

@@ -10,11 +10,11 @@
         <div class="profile-img-section flx-c-w">
             <div class="profile-img-container">
               <% if (userInfo.profileImg) { %>
-                <img src="/img/usersImg<%= userInfo.profileImg %>">
+                <img src="/img/usersImg<%= userInfo.profileImg %>" id="profileImg">
                 <% }else{ %>
-                <img src="/img/user-img.svg">
-            <% } %>
-            <input type="hidden" name="isProfileImage" value="<%= userInfo.profileImg %>" disabled>
+                <img src="/img/user-img.svg" id="profileImg">
+              <% } %>
+                <input type="hidden" name="isProfileImage" value="<%= userInfo.profileImg %>" disabled>
             </div>
             <input type="file" id="add-img" name="profileImg" accept=".jpg, .jpeg, .png" disabled>
             <label class="flx-c-w" for="add-img">

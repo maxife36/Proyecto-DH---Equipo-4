@@ -352,7 +352,7 @@ createForm.addEventListener("submit", async (event) => {
     const formData = new FormData(event.target)
     formData.append("customeData", JSON.stringify(customeData))
 
-    console.log(noErrors);
+    
     if (!noErrors) updateWarnings()
     if (noErrors) {
 

@@ -41,9 +41,10 @@ module.exports = async (req, res, next) => {
             whatsappContactNumber,
             whatsappDefaultText: encodeURIComponent(whatsappDefaultText),
             showCategories,
-            allCategories
+            allCategories,
+            profileImg: req.session.profileImg? req.session.profileImg : null
         };
-
+        
         next();
     } catch (err) {
         console.log(err.message)

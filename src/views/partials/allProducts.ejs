@@ -4,6 +4,18 @@
          
         <div class="titleSection flx-r-nw">
             <h2>Todos los Productos</h2>
+            <div class="main-search-bar flx-r-w" id="searchProduct">
+                <label class="search-label profileSearchLabel flx-r-w" for="search-btn">
+                  <input
+                    type="text"
+                    name="keywords"
+                    id="search-btn"
+                    class="profileSearchInput"
+                    placeholder="Busqueda de Productos"
+                  />
+                </label>
+            </div>
+            <button type="button" class="navBtn" onclick="newProduct(event)">Nuevo Producto</button>
         </div>
   
         <div class="profileCartProducts flx-r-w">
@@ -12,7 +24,7 @@
 
                 <% locals.allProducts.forEach(product => {  %>
 
-                    <article class="profileCartDataConatiner flx-r-nw">
+                    <article class="profileCartDataConatiner flx-r-nw"  onclick="dashboardProductController(event)">
                         <input type="hidden" name="productId" id="productId" value="<%= product.productId %>" >
 
                         <div class="leftProfileCartBorder"></div>
@@ -37,8 +49,7 @@
 
                         <p class="profileCart-product-subtotal"><%= product.productPrice.toFixed(2) %></p>
 
-                        <i class="fa-solid fa-x flx-r-nw profileCart-delete-product" onclick="profileCartDeleteProduct(event)"></i>
-
+                        <i class="fa-solid fa-trash flx-r-nw profileCart-delete-product"></i>
                     </article>
 
                 <% }) %>

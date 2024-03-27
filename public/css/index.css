@@ -106,43 +106,24 @@
 
 /* ---Carrusel--- */
 
-.carrusel-img{
+.carouselBannerContainer {
+    position: relative;
+    width: 100vw;
+    height: 350px;
+    margin-bottom: 30px;
+}
+.carouselBannerContainer div {
+    position: absolute;
     width: 90%;
+    height: 100%;
+    overflow-x: hidden;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: all 0.4s linear;
 }
 
-.carrusel{
-    position:relative;
-    display:flex;
-    flex-flow: row wrap;
-    justify-content:center;
-    align-items: center;
-    overflow: hidden;
-    padding-bottom: 30px;
+.carouselBannerContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
-
-.carrusel i{
-    font-size: 6rem;
-}
-
-.previous-icon-banner {
-    position: absolute;
-    left: 7%;
-    top: 40%;
-    color: white;
-    background-color: #0000005b;
-    width: 4rem;
-    border-radius: 15px;
-}
-.next-icon-banner{
-    position: absolute;
-    right: 7%;
-    top: 40%;
-    color: white;
-    background-color: #0000005b;
-    width: 4rem;
-    border-radius: 15px;
-}
-
-
-
-

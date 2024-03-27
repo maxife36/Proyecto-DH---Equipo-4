@@ -5,6 +5,14 @@ const { DbUser, DbProduct } = require("../database/controllers");
 const path = require("path");
 
 const controllers = {
+    formatDate: function (date) {
+        const year = date.getFullYear();
+        let month = (1 + date.getMonth()).toString().padStart(2, '0');
+        let day = (date.getDate() + 1).toString().padStart(2, '0');
+
+        // Formatea la fecha en formato YYYY-MM-DD para el input date
+        return `${year}-${month}-${day}`;
+    },
     allProducts: async (req, res) => {
         try {
             const allProducts = await DbProduct.getAllProducts()
@@ -15,13 +23,29 @@ const controllers = {
             res.status(404).render("notFound")
         }
     },
-    allUser: async (req,res) => {
+    allUsers: async (req, res) => {
         try {
-            const usersInfo = await DbUser.getAllUsers()
+            const allUsers = await DbUser.getAllUsers()
 
-            res.render("/", { usersInfo })  //Cambiar Ruta al dashboard para manipulacion de usuarios como ADMIN
+            res.render("./partials/allUsers", { allUsers })
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message);
+            res.status(404).render("notFound")
+        }
+    },
+    userDetail: async (req, res) => {
+        try {
+
+            const userId = req.params.userId
+            
+            const userInfo = await DbUser.getUserById(userId)
+
+            userInfo.formatedBirthday = controllers.formatDate(userInfo.birthday)
+
+            res.render("./partials/userDetail", { userInfo })
+        } catch (err) {
+            console.log(err.message);
+            res.status(404).render("notFound")
         }
     },
     editUser: async (req, res) => {
@@ -99,28 +123,35 @@ const controllers = {
     },
     deleteUser: async (req, res) => {
         try {
-            const userId = req.session.loggedUser
+            const currentUserId = req.session.loggedUser
 
-            const currentUser = await DbUser.getUserById(userId)
-
-            await DbUser.deleteUser(userId)
-
-            if (currentUser.profileImg) {
-                const profileImgPath = path.join(__dirname, `../../public/img/usersimg${currentUser.profileImg}`)
+            const currentUser = await DbUser.getUserById(currentUserId)
+            
+            if (currentUser.admin) {
+                const { userId }= req.body
                 
-                fs.unlink(profileImgPath, (err) => {
-                    if (err) {
-                        console.error("Error al eliminar la Foto de Perfil:", err);
-                    }
-                    console.log("Foto de Perfil eliminado");
-                })
+                const userToDelete = await DbUser.getUserById(userId)
+
+                const deleteResult = await DbUser.deleteUser(userId)
+    
+                if (deleteResult) {
+                    if (userToDelete.profileImg) {
+                        const profileImgPath = path.join(__dirname, `../../public/img/usersimg${userToDelete.profileImg}`)
+                        
+                        fs.unlink(profileImgPath, (err) => {
+                            if (err) {
+                                console.error("Error al eliminar la Foto de Perfil:", err);
+                            }
+                            console.log("Foto de Perfil eliminado");
+                        })
+                    }    
+                }
+
+                if (deleteResult) return res.send(true)
+                
+                return res.send(false)
             }
 
-            req.session.loggedUser = undefined
-
-            res.clearCookie("rememberme")
-
-            res.redirect("login")
         } catch (err) {
             throw new Error(err.message)
         }
@@ -129,21 +160,15 @@ const controllers = {
         try {
             const { userId, admin } = req.body
 
-            await DbUser.updateUserData(userId, { admin })
+            const result = await DbUser.changePermission(userId, { admin })
 
-            res.render("/") //cambiar ruta al Dashboard 
-
+            if(result[0]) return res.send(true)
+            
+            res.send(false)
         } catch (err) {
             throw new Error(err.message)
         }
     }
 }
 
-/* 
-Falta PROBAR controlador para:
-
-Falta controlador para:
--Ruta para mostrar todos los usuarios con un ofsset y limit
--
-*/
 module.exports = controllers;

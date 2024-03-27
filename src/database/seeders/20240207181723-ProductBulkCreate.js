@@ -82,7 +82,7 @@ module.exports = {
             specifications: ["HDM", "USB"]
           }
          ],
-         imageTitles: ["/SamsungOdysseyG7.png", "/samsung.png"],
+         imageTitles: ["/SamsungOdysseyG7.png"],
          categories: [categories.Monitores]
        },
        {
@@ -294,7 +294,7 @@ module.exports = {
             specifications: ["1 TB", "SSD"]
           }
          ],
-         imageTitles: ["/SamsungEVOPlus.png" , "/samsung.png"],
+         imageTitles: ["/SamsungEVOPlus.png"],
          categories: [categories.Procesadores]
        },
        {
@@ -400,7 +400,7 @@ module.exports = {
             specifications: ["Luces LED RGB"]
           }
          ],
-         imageTitles: ["/Vengeance.png", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         imageTitles: ["/logos-2020.png"],
          categories: [categories.MemoriaRAM]
        },
        {
@@ -583,7 +583,7 @@ module.exports = {
             specifications: ["Windows"]
           }
          ],
-         imageTitles: ["/SamsungEVOPlus.png", "/samsung.png"],
+         imageTitles: ["/SamsungEVOPlus.png"],
          categories: [categories.Procesadores]
        },
        {
@@ -677,7 +677,7 @@ module.exports = {
             specifications: ["Retro. RGB"]
           }
          ],
-         imageTitles: ["/CorsairK95.png", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         imageTitles: ["/CorsairK95.png", "/logos-2020.png"],
          categories: [categories.Perifericos, categories.AccesoriosGaming]
        },
        {
@@ -725,7 +725,7 @@ module.exports = {
             specifications: ["HDMI", "USB"]
           }
          ],
-         imageTitles: ["/SamsungOdyssey.png", "/samsung.png"],
+         imageTitles: ["/SamsungOdyssey.png"],
          categories: [categories.Monitores]
        },
        {
@@ -966,7 +966,7 @@ module.exports = {
             specifications: ["Windows 7", "MacOS 10 X 10.1", "Android Lollipop"]
           }
          ],
-         imageTitles: ["/SamsuntT5.png", "/samsung.png"],
+         imageTitles: ["/SamsuntT5.png"],
          categories: [categories.Almacenamiento, categories.Ofertas]
        },
        {
@@ -988,7 +988,7 @@ module.exports = {
             specifications: ["DDR4 DRAM", "UDIMM", "2666 MHz"]
           }
          ],
-         imageTitles: ["/CorsairLPX.png", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         imageTitles: ["/CorsairLPX.png", "/logos-2020.png"],
          categories: [categories.MemoriaRAM]
        },
        {
@@ -1241,7 +1241,7 @@ module.exports = {
             specifications: ["DDR4 DRAM", "DIMM", "2666 MHz"]
           }
          ],
-         imageTitles: ["/Vengeance", "/logos-2020_png_corsairlogo2020_horiz_w.png"],
+         imageTitles: ["/Vengeance.png", "/logos-2020.png"],
          categories: [categories.MemoriaRAM]
        },
        {
@@ -1311,7 +1311,7 @@ module.exports = {
             specifications: ["Windows"]
           }
          ],
-         imageTitles: ["/SamsungEVOPlus.png", "/samsung.png"],
+         imageTitles: ["/SamsungEVOPlus.png"],
          categories: [categories.Procesadores]
        },
        {

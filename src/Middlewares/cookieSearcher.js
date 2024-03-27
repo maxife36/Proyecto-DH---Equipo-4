@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
         if (userFinded) {           
             req.session.loggedUser = userId
             req.session.loggedCart = userFinded.cart.cartId
+            req.session.profileImg = userFinded.profileImg
             
             res.cookie("isLogged", true)
             await updateCartInfoToRender(userId, req, res)

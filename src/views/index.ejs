@@ -10,7 +10,7 @@
     
     <%- include("./partials/header.ejs") %>
 
-    <main class="main-section">
+    <main class="main-section flx-c-nw">
         <section class="cards">
             <% products.forEach(product => { %>
                 <article class="tarjeta-articulo" onclick="toProductDetail(event)">
@@ -44,12 +44,18 @@
             <% }) %>
 
         </section>
-        <section class="carrusel">
-            <img class="carrusel-img" src="/img/Imagenes-Index/banner-00.png" alt="">
-            <i class="previous-icon-banner fa-solid fa-caret-left flx-r-w"></i>
-            <i class="next-icon-banner fa-solid fa-caret-right flx-r-w"></i>
-        </section>
 
+        <div class="carouselBannerContainer flx-r-nw">
+            <div class="flx-r-nw" id="banner1">
+                <img src="/img/Imagenes-Index/banner1.png" >
+            </div>
+            <div class="flx-r-nw" id="banner2">
+                <img src="/img/Imagenes-Index/banner2.png" >
+            </div>
+            <div class="flx-r-nw" id="banner3" style="opacity: 1;">
+                <img src="/img/Imagenes-Index/banner3.png" >
+            </div>
+        </div>
         
     </main>
     <%- include('./partials/sideCart.ejs') %>
