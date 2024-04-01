@@ -15,7 +15,7 @@ module.exports = class DbProduct {
     static async getAllProducts() {
         try {
             //query config
-            const query = queryProduct.newQuery(["images"])
+            const query = queryProduct.newQuery(["images","comments","favorites"])
             
             //Consulta a DB
             const products = await Product.findAll(query.config)

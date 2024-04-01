@@ -8,7 +8,9 @@ const queryCategory = seqQuery.newModel("Category")
 module.exports = class DbCategory {
     static async getAllCategories() {
         try {
-            const categories = await Category.findAll()
+            const query = queryCategory.newQuery(["products"])
+
+            const categories = await Category.findAll(query.config)
 
             if (!categories.length) throw new Error(msg.erroMsg.emptyTable + "Categorias")
 

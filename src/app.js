@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt")
 
 /* ---Modulos Internos--- */
 const {cookieSearcher, adminMiddleware , globalDataMiddleware} = require("./Middlewares")
-const {internalRoutes, mainRoutes , productsRoutes, usersRoutes, cartRoutes, adminRoutes, mpPaymentRoutes, sendGridRoutes, favoritesRoutes} = require("./routes")
+const {internalRoutes, mainRoutes , productsRoutes, usersRoutes, cartRoutes, adminRoutes, mpPaymentRoutes, sendGridRoutes, favoritesRoutes, reactAPIRoutes} = require("./routes")
 
 /* ---Variables de Configuracion--- */
 
@@ -55,6 +55,7 @@ app.use("/favorites", favoritesRoutes)
 app.use("/admin", adminMiddleware, adminRoutes)
 app.use("/mercadopago", mpPaymentRoutes)
 app.use("/mail-service", sendGridRoutes)
+app.use("/api", reactAPIRoutes)
 app.use("*", (req,res) => {
     res.render("notFound")
 })
