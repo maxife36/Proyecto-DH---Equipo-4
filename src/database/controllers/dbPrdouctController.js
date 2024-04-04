@@ -389,6 +389,32 @@ module.exports = class DbProduct {
         }
     }
 
+    static async updateProductStock(productId, quantity) {
+        try {
+
+            //query Product Table config
+            const query = queryProduct.newQuery()
+            query.addWhere(productId, "productId")
+
+            const product = await Product.findByPk(productId)
+
+            if (product) {
+                const currentStock = product.stock
+
+                const updatedProduct = await Product.update({stock: currentStock-quantity }, query.config)
+
+                return updatedProduct
+            }
+        } catch (err) {
+            // Deshago la transaccion en caso de que haya errores
+            await productUpdate.rollback()
+
+            console.log(err.message)
+            throw err
+
+        }
+    }
+
     static async deleteProduct(productId) {
         try {
             //validacion de ID

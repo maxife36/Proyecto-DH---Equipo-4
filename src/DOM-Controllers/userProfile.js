@@ -33,6 +33,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                 <ul class="settingList" id="settingListDashboard">
                   <li id="allProductsDisplay">Productos</li>
                   <li id="allUsersDisplay">Usuarios</li>
+                  <li id="reactDashboard">React</li>
                 </ul>
            `
 
@@ -63,9 +64,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 
             const allProductsDisplay = document.querySelector("#allProductsDisplay")
             const allUsersDisplay = document.querySelector("#allUsersDisplay")
+            const reactDashboard = document.querySelector("#reactDashboard")
 
             allProductsDisplay.addEventListener("click",() => inyectPartialEJSDashboard("allProducts", "allProducts", "products"))
             allUsersDisplay.addEventListener("click",() => inyectPartialEJSDashboard("allUsers", "allUsers", "users"))
+            reactDashboard.addEventListener("click",() => window.open(`http://localhost:5173?userId=${userData.userId}`, '_blank'))
 
         } else {
             // const articleDashboard = dashboardInput.parentNode
@@ -88,7 +91,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                 dashboardFlag = dashboardFlag ? false : true
 
                 if (dashboardFlag) {
-                    settingListDashboard.style.height = "70px"
+                    settingListDashboard.style.height = "105px"
                     dashboardAngle.style.transform = "rotate(180deg) translateY(5px)"
                     settingListDashboardLi.forEach(li => {
                         li.style.pointerEvents = "auto"

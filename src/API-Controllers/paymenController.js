@@ -32,7 +32,6 @@ module.exports = {
             
             if (userId) {
                 let { productId: requireProductId, quantity, productDetailShippingCost} = req.body
-                console.log(req.body);
 
                 const { email, fullname } = await DbUser.getUserById(userId)
     
@@ -170,6 +169,12 @@ module.exports = {
                 })
 
                 res.status(200).send("Pago Exitoso")
+
+                const purchasedItem = paymentInfo.additional_info.items
+                const productId = purchasedItem[0].id
+                const productQuantity = purchasedItem[0].quantity
+
+                DbProduct.updateProductStock(productId, +productQuantity)
             }
         } catch (err) {
             console.log(err);
@@ -188,6 +193,17 @@ module.exports = {
                     userId,
                     data: paymentInfo
                 })
+
+                /* Actualizacion del Stock */
+                const allItems = paymentInfo.additional_info.items
+                allItems.forEach(product =>{
+                    const productId = product.id
+                    const productQuantity = product.quantity
+    
+                    DbProduct.updateProductStock(productId, +productQuantity)
+                })
+
+                /* ----------------- */
 
                 const cleanCart = await DbCartProduct.cleanCartProductsByUserId(cartId)
 

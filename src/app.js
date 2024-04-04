@@ -1,5 +1,6 @@
 /* ---Modulos Nativos y de Terceros--- */
 require('dotenv').config()
+const cors = require('cors');
 
 const express = require("express")
 const path = require("path")
@@ -33,6 +34,9 @@ app.use(express.static(pathPublic))
 //Permite leer formatos enviados por forms
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+// Habilitar CORS para todas las solicitudes
+app.use(cors());
 
 //Permite utilizacion de otros metodos en los forms del html
 app.use(methodOverride("_method"))
