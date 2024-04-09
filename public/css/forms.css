@@ -2,12 +2,15 @@
     --input-container-width: 100vw;
     --input-container-height: 50px;
     --input-config-width: calc(var(--input-container-width) * 0.8);
-    --input-config-height: calc(var(--input-container-height) * 0.8);;
+    --input-config-height: calc(var(--input-container-height) * 0.8);
+    ;
     --input-config-half-width: calc(var(--input-config-width) * 0.5);
-    --input-config-half-height: calc(var(--input-config-height) * 0.5);;
+    --input-config-half-height: calc(var(--input-config-height) * 0.5);
+    ;
     --profile-img-size: 100px
 }
-.header-nav{
+
+.header-nav {
     display: none;
 }
 
@@ -16,7 +19,7 @@
     background-color: #f8f8f8;
 }
 
-.beside{
+.beside {
     display: none;
     width: 65vw;
     min-height: 95vh;
@@ -24,13 +27,13 @@
     background-color: #f8f8f8;
 }
 
-.main-section{
+.main-section {
     align-items: stretch;
 }
 
-#logo-beside{
+#logo-beside {
     width: 80%;
-    filter:drop-shadow(black 0px 1px 2px);
+    filter: drop-shadow(black 0px 1px 2px);
 }
 
 /* -----Profile Img configuration----- */
@@ -133,7 +136,7 @@ label[for="add-img"] i {
     left: calc(var(--input-config-width) - 194px);
 }
 
-.input-config:focus+.user-email-label {    
+.input-config:focus+.user-email-label {
     left: calc(var(--input-config-width) - 92px);
 }
 
@@ -184,7 +187,8 @@ label[for="add-img"] i {
 
 .switch-input {
     width: 25%;
-    height: calc(var(--input-config-half-width) * 0.125) ; /* 0.125 corresponde a la mitad del width de esta regla. Mantiene proporcion del switch 1:2*/
+    height: calc(var(--input-config-half-width) * 0.125);
+    /* 0.125 corresponde a la mitad del width de esta regla. Mantiene proporcion del switch 1:2*/
     z-index: 2;
     opacity: 0;
 }
@@ -234,7 +238,7 @@ label[for="add-img"] i {
 
 #submit-btn,
 #reset-btn,
-#login-btn{
+#login-btn {
     outline: none;
     width: 43%;
     max-width: 250px;
@@ -259,22 +263,22 @@ label[for="add-img"] i {
     margin-left: 3.5%;
 }
 
-#login-btn{
+#login-btn {
     width: 60%;
 }
 
-.option-container{
+.option-container {
     width: var(--input-config-width);
     margin: 15px 0;
 }
 
 .rememberme-container,
-.forgot-container{
-    width:50%;
+.forgot-container {
+    width: 50%;
     font-style: italic;
 }
 
-.forgot-container{
+.forgot-container {
     cursor: pointer;
     font-size: 14px;
     text-align: right;
@@ -285,9 +289,18 @@ label[for="add-img"] i {
 #login-btn:hover {
     transform: scaleX(1.03);
     background-color: var(--verde-oscuro-gotec);
-    
+
 }
 
+/*  ERRORS SPANS */
+
+.errorSpan {
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    color: red;
+    font-size: 11px
+}
 
 
 /* ---------MEDIAS QUERIES--------- */
@@ -302,25 +315,27 @@ label[for="add-img"] i {
     :root {
         --input-container-width: 50vw;
     }
-    .beside{
+
+    .beside {
         display: flex;
         width: 50vw;
     }
-  }
-  
+}
+
 @media (min-width:1080px) {
     :root {
         --input-container-width: 35vw;
         --input-container-height: 60px;
         --profile-img-size: 150px
     }
-    .beside{
+
+    .beside {
         display: flex;
         width: 65vw;
     }
-    
+
     label[for="add-img"] {
-    right: -3%;
+        right: -3%;
     }
-    
-  }
+
+}

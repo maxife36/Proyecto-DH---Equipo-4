@@ -25,7 +25,7 @@
             <h3 class="personal-info-tittle">Log In</h3>
             <% if (locals.errors) { %>
               <% errors.forEach(error => { %>
-                <span>"<%= error.msg %>"</span>
+                <span style="color:red; font-size: '12px';"><%= error.msg %></span>
               <% }) %>
             <% } %>
 
