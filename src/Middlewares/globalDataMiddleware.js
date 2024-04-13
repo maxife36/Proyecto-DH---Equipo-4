@@ -4,7 +4,7 @@ let allCategories = null
 let firstChargeFlag = false
 
 const whatsappDefaultText = "Hola Gotec 🙋🏽, me gustaria realizar una consulta."
-const whatsappContactNumber = "+543855991428"
+const whatsappContactNumber = "+543815978612"
 let showCategories = ["Laptops", "Monitores", "Periféricos", "Ofertas"]
 
 //Verificacion de las Categorias solicitadas
