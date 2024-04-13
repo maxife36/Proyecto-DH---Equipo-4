@@ -4,8 +4,8 @@ const { DbProduct } = require("../database/controllers")
 
 module.exports = {
     hostName: (req, res) => {
-        const HOST = process.env.HOST
-        res.send(HOST)
+        const APP_HOST = process.env.APP_HOST
+        res.send(APP_HOST)
     },
     index: async (req, res) => {
         const products = await DbProduct.getProductPagination(15, 0)

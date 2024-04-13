@@ -11,7 +11,7 @@ const { updateCartInfoToRender } = require("./cartController")
 const { v4: uuid } = require("uuid")
 
 const MP_ACCESS_KEY = process.env.MP_ACCESS_KEY
-const HOST = process.env.HOST
+const APP_HOST = process.env.APP_HOST
 
 // Step 2: Initialize the client object
 const client = new MercadoPagoConfig({
@@ -65,11 +65,11 @@ module.exports = {
                         "cost": Number(productDetailShippingCost),
                     },
                     back_urls: {
-                        success: `${HOST}/mercadopago/success`,
-                        pending: `${HOST}/mercadopago/pending`,
-                        failure: `${HOST}/mercadopago/failure`
+                        success: `${APP_HOST}/mercadopago/success`,
+                        pending: `${APP_HOST}/mercadopago/pending`,
+                        failure: `${APP_HOST}/mercadopago/failure`
                     },
-                    notification_url: `${ HOST || NGROK_HOST}/mercadopago/oneProductWebhook/${userId}`
+                    notification_url: `${ APP_HOST || NGROK_HOST}/mercadopago/oneProductWebhook/${userId}`
                 }
     
                 // Step 5: Create request options object - Optional
@@ -133,11 +133,11 @@ module.exports = {
                     "cost": Number(shippingCost),
                 },
                 back_urls: {
-                    success: `${HOST}/mercadopago/success`,
-                    pending: `${HOST}/mercadopago/pending`,
-                    failure: `${HOST}/mercadopago/failure`
+                    success: `${APP_HOST}/mercadopago/success`,
+                    pending: `${APP_HOST}/mercadopago/pending`,
+                    failure: `${APP_HOST}/mercadopago/failure`
                 },
-                notification_url: `${ HOST || NGROK_HOST}/mercadopago/cartWebhook/${userId}/${cartId}`
+                notification_url: `${ APP_HOST || NGROK_HOST}/mercadopago/cartWebhook/${userId}/${cartId}`
             }
 
             // Step 5: Create request options object - Optional

@@ -16,8 +16,8 @@ const controllers = {
                 delete user.dataValues.admin
                 delete user.dataValues.isVerified
                 delete user.dataValues.cart
-                user.dataValues.profileImg = `${process.env.HOST}/img/usersImg${user.dataValues.profileImg}`
-                user.dataValues.detail = `${process.env.HOST}/api/users/${user.userId}`
+                user.dataValues.profileImg = `${process.env.APP_HOST}/img/usersImg${user.dataValues.profileImg}`
+                user.dataValues.detail = `${process.env.APP_HOST}/api/users/${user.userId}`
             })
 
             //Limpieza de Admin Info
@@ -25,8 +25,8 @@ const controllers = {
             delete admin.dataValues.admin
             delete admin.dataValues.isVerified
             delete admin.dataValues.cart
-            admin.dataValues.profileImg = `${process.env.HOST}/img/usersImg${admin.dataValues.profileImg}`
-            admin.dataValues.detail = `${process.env.HOST}/api/users/${admin.userId}`
+            admin.dataValues.profileImg = `${process.env.APP_HOST}/img/usersImg${admin.dataValues.profileImg}`
+            admin.dataValues.detail = `${process.env.APP_HOST}/api/users/${admin.userId}`
 
             const result = {
                 admin,
@@ -50,7 +50,7 @@ const controllers = {
             delete userInfo.dataValues.admin
             delete userInfo.dataValues.isVerified
             delete userInfo.dataValues.cart
-            userInfo.dataValues.profileImg = `${process.env.HOST}/img/usersImg${userInfo.dataValues.profileImg}`
+            userInfo.dataValues.profileImg = `${process.env.APP_HOST}/img/usersImg${userInfo.dataValues.profileImg}`
 
             res.json(userInfo)
         } catch (err) {
@@ -73,13 +73,13 @@ const controllers = {
                 //Configuracion de images
                 const imagesURL = {}
 
-                product.dataValues.images.forEach((image, i) => imagesURL[`image${i}`] = `${process.env.HOST}/img/Products-Image${image.dataValues.imageTitle}`)
+                product.dataValues.images.forEach((image, i) => imagesURL[`image${i}`] = `${process.env.APP_HOST}/img/Products-Image${image.dataValues.imageTitle}`)
 
                 product.dataValues.imagesURL = imagesURL
 
                 delete product.dataValues.images
                 
-                product.dataValues.detail = `${process.env.HOST}/api/products/${product.productId}`
+                product.dataValues.detail = `${process.env.APP_HOST}/api/products/${product.productId}`
             })
 
 
@@ -139,7 +139,7 @@ const controllers = {
                 //Configuracion de images
                 const imagesURL = {}
 
-                product.dataValues.images.forEach((image, i) => imagesURL[`image${i}`] = `${process.env.HOST}/img/Products-Image${image.dataValues.imageTitle}`)
+                product.dataValues.images.forEach((image, i) => imagesURL[`image${i}`] = `${process.env.APP_HOST}/img/Products-Image${image.dataValues.imageTitle}`)
 
                 product.dataValues.imagesURL = imagesURL
 

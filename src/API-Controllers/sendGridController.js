@@ -12,7 +12,7 @@ module.exports = {
         try {
             const { userEmail, userName, userId } = userData
 
-            const verificationHref = `${process.env.HOST}/mail-service/verifiedController/${userId}`
+            const verificationHref = `${process.env.APP_HOST}/mail-service/verifiedController/${userId}`
 
             const msg = {
                 to: userEmail,  // mail que se desea verificar userEmail
@@ -67,7 +67,7 @@ module.exports = {
         try {
             const { userEmail, userName, userId, validateToken } = userData
 
-            const verificationHref = `${process.env.HOST}/mail-service/verifiedSecurityData/${userId}/${validateToken}`
+            const verificationHref = `${process.env.APP_HOST}/mail-service/verifiedSecurityData/${userId}/${validateToken}`
 
             const msg = {
                 to: userEmail,  // mail que se desea verificar userEmail
@@ -102,7 +102,7 @@ module.exports = {
 
         if (paramsUserId === userId && validateToken === updateUserToken) {
 
-            const mainHTML = await fetch(`${process.env.HOST}/users/profile`, {
+            const mainHTML = await fetch(`${process.env.APP_HOST}/users/profile`, {
                 method: 'GET',
                 headers: {
                   'Cookie': req.headers.cookie // Adjunta la cookie al encabezado de la solicitud para pasar el middleware auth
@@ -115,7 +115,7 @@ module.exports = {
             const $ = cheerio.load(mainHTMLTxt);
             const displayContainer = $(".settingDisplayConatiner");
 
-            const securityDataHTML = await fetch(`${process.env.HOST}/users/securityData`, {
+            const securityDataHTML = await fetch(`${process.env.APP_HOST}/users/securityData`, {
                 method: 'GET',
                 headers: {
                   'Cookie': req.headers.cookie // Adjunta la cookie al encabezado de la solicitud para pasar el middleware auth
