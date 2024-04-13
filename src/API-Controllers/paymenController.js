@@ -46,7 +46,7 @@ module.exports = {
                 productDetailShippingCost = parseFloat(productDetailShippingCost.replace(/\$|\s/g, ''))
 
                 //Eliminar en produccion
-                const NGROK_HOST = await ngrok.connect({ addr: 4000, authtoken: process.env.NGROK_AUTHTOKEN })
+                // const NGROK_HOST = await ngrok.connect({ addr: 4000, authtoken: process.env.NGROK_AUTHTOKEN })
     
                 // Step 4: Create the request object
                 const body = {
@@ -69,7 +69,7 @@ module.exports = {
                         pending: `${HOST}/mercadopago/pending`,
                         failure: `${HOST}/mercadopago/failure`
                     },
-                    notification_url: `${NGROK_HOST || HOST}/mercadopago/oneProductWebhook/${userId}`
+                    notification_url: `${ HOST || NGROK_HOST}/mercadopago/oneProductWebhook/${userId}`
                 }
     
                 // Step 5: Create request options object - Optional
@@ -120,7 +120,7 @@ module.exports = {
             }
 
             //Eliminar en produccion
-            const NGROK_HOST = await ngrok.connect({ addr: 4000, authtoken: process.env.NGROK_AUTHTOKEN })
+            // const NGROK_HOST = await ngrok.connect({ addr: 4000, authtoken: process.env.NGROK_AUTHTOKEN })
 
             // Step 4: Create the request object
             const body = {
@@ -137,7 +137,7 @@ module.exports = {
                     pending: `${HOST}/mercadopago/pending`,
                     failure: `${HOST}/mercadopago/failure`
                 },
-                notification_url: `${NGROK_HOST || HOST}/mercadopago/cartWebhook/${userId}/${cartId}`
+                notification_url: `${ HOST || NGROK_HOST}/mercadopago/cartWebhook/${userId}/${cartId}`
             }
 
             // Step 5: Create request options object - Optional
