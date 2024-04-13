@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 //Creador de tunel hhtps 
-const ngrok = require('ngrok');
+// const ngrok = require('ngrok');
 
 // Step 1: Import the parts of the module you want to use
 const { MercadoPagoConfig, Preference, Payment } = require('mercadopago');
