@@ -2,7 +2,7 @@
 const { Model, Sequelize } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
-const CartModel = require("./Cart")
+const CartModel = require("./cart")
 
 
 module.exports = (sequelize, DataTypes) => {
