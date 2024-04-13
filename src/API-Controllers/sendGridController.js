@@ -57,11 +57,11 @@ module.exports = {
                 })
             }
 
-            req.session.loggedUser = userId
-            res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
+            // req.session.loggedUser = userId
+            // res.cookie("isLogged", true) //permitira identificar desde el front si un usaurio esta logueado o no
         }
 
-        return res.redirect("/")
+        return res.redirect("/users/login")
     },
     sendSecurityUpdateMail: async (userData) => {
         try {

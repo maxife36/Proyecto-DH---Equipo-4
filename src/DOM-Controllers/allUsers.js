@@ -83,7 +83,7 @@ async function adminController(event){
 
         if (result) {
             adminBtn.style.justifyContent = "flex-start"
-            adminBtn.style.backgroundColor = "var(--verde-gotec)"
+            adminBtn.style.backgroundColor = "var(--gris-claro-gotec)"
         }
     }
 }

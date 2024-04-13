@@ -45,8 +45,6 @@ app.use(cookieParser())
 app.use(cookieSearcher)
 app.use(globalDataMiddleware)
 
-// const morgan = require("morgan")
-// app.use(morgan("dev"))
 
 /* ---Rutas Principales de Express--- */
 

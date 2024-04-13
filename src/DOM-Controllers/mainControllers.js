@@ -42,8 +42,8 @@ previousBrand.addEventListener("click", () => {
 })
 
 window.addEventListener("resize", () => {
-    const allBrandImg = brandsImgWraper.querySelectorAll("img")
     const brandsImgWraper = document.querySelector(".brandsImgWraper")
+    const allBrandImg = brandsImgWraper.querySelectorAll("img")
 
 
     brandsWraperWindowWidth = parseFloat(window.getComputedStyle(brandsImgWraper).width)

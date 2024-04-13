@@ -10,7 +10,7 @@ module.exports = class DbPurchase {
         try {
             const purchase = await Purchase.findAll()
 
-            if (!purchase.length) throw new Error(msg.erroMsg.emptyTable + "Purchasenes")
+            // if (!purchase.length) throw new Error(msg.erroMsg.emptyTable + "Purchasenes")
 
             return purchase
         } catch (err) {
@@ -30,7 +30,7 @@ module.exports = class DbPurchase {
 
             const purchase = await Purchase.findAll(query.config)
 
-            if (!purchase.length) throw new Error(msg.erroMsg.emptyTable + "Purchasenes")
+            // if (!purchase.length) throw new Error(msg.erroMsg.emptyTable + "Purchasenes")
 
             return purchase
         } catch (err) {
